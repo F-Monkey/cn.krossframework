@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AbstractWorkerManager implements WorkerManager {
+public abstract class AbstractWorkerManager implements WorkerManager {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractWorkerManager.class);
 
@@ -160,24 +160,30 @@ public class AbstractWorkerManager implements WorkerManager {
         return true;
     }
 
+    protected abstract boolean isAutoExecuteTask(Task task);
+
     @Override
     public void addTask(Worker.GroupIdTaskPair groupIdTaskPair) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupIdTaskPair.getGroupId());
         // this should be enter
+        Task task = groupIdTaskPair.getTask();
         if (fetchStateGroup.isNew()) {
-            this.enter(groupIdTaskPair);
-            return;
+            if (this.isAutoExecuteTask(task)) {
+                this.enter(groupIdTaskPair);
+                return;
+            }
         }
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
         long currentWorkerId = stateGroup.getCurrentWorkerId();
         Worker worker = this.workerMap.get(currentWorkerId);
         if (worker == null) {
-            this.enter(groupIdTaskPair);
-            return;
-        }
-
-        if (!worker.tryAddTask(groupIdTaskPair)) {
-            log.error("task add fail");
+            if (this.isAutoExecuteTask(task)) {
+                this.enter(groupIdTaskPair);
+            }
+        } else {
+            if (!worker.tryAddTask(groupIdTaskPair)) {
+                log.error("task add fail");
+            }
         }
     }
 }

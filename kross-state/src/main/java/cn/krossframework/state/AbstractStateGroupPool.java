@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class AbstractStateGroupPool implements StateGroupPool {
 
-    private static final Logger log = LoggerFactory.getLogger(AbstractStateGroup.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractStateGroupPool.class);
 
     private static final AtomicLong ID_COUNT = new AtomicLong(0);
 
@@ -19,7 +19,6 @@ public class AbstractStateGroupPool implements StateGroupPool {
     private final StateGroupFactory stateGroupFactory;
 
     private volatile ConcurrentHashMap<Long, StateGroup> stateGroupMap;
-
 
     /**
      * remove deposed stateGroup period
@@ -44,7 +43,8 @@ public class AbstractStateGroupPool implements StateGroupPool {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        new AutoTask(this.period == null ? DEFAULT_PERIOD : this.period, 2) {
+        long period = this.period == null ? DEFAULT_PERIOD : this.period;
+        new AutoTask(period, 2) {
             @Override
             protected void run() {
                 AbstractStateGroupPool.this.removeDeposedStateGroup();

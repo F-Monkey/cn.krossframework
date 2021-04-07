@@ -28,7 +28,14 @@ public class StateConfig {
             }
         };
         CatPool catPool = new CatPool(catFactory);
+        catPool.setRemoveDeposedStateGroupPeriod(2000);
         catPool.afterPropertiesSet();
-        return new AbstractWorkerManager(500, 20, 10, 2000, 2000, catPool);
+        return new AbstractWorkerManager(500, 20, 10, 2000, 2000, catPool) {
+
+            @Override
+            protected boolean isAutoExecuteTask(Task task) {
+                return false;
+            }
+        };
     }
 }

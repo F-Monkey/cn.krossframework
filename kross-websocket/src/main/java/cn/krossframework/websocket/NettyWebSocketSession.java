@@ -40,8 +40,6 @@ public class NettyWebSocketSession implements Session {
 
     @Override
     public <T> void setAttribute(AttributeKey<T> key, T val) {
-        // 空属性设置值无意义
-        Preconditions.checkNotNull(this.context);
         this.context.channel().attr(key).set(val);
     }
 

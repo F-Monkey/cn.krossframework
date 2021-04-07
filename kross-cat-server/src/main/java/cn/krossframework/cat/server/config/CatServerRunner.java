@@ -1,6 +1,7 @@
 package cn.krossframework.cat.server.config;
 
 import cn.krossframework.cat.server.state.*;
+import cn.krossframework.proto.CmdType;
 import cn.krossframework.state.*;
 import cn.krossframework.websocket.Dispatcher;
 import cn.krossframework.websocket.Filter;
@@ -68,6 +69,14 @@ public class CatServerRunner implements ApplicationRunner, ApplicationContextAwa
         };
         CatPool catPool = new CatPool(catFactory);
         catPool.afterPropertiesSet();
-        return new AbstractWorkerManager(500, 20, 10, 2000, 2000, catPool);
+        return new AbstractWorkerManager(500, 20, 10, 2000, 2000, catPool) {
+            @Override
+            protected boolean isAutoExecuteTask(Task task) {
+                if (task instanceof CatTask) {
+                    return ((CatTask) task).getCmd().getCmdType() != CmdType.KILL_CAT;
+                }
+                return false;
+            }
+        };
     }
 }
