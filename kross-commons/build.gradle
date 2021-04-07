@@ -1,0 +1,3 @@
+dependencies {
+    implementation rootProject.ext.dependencies["slf4j"]
+}

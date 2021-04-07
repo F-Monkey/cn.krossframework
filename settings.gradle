@@ -1,0 +1,8 @@
+rootProject.name = 'cn.krossframework.parent'
+include 'kross-state'
+include 'kross-web'
+include 'kross-websocket'
+include 'kross-commons'
+include 'kross-proto'
+include 'kross-cat-server'
+

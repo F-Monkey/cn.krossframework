@@ -1,0 +1,6 @@
+dependencies {
+    compile project(":kross-commons")
+    implementation rootProject.ext.dependencies["slf4j"]
+    implementation rootProject.ext.dependencies["guava"]
+    testImplementation rootProject.ext.dependencies["junit"]
+}
