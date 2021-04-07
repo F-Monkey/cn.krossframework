@@ -73,7 +73,6 @@ public class ProtoWebSocketHandler extends SimpleChannelInboundHandler<BinaryWeb
         if (needDispatch) {
             if (this.dispatcher != null) {
                 this.dispatcher.dispatch(session, cmd);
-                return;
             }
         }
     }

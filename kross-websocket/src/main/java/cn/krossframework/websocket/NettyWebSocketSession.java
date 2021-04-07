@@ -9,8 +9,6 @@ import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
-
 public class NettyWebSocketSession implements Session {
 
     private static final Logger log = LoggerFactory.getLogger(NettyWebSocketSession.class);
@@ -18,9 +16,7 @@ public class NettyWebSocketSession implements Session {
     private final ChannelHandlerContext context;
 
     public NettyWebSocketSession(ChannelHandlerContext ctx) {
-        if (Objects.isNull(ctx)) {
-            log.warn("create empty session context");
-        }
+        Preconditions.checkNotNull(ctx);
         this.context = ctx;
     }
 
