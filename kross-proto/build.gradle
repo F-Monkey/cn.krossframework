@@ -12,7 +12,7 @@ plugins {
 protobuf {
     protoc {
         //artifact = rootProject.ext.protoc["artifact"]
-        artifact = 'com.google.protobuf:protoc:3.0.0'
+        artifact = 'com.google.protobuf:protoc:3.15.2'
     }
 
     generatedFilesBaseDir = "$projectDir/src/"

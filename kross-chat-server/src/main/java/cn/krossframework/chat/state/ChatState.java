@@ -72,11 +72,12 @@ public class ChatState extends AbstractState {
             log.error("body parse error:\n", e);
             return;
         }
+        String id = character.getId();
         for (Character other : this.stateData.getChatterList()) {
-            if (character.getId().equals(other.getId())) {
+            if (id.equals(other.getId())) {
                 continue;
             }
-            character.sendMsg(ChatCmdUtil.sendMsgResult());
+            character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.SUCCESS, "ok", id, chatMessage));
         }
     }
 }

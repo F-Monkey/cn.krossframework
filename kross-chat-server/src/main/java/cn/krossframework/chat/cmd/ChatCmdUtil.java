@@ -1,10 +1,14 @@
 package cn.krossframework.chat.cmd;
 
+import cn.krossframework.proto.Chat;
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.ResultCode;
+import com.google.common.base.Strings;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.ProtocolStringList;
+import org.springframework.util.CollectionUtils;
 
 public class ChatCmdUtil {
     private ChatCmdUtil() {
@@ -24,13 +28,19 @@ public class ChatCmdUtil {
         return CmdUtil.packageGroup(builder.build());
     }
 
-    public static Command.PackageGroup sendMsgResult(int resultCode, String resultMsg, ByteString content) {
+    public static Command.PackageGroup sendMsgResult(int resultCode, String resultMsg, String fromId,
+                                                     Chat.ChatMessage chatMessage) {
         Command.Package.Builder builder = Command.Package.newBuilder();
         builder.setCmdType(CmdType.SEND_MESSAGE_RESULT);
         builder.setResultMsg(CmdUtil.resultMessage(resultCode, resultMsg));
-        if(content != null){
-            builder.setContent(content);
+        Chat.ChatMessageResult.Builder msgBuilder = Chat.ChatMessageResult.newBuilder();
+        ProtocolStringList toList = chatMessage.getToList();
+        if (!CollectionUtils.isEmpty(toList)) {
+            msgBuilder.addAllTo(toList);
         }
+        msgBuilder.setChatMessage(chatMessage);
+        msgBuilder.setFrom(fromId);
+        builder.setContent(msgBuilder.build().toByteString());
         return CmdUtil.packageGroup(builder.build());
     }
 }

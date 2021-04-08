@@ -19,59 +19,101 @@ public final class Chat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 cmdType = 1;</code>
+     * <code>int32 cmdType = 1;</code>
+     * @return The cmdType.
      */
     int getCmdType();
 
     /**
-     * <code>optional string msg = 2;</code>
+     * <code>repeated string to = 2;</code>
+     * @return A list containing the to.
+     */
+    java.util.List<java.lang.String>
+        getToList();
+    /**
+     * <code>repeated string to = 2;</code>
+     * @return The count of to.
+     */
+    int getToCount();
+    /**
+     * <code>repeated string to = 2;</code>
+     * @param index The index of the element to return.
+     * @return The to at the given index.
+     */
+    java.lang.String getTo(int index);
+    /**
+     * <code>repeated string to = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the to at the given index.
+     */
+    com.google.protobuf.ByteString
+        getToBytes(int index);
+
+    /**
+     * <code>string msg = 3;</code>
+     * @return The msg.
      */
     java.lang.String getMsg();
     /**
-     * <code>optional string msg = 2;</code>
+     * <code>string msg = 3;</code>
+     * @return The bytes for msg.
      */
     com.google.protobuf.ByteString
         getMsgBytes();
 
     /**
-     * <code>optional int32 emoticon = 3;</code>
+     * <code>int32 emoticon = 4;</code>
+     * @return The emoticon.
      */
     int getEmoticon();
 
     /**
-     * <code>optional bytes stream = 4;</code>
+     * <code>bytes stream = 5;</code>
+     * @return The stream.
      */
     com.google.protobuf.ByteString getStream();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.ChatMessage}
    */
-  public  static final class ChatMessage extends
+  public static final class ChatMessage extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.ChatMessage)
       ChatMessageOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ChatMessage.newBuilder() to construct.
     private ChatMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ChatMessage() {
-      cmdType_ = 0;
+      to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       msg_ = "";
-      emoticon_ = 0;
       stream_ = com.google.protobuf.ByteString.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ChatMessage();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ChatMessage(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -80,12 +122,6 @@ public final class Chat {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               cmdType_ = input.readInt32();
@@ -93,18 +129,34 @@ public final class Chat {
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                to_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              to_.add(s);
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
 
               msg_ = s;
               break;
             }
-            case 24: {
+            case 32: {
 
               emoticon_ = input.readInt32();
               break;
             }
-            case 34: {
+            case 42: {
 
               stream_ = input.readBytes();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -115,6 +167,10 @@ public final class Chat {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          to_ = to_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -123,6 +179,7 @@ public final class Chat {
       return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessage_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessage_fieldAccessorTable
@@ -133,17 +190,56 @@ public final class Chat {
     public static final int CMDTYPE_FIELD_NUMBER = 1;
     private int cmdType_;
     /**
-     * <code>optional int32 cmdType = 1;</code>
+     * <code>int32 cmdType = 1;</code>
+     * @return The cmdType.
      */
+    @java.lang.Override
     public int getCmdType() {
       return cmdType_;
     }
 
-    public static final int MSG_FIELD_NUMBER = 2;
+    public static final int TO_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList to_;
+    /**
+     * <code>repeated string to = 2;</code>
+     * @return A list containing the to.
+     */
+    public com.google.protobuf.ProtocolStringList
+        getToList() {
+      return to_;
+    }
+    /**
+     * <code>repeated string to = 2;</code>
+     * @return The count of to.
+     */
+    public int getToCount() {
+      return to_.size();
+    }
+    /**
+     * <code>repeated string to = 2;</code>
+     * @param index The index of the element to return.
+     * @return The to at the given index.
+     */
+    public java.lang.String getTo(int index) {
+      return to_.get(index);
+    }
+    /**
+     * <code>repeated string to = 2;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the to at the given index.
+     */
+    public com.google.protobuf.ByteString
+        getToBytes(int index) {
+      return to_.getByteString(index);
+    }
+
+    public static final int MSG_FIELD_NUMBER = 3;
     private volatile java.lang.Object msg_;
     /**
-     * <code>optional string msg = 2;</code>
+     * <code>string msg = 3;</code>
+     * @return The msg.
      */
+    @java.lang.Override
     public java.lang.String getMsg() {
       java.lang.Object ref = msg_;
       if (ref instanceof java.lang.String) {
@@ -157,8 +253,10 @@ public final class Chat {
       }
     }
     /**
-     * <code>optional string msg = 2;</code>
+     * <code>string msg = 3;</code>
+     * @return The bytes for msg.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getMsgBytes() {
       java.lang.Object ref = msg_;
@@ -173,25 +271,30 @@ public final class Chat {
       }
     }
 
-    public static final int EMOTICON_FIELD_NUMBER = 3;
+    public static final int EMOTICON_FIELD_NUMBER = 4;
     private int emoticon_;
     /**
-     * <code>optional int32 emoticon = 3;</code>
+     * <code>int32 emoticon = 4;</code>
+     * @return The emoticon.
      */
+    @java.lang.Override
     public int getEmoticon() {
       return emoticon_;
     }
 
-    public static final int STREAM_FIELD_NUMBER = 4;
+    public static final int STREAM_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString stream_;
     /**
-     * <code>optional bytes stream = 4;</code>
+     * <code>bytes stream = 5;</code>
+     * @return The stream.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString getStream() {
       return stream_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -201,22 +304,28 @@ public final class Chat {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (cmdType_ != 0) {
         output.writeInt32(1, cmdType_);
       }
+      for (int i = 0; i < to_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, to_.getRaw(i));
+      }
       if (!getMsgBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msg_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, msg_);
       }
       if (emoticon_ != 0) {
-        output.writeInt32(3, emoticon_);
+        output.writeInt32(4, emoticon_);
       }
       if (!stream_.isEmpty()) {
-        output.writeBytes(4, stream_);
+        output.writeBytes(5, stream_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -226,22 +335,30 @@ public final class Chat {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, cmdType_);
       }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < to_.size(); i++) {
+          dataSize += computeStringSizeNoTag(to_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getToList().size();
+      }
       if (!getMsgBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msg_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, msg_);
       }
       if (emoticon_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, emoticon_);
+          .computeInt32Size(4, emoticon_);
       }
       if (!stream_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, stream_);
+          .computeBytesSize(5, stream_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -252,16 +369,18 @@ public final class Chat {
       }
       cn.krossframework.proto.Chat.ChatMessage other = (cn.krossframework.proto.Chat.ChatMessage) obj;
 
-      boolean result = true;
-      result = result && (getCmdType()
-          == other.getCmdType());
-      result = result && getMsg()
-          .equals(other.getMsg());
-      result = result && (getEmoticon()
-          == other.getEmoticon());
-      result = result && getStream()
-          .equals(other.getStream());
-      return result;
+      if (getCmdType()
+          != other.getCmdType()) return false;
+      if (!getToList()
+          .equals(other.getToList())) return false;
+      if (!getMsg()
+          .equals(other.getMsg())) return false;
+      if (getEmoticon()
+          != other.getEmoticon()) return false;
+      if (!getStream()
+          .equals(other.getStream())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -270,9 +389,13 @@ public final class Chat {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CMDTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getCmdType();
+      if (getToCount() > 0) {
+        hash = (37 * hash) + TO_FIELD_NUMBER;
+        hash = (53 * hash) + getToList().hashCode();
+      }
       hash = (37 * hash) + MSG_FIELD_NUMBER;
       hash = (53 * hash) + getMsg().hashCode();
       hash = (37 * hash) + EMOTICON_FIELD_NUMBER;
@@ -284,6 +407,17 @@ public final class Chat {
       return hash;
     }
 
+    public static cn.krossframework.proto.Chat.ChatMessage parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Chat.ChatMessage parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Chat.ChatMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -343,6 +477,7 @@ public final class Chat {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -350,6 +485,7 @@ public final class Chat {
     public static Builder newBuilder(cn.krossframework.proto.Chat.ChatMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -373,6 +509,7 @@ public final class Chat {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessage_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessage_fieldAccessorTable
@@ -395,10 +532,13 @@ public final class Chat {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         cmdType_ = 0;
 
+        to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
         msg_ = "";
 
         emoticon_ = 0;
@@ -408,15 +548,18 @@ public final class Chat {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessage_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessage getDefaultInstanceForType() {
         return cn.krossframework.proto.Chat.ChatMessage.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessage build() {
         cn.krossframework.proto.Chat.ChatMessage result = buildPartial();
         if (!result.isInitialized()) {
@@ -425,9 +568,16 @@ public final class Chat {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessage buildPartial() {
         cn.krossframework.proto.Chat.ChatMessage result = new cn.krossframework.proto.Chat.ChatMessage(this);
+        int from_bitField0_ = bitField0_;
         result.cmdType_ = cmdType_;
+        if (((bitField0_ & 0x00000001) != 0)) {
+          to_ = to_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.to_ = to_;
         result.msg_ = msg_;
         result.emoticon_ = emoticon_;
         result.stream_ = stream_;
@@ -435,32 +585,39 @@ public final class Chat {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Chat.ChatMessage) {
           return mergeFrom((cn.krossframework.proto.Chat.ChatMessage)other);
@@ -475,6 +632,16 @@ public final class Chat {
         if (other.getCmdType() != 0) {
           setCmdType(other.getCmdType());
         }
+        if (!other.to_.isEmpty()) {
+          if (to_.isEmpty()) {
+            to_ = other.to_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureToIsMutable();
+            to_.addAll(other.to_);
+          }
+          onChanged();
+        }
         if (!other.getMsg().isEmpty()) {
           msg_ = other.msg_;
           onChanged();
@@ -485,14 +652,17 @@ public final class Chat {
         if (other.getStream() != com.google.protobuf.ByteString.EMPTY) {
           setStream(other.getStream());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -510,16 +680,21 @@ public final class Chat {
         }
         return this;
       }
+      private int bitField0_;
 
       private int cmdType_ ;
       /**
-       * <code>optional int32 cmdType = 1;</code>
+       * <code>int32 cmdType = 1;</code>
+       * @return The cmdType.
        */
+      @java.lang.Override
       public int getCmdType() {
         return cmdType_;
       }
       /**
-       * <code>optional int32 cmdType = 1;</code>
+       * <code>int32 cmdType = 1;</code>
+       * @param value The cmdType to set.
+       * @return This builder for chaining.
        */
       public Builder setCmdType(int value) {
         
@@ -528,7 +703,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional int32 cmdType = 1;</code>
+       * <code>int32 cmdType = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCmdType() {
         
@@ -537,9 +713,120 @@ public final class Chat {
         return this;
       }
 
+      private com.google.protobuf.LazyStringList to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureToIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          to_ = new com.google.protobuf.LazyStringArrayList(to_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @return A list containing the to.
+       */
+      public com.google.protobuf.ProtocolStringList
+          getToList() {
+        return to_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @return The count of to.
+       */
+      public int getToCount() {
+        return to_.size();
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param index The index of the element to return.
+       * @return The to at the given index.
+       */
+      public java.lang.String getTo(int index) {
+        return to_.get(index);
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the to at the given index.
+       */
+      public com.google.protobuf.ByteString
+          getToBytes(int index) {
+        return to_.getByteString(index);
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The to to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTo(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToIsMutable();
+        to_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param value The to to add.
+       * @return This builder for chaining.
+       */
+      public Builder addTo(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToIsMutable();
+        to_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param values The to to add.
+       * @return This builder for chaining.
+       */
+      public Builder addAllTo(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureToIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, to_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTo() {
+        to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string to = 2;</code>
+       * @param value The bytes of the to to add.
+       * @return This builder for chaining.
+       */
+      public Builder addToBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureToIsMutable();
+        to_.add(value);
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object msg_ = "";
       /**
-       * <code>optional string msg = 2;</code>
+       * <code>string msg = 3;</code>
+       * @return The msg.
        */
       public java.lang.String getMsg() {
         java.lang.Object ref = msg_;
@@ -554,7 +841,8 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional string msg = 2;</code>
+       * <code>string msg = 3;</code>
+       * @return The bytes for msg.
        */
       public com.google.protobuf.ByteString
           getMsgBytes() {
@@ -570,7 +858,9 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional string msg = 2;</code>
+       * <code>string msg = 3;</code>
+       * @param value The msg to set.
+       * @return This builder for chaining.
        */
       public Builder setMsg(
           java.lang.String value) {
@@ -583,7 +873,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional string msg = 2;</code>
+       * <code>string msg = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMsg() {
         
@@ -592,7 +883,9 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional string msg = 2;</code>
+       * <code>string msg = 3;</code>
+       * @param value The bytes for msg to set.
+       * @return This builder for chaining.
        */
       public Builder setMsgBytes(
           com.google.protobuf.ByteString value) {
@@ -608,13 +901,17 @@ public final class Chat {
 
       private int emoticon_ ;
       /**
-       * <code>optional int32 emoticon = 3;</code>
+       * <code>int32 emoticon = 4;</code>
+       * @return The emoticon.
        */
+      @java.lang.Override
       public int getEmoticon() {
         return emoticon_;
       }
       /**
-       * <code>optional int32 emoticon = 3;</code>
+       * <code>int32 emoticon = 4;</code>
+       * @param value The emoticon to set.
+       * @return This builder for chaining.
        */
       public Builder setEmoticon(int value) {
         
@@ -623,7 +920,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional int32 emoticon = 3;</code>
+       * <code>int32 emoticon = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearEmoticon() {
         
@@ -634,13 +932,17 @@ public final class Chat {
 
       private com.google.protobuf.ByteString stream_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes stream = 4;</code>
+       * <code>bytes stream = 5;</code>
+       * @return The stream.
        */
+      @java.lang.Override
       public com.google.protobuf.ByteString getStream() {
         return stream_;
       }
       /**
-       * <code>optional bytes stream = 4;</code>
+       * <code>bytes stream = 5;</code>
+       * @param value The stream to set.
+       * @return This builder for chaining.
        */
       public Builder setStream(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -652,7 +954,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional bytes stream = 4;</code>
+       * <code>bytes stream = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearStream() {
         
@@ -660,14 +963,16 @@ public final class Chat {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -686,11 +991,12 @@ public final class Chat {
 
     private static final com.google.protobuf.Parser<ChatMessage>
         PARSER = new com.google.protobuf.AbstractParser<ChatMessage>() {
+      @java.lang.Override
       public ChatMessage parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ChatMessage(input, extensionRegistry);
+        return new ChatMessage(input, extensionRegistry);
       }
     };
 
@@ -703,6 +1009,7 @@ public final class Chat {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Chat.ChatMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -714,80 +1021,103 @@ public final class Chat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string from = 1;</code>
+     * <code>string from = 1;</code>
+     * @return The from.
      */
     java.lang.String getFrom();
     /**
-     * <code>optional string from = 1;</code>
+     * <code>string from = 1;</code>
+     * @return The bytes for from.
      */
     com.google.protobuf.ByteString
         getFromBytes();
 
     /**
-     * <code>optional bool toAll = 2;</code>
+     * <code>bool toAll = 2;</code>
+     * @return The toAll.
      */
     boolean getToAll();
 
     /**
      * <code>repeated string to = 3;</code>
+     * @return A list containing the to.
      */
     java.util.List<java.lang.String>
         getToList();
     /**
      * <code>repeated string to = 3;</code>
+     * @return The count of to.
      */
     int getToCount();
     /**
      * <code>repeated string to = 3;</code>
+     * @param index The index of the element to return.
+     * @return The to at the given index.
      */
     java.lang.String getTo(int index);
     /**
      * <code>repeated string to = 3;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the to at the given index.
      */
     com.google.protobuf.ByteString
         getToBytes(int index);
 
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * @return Whether the chatMessage field is set.
      */
     boolean hasChatMessage();
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * @return The chatMessage.
      */
     cn.krossframework.proto.Chat.ChatMessage getChatMessage();
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
      */
     cn.krossframework.proto.Chat.ChatMessageOrBuilder getChatMessageOrBuilder();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.ChatMessageResult}
    */
-  public  static final class ChatMessageResult extends
+  public static final class ChatMessageResult extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.ChatMessageResult)
       ChatMessageResultOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ChatMessageResult.newBuilder() to construct.
     private ChatMessageResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ChatMessageResult() {
       from_ = "";
-      toAll_ = false;
       to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ChatMessageResult();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ChatMessageResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -796,12 +1126,6 @@ public final class Chat {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -815,9 +1139,9 @@ public final class Chat {
             }
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 to_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000001;
               }
               to_.add(s);
               break;
@@ -835,6 +1159,13 @@ public final class Chat {
 
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -843,9 +1174,10 @@ public final class Chat {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           to_ = to_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -854,6 +1186,7 @@ public final class Chat {
       return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessageResult_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessageResult_fieldAccessorTable
@@ -861,12 +1194,13 @@ public final class Chat {
               cn.krossframework.proto.Chat.ChatMessageResult.class, cn.krossframework.proto.Chat.ChatMessageResult.Builder.class);
     }
 
-    private int bitField0_;
     public static final int FROM_FIELD_NUMBER = 1;
     private volatile java.lang.Object from_;
     /**
-     * <code>optional string from = 1;</code>
+     * <code>string from = 1;</code>
+     * @return The from.
      */
+    @java.lang.Override
     public java.lang.String getFrom() {
       java.lang.Object ref = from_;
       if (ref instanceof java.lang.String) {
@@ -880,8 +1214,10 @@ public final class Chat {
       }
     }
     /**
-     * <code>optional string from = 1;</code>
+     * <code>string from = 1;</code>
+     * @return The bytes for from.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getFromBytes() {
       java.lang.Object ref = from_;
@@ -899,8 +1235,10 @@ public final class Chat {
     public static final int TOALL_FIELD_NUMBER = 2;
     private boolean toAll_;
     /**
-     * <code>optional bool toAll = 2;</code>
+     * <code>bool toAll = 2;</code>
+     * @return The toAll.
      */
+    @java.lang.Override
     public boolean getToAll() {
       return toAll_;
     }
@@ -909,6 +1247,7 @@ public final class Chat {
     private com.google.protobuf.LazyStringList to_;
     /**
      * <code>repeated string to = 3;</code>
+     * @return A list containing the to.
      */
     public com.google.protobuf.ProtocolStringList
         getToList() {
@@ -916,18 +1255,23 @@ public final class Chat {
     }
     /**
      * <code>repeated string to = 3;</code>
+     * @return The count of to.
      */
     public int getToCount() {
       return to_.size();
     }
     /**
      * <code>repeated string to = 3;</code>
+     * @param index The index of the element to return.
+     * @return The to at the given index.
      */
     public java.lang.String getTo(int index) {
       return to_.get(index);
     }
     /**
      * <code>repeated string to = 3;</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the to at the given index.
      */
     public com.google.protobuf.ByteString
         getToBytes(int index) {
@@ -937,25 +1281,31 @@ public final class Chat {
     public static final int CHATMESSAGE_FIELD_NUMBER = 4;
     private cn.krossframework.proto.Chat.ChatMessage chatMessage_;
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * @return Whether the chatMessage field is set.
      */
+    @java.lang.Override
     public boolean hasChatMessage() {
       return chatMessage_ != null;
     }
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * @return The chatMessage.
      */
+    @java.lang.Override
     public cn.krossframework.proto.Chat.ChatMessage getChatMessage() {
       return chatMessage_ == null ? cn.krossframework.proto.Chat.ChatMessage.getDefaultInstance() : chatMessage_;
     }
     /**
-     * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+     * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Chat.ChatMessageOrBuilder getChatMessageOrBuilder() {
       return getChatMessage();
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -965,6 +1315,7 @@ public final class Chat {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getFromBytes().isEmpty()) {
@@ -979,8 +1330,10 @@ public final class Chat {
       if (chatMessage_ != null) {
         output.writeMessage(4, getChatMessage());
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1005,11 +1358,11 @@ public final class Chat {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getChatMessage());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1020,19 +1373,19 @@ public final class Chat {
       }
       cn.krossframework.proto.Chat.ChatMessageResult other = (cn.krossframework.proto.Chat.ChatMessageResult) obj;
 
-      boolean result = true;
-      result = result && getFrom()
-          .equals(other.getFrom());
-      result = result && (getToAll()
-          == other.getToAll());
-      result = result && getToList()
-          .equals(other.getToList());
-      result = result && (hasChatMessage() == other.hasChatMessage());
+      if (!getFrom()
+          .equals(other.getFrom())) return false;
+      if (getToAll()
+          != other.getToAll()) return false;
+      if (!getToList()
+          .equals(other.getToList())) return false;
+      if (hasChatMessage() != other.hasChatMessage()) return false;
       if (hasChatMessage()) {
-        result = result && getChatMessage()
-            .equals(other.getChatMessage());
+        if (!getChatMessage()
+            .equals(other.getChatMessage())) return false;
       }
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -1041,7 +1394,7 @@ public final class Chat {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + FROM_FIELD_NUMBER;
       hash = (53 * hash) + getFrom().hashCode();
       hash = (37 * hash) + TOALL_FIELD_NUMBER;
@@ -1060,6 +1413,17 @@ public final class Chat {
       return hash;
     }
 
+    public static cn.krossframework.proto.Chat.ChatMessageResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Chat.ChatMessageResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Chat.ChatMessageResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1119,6 +1483,7 @@ public final class Chat {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1126,6 +1491,7 @@ public final class Chat {
     public static Builder newBuilder(cn.krossframework.proto.Chat.ChatMessageResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1149,6 +1515,7 @@ public final class Chat {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessageResult_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessageResult_fieldAccessorTable
@@ -1171,6 +1538,7 @@ public final class Chat {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         from_ = "";
@@ -1178,7 +1546,7 @@ public final class Chat {
         toAll_ = false;
 
         to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (chatMessageBuilder_ == null) {
           chatMessage_ = null;
         } else {
@@ -1188,15 +1556,18 @@ public final class Chat {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Chat.internal_static_cn_krossframework_proto_ChatMessageResult_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessageResult getDefaultInstanceForType() {
         return cn.krossframework.proto.Chat.ChatMessageResult.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessageResult build() {
         cn.krossframework.proto.Chat.ChatMessageResult result = buildPartial();
         if (!result.isInitialized()) {
@@ -1205,15 +1576,15 @@ public final class Chat {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Chat.ChatMessageResult buildPartial() {
         cn.krossframework.proto.Chat.ChatMessageResult result = new cn.krossframework.proto.Chat.ChatMessageResult(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.from_ = from_;
         result.toAll_ = toAll_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           to_ = to_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.to_ = to_;
         if (chatMessageBuilder_ == null) {
@@ -1221,37 +1592,43 @@ public final class Chat {
         } else {
           result.chatMessage_ = chatMessageBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Chat.ChatMessageResult) {
           return mergeFrom((cn.krossframework.proto.Chat.ChatMessageResult)other);
@@ -1273,7 +1650,7 @@ public final class Chat {
         if (!other.to_.isEmpty()) {
           if (to_.isEmpty()) {
             to_ = other.to_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureToIsMutable();
             to_.addAll(other.to_);
@@ -1283,14 +1660,17 @@ public final class Chat {
         if (other.hasChatMessage()) {
           mergeChatMessage(other.getChatMessage());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1312,7 +1692,8 @@ public final class Chat {
 
       private java.lang.Object from_ = "";
       /**
-       * <code>optional string from = 1;</code>
+       * <code>string from = 1;</code>
+       * @return The from.
        */
       public java.lang.String getFrom() {
         java.lang.Object ref = from_;
@@ -1327,7 +1708,8 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional string from = 1;</code>
+       * <code>string from = 1;</code>
+       * @return The bytes for from.
        */
       public com.google.protobuf.ByteString
           getFromBytes() {
@@ -1343,7 +1725,9 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional string from = 1;</code>
+       * <code>string from = 1;</code>
+       * @param value The from to set.
+       * @return This builder for chaining.
        */
       public Builder setFrom(
           java.lang.String value) {
@@ -1356,7 +1740,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional string from = 1;</code>
+       * <code>string from = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearFrom() {
         
@@ -1365,7 +1750,9 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional string from = 1;</code>
+       * <code>string from = 1;</code>
+       * @param value The bytes for from to set.
+       * @return This builder for chaining.
        */
       public Builder setFromBytes(
           com.google.protobuf.ByteString value) {
@@ -1381,13 +1768,17 @@ public final class Chat {
 
       private boolean toAll_ ;
       /**
-       * <code>optional bool toAll = 2;</code>
+       * <code>bool toAll = 2;</code>
+       * @return The toAll.
        */
+      @java.lang.Override
       public boolean getToAll() {
         return toAll_;
       }
       /**
-       * <code>optional bool toAll = 2;</code>
+       * <code>bool toAll = 2;</code>
+       * @param value The toAll to set.
+       * @return This builder for chaining.
        */
       public Builder setToAll(boolean value) {
         
@@ -1396,7 +1787,8 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional bool toAll = 2;</code>
+       * <code>bool toAll = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearToAll() {
         
@@ -1407,13 +1799,14 @@ public final class Chat {
 
       private com.google.protobuf.LazyStringList to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureToIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           to_ = new com.google.protobuf.LazyStringArrayList(to_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000001;
          }
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @return A list containing the to.
        */
       public com.google.protobuf.ProtocolStringList
           getToList() {
@@ -1421,18 +1814,23 @@ public final class Chat {
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @return The count of to.
        */
       public int getToCount() {
         return to_.size();
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param index The index of the element to return.
+       * @return The to at the given index.
        */
       public java.lang.String getTo(int index) {
         return to_.get(index);
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the to at the given index.
        */
       public com.google.protobuf.ByteString
           getToBytes(int index) {
@@ -1440,6 +1838,9 @@ public final class Chat {
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param index The index to set the value at.
+       * @param value The to to set.
+       * @return This builder for chaining.
        */
       public Builder setTo(
           int index, java.lang.String value) {
@@ -1453,6 +1854,8 @@ public final class Chat {
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param value The to to add.
+       * @return This builder for chaining.
        */
       public Builder addTo(
           java.lang.String value) {
@@ -1466,6 +1869,8 @@ public final class Chat {
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param values The to to add.
+       * @return This builder for chaining.
        */
       public Builder addAllTo(
           java.lang.Iterable<java.lang.String> values) {
@@ -1477,15 +1882,18 @@ public final class Chat {
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearTo() {
         to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
       /**
        * <code>repeated string to = 3;</code>
+       * @param value The bytes of the to to add.
+       * @return This builder for chaining.
        */
       public Builder addToBytes(
           com.google.protobuf.ByteString value) {
@@ -1499,17 +1907,19 @@ public final class Chat {
         return this;
       }
 
-      private cn.krossframework.proto.Chat.ChatMessage chatMessage_ = null;
+      private cn.krossframework.proto.Chat.ChatMessage chatMessage_;
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Chat.ChatMessage, cn.krossframework.proto.Chat.ChatMessage.Builder, cn.krossframework.proto.Chat.ChatMessageOrBuilder> chatMessageBuilder_;
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * @return Whether the chatMessage field is set.
        */
       public boolean hasChatMessage() {
         return chatMessageBuilder_ != null || chatMessage_ != null;
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * @return The chatMessage.
        */
       public cn.krossframework.proto.Chat.ChatMessage getChatMessage() {
         if (chatMessageBuilder_ == null) {
@@ -1519,7 +1929,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public Builder setChatMessage(cn.krossframework.proto.Chat.ChatMessage value) {
         if (chatMessageBuilder_ == null) {
@@ -1535,7 +1945,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public Builder setChatMessage(
           cn.krossframework.proto.Chat.ChatMessage.Builder builderForValue) {
@@ -1549,7 +1959,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public Builder mergeChatMessage(cn.krossframework.proto.Chat.ChatMessage value) {
         if (chatMessageBuilder_ == null) {
@@ -1567,7 +1977,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public Builder clearChatMessage() {
         if (chatMessageBuilder_ == null) {
@@ -1581,7 +1991,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public cn.krossframework.proto.Chat.ChatMessage.Builder getChatMessageBuilder() {
         
@@ -1589,7 +1999,7 @@ public final class Chat {
         return getChatMessageFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       public cn.krossframework.proto.Chat.ChatMessageOrBuilder getChatMessageOrBuilder() {
         if (chatMessageBuilder_ != null) {
@@ -1600,7 +2010,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
+       * <code>.cn.krossframework.proto.ChatMessage chatMessage = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Chat.ChatMessage, cn.krossframework.proto.Chat.ChatMessage.Builder, cn.krossframework.proto.Chat.ChatMessageOrBuilder> 
@@ -1615,14 +2025,16 @@ public final class Chat {
         }
         return chatMessageBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1641,11 +2053,12 @@ public final class Chat {
 
     private static final com.google.protobuf.Parser<ChatMessageResult>
         PARSER = new com.google.protobuf.AbstractParser<ChatMessageResult>() {
+      @java.lang.Override
       public ChatMessageResult parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ChatMessageResult(input, extensionRegistry);
+        return new ChatMessageResult(input, extensionRegistry);
       }
     };
 
@@ -1658,6 +2071,7 @@ public final class Chat {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Chat.ChatMessageResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1683,32 +2097,24 @@ public final class Chat {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nChat.proto\022\027cn.krossframework.proto\"M\n" +
-      "\013ChatMessage\022\017\n\007cmdType\030\001 \001(\005\022\013\n\003msg\030\002 \001" +
-      "(\t\022\020\n\010emoticon\030\003 \001(\005\022\016\n\006stream\030\004 \001(\014\"w\n\021" +
-      "ChatMessageResult\022\014\n\004from\030\001 \001(\t\022\r\n\005toAll" +
-      "\030\002 \001(\010\022\n\n\002to\030\003 \003(\t\0229\n\013chatMessage\030\004 \001(\0132" +
-      "$.cn.krossframework.proto.ChatMessageB\010B" +
-      "\004ChatH\001b\006proto3"
+      "\n\nChat.proto\022\027cn.krossframework.proto\"Y\n" +
+      "\013ChatMessage\022\017\n\007cmdType\030\001 \001(\005\022\n\n\002to\030\002 \003(" +
+      "\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005\022\016\n\006stre" +
+      "am\030\005 \001(\014\"w\n\021ChatMessageResult\022\014\n\004from\030\001 " +
+      "\001(\t\022\r\n\005toAll\030\002 \001(\010\022\n\n\002to\030\003 \003(\t\0229\n\013chatMe" +
+      "ssage\030\004 \001(\0132$.cn.krossframework.proto.Ch" +
+      "atMessageB\010B\004ChatH\001b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_cn_krossframework_proto_ChatMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_cn_krossframework_proto_ChatMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_ChatMessage_descriptor,
-        new java.lang.String[] { "CmdType", "Msg", "Emoticon", "Stream", });
+        new java.lang.String[] { "CmdType", "To", "Msg", "Emoticon", "Stream", });
     internal_static_cn_krossframework_proto_ChatMessageResult_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_cn_krossframework_proto_ChatMessageResult_fieldAccessorTable = new

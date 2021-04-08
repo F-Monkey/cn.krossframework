@@ -120,7 +120,6 @@ public class RingBuffer<T> implements Queue<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T poll() {
         if (this.isEmpty()) {
             return null;
