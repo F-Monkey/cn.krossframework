@@ -10,6 +10,7 @@ ext {
             netty         : "4.1.42.Final",
             junit         : "4.12",
             mockito       : "1.10.19",
+            disruptor     : "3.4.2",
     ]
 
     protoc = [
@@ -29,6 +30,7 @@ ext {
             "slf4j"                   : ["org.slf4j:slf4j-api:${version.slf4j}"],
             "netty"                   : "io.netty:netty-all:${version.netty}",
             "junit"                   : "junit:junit:${version.junit}",
-            "mockito"                 : "org.mockito:mockito-all:${version.mockito}"
+            "mockito"                 : "org.mockito:mockito-all:${version.mockito}",
+            "disruptor"               : "com.lmax:disruptor:${version.disruptor}",
     ]
 }

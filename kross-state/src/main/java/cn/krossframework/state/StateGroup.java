@@ -14,7 +14,7 @@ public interface StateGroup {
      *
      * @return workerId
      */
-    long getCurrentWorkerId();
+    Long getCurrentWorkerId();
 
     /**
      * set workerId

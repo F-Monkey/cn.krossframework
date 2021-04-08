@@ -7,11 +7,15 @@ public interface Worker {
     class GroupIdTaskPair {
         private final Long groupId;
         private final Task task;
+        private final FailCallBack callBack;
 
-        public GroupIdTaskPair(Long groupId, Task task) {
+        public GroupIdTaskPair(Long groupId,
+                               Task task,
+                               FailCallBack failCallBack) {
             Preconditions.checkNotNull(task);
             this.groupId = groupId;
             this.task = task;
+            this.callBack = failCallBack;
         }
 
         public Long getGroupId() {
@@ -21,6 +25,10 @@ public interface Worker {
         public Task getTask() {
             return task;
         }
+
+        public FailCallBack getCallBack() {
+            return callBack;
+        }
     }
 
     long getId();
@@ -29,15 +37,16 @@ public interface Worker {
 
     boolean isStart();
 
-    boolean isFull();
+    default boolean isFull() {
+        return false;
+    }
 
-    boolean isEmpty();
+    default boolean isEmpty() {
+        return false;
+    }
 
     void update();
 
     void stop();
 
-    boolean tryAddStateGroup(StateGroup stateGroup);
-
-    boolean tryAddTask(GroupIdTaskPair groupIdTaskPair);
 }

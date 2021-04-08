@@ -12,7 +12,7 @@ public interface Character {
 
     void setCurrentGroupId(long groupId);
 
-    long getCurrentGroupId();
+    Long getCurrentGroupId();
 
     String getNickName();
 

@@ -4,5 +4,6 @@ include 'kross-web'
 include 'kross-websocket'
 include 'kross-commons'
 include 'kross-proto'
-include 'kross-cat-server'
+include 'kross-chat-server'
+include 'kross-chat-server'
 

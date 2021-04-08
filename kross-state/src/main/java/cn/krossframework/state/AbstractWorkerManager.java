@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class AbstractWorkerManager implements WorkerManager {
+public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractWorkerManager.class);
 
@@ -20,6 +20,8 @@ public abstract class AbstractWorkerManager implements WorkerManager {
 
     protected final int workerCapacity;
 
+    protected final int taskDispatcherSize;
+
     protected final ExecutorService executorService;
 
     protected final LinkedBlockingQueue<EnterWorkerTask> enterWorkerTaskQueue;
@@ -28,34 +30,46 @@ public abstract class AbstractWorkerManager implements WorkerManager {
 
     protected final Object LOCK;
 
-    protected volatile ConcurrentHashMap<Long, Worker> workerMap;
+    protected final ConcurrentHashMap<Long, TaskDispatcher> dispatcherMap;
+
+    protected volatile ConcurrentHashMap<Long, StateGroupWorker> workerMap;
 
     public AbstractWorkerManager(int workerUpdatePeriod,
                                  int workerCapacity,
-                                 int workerSize,
+                                 int workerThreadSize,
                                  int removeEmptyWorkerPeriod,
                                  int removeDeposedStateGroupPeriod,
+                                 int taskDispatcherSize,
                                  StateGroupPool stateGroupPool) {
         this.workerUpdatePeriod = workerUpdatePeriod;
         this.removeDeposedStateGroupPeriod = removeDeposedStateGroupPeriod;
+        this.taskDispatcherSize = taskDispatcherSize;
         this.stateGroupPool = stateGroupPool;
         this.enterWorkerTaskQueue = new LinkedBlockingQueue<>();
         this.workerCapacity = workerCapacity;
         this.LOCK = new Object();
-        this.workerMap = new ConcurrentHashMap<>();
-        this.executorService = new ThreadPoolExecutor(workerSize, workerSize, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+        this.executorService = new ThreadPoolExecutor(workerThreadSize + taskDispatcherSize,
+                workerCapacity + taskDispatcherSize,
+                0,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>());
+        this.workerMap = this.initWorkerMap();
+        this.dispatcherMap = this.initDispatcherMap();
         this.executorService.submit(() -> {
             for (; ; ) {
-                this.lock();
+                this.tryLock();
                 EnterWorkerTask task = this.enterWorkerTaskQueue.poll();
                 if (task == null) {
                     continue;
                 }
-                task.run();
+                try {
+                    task.run();
+                } catch (Exception e) {
+                    log.error("enterWorkerTask run error:\n", e);
+                }
             }
         });
         new AutoTask(removeEmptyWorkerPeriod, 2) {
-
             @Override
             protected void run() {
                 AbstractWorkerManager.this.removeEmptyWorker();
@@ -63,16 +77,26 @@ public abstract class AbstractWorkerManager implements WorkerManager {
         }.start();
     }
 
-    protected void lock() {
+    protected ConcurrentHashMap<Long, TaskDispatcher> initDispatcherMap() {
+        return new ConcurrentHashMap<>(this.taskDispatcherSize);
+    }
+
+    protected ConcurrentHashMap<Long, StateGroupWorker> initWorkerMap() {
+        return new ConcurrentHashMap<>();
+    }
+
+    public boolean tryLock() {
         synchronized (this.LOCK) {
             try {
                 this.LOCK.wait();
+                return true;
             } catch (InterruptedException ignore) {
+                return false;
             }
         }
     }
 
-    protected void unlock() {
+    public void unlock() {
         synchronized (this.LOCK) {
             this.LOCK.notifyAll();
         }
@@ -92,7 +116,7 @@ public abstract class AbstractWorkerManager implements WorkerManager {
     }
 
     protected void removeEmptyWorker() {
-        final ConcurrentHashMap<Long, Worker> workerMap = this.workerMap;
+        final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         workerMap.entrySet().removeIf(e -> {
             Worker worker = e.getValue();
             boolean empty = worker.isEmpty();
@@ -105,23 +129,59 @@ public abstract class AbstractWorkerManager implements WorkerManager {
         this.workerMap = workerMap;
     }
 
+    protected void dispatcherTask(Worker.GroupIdTaskPair groupIdTaskPair) {
+        Long groupId = groupIdTaskPair.getGroupId();
+        FailCallBack callBack = groupIdTaskPair.getCallBack();
+        if (groupId == null) {
+            if (callBack != null) {
+                callBack.call();
+            }
+            return;
+        }
+        TaskDispatcher dispatcher = this.findDispatcher(groupId);
+        if (dispatcher == null) {
+            if (callBack != null) {
+                callBack.call();
+            }
+            return;
+        }
+        if (!dispatcher.tryAddTask(groupIdTaskPair)) {
+            if (callBack != null) {
+                callBack.call();
+            }
+        }
+    }
+
+    protected TaskDispatcher findDispatcher(long groupId) {
+        long index = groupId % this.taskDispatcherSize;
+        return this.dispatcherMap.computeIfAbsent(index, (i) -> {
+            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.executorService, this.stateGroupPool) {
+            };
+            taskDispatcher.start();
+            return taskDispatcher;
+        });
+    }
+
     protected void findBestWorker2Enter(Worker.GroupIdTaskPair groupIdTaskPair) {
         Long groupId = groupIdTaskPair.getGroupId();
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupId);
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
+        if (stateGroup.canDeposed()) {
+            return;
+        }
         stateGroup.tryAddTask(groupIdTaskPair.getTask());
+        final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
+        Long currentWorkerId = stateGroup.getCurrentWorkerId();
         boolean enterSuccess = false;
-        final ConcurrentHashMap<Long, Worker> workerMap = this.workerMap;
-        if (!fetchStateGroup.isNew()) {
-            long currentWorkerId = stateGroup.getCurrentWorkerId();
-            Worker worker = workerMap.get(currentWorkerId);
+        if (!fetchStateGroup.isNew() && currentWorkerId != null) {
+            StateGroupWorker worker = workerMap.get(currentWorkerId);
             if (worker != null) {
                 if (worker.tryAddStateGroup(stateGroup)) {
                     enterSuccess = true;
                 }
             }
         } else {
-            for (Worker worker : workerMap.values()) {
+            for (StateGroupWorker worker : workerMap.values()) {
                 if (!worker.isStart()) {
                     continue;
                 }
@@ -136,12 +196,7 @@ public abstract class AbstractWorkerManager implements WorkerManager {
             }
         }
         if (!enterSuccess) {
-            Worker worker = new AbstractWorker(ID_COUNT.incrementAndGet(),
-                    this.workerUpdatePeriod,
-                    this.workerCapacity,
-                    this.removeDeposedStateGroupPeriod,
-                    this.executorService) {
-            };
+            AbstractStateGroupWorker worker = this.createWorker();
             worker.start();
             workerMap.put(worker.getId(), worker);
             worker.tryAddStateGroup(stateGroup);
@@ -149,6 +204,15 @@ public abstract class AbstractWorkerManager implements WorkerManager {
         this.workerMap = workerMap;
     }
 
+    protected AbstractStateGroupWorker createWorker() {
+        return new AbstractStateGroupWorker(ID_COUNT.incrementAndGet(),
+                this.workerUpdatePeriod,
+                this.workerCapacity,
+                this.removeDeposedStateGroupPeriod,
+                this.stateGroupPool,
+                this.executorService) {
+        };
+    }
 
     @Override
     public boolean enter(Worker.GroupIdTaskPair groupIdTaskPair) {
@@ -160,30 +224,25 @@ public abstract class AbstractWorkerManager implements WorkerManager {
         return true;
     }
 
-    protected abstract boolean isAutoExecuteTask(Task task);
-
     @Override
     public void addTask(Worker.GroupIdTaskPair groupIdTaskPair) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupIdTaskPair.getGroupId());
         // this should be enter
-        Task task = groupIdTaskPair.getTask();
         if (fetchStateGroup.isNew()) {
-            if (this.isAutoExecuteTask(task)) {
-                this.enter(groupIdTaskPair);
-                return;
-            }
+            this.enter(groupIdTaskPair);
+            return;
         }
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
-        long currentWorkerId = stateGroup.getCurrentWorkerId();
+        Long currentWorkerId = stateGroup.getCurrentWorkerId();
+        if (currentWorkerId == null) {
+            this.enter(groupIdTaskPair);
+            return;
+        }
         Worker worker = this.workerMap.get(currentWorkerId);
         if (worker == null) {
-            if (this.isAutoExecuteTask(task)) {
-                this.enter(groupIdTaskPair);
-            }
-        } else {
-            if (!worker.tryAddTask(groupIdTaskPair)) {
-                log.error("task add fail");
-            }
+            this.enter(groupIdTaskPair);
+            return;
         }
+        this.dispatcherTask(groupIdTaskPair);
     }
 }

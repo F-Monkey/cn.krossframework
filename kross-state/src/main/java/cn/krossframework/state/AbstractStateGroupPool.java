@@ -83,4 +83,9 @@ public class AbstractStateGroupPool implements StateGroupPool {
         this.stateGroupMap = stateGroupMap;
         return new FetchStateGroup(isNew[0], stateGroup);
     }
+
+    @Override
+    public StateGroup find(long id) {
+        return this.stateGroupMap.get(id);
+    }
 }

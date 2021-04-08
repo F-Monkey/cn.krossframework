@@ -22,6 +22,10 @@ public class Walk extends AbstractState {
 
     @Override
     public void update(Time time, StateInfo stateInfo) {
+        if (this.status == 1) {
+            stateInfo.isFinished = true;
+            return;
+        }
         this.walkDistance -= 10;
         System.out.println("walking");
         if (this.walkDistance <= 0) {

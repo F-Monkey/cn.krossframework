@@ -20,4 +20,5 @@ protobuf {
 
 dependencies {
     implementation rootProject.ext.dependencies["protobuf"]
+    implementation rootProject.ext.dependencies["guava"]
 }

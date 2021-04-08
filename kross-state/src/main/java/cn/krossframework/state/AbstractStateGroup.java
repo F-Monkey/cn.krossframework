@@ -1,12 +1,11 @@
 package cn.krossframework.state;
 
+import cn.krossframework.commons.collection.RingBuffer;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.BlockingQueue;
+import java.util.*;
 
 public abstract class AbstractStateGroup implements StateGroup {
 
@@ -20,11 +19,11 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     protected final Map<String, State> stateMap;
 
-    protected final BlockingQueue<Task> taskQueue;
+    protected final Queue<Task> taskQueue;
 
     protected State currentState;
 
-    protected volatile long currentWorkerId;
+    protected volatile Long currentWorkerId;
 
     public AbstractStateGroup(long id,
                               Time time,
@@ -35,12 +34,27 @@ public abstract class AbstractStateGroup implements StateGroup {
         this.time = time;
         this.id = id;
         this.stateGroupConfig = stateGroupConfig;
+        Collection<State> states = stateGroupConfig.getStates();
+        if (states != null && states.size() > 0) {
+            for (State state : states) {
+                this.addState(state);
+            }
+        }
         this.stateMap = new HashMap<>();
         this.taskQueue = this.initTaskQueue();
     }
 
-    protected abstract BlockingQueue<Task> initTaskQueue();
-
+    /**
+     * return an async queue,
+     * all task should be provide by {@link #tryAddTask(Task)}
+     * and consume by {@link #update()}
+     * provider and consumer can be different thread
+     *
+     * @return queue
+     */
+    protected Queue<Task> initTaskQueue() {
+        return new RingBuffer<>();
+    }
 
     @Override
     public long getId() {
@@ -48,7 +62,7 @@ public abstract class AbstractStateGroup implements StateGroup {
     }
 
     @Override
-    public long getCurrentWorkerId() {
+    public Long getCurrentWorkerId() {
         return this.currentWorkerId;
     }
 
@@ -79,7 +93,7 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     @Override
     public boolean tryAddTask(Task task) {
-        return this.taskQueue.offer(task);
+        return !this.canDeposed() && this.taskQueue.offer(task);
     }
 
     @Override

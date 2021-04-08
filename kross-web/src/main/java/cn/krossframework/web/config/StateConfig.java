@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Collection;
+
 @Configuration
 public class StateConfig {
 
@@ -15,7 +17,17 @@ public class StateConfig {
     @Bean
     WorkerManager workerManager() throws Exception {
         DefaultLazyTime defaultLazyTime = new DefaultLazyTime(100);
-        CatFactory catFactory = new CatFactory(defaultLazyTime, () -> true) {
+        CatFactory catFactory = new CatFactory(defaultLazyTime, new StateGroupConfig() {
+            @Override
+            public boolean autoUpdate() {
+                return true;
+            }
+
+            @Override
+            public Collection<State> getStates() {
+                return null;
+            }
+        }) {
             @Override
             public StateGroup create(long id) {
                 StateGroup stateGroup = new Cat(id, super.time, super.stateGroupConfig);
@@ -30,12 +42,8 @@ public class StateConfig {
         CatPool catPool = new CatPool(catFactory);
         catPool.setRemoveDeposedStateGroupPeriod(2000);
         catPool.afterPropertiesSet();
-        return new AbstractWorkerManager(500, 20, 10, 2000, 2000, catPool) {
-
-            @Override
-            protected boolean isAutoExecuteTask(Task task) {
-                return false;
-            }
+        return new AbstractWorkerManager(500, 20, 10,
+                2000, 2000, 20, catPool) {
         };
     }
 }

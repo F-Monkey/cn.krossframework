@@ -1,0 +1,3 @@
+spring:
+  netty:
+    port: 8000

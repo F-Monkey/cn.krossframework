@@ -34,4 +34,8 @@ public abstract class AutoTask {
     }
 
     protected abstract void run();
+
+    public void stop() {
+        this.scheduledExecutorService.shutdownNow();
+    }
 }

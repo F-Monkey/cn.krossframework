@@ -2,9 +2,6 @@ package cn.krossframework.state;
 
 import com.google.common.base.Preconditions;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 public class DefaultStateGroupFactory implements StateGroupFactory {
 
     protected final StateGroupConfig stateGroupConfig;
@@ -21,10 +18,6 @@ public class DefaultStateGroupFactory implements StateGroupFactory {
     @Override
     public StateGroup create(long id) {
         return new AbstractStateGroup(id, this.time, this.stateGroupConfig) {
-            @Override
-            protected BlockingQueue<Task> initTaskQueue() {
-                return new LinkedBlockingQueue<>();
-            }
         };
     }
 }

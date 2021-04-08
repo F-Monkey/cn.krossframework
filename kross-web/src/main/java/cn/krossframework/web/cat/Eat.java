@@ -30,6 +30,10 @@ public class Eat extends AbstractState {
 
     @Override
     public void update(Time time, StateInfo stateInfo) {
+        if (this.status == 1) {
+            stateInfo.isFinished = true;
+            return;
+        }
         this.foodCount -= 1;
         System.out.println("eating");
         if (this.foodCount <= 0) {

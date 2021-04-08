@@ -22,6 +22,10 @@ public class Sleep extends AbstractState {
 
     @Override
     public void update(Time time, StateInfo stateInfo) {
+        if (this.status == 1) {
+            stateInfo.isFinished = true;
+            return;
+        }
         this.sleepTime -= 20;
         System.out.println("sleeping");
         if (this.sleepTime <= 0) {

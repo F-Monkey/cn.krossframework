@@ -21,6 +21,7 @@ public class NettyServer {
     private final ServerBootstrap bootstrap;
 
     private final NioEventLoopGroup bossGroup;
+
     private final NioEventLoopGroup workerGroup;
 
     private final int port;
@@ -30,7 +31,6 @@ public class NettyServer {
     public NettyServer(int port,
                        ChannelHandler customHandler) {
         this.bossGroup = new NioEventLoopGroup(2);
-        // 主要是IO密集型的任务，考虑部分线程数量由于处理机器内部的任务，目前的workerGroup数量这样设置
         this.workerGroup = new NioEventLoopGroup(ThreadPoolUtil.ioIntesivePoolSize() / 2);
         this.bootstrap = new ServerBootstrap();
         this.port = port;

@@ -26,11 +26,11 @@ public class WebApplication {
     @RequestMapping("/addCat/{id}")
     public void addCat(@PathVariable("id") Long id) {
         this.workerManager.enter(new Worker.GroupIdTaskPair(id, new Task() {
-        }));
+        }, null));
     }
 
     @RequestMapping("/killCat/{id}")
     public void killCat(@PathVariable("id") Long id) {
-        this.workerManager.addTask(new Worker.GroupIdTaskPair(id, new CatTask(1)));
+        this.workerManager.addTask(new Worker.GroupIdTaskPair(id, new CatTask(1), null));
     }
 }
