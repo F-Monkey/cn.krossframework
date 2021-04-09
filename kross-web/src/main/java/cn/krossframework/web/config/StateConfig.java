@@ -18,7 +18,10 @@ public class StateConfig {
     WorkerManager workerManager() throws Exception {
         DefaultLazyTime defaultLazyTime = new DefaultLazyTime(100);
         CatFactory catFactory = new CatFactory(defaultLazyTime, new StateGroupConfig() {
-
+            @Override
+            public boolean autoUpdate() {
+                return true;
+            }
         }) {
             @Override
             public StateGroup create(long id) {

@@ -124,13 +124,12 @@ public abstract class AbstractStateGroup implements StateGroup {
             }
         }
 
-        StateInfo stateInfo = new StateInfo();
         if (this.time.getCurrentTimeMillis() - this.lastUpdateTime < this.stateGroupConfig.updatePeriod()) {
             return;
         }
 
         this.lastUpdateTime = 0;
-
+        StateInfo stateInfo = new StateInfo();
         try {
             this.currentState.update(this.time, stateInfo);
         } catch (Throwable e) {
