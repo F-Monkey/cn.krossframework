@@ -74,7 +74,7 @@ public interface State {
      * and switch to next state
      *
      * @param time      execute time
-     * @param stateInfo if current state should be finished, then update {@link StateInfo#isFinished} to true。
+     * @param stateInfo if current state should be finished, then update {@link StateInfo#isFinished} to {@code true}
      */
     void update(Time time, StateInfo stateInfo);
 
