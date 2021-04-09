@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package cn.krossframework.proto;
+
+option optimize_for = SPEED;
+
+option java_outer_classname = "Game";
+
+message Player {
+  string uid = 1;
+  string nickname = 2;
+  string headIcon = 3;
+}
+
+message TetrisSeatData {
+  int32 score = 1;
+  Player player = 2;
+}
+
+message TetrisRoomData {
+  repeated TetrisSeatData tetrisSeatDataList = 1;
+}

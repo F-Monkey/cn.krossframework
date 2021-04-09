@@ -150,34 +150,35 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         });
     }
 
-    protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack) {
-        if (groupId == null) {
-            for (StateGroupWorker worker : this.workerMap.values()) {
-                Iterator<Long> idIterator = worker.stateGroupIdIterator();
-                while (idIterator.hasNext()) {
-                    Long id = idIterator.next();
-                    StateGroup stateGroup = this.stateGroupPool.find(id);
-                    if (stateGroup != null && stateGroup.tryEnterGroup(task)) {
-                        return;
-                    }
+    private boolean findGroupInWorker2EnterWithoutGroupId(Task task) {
+        final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
+        for (StateGroupWorker worker : workerMap.values()) {
+            Iterator<Long> idIterator = worker.stateGroupIdIterator();
+            while (idIterator.hasNext()) {
+                Long id = idIterator.next();
+                StateGroup stateGroup = this.stateGroupPool.find(id);
+                if (stateGroup != null && stateGroup.tryEnterGroup(task)) {
+                    return true;
                 }
             }
         }
+        return false;
+    }
+
+    private boolean findGroup2Enter(Long groupId, Task task) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupId);
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
         if (stateGroup.canDeposed()) {
-            return;
+            return false;
         }
-
         stateGroup.tryEnterGroup(task);
-
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (!fetchStateGroup.isNew() && currentWorkerId != null) {
             StateGroupWorker worker = workerMap.get(currentWorkerId);
             if (worker != null) {
                 if (worker.tryAddStateGroup(stateGroup)) {
-                    return;
+                    return true;
                 }
             }
         } else {
@@ -191,14 +192,13 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
                 }
 
                 if (worker.tryAddStateGroup(stateGroup)) {
-                    return;
+                    return true;
                 }
             }
         }
 
         if (this.workerMap.size() > this.workerCapacity) {
-            failCallBack.call();
-            return;
+            return false;
         }
 
         AbstractStateGroupWorker worker = this.createWorker();
@@ -206,6 +206,17 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         workerMap.put(worker.getId(), worker);
         worker.tryAddStateGroup(stateGroup);
         this.workerMap = workerMap;
+        return true;
+    }
+
+    protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack) {
+        if (groupId == null && this.findGroupInWorker2EnterWithoutGroupId(task)) {
+            return;
+        }
+        if (findGroup2Enter(groupId, task)) {
+            return;
+        }
+        failCallBack.call();
     }
 
     protected AbstractStateGroupWorker createWorker() {

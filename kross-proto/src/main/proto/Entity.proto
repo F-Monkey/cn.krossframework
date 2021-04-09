@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cn . krossframework. proto;
+package cn.krossframework.proto;
 
 option optimize_for = SPEED;
 option java_outer_classname = "Entity";
