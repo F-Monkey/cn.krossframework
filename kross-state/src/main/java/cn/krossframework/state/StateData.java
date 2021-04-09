@@ -4,4 +4,8 @@ public interface StateData {
     void setGroupId(long groupId);
 
     long getGroupId();
+
+    default boolean isFull(){
+        return false;
+    }
 }

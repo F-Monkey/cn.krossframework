@@ -6,4 +6,5 @@ include 'kross-commons'
 include 'kross-proto'
 include 'kross-chat-server'
 include 'kross-chat-server'
+include 'kross-game'
 

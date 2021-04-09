@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state.chat;
+package cn.krossframework.chat.state;
 
 import cn.krossframework.state.*;
 
@@ -14,12 +14,5 @@ public class ChatRoom extends AbstractStateGroup {
             return super.tryAddTask(task);
         }
         return false;
-    }
-
-    @Override
-    protected StateData initStateData() {
-        RoomData roomData = new RoomData();
-        roomData.setGroupId(super.id);
-        return roomData;
     }
 }

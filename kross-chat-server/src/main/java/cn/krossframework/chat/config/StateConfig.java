@@ -1,10 +1,10 @@
 package cn.krossframework.chat.config;
 
 import cn.krossframework.chat.config.properties.StateProperty;
-import cn.krossframework.chat.state.chat.ChatConfig;
-import cn.krossframework.chat.state.chat.ChatRoomFactory;
-import cn.krossframework.chat.state.chat.ChatRoomPool;
-import cn.krossframework.chat.state.chat.ChatWorkerManager;
+import cn.krossframework.chat.state.ChatConfig;
+import cn.krossframework.chat.state.ChatRoomFactory;
+import cn.krossframework.chat.state.ChatRoomPool;
+import cn.krossframework.chat.state.ChatWorkerManager;
 import cn.krossframework.state.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;

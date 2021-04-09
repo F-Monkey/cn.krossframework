@@ -18,6 +18,7 @@ public class UserService implements IUserService {
 
     @Override
     public User findOrCreateUser(String username) {
+        // TODO  this is not safe code
         ChatUser chatUser = this.mongoTemplate.findOne(new Query(Criteria.where("username").is(username)), ChatUser.class);
         if (chatUser == null) {
             chatUser = new ChatUser();

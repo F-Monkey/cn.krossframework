@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state.chat;
+package cn.krossframework.chat.state;
 
 import cn.krossframework.proto.Command;
 import cn.krossframework.state.Task;

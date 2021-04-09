@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state.chat;
+package cn.krossframework.chat.state;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
 import cn.krossframework.proto.*;

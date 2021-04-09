@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 public interface StateGroupConfig {
+
     default boolean autoUpdate() {
         return false;
     }
@@ -14,5 +15,10 @@ public interface StateGroupConfig {
 
     default Collection<State> getStates() {
         return Collections.emptyList();
+    }
+
+    default StateData getStateData(){
+        return new AbstractStateData() {
+        };
     }
 }

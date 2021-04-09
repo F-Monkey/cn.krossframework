@@ -2,8 +2,8 @@ package cn.krossframework.state;
 
 public interface WorkerManager {
 
-    boolean enter(Worker.GroupIdTaskPair groupIdTaskPair);
+    void enter(GroupIdTask groupIdTask);
 
-    void addTask(Worker.GroupIdTaskPair groupIdTaskPair);
+    void addTask(GroupIdTask groupIdTask);
 
 }

@@ -5,6 +5,7 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ExecutorService;
 
@@ -136,5 +137,10 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
         this.groupIdSet.add(stateGroup.getId());
         this.currentAddStateGroup = null;
         return true;
+    }
+
+    @Override
+    public Iterator<Long> stateGroupIdIterator() {
+        return this.groupIdSet.iterator();
     }
 }

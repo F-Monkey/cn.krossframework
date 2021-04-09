@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state.chat;
+package cn.krossframework.chat.state;
 
 import cn.krossframework.state.*;
 
@@ -9,15 +9,7 @@ public class ChatWorkerManager extends AbstractWorkerManager {
     }
 
     @Override
-    public void addTask(Worker.GroupIdTaskPair groupIdTaskPair) {
-        Task task = groupIdTaskPair.getTask();
-        if (task instanceof ChatTask) {
-            super.addTask(groupIdTaskPair);
-            return;
-        }
-        FailCallBack callBack = groupIdTaskPair.getCallBack();
-        if (callBack != null) {
-            callBack.call();
-        }
+    public void addTask(GroupIdTask groupIdTask) {
+        super.addTask(groupIdTask);
     }
 }

@@ -44,16 +44,10 @@ public abstract class AbstractStateGroup implements StateGroup {
                 this.addState(state);
             }
         }
-        this.stateData = this.initStateData();
+        this.stateData = stateGroupConfig.getStateData();
+        this.stateData.setGroupId(this.id);
         this.stateMap = new HashMap<>();
         this.taskQueue = this.initTaskQueue();
-    }
-
-    protected StateData initStateData() {
-        AbstractStateData stateData = new AbstractStateData() {
-        };
-        stateData.setGroupId(this.id);
-        return stateData;
     }
 
     /**
@@ -102,6 +96,11 @@ public abstract class AbstractStateGroup implements StateGroup {
             return;
         }
         this.currentState = state;
+    }
+
+    @Override
+    public boolean tryEnterGroup(Task task) {
+        return !this.canDeposed() && !this.stateData.isFull();
     }
 
     @Override

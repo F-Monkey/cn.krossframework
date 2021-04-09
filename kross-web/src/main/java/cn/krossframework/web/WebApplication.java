@@ -1,5 +1,6 @@
 package cn.krossframework.web;
 
+import cn.krossframework.state.GroupIdTask;
 import cn.krossframework.state.Task;
 import cn.krossframework.state.Worker;
 import cn.krossframework.state.WorkerManager;
@@ -23,14 +24,13 @@ public class WebApplication {
         this.workerManager = workerManager;
     }
 
-    @RequestMapping("/addCat/{id}")
-    public void addCat(@PathVariable("id") Long id) {
-        this.workerManager.enter(new Worker.GroupIdTaskPair(id, new Task() {
-        }, null));
+    @RequestMapping({"/addCat/{id}", "/addCat"})
+    public void addCat(@PathVariable(value = "id", required = false) Long id) {
+        this.workerManager.enter(new GroupIdTask(id, new CatTask(0), null));
     }
 
     @RequestMapping("/killCat/{id}")
     public void killCat(@PathVariable("id") Long id) {
-        this.workerManager.addTask(new Worker.GroupIdTaskPair(id, new CatTask(1), null));
+        this.workerManager.addTask(new GroupIdTask(id, new CatTask(1), null));
     }
 }

@@ -22,7 +22,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     private final Object LOCK;
 
-    protected final BlockingQueue<GroupIdTaskPair> groupIdTaskPairQueue;
+    protected final BlockingQueue<Task> groupIdTaskQueue;
 
     protected volatile boolean isStart;
 
@@ -34,18 +34,18 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
         this.executorService = executorService;
         this.thread = new Thread(AbstractTaskDispatcher.this::run);
         this.LOCK = new Object();
-        this.groupIdTaskPairQueue = new LinkedBlockingQueue<>();
+        this.groupIdTaskQueue = new LinkedBlockingQueue<>();
         this.stateGroupPool = stateGroupPool;
     }
 
     protected void run() {
         for (; ; ) {
-            this.tryLock();
             try {
                 this.update();
             } catch (Exception e) {
                 log.error("update error:\n", e);
             }
+            this.tryLock();
         }
     }
 
@@ -69,29 +69,37 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     @Override
     public void update() {
         do {
-            GroupIdTaskPair poll = this.groupIdTaskPairQueue.poll();
+            Task poll = this.groupIdTaskQueue.poll();
             if (poll == null) {
                 return;
             }
             if (!this.findStateGroupAndAddTask(poll)) {
-                FailCallBack callBack = poll.getCallBack();
-                if (callBack != null) {
-                    callBack.call();
-                }
+                log.error("stateGroup task add fail, task type:{}, task:\n{}", poll.getClass(), poll);
             }
-        } while (this.groupIdTaskPairQueue.size() > 0);
+        } while (this.groupIdTaskQueue.size() > 0);
     }
 
-    protected boolean findStateGroupAndAddTask(GroupIdTaskPair groupIdTaskPair) {
-        Long groupId = groupIdTaskPair.getGroupId();
-        if (groupId == null) {
-            return false;
+    protected boolean findStateGroupAndAddTask(Task task) {
+        if (task instanceof AbstractWorkerManager.EnterGroupTask) {
+            ((AbstractWorkerManager.EnterGroupTask) task).run();
+            return true;
         }
-        StateGroup stateGroup = this.stateGroupPool.find(groupId);
-        if (stateGroup == null) {
-            return false;
+        if (task instanceof GroupIdTask) {
+            GroupIdTask groupIdTask = (GroupIdTask) task;
+            Long groupId = groupIdTask.getGroupId();
+            FailCallBack failCallBack = groupIdTask.getFailCallBack();
+            if (groupId == null) {
+                if (failCallBack != null) {
+                    failCallBack.call();
+                }
+            }
+            StateGroup stateGroup = this.stateGroupPool.find(groupId);
+            if (stateGroup == null) {
+                return false;
+            }
+            return stateGroup.tryAddTask(groupIdTask.getTask());
         }
-        return stateGroup.tryAddTask(groupIdTaskPair.getTask());
+        return false;
     }
 
     @Override
@@ -101,8 +109,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     }
 
     @Override
-    public boolean tryAddTask(GroupIdTaskPair groupIdTaskPair) {
-        boolean b = this.isStart() && this.groupIdTaskPairQueue.offer(groupIdTaskPair);
+    public boolean tryAddTask(Task task) {
+        boolean b = this.isStart() && this.groupIdTaskQueue.offer(task);
         if (b) {
             this.unlock();
         }

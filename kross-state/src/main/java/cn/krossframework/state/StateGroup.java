@@ -37,6 +37,13 @@ public interface StateGroup {
     void initAndSetCurrentState(String code) throws NullPointerException;
 
     /**
+     * try enter stateGroup, if stateGroup is full, return false
+     * @param task enterGroup task
+     * @return enterResult
+     */
+    boolean tryEnterGroup(Task task);
+
+    /**
      * try add task
      *
      * @param task task

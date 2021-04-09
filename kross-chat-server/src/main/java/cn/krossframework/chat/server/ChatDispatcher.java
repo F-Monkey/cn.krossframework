@@ -1,13 +1,13 @@
 package cn.krossframework.chat.server;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
-import cn.krossframework.chat.state.chat.ChatTask;
+import cn.krossframework.chat.state.ChatTask;
 import cn.krossframework.proto.Chat;
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
-import cn.krossframework.state.Worker;
+import cn.krossframework.state.GroupIdTask;
 import cn.krossframework.state.WorkerManager;
 import cn.krossframework.websocket.CharacterPool;
 import cn.krossframework.websocket.Dispatcher;
@@ -88,18 +88,23 @@ public class ChatDispatcher implements Dispatcher {
             character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid content", cmdType, null)));
             return;
         }
-        this.workerManager.enter(new Worker.GroupIdTaskPair(createRoom.getRoomId(), new ChatTask(character, cmd), () -> character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "createFail", cmdType, null)))));
+        ChatTask chatTask = new ChatTask(character, cmd);
+        this.workerManager.enter(new GroupIdTask(null,
+                chatTask,
+                () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
     }
 
     private void sendMessage(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
         long currentGroupId = character.getCurrentGroupId();
-        this.workerManager.addTask(new Worker.GroupIdTaskPair(currentGroupId, new ChatTask(character, cmd), () -> character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.FAIL, "message send fail", null, null))));
+        this.workerManager.addTask(new GroupIdTask(currentGroupId, new ChatTask(character, cmd), () -> character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.FAIL, "message send fail", null, null))));
     }
 
     private void enterRoom(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        this.workerManager.addTask(new Worker.GroupIdTaskPair(null, chatTask, () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
+        this.workerManager.enter(new GroupIdTask(null,
+                chatTask,
+                () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
     }
 }
