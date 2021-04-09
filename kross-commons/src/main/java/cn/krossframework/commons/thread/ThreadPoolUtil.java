@@ -11,7 +11,7 @@ public class ThreadPoolUtil {
      *
      * @return io intesive Thread pool size
      */
-    public static int ioIntesivePoolSize() {
+    public static int ioIntensivePoolSize() {
 
         double blockingCoefficient = 0.9;
         return poolSize(blockingCoefficient);

@@ -1,7 +1,12 @@
 package cn.krossframework.chat.server;
 
+import cn.krossframework.chat.cmd.ChatCmdUtil;
+import cn.krossframework.chat.state.ChatTask;
+import cn.krossframework.proto.Chat;
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
+import cn.krossframework.proto.ResultCode;
+import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.Worker;
 import cn.krossframework.state.WorkerManager;
 import cn.krossframework.websocket.Dispatcher;
@@ -9,6 +14,8 @@ import cn.krossframework.websocket.Session;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.channel.nio.NioEventLoopGroup;
 import cn.krossframework.websocket.Character;
 import org.slf4j.Logger;
@@ -67,12 +74,24 @@ public class ChatDispatcher implements Dispatcher {
     }
 
     private void createRoom(Session session, Command.Cmd cmd) {
-        this.workerManager.enter(new Worker.GroupIdTaskPair(null, null, null));
+        Character character = session.getAttribute(Character.KEY);
+        ByteString content = cmd.getContent();
+        int cmdType = cmd.getCmdType();
+        Chat.CreateRoom createRoom;
+        try {
+            createRoom = Chat.CreateRoom.parseFrom(content);
+        } catch (InvalidProtocolBufferException e) {
+            log.error("createRoom parse error");
+            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid content", cmdType, null)));
+            return;
+        }
+        this.workerManager.enter(new Worker.GroupIdTaskPair(createRoom.getRoomId(), new ChatTask(character, cmd), () -> character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "createFail", cmdType, null)))));
     }
 
     private void sendMessage(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
         long currentGroupId = character.getCurrentGroupId();
+        this.workerManager.addTask(new Worker.GroupIdTaskPair(currentGroupId, new ChatTask(character, cmd), () -> character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.FAIL, "message send fail", null, null))));
     }
 
     private void enterRoom(Session session, Command.Cmd cmd) {

@@ -8,13 +8,11 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AbstractStateGroupPool implements StateGroupPool {
+public abstract class AbstractStateGroupPool implements StateGroupPool {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractStateGroupPool.class);
 
     private static final AtomicLong ID_COUNT = new AtomicLong(0);
-
-    public static final long DEFAULT_PERIOD = 1000 * 60;
 
     private final StateGroupFactory stateGroupFactory;
 
@@ -43,8 +41,7 @@ public class AbstractStateGroupPool implements StateGroupPool {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        long period = this.period == null ? DEFAULT_PERIOD : this.period;
-        new AutoTask(period, 2) {
+        new AutoTask(this.period == null ? 0 : this.period, 2) {
             @Override
             protected void run() {
                 AbstractStateGroupPool.this.removeDeposedStateGroup();

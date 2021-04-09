@@ -30,7 +30,7 @@ public class RingBuffer<T> implements Queue<T> {
     }
 
     private boolean isFull() {
-        return (this.tail.get() + 1) % this.buffer.length() == this.head.get() % this.buffer.length();
+        return ((this.tail.get() + 1) % this.buffer.length()) == (this.head.get() % this.buffer.length());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class RingBuffer<T> implements Queue<T> {
         }
         int index = (this.tail.get() + 1) % this.buffer.length();
         if (!this.buffer.compareAndSet(index, null, t)) {
-            return offer(t);
+            return this.offer(t);
         }
         this.tail.incrementAndGet();
         return true;

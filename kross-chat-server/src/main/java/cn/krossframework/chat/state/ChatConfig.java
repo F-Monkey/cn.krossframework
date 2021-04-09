@@ -1,6 +1,5 @@
 package cn.krossframework.chat.state;
 
-import cn.krossframework.state.SimpleState;
 import cn.krossframework.state.State;
 import cn.krossframework.state.StateGroupConfig;
 import com.google.common.collect.Lists;
@@ -16,6 +15,6 @@ public class ChatConfig implements StateGroupConfig {
 
     @Override
     public Collection<State> getStates() {
-        return Lists.newArrayList(new SimpleState());
+        return Lists.newArrayList(new ChatState());
     }
 }

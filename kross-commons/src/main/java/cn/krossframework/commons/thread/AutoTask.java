@@ -14,12 +14,14 @@ public abstract class AutoTask {
 
     private static final Logger log = LoggerFactory.getLogger(AutoTask.class);
 
+    private static final long DEFAULT_PERIOD = 1000 * 60;
+
     private final long period;
 
     private final ScheduledExecutorService scheduledExecutorService;
 
     public AutoTask(long period, int nThreads) {
-        this.period = period;
+        this.period = period <= 0 ? DEFAULT_PERIOD : period;
         this.scheduledExecutorService = new ScheduledThreadPoolExecutor(nThreads);
     }
 

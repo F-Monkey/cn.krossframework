@@ -13,6 +13,8 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     protected final long id;
 
+    protected final StateData stateData;
+
     protected final Time time;
 
     protected final StateGroupConfig stateGroupConfig;
@@ -40,8 +42,16 @@ public abstract class AbstractStateGroup implements StateGroup {
                 this.addState(state);
             }
         }
+        this.stateData = this.initStateData();
         this.stateMap = new HashMap<>();
         this.taskQueue = this.initTaskQueue();
+    }
+
+    protected StateData initStateData() {
+        AbstractStateData stateData = new AbstractStateData() {
+        };
+        stateData.setGroupId(this.id);
+        return stateData;
     }
 
     /**
@@ -73,6 +83,7 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     @Override
     public void addState(State state) {
+        state.setStateData(this.stateData);
         this.stateMap.put(state.getCode(), state);
     }
 

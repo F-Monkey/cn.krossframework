@@ -7,20 +7,12 @@ import cn.krossframework.state.AbstractState;
 import cn.krossframework.state.Task;
 import cn.krossframework.state.Time;
 import cn.krossframework.websocket.Character;
-import com.google.common.base.Preconditions;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
 public class ChatState extends AbstractState {
 
     public static final String CODE = "chat";
-
-    private final RoomData stateData;
-
-    public ChatState(RoomData stateData) {
-        Preconditions.checkNotNull(stateData);
-        this.stateData = stateData;
-    }
 
     @Override
     public String getCode() {
@@ -48,10 +40,11 @@ public class ChatState extends AbstractState {
     }
 
     private void enterRoom(Character character, Command.Cmd cmd) {
-        this.stateData.addCharacter(character);
+        RoomData stateData = super.getStateData();
+        stateData.addCharacter(character);
         character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "enter room"));
         Command.PackageGroup enterRoom = ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, character.getNickName() + " enter room");
-        for (Character other : this.stateData.getChatterList()) {
+        for (Character other : stateData.getChatterList()) {
             if (character.getId().equals(other.getId())) {
                 continue;
             }
@@ -73,11 +66,13 @@ public class ChatState extends AbstractState {
             return;
         }
         String id = character.getId();
-        for (Character other : this.stateData.getChatterList()) {
+        RoomData stateData = super.getStateData();
+        for (Character other : stateData.getChatterList()) {
             if (id.equals(other.getId())) {
                 continue;
             }
             character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.SUCCESS, "ok", id, chatMessage));
         }
+        stateData.addChatMessage(chatMessage);
     }
 }

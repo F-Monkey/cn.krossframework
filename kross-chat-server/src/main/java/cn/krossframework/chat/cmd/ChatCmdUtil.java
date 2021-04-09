@@ -6,7 +6,6 @@ import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.ResultCode;
 import com.google.common.base.Strings;
-import com.google.protobuf.ByteString;
 import com.google.protobuf.ProtocolStringList;
 import org.springframework.util.CollectionUtils;
 
@@ -34,12 +33,17 @@ public class ChatCmdUtil {
         builder.setCmdType(CmdType.SEND_MESSAGE_RESULT);
         builder.setResultMsg(CmdUtil.resultMessage(resultCode, resultMsg));
         Chat.ChatMessageResult.Builder msgBuilder = Chat.ChatMessageResult.newBuilder();
-        ProtocolStringList toList = chatMessage.getToList();
-        if (!CollectionUtils.isEmpty(toList)) {
-            msgBuilder.addAllTo(toList);
+        if (chatMessage != null) {
+            msgBuilder.setChatMessage(chatMessage);
+            ProtocolStringList toList = chatMessage.getToList();
+            if (!CollectionUtils.isEmpty(toList)) {
+                msgBuilder.addAllTo(toList);
+            }
         }
-        msgBuilder.setChatMessage(chatMessage);
-        msgBuilder.setFrom(fromId);
+
+        if (!Strings.isNullOrEmpty(fromId)) {
+            msgBuilder.setFrom(fromId);
+        }
         builder.setContent(msgBuilder.build().toByteString());
         return CmdUtil.packageGroup(builder.build());
     }

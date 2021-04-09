@@ -15,4 +15,11 @@ public class ChatRoom extends AbstractStateGroup {
         }
         return false;
     }
+
+    @Override
+    protected StateData initStateData() {
+        RoomData roomData = new RoomData();
+        roomData.setGroupId(super.id);
+        return roomData;
+    }
 }

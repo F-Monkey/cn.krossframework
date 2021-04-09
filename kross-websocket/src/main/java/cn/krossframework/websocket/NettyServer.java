@@ -31,7 +31,7 @@ public class NettyServer {
     public NettyServer(int port,
                        ChannelHandler customHandler) {
         this.bossGroup = new NioEventLoopGroup(2);
-        this.workerGroup = new NioEventLoopGroup(ThreadPoolUtil.ioIntesivePoolSize() / 2);
+        this.workerGroup = new NioEventLoopGroup(ThreadPoolUtil.ioIntensivePoolSize() / 2);
         this.bootstrap = new ServerBootstrap();
         this.port = port;
         Preconditions.checkNotNull(customHandler);

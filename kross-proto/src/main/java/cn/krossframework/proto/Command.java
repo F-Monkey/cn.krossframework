@@ -19,55 +19,42 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 cmdType = 1;</code>
-     * @return The cmdType.
+     * <code>optional int32 cmdType = 1;</code>
      */
     int getCmdType();
 
     /**
-     * <code>bytes content = 2;</code>
-     * @return The content.
+     * <code>optional bytes content = 2;</code>
      */
     com.google.protobuf.ByteString getContent();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.Cmd}
    */
-  public static final class Cmd extends
+  public  static final class Cmd extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.Cmd)
       CmdOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use Cmd.newBuilder() to construct.
     private Cmd(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private Cmd() {
+      cmdType_ = 0;
       content_ = com.google.protobuf.ByteString.EMPTY;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Cmd();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Cmd(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+      int mutable_bitField0_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -76,6 +63,12 @@ public final class Command {
             case 0:
               done = true;
               break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
             case 8: {
 
               cmdType_ = input.readInt32();
@@ -86,13 +79,6 @@ public final class Command {
               content_ = input.readBytes();
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -101,7 +87,6 @@ public final class Command {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -110,7 +95,6 @@ public final class Command {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Cmd_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Cmd_fieldAccessorTable
@@ -121,10 +105,8 @@ public final class Command {
     public static final int CMDTYPE_FIELD_NUMBER = 1;
     private int cmdType_;
     /**
-     * <code>int32 cmdType = 1;</code>
-     * @return The cmdType.
+     * <code>optional int32 cmdType = 1;</code>
      */
-    @java.lang.Override
     public int getCmdType() {
       return cmdType_;
     }
@@ -132,16 +114,13 @@ public final class Command {
     public static final int CONTENT_FIELD_NUMBER = 2;
     private com.google.protobuf.ByteString content_;
     /**
-     * <code>bytes content = 2;</code>
-     * @return The content.
+     * <code>optional bytes content = 2;</code>
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString getContent() {
       return content_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -151,7 +130,6 @@ public final class Command {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (cmdType_ != 0) {
@@ -160,10 +138,8 @@ public final class Command {
       if (!content_.isEmpty()) {
         output.writeBytes(2, content_);
       }
-      unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -177,11 +153,11 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, content_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -192,12 +168,12 @@ public final class Command {
       }
       cn.krossframework.proto.Command.Cmd other = (cn.krossframework.proto.Command.Cmd) obj;
 
-      if (getCmdType()
-          != other.getCmdType()) return false;
-      if (!getContent()
-          .equals(other.getContent())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && (getCmdType()
+          == other.getCmdType());
+      result = result && getContent()
+          .equals(other.getContent());
+      return result;
     }
 
     @java.lang.Override
@@ -206,7 +182,7 @@ public final class Command {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + CMDTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getCmdType();
       hash = (37 * hash) + CONTENT_FIELD_NUMBER;
@@ -216,17 +192,6 @@ public final class Command {
       return hash;
     }
 
-    public static cn.krossframework.proto.Command.Cmd parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.krossframework.proto.Command.Cmd parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static cn.krossframework.proto.Command.Cmd parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -286,7 +251,6 @@ public final class Command {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -294,7 +258,6 @@ public final class Command {
     public static Builder newBuilder(cn.krossframework.proto.Command.Cmd prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -318,7 +281,6 @@ public final class Command {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Cmd_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Cmd_fieldAccessorTable
@@ -341,7 +303,6 @@ public final class Command {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         cmdType_ = 0;
@@ -351,18 +312,15 @@ public final class Command {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Cmd_descriptor;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Cmd getDefaultInstanceForType() {
         return cn.krossframework.proto.Command.Cmd.getDefaultInstance();
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Cmd build() {
         cn.krossframework.proto.Command.Cmd result = buildPartial();
         if (!result.isInitialized()) {
@@ -371,7 +329,6 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Cmd buildPartial() {
         cn.krossframework.proto.Command.Cmd result = new cn.krossframework.proto.Command.Cmd(this);
         result.cmdType_ = cmdType_;
@@ -380,39 +337,32 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
+          Object value) {
+        return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Command.Cmd) {
           return mergeFrom((cn.krossframework.proto.Command.Cmd)other);
@@ -430,17 +380,14 @@ public final class Command {
         if (other.getContent() != com.google.protobuf.ByteString.EMPTY) {
           setContent(other.getContent());
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -461,17 +408,13 @@ public final class Command {
 
       private int cmdType_ ;
       /**
-       * <code>int32 cmdType = 1;</code>
-       * @return The cmdType.
+       * <code>optional int32 cmdType = 1;</code>
        */
-      @java.lang.Override
       public int getCmdType() {
         return cmdType_;
       }
       /**
-       * <code>int32 cmdType = 1;</code>
-       * @param value The cmdType to set.
-       * @return This builder for chaining.
+       * <code>optional int32 cmdType = 1;</code>
        */
       public Builder setCmdType(int value) {
         
@@ -480,8 +423,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>int32 cmdType = 1;</code>
-       * @return This builder for chaining.
+       * <code>optional int32 cmdType = 1;</code>
        */
       public Builder clearCmdType() {
         
@@ -492,17 +434,13 @@ public final class Command {
 
       private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>bytes content = 2;</code>
-       * @return The content.
+       * <code>optional bytes content = 2;</code>
        */
-      @java.lang.Override
       public com.google.protobuf.ByteString getContent() {
         return content_;
       }
       /**
-       * <code>bytes content = 2;</code>
-       * @param value The content to set.
-       * @return This builder for chaining.
+       * <code>optional bytes content = 2;</code>
        */
       public Builder setContent(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -514,8 +452,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>bytes content = 2;</code>
-       * @return This builder for chaining.
+       * <code>optional bytes content = 2;</code>
        */
       public Builder clearContent() {
         
@@ -523,16 +460,14 @@ public final class Command {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return this;
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
+        return this;
       }
 
 
@@ -551,12 +486,11 @@ public final class Command {
 
     private static final com.google.protobuf.Parser<Cmd>
         PARSER = new com.google.protobuf.AbstractParser<Cmd>() {
-      @java.lang.Override
       public Cmd parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Cmd(input, extensionRegistry);
+          return new Cmd(input, extensionRegistry);
       }
     };
 
@@ -569,7 +503,6 @@ public final class Command {
       return PARSER;
     }
 
-    @java.lang.Override
     public cn.krossframework.proto.Command.Cmd getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -581,19 +514,16 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
+     * <code>optional int32 code = 1;</code>
      */
     int getCode();
 
     /**
-     * <code>string msg = 2;</code>
-     * @return The msg.
+     * <code>optional string msg = 2;</code>
      */
     java.lang.String getMsg();
     /**
-     * <code>string msg = 2;</code>
-     * @return The bytes for msg.
+     * <code>optional string msg = 2;</code>
      */
     com.google.protobuf.ByteString
         getMsgBytes();
@@ -601,41 +531,30 @@ public final class Command {
   /**
    * Protobuf type {@code cn.krossframework.proto.ResultMessage}
    */
-  public static final class ResultMessage extends
+  public  static final class ResultMessage extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.ResultMessage)
       ResultMessageOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use ResultMessage.newBuilder() to construct.
     private ResultMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private ResultMessage() {
+      code_ = 0;
       msg_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ResultMessage();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private ResultMessage(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+      int mutable_bitField0_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -644,6 +563,12 @@ public final class Command {
             case 0:
               done = true;
               break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
             case 8: {
 
               code_ = input.readInt32();
@@ -655,13 +580,6 @@ public final class Command {
               msg_ = s;
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -670,7 +588,6 @@ public final class Command {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -679,7 +596,6 @@ public final class Command {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_ResultMessage_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_ResultMessage_fieldAccessorTable
@@ -690,10 +606,8 @@ public final class Command {
     public static final int CODE_FIELD_NUMBER = 1;
     private int code_;
     /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
+     * <code>optional int32 code = 1;</code>
      */
-    @java.lang.Override
     public int getCode() {
       return code_;
     }
@@ -701,10 +615,8 @@ public final class Command {
     public static final int MSG_FIELD_NUMBER = 2;
     private volatile java.lang.Object msg_;
     /**
-     * <code>string msg = 2;</code>
-     * @return The msg.
+     * <code>optional string msg = 2;</code>
      */
-    @java.lang.Override
     public java.lang.String getMsg() {
       java.lang.Object ref = msg_;
       if (ref instanceof java.lang.String) {
@@ -718,10 +630,8 @@ public final class Command {
       }
     }
     /**
-     * <code>string msg = 2;</code>
-     * @return The bytes for msg.
+     * <code>optional string msg = 2;</code>
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString
         getMsgBytes() {
       java.lang.Object ref = msg_;
@@ -737,7 +647,6 @@ public final class Command {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -747,7 +656,6 @@ public final class Command {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (code_ != 0) {
@@ -756,10 +664,8 @@ public final class Command {
       if (!getMsgBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, msg_);
       }
-      unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -772,11 +678,11 @@ public final class Command {
       if (!getMsgBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, msg_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -787,12 +693,12 @@ public final class Command {
       }
       cn.krossframework.proto.Command.ResultMessage other = (cn.krossframework.proto.Command.ResultMessage) obj;
 
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getMsg()
-          .equals(other.getMsg())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && (getCode()
+          == other.getCode());
+      result = result && getMsg()
+          .equals(other.getMsg());
+      return result;
     }
 
     @java.lang.Override
@@ -801,7 +707,7 @@ public final class Command {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + getCode();
       hash = (37 * hash) + MSG_FIELD_NUMBER;
@@ -811,17 +717,6 @@ public final class Command {
       return hash;
     }
 
-    public static cn.krossframework.proto.Command.ResultMessage parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.krossframework.proto.Command.ResultMessage parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static cn.krossframework.proto.Command.ResultMessage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -881,7 +776,6 @@ public final class Command {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -889,7 +783,6 @@ public final class Command {
     public static Builder newBuilder(cn.krossframework.proto.Command.ResultMessage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -913,7 +806,6 @@ public final class Command {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_ResultMessage_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_ResultMessage_fieldAccessorTable
@@ -936,7 +828,6 @@ public final class Command {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         code_ = 0;
@@ -946,18 +837,15 @@ public final class Command {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_ResultMessage_descriptor;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.ResultMessage getDefaultInstanceForType() {
         return cn.krossframework.proto.Command.ResultMessage.getDefaultInstance();
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.ResultMessage build() {
         cn.krossframework.proto.Command.ResultMessage result = buildPartial();
         if (!result.isInitialized()) {
@@ -966,7 +854,6 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.ResultMessage buildPartial() {
         cn.krossframework.proto.Command.ResultMessage result = new cn.krossframework.proto.Command.ResultMessage(this);
         result.code_ = code_;
@@ -975,39 +862,32 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
+          Object value) {
+        return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Command.ResultMessage) {
           return mergeFrom((cn.krossframework.proto.Command.ResultMessage)other);
@@ -1026,17 +906,14 @@ public final class Command {
           msg_ = other.msg_;
           onChanged();
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1057,17 +934,13 @@ public final class Command {
 
       private int code_ ;
       /**
-       * <code>int32 code = 1;</code>
-       * @return The code.
+       * <code>optional int32 code = 1;</code>
        */
-      @java.lang.Override
       public int getCode() {
         return code_;
       }
       /**
-       * <code>int32 code = 1;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
+       * <code>optional int32 code = 1;</code>
        */
       public Builder setCode(int value) {
         
@@ -1076,8 +949,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>int32 code = 1;</code>
-       * @return This builder for chaining.
+       * <code>optional int32 code = 1;</code>
        */
       public Builder clearCode() {
         
@@ -1088,8 +960,7 @@ public final class Command {
 
       private java.lang.Object msg_ = "";
       /**
-       * <code>string msg = 2;</code>
-       * @return The msg.
+       * <code>optional string msg = 2;</code>
        */
       public java.lang.String getMsg() {
         java.lang.Object ref = msg_;
@@ -1104,8 +975,7 @@ public final class Command {
         }
       }
       /**
-       * <code>string msg = 2;</code>
-       * @return The bytes for msg.
+       * <code>optional string msg = 2;</code>
        */
       public com.google.protobuf.ByteString
           getMsgBytes() {
@@ -1121,9 +991,7 @@ public final class Command {
         }
       }
       /**
-       * <code>string msg = 2;</code>
-       * @param value The msg to set.
-       * @return This builder for chaining.
+       * <code>optional string msg = 2;</code>
        */
       public Builder setMsg(
           java.lang.String value) {
@@ -1136,8 +1004,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>string msg = 2;</code>
-       * @return This builder for chaining.
+       * <code>optional string msg = 2;</code>
        */
       public Builder clearMsg() {
         
@@ -1146,9 +1013,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>string msg = 2;</code>
-       * @param value The bytes for msg to set.
-       * @return This builder for chaining.
+       * <code>optional string msg = 2;</code>
        */
       public Builder setMsgBytes(
           com.google.protobuf.ByteString value) {
@@ -1161,16 +1026,14 @@ public final class Command {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return this;
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
+        return this;
       }
 
 
@@ -1189,12 +1052,11 @@ public final class Command {
 
     private static final com.google.protobuf.Parser<ResultMessage>
         PARSER = new com.google.protobuf.AbstractParser<ResultMessage>() {
-      @java.lang.Override
       public ResultMessage parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ResultMessage(input, extensionRegistry);
+          return new ResultMessage(input, extensionRegistry);
       }
     };
 
@@ -1207,7 +1069,6 @@ public final class Command {
       return PARSER;
     }
 
-    @java.lang.Override
     public cn.krossframework.proto.Command.ResultMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1219,70 +1080,55 @@ public final class Command {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-     * @return Whether the resultMsg field is set.
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
     boolean hasResultMsg();
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-     * @return The resultMsg.
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
     cn.krossframework.proto.Command.ResultMessage getResultMsg();
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
     cn.krossframework.proto.Command.ResultMessageOrBuilder getResultMsgOrBuilder();
 
     /**
-     * <code>int32 cmdType = 2;</code>
-     * @return The cmdType.
+     * <code>optional int32 cmdType = 2;</code>
      */
     int getCmdType();
 
     /**
-     * <code>bytes content = 3;</code>
-     * @return The content.
+     * <code>optional bytes content = 3;</code>
      */
     com.google.protobuf.ByteString getContent();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.Package}
    */
-  public static final class Package extends
+  public  static final class Package extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.Package)
       PackageOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use Package.newBuilder() to construct.
     private Package(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private Package() {
+      cmdType_ = 0;
       content_ = com.google.protobuf.ByteString.EMPTY;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new Package();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private Package(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
+      int mutable_bitField0_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -1291,6 +1137,12 @@ public final class Command {
             case 0:
               done = true;
               break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               cn.krossframework.proto.Command.ResultMessage.Builder subBuilder = null;
               if (resultMsg_ != null) {
@@ -1314,13 +1166,6 @@ public final class Command {
               content_ = input.readBytes();
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1329,7 +1174,6 @@ public final class Command {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1338,7 +1182,6 @@ public final class Command {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Package_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Package_fieldAccessorTable
@@ -1349,25 +1192,20 @@ public final class Command {
     public static final int RESULTMSG_FIELD_NUMBER = 1;
     private cn.krossframework.proto.Command.ResultMessage resultMsg_;
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-     * @return Whether the resultMsg field is set.
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
-    @java.lang.Override
     public boolean hasResultMsg() {
       return resultMsg_ != null;
     }
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-     * @return The resultMsg.
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
-    @java.lang.Override
     public cn.krossframework.proto.Command.ResultMessage getResultMsg() {
       return resultMsg_ == null ? cn.krossframework.proto.Command.ResultMessage.getDefaultInstance() : resultMsg_;
     }
     /**
-     * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+     * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
      */
-    @java.lang.Override
     public cn.krossframework.proto.Command.ResultMessageOrBuilder getResultMsgOrBuilder() {
       return getResultMsg();
     }
@@ -1375,10 +1213,8 @@ public final class Command {
     public static final int CMDTYPE_FIELD_NUMBER = 2;
     private int cmdType_;
     /**
-     * <code>int32 cmdType = 2;</code>
-     * @return The cmdType.
+     * <code>optional int32 cmdType = 2;</code>
      */
-    @java.lang.Override
     public int getCmdType() {
       return cmdType_;
     }
@@ -1386,16 +1222,13 @@ public final class Command {
     public static final int CONTENT_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString content_;
     /**
-     * <code>bytes content = 3;</code>
-     * @return The content.
+     * <code>optional bytes content = 3;</code>
      */
-    @java.lang.Override
     public com.google.protobuf.ByteString getContent() {
       return content_;
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1405,7 +1238,6 @@ public final class Command {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resultMsg_ != null) {
@@ -1417,10 +1249,8 @@ public final class Command {
       if (!content_.isEmpty()) {
         output.writeBytes(3, content_);
       }
-      unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1438,11 +1268,11 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, content_);
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1453,17 +1283,17 @@ public final class Command {
       }
       cn.krossframework.proto.Command.Package other = (cn.krossframework.proto.Command.Package) obj;
 
-      if (hasResultMsg() != other.hasResultMsg()) return false;
+      boolean result = true;
+      result = result && (hasResultMsg() == other.hasResultMsg());
       if (hasResultMsg()) {
-        if (!getResultMsg()
-            .equals(other.getResultMsg())) return false;
+        result = result && getResultMsg()
+            .equals(other.getResultMsg());
       }
-      if (getCmdType()
-          != other.getCmdType()) return false;
-      if (!getContent()
-          .equals(other.getContent())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      result = result && (getCmdType()
+          == other.getCmdType());
+      result = result && getContent()
+          .equals(other.getContent());
+      return result;
     }
 
     @java.lang.Override
@@ -1472,7 +1302,7 @@ public final class Command {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasResultMsg()) {
         hash = (37 * hash) + RESULTMSG_FIELD_NUMBER;
         hash = (53 * hash) + getResultMsg().hashCode();
@@ -1486,17 +1316,6 @@ public final class Command {
       return hash;
     }
 
-    public static cn.krossframework.proto.Command.Package parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.krossframework.proto.Command.Package parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static cn.krossframework.proto.Command.Package parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1556,7 +1375,6 @@ public final class Command {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1564,7 +1382,6 @@ public final class Command {
     public static Builder newBuilder(cn.krossframework.proto.Command.Package prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1588,7 +1405,6 @@ public final class Command {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Package_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Package_fieldAccessorTable
@@ -1611,7 +1427,6 @@ public final class Command {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (resultMsgBuilder_ == null) {
@@ -1627,18 +1442,15 @@ public final class Command {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_Package_descriptor;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Package getDefaultInstanceForType() {
         return cn.krossframework.proto.Command.Package.getDefaultInstance();
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Package build() {
         cn.krossframework.proto.Command.Package result = buildPartial();
         if (!result.isInitialized()) {
@@ -1647,7 +1459,6 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.Package buildPartial() {
         cn.krossframework.proto.Command.Package result = new cn.krossframework.proto.Command.Package(this);
         if (resultMsgBuilder_ == null) {
@@ -1661,39 +1472,32 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
+          Object value) {
+        return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Command.Package) {
           return mergeFrom((cn.krossframework.proto.Command.Package)other);
@@ -1714,17 +1518,14 @@ public final class Command {
         if (other.getContent() != com.google.protobuf.ByteString.EMPTY) {
           setContent(other.getContent());
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1743,19 +1544,17 @@ public final class Command {
         return this;
       }
 
-      private cn.krossframework.proto.Command.ResultMessage resultMsg_;
+      private cn.krossframework.proto.Command.ResultMessage resultMsg_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Command.ResultMessage, cn.krossframework.proto.Command.ResultMessage.Builder, cn.krossframework.proto.Command.ResultMessageOrBuilder> resultMsgBuilder_;
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-       * @return Whether the resultMsg field is set.
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public boolean hasResultMsg() {
         return resultMsgBuilder_ != null || resultMsg_ != null;
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
-       * @return The resultMsg.
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public cn.krossframework.proto.Command.ResultMessage getResultMsg() {
         if (resultMsgBuilder_ == null) {
@@ -1765,7 +1564,7 @@ public final class Command {
         }
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public Builder setResultMsg(cn.krossframework.proto.Command.ResultMessage value) {
         if (resultMsgBuilder_ == null) {
@@ -1781,7 +1580,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public Builder setResultMsg(
           cn.krossframework.proto.Command.ResultMessage.Builder builderForValue) {
@@ -1795,7 +1594,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public Builder mergeResultMsg(cn.krossframework.proto.Command.ResultMessage value) {
         if (resultMsgBuilder_ == null) {
@@ -1813,7 +1612,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public Builder clearResultMsg() {
         if (resultMsgBuilder_ == null) {
@@ -1827,7 +1626,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public cn.krossframework.proto.Command.ResultMessage.Builder getResultMsgBuilder() {
         
@@ -1835,7 +1634,7 @@ public final class Command {
         return getResultMsgFieldBuilder().getBuilder();
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       public cn.krossframework.proto.Command.ResultMessageOrBuilder getResultMsgOrBuilder() {
         if (resultMsgBuilder_ != null) {
@@ -1846,7 +1645,7 @@ public final class Command {
         }
       }
       /**
-       * <code>.cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
+       * <code>optional .cn.krossframework.proto.ResultMessage resultMsg = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Command.ResultMessage, cn.krossframework.proto.Command.ResultMessage.Builder, cn.krossframework.proto.Command.ResultMessageOrBuilder> 
@@ -1864,17 +1663,13 @@ public final class Command {
 
       private int cmdType_ ;
       /**
-       * <code>int32 cmdType = 2;</code>
-       * @return The cmdType.
+       * <code>optional int32 cmdType = 2;</code>
        */
-      @java.lang.Override
       public int getCmdType() {
         return cmdType_;
       }
       /**
-       * <code>int32 cmdType = 2;</code>
-       * @param value The cmdType to set.
-       * @return This builder for chaining.
+       * <code>optional int32 cmdType = 2;</code>
        */
       public Builder setCmdType(int value) {
         
@@ -1883,8 +1678,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>int32 cmdType = 2;</code>
-       * @return This builder for chaining.
+       * <code>optional int32 cmdType = 2;</code>
        */
       public Builder clearCmdType() {
         
@@ -1895,17 +1689,13 @@ public final class Command {
 
       private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>bytes content = 3;</code>
-       * @return The content.
+       * <code>optional bytes content = 3;</code>
        */
-      @java.lang.Override
       public com.google.protobuf.ByteString getContent() {
         return content_;
       }
       /**
-       * <code>bytes content = 3;</code>
-       * @param value The content to set.
-       * @return This builder for chaining.
+       * <code>optional bytes content = 3;</code>
        */
       public Builder setContent(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1917,8 +1707,7 @@ public final class Command {
         return this;
       }
       /**
-       * <code>bytes content = 3;</code>
-       * @return This builder for chaining.
+       * <code>optional bytes content = 3;</code>
        */
       public Builder clearContent() {
         
@@ -1926,16 +1715,14 @@ public final class Command {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return this;
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
+        return this;
       }
 
 
@@ -1954,12 +1741,11 @@ public final class Command {
 
     private static final com.google.protobuf.Parser<Package>
         PARSER = new com.google.protobuf.AbstractParser<Package>() {
-      @java.lang.Override
       public Package parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Package(input, extensionRegistry);
+          return new Package(input, extensionRegistry);
       }
     };
 
@@ -1972,7 +1758,6 @@ public final class Command {
       return PARSER;
     }
 
-    @java.lang.Override
     public cn.krossframework.proto.Command.Package getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2010,11 +1795,10 @@ public final class Command {
   /**
    * Protobuf type {@code cn.krossframework.proto.PackageGroup}
    */
-  public static final class PackageGroup extends
+  public  static final class PackageGroup extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.PackageGroup)
       PackageGroupOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use PackageGroup.newBuilder() to construct.
     private PackageGroup(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2024,28 +1808,16 @@ public final class Command {
     }
 
     @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new PackageGroup();
-    }
-
-    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return this.unknownFields;
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
     private PackageGroup(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
       int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2054,20 +1826,19 @@ public final class Command {
             case 0:
               done = true;
               break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 packages_ = new java.util.ArrayList<cn.krossframework.proto.Command.Package>();
                 mutable_bitField0_ |= 0x00000001;
               }
               packages_.add(
                   input.readMessage(cn.krossframework.proto.Command.Package.parser(), extensionRegistry));
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
               break;
             }
           }
@@ -2078,10 +1849,9 @@ public final class Command {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           packages_ = java.util.Collections.unmodifiableList(packages_);
         }
-        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2090,7 +1860,6 @@ public final class Command {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_PackageGroup_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_PackageGroup_fieldAccessorTable
@@ -2103,14 +1872,12 @@ public final class Command {
     /**
      * <code>repeated .cn.krossframework.proto.Package packages = 1;</code>
      */
-    @java.lang.Override
     public java.util.List<cn.krossframework.proto.Command.Package> getPackagesList() {
       return packages_;
     }
     /**
      * <code>repeated .cn.krossframework.proto.Package packages = 1;</code>
      */
-    @java.lang.Override
     public java.util.List<? extends cn.krossframework.proto.Command.PackageOrBuilder> 
         getPackagesOrBuilderList() {
       return packages_;
@@ -2118,28 +1885,24 @@ public final class Command {
     /**
      * <code>repeated .cn.krossframework.proto.Package packages = 1;</code>
      */
-    @java.lang.Override
     public int getPackagesCount() {
       return packages_.size();
     }
     /**
      * <code>repeated .cn.krossframework.proto.Package packages = 1;</code>
      */
-    @java.lang.Override
     public cn.krossframework.proto.Command.Package getPackages(int index) {
       return packages_.get(index);
     }
     /**
      * <code>repeated .cn.krossframework.proto.Package packages = 1;</code>
      */
-    @java.lang.Override
     public cn.krossframework.proto.Command.PackageOrBuilder getPackagesOrBuilder(
         int index) {
       return packages_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2149,16 +1912,13 @@ public final class Command {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < packages_.size(); i++) {
         output.writeMessage(1, packages_.get(i));
       }
-      unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2168,11 +1928,11 @@ public final class Command {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, packages_.get(i));
       }
-      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2183,10 +1943,10 @@ public final class Command {
       }
       cn.krossframework.proto.Command.PackageGroup other = (cn.krossframework.proto.Command.PackageGroup) obj;
 
-      if (!getPackagesList()
-          .equals(other.getPackagesList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
+      boolean result = true;
+      result = result && getPackagesList()
+          .equals(other.getPackagesList());
+      return result;
     }
 
     @java.lang.Override
@@ -2195,7 +1955,7 @@ public final class Command {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (getPackagesCount() > 0) {
         hash = (37 * hash) + PACKAGES_FIELD_NUMBER;
         hash = (53 * hash) + getPackagesList().hashCode();
@@ -2205,17 +1965,6 @@ public final class Command {
       return hash;
     }
 
-    public static cn.krossframework.proto.Command.PackageGroup parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.krossframework.proto.Command.PackageGroup parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static cn.krossframework.proto.Command.PackageGroup parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2275,7 +2024,6 @@ public final class Command {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2283,7 +2031,6 @@ public final class Command {
     public static Builder newBuilder(cn.krossframework.proto.Command.PackageGroup prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2307,7 +2054,6 @@ public final class Command {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_PackageGroup_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_PackageGroup_fieldAccessorTable
@@ -2331,7 +2077,6 @@ public final class Command {
           getPackagesFieldBuilder();
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (packagesBuilder_ == null) {
@@ -2343,18 +2088,15 @@ public final class Command {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Command.internal_static_cn_krossframework_proto_PackageGroup_descriptor;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.PackageGroup getDefaultInstanceForType() {
         return cn.krossframework.proto.Command.PackageGroup.getDefaultInstance();
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.PackageGroup build() {
         cn.krossframework.proto.Command.PackageGroup result = buildPartial();
         if (!result.isInitialized()) {
@@ -2363,12 +2105,11 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public cn.krossframework.proto.Command.PackageGroup buildPartial() {
         cn.krossframework.proto.Command.PackageGroup result = new cn.krossframework.proto.Command.PackageGroup(this);
         int from_bitField0_ = bitField0_;
         if (packagesBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
             packages_ = java.util.Collections.unmodifiableList(packages_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -2380,39 +2121,32 @@ public final class Command {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
-        return super.clone();
+        return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
+          Object value) {
+        return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
+        return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
+        return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Command.PackageGroup) {
           return mergeFrom((cn.krossframework.proto.Command.PackageGroup)other);
@@ -2450,17 +2184,14 @@ public final class Command {
             }
           }
         }
-        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2483,7 +2214,7 @@ public final class Command {
       private java.util.List<cn.krossframework.proto.Command.Package> packages_ =
         java.util.Collections.emptyList();
       private void ensurePackagesIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           packages_ = new java.util.ArrayList<cn.krossframework.proto.Command.Package>(packages_);
           bitField0_ |= 0x00000001;
          }
@@ -2712,23 +2443,21 @@ public final class Command {
           packagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               cn.krossframework.proto.Command.Package, cn.krossframework.proto.Command.Package.Builder, cn.krossframework.proto.Command.PackageOrBuilder>(
                   packages_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           packages_ = null;
         }
         return packagesBuilder_;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+        return this;
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
+        return this;
       }
 
 
@@ -2747,12 +2476,11 @@ public final class Command {
 
     private static final com.google.protobuf.Parser<PackageGroup>
         PARSER = new com.google.protobuf.AbstractParser<PackageGroup>() {
-      @java.lang.Override
       public PackageGroup parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PackageGroup(input, extensionRegistry);
+          return new PackageGroup(input, extensionRegistry);
       }
     };
 
@@ -2765,7 +2493,6 @@ public final class Command {
       return PARSER;
     }
 
-    @java.lang.Override
     public cn.krossframework.proto.Command.PackageGroup getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2810,10 +2537,18 @@ public final class Command {
       "p\0222\n\010packages\030\001 \003(\0132 .cn.krossframework." +
       "proto.PackageB\013B\007CommandH\001b\006proto3"
     };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
+    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
+    com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        });
+        }, assigner);
     internal_static_cn_krossframework_proto_Cmd_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_cn_krossframework_proto_Cmd_fieldAccessorTable = new

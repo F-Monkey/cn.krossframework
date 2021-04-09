@@ -8,6 +8,21 @@ public interface State {
     Logger log = LoggerFactory.getLogger(State.class);
 
     /**
+     * set stateData that initialized from {@link StateGroup}
+     *
+     * @param stateData stateData
+     */
+    void setStateData(StateData stateData);
+
+    /**
+     * get StateData
+     *
+     * @param <T> stateData type
+     * @return stateData
+     */
+    <T extends StateData> T getStateData();
+
+    /**
      * return current state code, The code for each set of states
      * witch in the same {@link StateGroup} cannot be repeated
      *

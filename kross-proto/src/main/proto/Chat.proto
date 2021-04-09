@@ -6,16 +6,25 @@ option optimize_for = SPEED;
 option java_outer_classname = "Chat";
 
 message ChatMessage {
-  int32 cmdType = 1;
+  int32 cmdType      = 1;
   repeated string to = 2;
-  string msg = 3;
-  int32 emoticon = 4;
-  bytes stream = 5;
+  string msg         = 3;
+  int32 emoticon     = 4;
+  bytes stream       = 5;
 }
 
 message ChatMessageResult {
-  string from = 1;
-  bool toAll = 2;
-  repeated string to = 3;
-  ChatMessage chatMessage = 4;
+  string from                  = 1;
+  bool toAll                   = 2;
+  repeated string to           = 3;
+  ChatMessage chatMessage      = 4;
+  repeated ChatMessage history = 5;
+}
+
+message CreateRoom {
+  int64 roomId = 1;
+}
+
+message CreateRoomResult {
+  int64 roomId = 1;
 }
