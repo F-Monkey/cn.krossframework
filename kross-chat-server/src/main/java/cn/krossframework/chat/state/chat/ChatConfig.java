@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state;
+package cn.krossframework.chat.state.chat;
 
 import cn.krossframework.state.State;
 import cn.krossframework.state.StateGroupConfig;
@@ -8,10 +8,7 @@ import java.util.Collection;
 
 public class ChatConfig implements StateGroupConfig {
 
-    @Override
-    public boolean autoUpdate() {
-        return false;
-    }
+
 
     @Override
     public Collection<State> getStates() {

@@ -1,7 +1,7 @@
 package cn.krossframework.chat.server;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
-import cn.krossframework.chat.state.ChatTask;
+import cn.krossframework.chat.state.chat.ChatTask;
 import cn.krossframework.proto.Chat;
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
@@ -9,6 +9,7 @@ import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.Worker;
 import cn.krossframework.state.WorkerManager;
+import cn.krossframework.websocket.CharacterPool;
 import cn.krossframework.websocket.Dispatcher;
 import cn.krossframework.websocket.Session;
 import com.google.common.cache.CacheBuilder;
@@ -36,7 +37,8 @@ public class ChatDispatcher implements Dispatcher {
 
     private final NioEventLoopGroup eventLoopGroup;
 
-    public ChatDispatcher(WorkerManager workerManager) {
+    public ChatDispatcher(WorkerManager workerManager,
+                          CharacterPool characterPool) {
         this.workerManager = workerManager;
         this.eventLoopGroup = new NioEventLoopGroup();
         this.loadLock = CacheBuilder.newBuilder()
@@ -67,6 +69,7 @@ public class ChatDispatcher implements Dispatcher {
                     break;
                 default:
                     log.error("invalid cmdType:{}", cmdType);
+                    session.send(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd", cmdType, null));
             }
         } finally {
             lock.unlock();
@@ -96,6 +99,7 @@ public class ChatDispatcher implements Dispatcher {
 
     private void enterRoom(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
-        this.workerManager.addTask(new Worker.GroupIdTaskPair(null, null, null));
+        ChatTask chatTask = new ChatTask(character, cmd);
+        this.workerManager.addTask(new Worker.GroupIdTaskPair(null, chatTask, () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
     }
 }

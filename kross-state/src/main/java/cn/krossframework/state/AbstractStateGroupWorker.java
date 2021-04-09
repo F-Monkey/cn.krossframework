@@ -72,7 +72,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
 
     protected void removeDeposedStateGroup() {
         final ConcurrentSkipListSet<Long> groupIdSet = this.groupIdSet;
-        log.info("start remove stateGroup: {}", groupIdSet);
         groupIdSet.removeIf(id -> {
             StateGroup stateGroup = this.stateGroupPool.find(id);
             if (stateGroup == null) {
@@ -80,7 +79,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
             }
             return stateGroup.canDeposed();
         });
-        log.info("end remove stateGroup: {}", groupIdSet);
         this.groupIdSet = groupIdSet;
     }
 

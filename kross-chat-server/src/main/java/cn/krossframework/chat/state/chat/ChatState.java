@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state;
+package cn.krossframework.chat.state.chat;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
 import cn.krossframework.proto.*;
@@ -50,6 +50,7 @@ public class ChatState extends AbstractState {
             }
             character.sendMsg(enterRoom);
         }
+        character.setCurrentGroupId(stateData.getGroupId());
     }
 
     private void sendMessage(Character character, Command.Cmd cmd) {

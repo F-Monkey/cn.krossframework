@@ -34,6 +34,15 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     protected volatile ConcurrentHashMap<Long, StateGroupWorker> workerMap;
 
+    /**
+     * @param workerUpdatePeriod            worker的刷新频率
+     * @param workerCapacity                worker内的stateGroup数量
+     * @param workerThreadSize              worker的数量
+     * @param removeEmptyWorkerPeriod       移除worker的频率
+     * @param removeDeposedStateGroupPeriod 移除worker内的失效的stateGroup标记
+     * @param taskDispatcherSize            taskDispatcher的数量
+     * @param stateGroupPool                stateGroup池
+     */
     public AbstractWorkerManager(int workerUpdatePeriod,
                                  int workerCapacity,
                                  int workerThreadSize,

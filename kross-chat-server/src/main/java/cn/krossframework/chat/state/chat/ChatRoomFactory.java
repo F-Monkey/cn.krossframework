@@ -1,4 +1,4 @@
-package cn.krossframework.chat.state;
+package cn.krossframework.chat.state.chat;
 
 import cn.krossframework.state.DefaultStateGroupFactory;
 import cn.krossframework.state.StateGroup;

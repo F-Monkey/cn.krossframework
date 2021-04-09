@@ -27,6 +27,8 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     protected volatile Long currentWorkerId;
 
+    private int lastUpdateTime;
+
     public AbstractStateGroup(long id,
                               Time time,
                               StateGroupConfig stateGroupConfig) {
@@ -58,7 +60,7 @@ public abstract class AbstractStateGroup implements StateGroup {
      * return an async queue,
      * all task should be provide by {@link #tryAddTask(Task)}
      * and consume by {@link #update()}
-     * provider and consumer can be different thread
+     * provider and consumer can be in different thread
      *
      * @return queue
      */
@@ -123,6 +125,12 @@ public abstract class AbstractStateGroup implements StateGroup {
         }
 
         StateInfo stateInfo = new StateInfo();
+        if (this.time.getCurrentTimeMillis() - this.lastUpdateTime < this.stateGroupConfig.updatePeriod()) {
+            return;
+        }
+
+        this.lastUpdateTime = 0;
+
         try {
             this.currentState.update(this.time, stateInfo);
         } catch (Throwable e) {

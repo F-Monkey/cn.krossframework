@@ -8,4 +8,5 @@ dependencies {
     implementation rootProject.ext.dependencies["netty"]
     implementation rootProject.ext.dependencies["junit"]
     implementation rootProject.ext.dependencies["spring-boot-starter"]
+    implementation rootProject.ext.dependencies["spring-boot-starter-data-mongo"]
 }

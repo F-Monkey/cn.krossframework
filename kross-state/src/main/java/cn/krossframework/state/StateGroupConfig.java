@@ -1,9 +1,18 @@
 package cn.krossframework.state;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public interface StateGroupConfig {
-    boolean autoUpdate();
+    default boolean autoUpdate() {
+        return false;
+    }
 
-    Collection<State> getStates();
+    default int updatePeriod() {
+        return 0;
+    }
+
+    default Collection<State> getStates() {
+        return Collections.emptyList();
+    }
 }

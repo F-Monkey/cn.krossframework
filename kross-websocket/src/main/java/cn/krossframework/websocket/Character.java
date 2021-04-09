@@ -14,6 +14,8 @@ public interface Character {
 
     Long getCurrentGroupId();
 
+    void setNickName(String newNickName);
+
     String getNickName();
 
     void setSession(Session session);

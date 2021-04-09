@@ -1,7 +1,6 @@
-package cn.krossframework.chat.state;
+package cn.krossframework.chat.state.chat;
 
 import cn.krossframework.proto.Chat;
-import cn.krossframework.state.AbstractState;
 import cn.krossframework.state.AbstractStateData;
 import cn.krossframework.websocket.Character;
 

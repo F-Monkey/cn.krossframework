@@ -1,4 +1,4 @@
-package cn.krossframework.chat.server.config;
+package cn.krossframework.chat.config;
 
 import cn.krossframework.websocket.Dispatcher;
 import cn.krossframework.websocket.Filter;

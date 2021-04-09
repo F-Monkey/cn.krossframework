@@ -22,15 +22,16 @@ ext {
     ] as LinkedHashMap
 
     dependencies = [
-            "spring-boot-starter"     : "org.springframework.boot:spring-boot-starter:${version.springboot}",
-            "spring-boot-starter-test": "org.springframework.boot:spring-boot-starter-test:${version.springboot}",
-            "spring-boot-starter-web" : "org.springframework.boot:spring-boot-starter-web:${version.springboot}",
-            "protobuf"                : "com.google.protobuf:protobuf-java:${version.protobuf}",
-            "guava"                   : "com.google.guava:guava:${version.guava}",
-            "slf4j"                   : ["org.slf4j:slf4j-api:${version.slf4j}"],
-            "netty"                   : "io.netty:netty-all:${version.netty}",
-            "junit"                   : "junit:junit:${version.junit}",
-            "mockito"                 : "org.mockito:mockito-all:${version.mockito}",
-            "disruptor"               : "com.lmax:disruptor:${version.disruptor}",
+            "spring-boot-starter"           : "org.springframework.boot:spring-boot-starter:${version.springboot}",
+            "spring-boot-starter-test"      : "org.springframework.boot:spring-boot-starter-test:${version.springboot}",
+            "spring-boot-starter-web"       : "org.springframework.boot:spring-boot-starter-web:${version.springboot}",
+            "spring-boot-starter-data-mongo": "org.springframework.boot:spring-boot-starter-data-mongodb:${version.springboot}",
+            "protobuf"                      : "com.google.protobuf:protobuf-java:${version.protobuf}",
+            "guava"                         : "com.google.guava:guava:${version.guava}",
+            "slf4j"                         : ["org.slf4j:slf4j-api:${version.slf4j}"],
+            "netty"                         : "io.netty:netty-all:${version.netty}",
+            "junit"                         : "junit:junit:${version.junit}",
+            "mockito"                       : "org.mockito:mockito-all:${version.mockito}",
+            "disruptor"                     : "com.lmax:disruptor:${version.disruptor}",
     ]
 }
