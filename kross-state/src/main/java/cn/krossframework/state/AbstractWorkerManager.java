@@ -189,7 +189,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         if (!stateGroup.tryEnterGroup(task)) {
             return false;
         }
-        stateGroup.tryAddTask(task);
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (!fetchStateGroup.isNew() && currentWorkerId != null) {
