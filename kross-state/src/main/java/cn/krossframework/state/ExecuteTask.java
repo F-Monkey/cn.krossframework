@@ -2,7 +2,7 @@ package cn.krossframework.state;
 
 import com.google.common.base.Preconditions;
 
-public class GroupIdTask implements Task {
+public class ExecuteTask implements Task {
 
     private final Long groupId;
 
@@ -10,7 +10,7 @@ public class GroupIdTask implements Task {
 
     private final FailCallBack failCallBack;
 
-    public GroupIdTask(Long groupId,
+    public ExecuteTask(Long groupId,
                        Task task,
                        FailCallBack failCallBack){
         Preconditions.checkNotNull(task);

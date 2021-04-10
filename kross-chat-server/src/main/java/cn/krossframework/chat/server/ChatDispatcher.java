@@ -7,7 +7,7 @@ import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
-import cn.krossframework.state.GroupIdTask;
+import cn.krossframework.state.ExecuteTask;
 import cn.krossframework.state.WorkerManager;
 import cn.krossframework.websocket.CharacterPool;
 import cn.krossframework.websocket.Dispatcher;
@@ -89,7 +89,7 @@ public class ChatDispatcher implements Dispatcher {
             return;
         }
         ChatTask chatTask = new ChatTask(character, cmd);
-        this.workerManager.enter(new GroupIdTask(null,
+        this.workerManager.enter(new ExecuteTask(null,
                 chatTask,
                 () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
     }
@@ -97,13 +97,13 @@ public class ChatDispatcher implements Dispatcher {
     private void sendMessage(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
         long currentGroupId = character.getCurrentGroupId();
-        this.workerManager.addTask(new GroupIdTask(currentGroupId, new ChatTask(character, cmd), () -> character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.FAIL, "message send fail", null, null))));
+        this.workerManager.addTask(new ExecuteTask(currentGroupId, new ChatTask(character, cmd), () -> character.sendMsg(ChatCmdUtil.sendMsgResult(ResultCode.FAIL, "message send fail", null, null))));
     }
 
     private void enterRoom(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        this.workerManager.enter(new GroupIdTask(null,
+        this.workerManager.enter(new ExecuteTask(null,
                 chatTask,
                 () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
     }

@@ -20,3 +20,11 @@ message TetrisSeatData {
 message TetrisRoomData {
   repeated TetrisSeatData tetrisSeatDataList = 1;
 }
+
+message Enter{
+
+}
+
+message EnterResult{
+  
+}

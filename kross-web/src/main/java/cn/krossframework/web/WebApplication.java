@@ -1,8 +1,6 @@
 package cn.krossframework.web;
 
-import cn.krossframework.state.GroupIdTask;
-import cn.krossframework.state.Task;
-import cn.krossframework.state.Worker;
+import cn.krossframework.state.ExecuteTask;
 import cn.krossframework.state.WorkerManager;
 import cn.krossframework.web.cat.CatTask;
 import org.springframework.boot.SpringApplication;
@@ -26,11 +24,13 @@ public class WebApplication {
 
     @RequestMapping({"/addCat/{id}", "/addCat"})
     public void addCat(@PathVariable(value = "id", required = false) Long id) {
-        this.workerManager.enter(new GroupIdTask(id, new CatTask(0), null));
+        this.workerManager.enter(new ExecuteTask(id, new CatTask(0), null));
     }
 
     @RequestMapping("/killCat/{id}")
     public void killCat(@PathVariable("id") Long id) {
-        this.workerManager.addTask(new GroupIdTask(id, new CatTask(1), null));
+        this.workerManager.addTask(new ExecuteTask(id, new CatTask(1), () -> {
+            System.out.println("kill cat fail:" + id);
+        }));
     }
 }

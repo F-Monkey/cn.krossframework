@@ -5,7 +5,9 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class AbstractStateGroupPool implements StateGroupPool {
@@ -14,9 +16,11 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
 
     private static final AtomicLong ID_COUNT = new AtomicLong(0);
 
-    private final StateGroupFactory stateGroupFactory;
+    protected final StateGroupFactory stateGroupFactory;
 
-    private volatile ConcurrentHashMap<Long, StateGroup> stateGroupMap;
+    protected final BlockingQueue<Long> groupIdRecycleQueue;
+
+    protected volatile ConcurrentHashMap<Long, StateGroup> stateGroupMap;
 
     /**
      * remove deposed stateGroup period
@@ -27,6 +31,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         Preconditions.checkNotNull(stateGroupFactory);
         this.stateGroupFactory = stateGroupFactory;
         this.stateGroupMap = new ConcurrentHashMap<>();
+        this.groupIdRecycleQueue = new LinkedBlockingQueue<>();
     }
 
     @Override
@@ -59,6 +64,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         stateGroupMap.entrySet().removeIf(e -> {
             boolean b = e.getValue().canDeposed();
             if (b) {
+                this.groupIdRecycleQueue.offer(e.getKey());
                 log.info("stateGroup can be deposed, id: {}", e.getKey());
             }
             return b;
@@ -68,9 +74,15 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
     }
 
     @Override
+    public long getNewGroupId() {
+        Long id;
+        return (id = this.groupIdRecycleQueue.poll()) == null ? ID_COUNT.incrementAndGet() : id;
+    }
+
+    @Override
     public FetchStateGroup findOrCreate(Long id) {
         if (id == null) {
-            id = ID_COUNT.incrementAndGet();
+            id = this.getNewGroupId();
         }
         boolean[] isNew = {false};
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;

@@ -12,7 +12,7 @@ public interface State {
      *
      * @param stateData stateData
      */
-    void setStateData(StateData stateData);
+    <T extends StateData> void setStateData(T stateData);
 
     /**
      * get StateData

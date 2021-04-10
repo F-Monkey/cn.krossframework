@@ -9,7 +9,7 @@ public class ChatWorkerManager extends AbstractWorkerManager {
     }
 
     @Override
-    public void addTask(GroupIdTask groupIdTask) {
+    public void addTask(ExecuteTask groupIdTask) {
         super.addTask(groupIdTask);
     }
 }

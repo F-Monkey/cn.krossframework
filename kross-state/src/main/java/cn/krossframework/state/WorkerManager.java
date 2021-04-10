@@ -2,8 +2,8 @@ package cn.krossframework.state;
 
 public interface WorkerManager {
 
-    void enter(GroupIdTask groupIdTask);
+    void enter(ExecuteTask executeTask);
 
-    void addTask(GroupIdTask groupIdTask);
+    void addTask(ExecuteTask executeTask);
 
 }

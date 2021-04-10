@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -69,12 +71,14 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     @Override
     public void update() {
         do {
-            Task poll = this.groupIdTaskQueue.poll();
-            if (poll == null) {
-                return;
-            }
-            if (!this.findStateGroupAndAddTask(poll)) {
-                log.error("stateGroup task add fail, task type:{}, task:\n{}", poll.getClass(), poll);
+            List<Task> taskList = new ArrayList<>(this.groupIdTaskQueue.size());
+            this.groupIdTaskQueue.drainTo(taskList);
+            for (Task task : taskList) {
+                if (task == null) continue;
+
+                if (!this.findStateGroupAndAddTask(task)) {
+                    log.error("stateGroup task add fail, task type:{}, task:\n{}", task.getClass(), task);
+                }
             }
         } while (this.groupIdTaskQueue.size() > 0);
     }
@@ -84,20 +88,21 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
             ((AbstractWorkerManager.EnterGroupTask) task).run();
             return true;
         }
-        if (task instanceof GroupIdTask) {
-            GroupIdTask groupIdTask = (GroupIdTask) task;
+        if (task instanceof ExecuteTask) {
+            ExecuteTask groupIdTask = (ExecuteTask) task;
             Long groupId = groupIdTask.getGroupId();
             FailCallBack failCallBack = groupIdTask.getFailCallBack();
             if (groupId == null) {
                 if (failCallBack != null) {
                     failCallBack.call();
                 }
+            } else {
+                StateGroup stateGroup = this.stateGroupPool.find(groupId);
+                if (stateGroup == null) {
+                    return false;
+                }
+                return stateGroup.tryAddTask(groupIdTask.getTask());
             }
-            StateGroup stateGroup = this.stateGroupPool.find(groupId);
-            if (stateGroup == null) {
-                return false;
-            }
-            return stateGroup.tryAddTask(groupIdTask.getTask());
         }
         return false;
     }

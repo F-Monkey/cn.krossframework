@@ -1,7 +1,6 @@
 package cn.krossframework.state;
 
 import cn.krossframework.commons.thread.AutoTask;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +58,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
                 (workerThreadSize + taskDispatcherSize) * 2,
                 0,
                 TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>());
+                new LinkedBlockingQueue<>(10));
         this.workerMap = this.initWorkerMap();
         this.dispatcherMap = this.initDispatcherMap();
         new AutoTask(removeEmptyWorkerPeriod, 2) {
@@ -95,17 +94,25 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }
     }
 
-    public static class EnterGroupTask implements Task {
+    public class EnterGroupTask implements Task, Runnable {
 
-        private final Runnable runnable;
+        private final Long groupId;
 
-        public EnterGroupTask(Runnable runnable) {
-            Preconditions.checkNotNull(runnable);
-            this.runnable = runnable;
+        private final Task task;
+
+        private final FailCallBack failCallBack;
+
+        public EnterGroupTask(Long groupId,
+                              Task task,
+                              FailCallBack failCallBack) {
+            this.groupId = groupId;
+            this.task = task;
+            this.failCallBack = failCallBack;
         }
 
+        @Override
         public void run() {
-            this.runnable.run();
+            AbstractWorkerManager.this.findBestGroup2Enter(this.groupId, this.task, this.failCallBack);
         }
     }
 
@@ -123,11 +130,11 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         this.workerMap = workerMap;
     }
 
-    protected void dispatcherTask(Task task) {
+    protected void addDispatcherTask(Task task) {
         Long groupId = null;
         FailCallBack callBack = null;
-        if (task instanceof GroupIdTask) {
-            GroupIdTask groupIdTask = (GroupIdTask) task;
+        if (task instanceof ExecuteTask) {
+            ExecuteTask groupIdTask = (ExecuteTask) task;
             groupId = groupIdTask.getGroupId();
             callBack = groupIdTask.getFailCallBack();
         }
@@ -141,7 +148,12 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
     protected TaskDispatcher findDispatcher(Long groupId) {
-        long index = (groupId == null ? 0 : groupId) % this.taskDispatcherSize;
+        long index;
+        if (groupId == null) {
+            index = this.taskDispatcherSize + 1;
+        } else {
+            index = groupId % this.taskDispatcherSize;
+        }
         return this.dispatcherMap.computeIfAbsent(index, (i) -> {
             TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.executorService, this.stateGroupPool) {
             };
@@ -168,10 +180,16 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     private boolean findGroup2Enter(Long groupId, Task task) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupId);
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
+        if (stateGroup == null) {
+            return false;
+        }
         if (stateGroup.canDeposed()) {
             return false;
         }
-        stateGroup.tryEnterGroup(task);
+        if (!stateGroup.tryEnterGroup(task)) {
+            return false;
+        }
+        stateGroup.tryAddTask(task);
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (!fetchStateGroup.isNew() && currentWorkerId != null) {
@@ -181,19 +199,20 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
                     return true;
                 }
             }
-        } else {
-            for (StateGroupWorker worker : workerMap.values()) {
-                if (!worker.isStart()) {
-                    continue;
-                }
+        }
 
-                if (worker.isFull()) {
-                    continue;
-                }
+        for (StateGroupWorker worker : workerMap.values()) {
 
-                if (worker.tryAddStateGroup(stateGroup)) {
-                    return true;
-                }
+            if (!worker.isStart()) {
+                continue;
+            }
+
+            if (worker.isFull()) {
+                continue;
+            }
+
+            if (worker.tryAddStateGroup(stateGroup)) {
+                return true;
             }
         }
 
@@ -210,13 +229,17 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
     protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack) {
-        if (groupId == null && this.findGroupInWorker2EnterWithoutGroupId(task)) {
+        if (groupId == null) {
+            if (this.findGroupInWorker2EnterWithoutGroupId(task)) {
+                return;
+            }
+        }
+        if (this.findGroup2Enter(groupId, task)) {
             return;
         }
-        if (findGroup2Enter(groupId, task)) {
-            return;
+        if (failCallBack != null) {
+            failCallBack.call();
         }
-        failCallBack.call();
     }
 
     protected AbstractStateGroupWorker createWorker() {
@@ -230,36 +253,41 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
     @Override
-    public void enter(GroupIdTask groupIdTask) {
-        this.dispatcherTask(new EnterGroupTask(() -> {
-            AbstractWorkerManager.this.findBestGroup2Enter(groupIdTask.getGroupId(), groupIdTask.getTask(), groupIdTask.getFailCallBack());
-        }));
+    public void enter(ExecuteTask executeTask) {
+        this.addDispatcherTask(new EnterGroupTask(executeTask.getGroupId(),
+                executeTask.getTask(),
+                executeTask.getFailCallBack()));
     }
 
     @Override
-    public void addTask(GroupIdTask groupIdTask) {
-        Long groupId = groupIdTask.getGroupId();
+    public void addTask(ExecuteTask executeTask) {
+        if (!this.tryAddTask(executeTask)) {
+            FailCallBack failCallBack = executeTask.getFailCallBack();
+            if (failCallBack != null) {
+                failCallBack.call();
+            }
+        }
+    }
+
+    protected boolean tryAddTask(ExecuteTask executeTask) {
+        Long groupId = executeTask.getGroupId();
         if (groupId == null) {
-            this.enter(groupIdTask);
-            return;
+            return false;
         }
-        StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupIdTask.getGroupId());
+        StateGroup stateGroup = this.stateGroupPool.find(executeTask.getGroupId());
         // this should be enter
-        if (fetchStateGroup.isNew()) {
-            this.enter(groupIdTask);
-            return;
+        if (stateGroup == null) {
+            return false;
         }
-        StateGroup stateGroup = fetchStateGroup.getStateGroup();
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (currentWorkerId == null) {
-            this.enter(groupIdTask);
-            return;
+            return false;
         }
         Worker worker = this.workerMap.get(currentWorkerId);
         if (worker == null) {
-            this.enter(groupIdTask);
-            return;
+            return false;
         }
-        this.dispatcherTask(groupIdTask);
+        this.addDispatcherTask(executeTask);
+        return true;
     }
 }
