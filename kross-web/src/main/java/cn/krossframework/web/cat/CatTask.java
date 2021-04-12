@@ -1,5 +1,6 @@
 package cn.krossframework.web.cat;
 
+import cn.krossframework.state.FailCallBack;
 import cn.krossframework.state.Task;
 
 public class CatTask implements Task {
@@ -11,6 +12,11 @@ public class CatTask implements Task {
 
     public int getCmd() {
         return cmd;
+    }
+
+    @Override
+    public FailCallBack getFailCallBack() {
+        return null;
     }
 }
 

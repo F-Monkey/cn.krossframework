@@ -122,6 +122,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
         boolean b = this.isStart() && this.groupIdTaskQueue.offer(task);
         if (b) {
             this.unlock();
+        } else {
+            log.error("dispatcher task add error");
         }
         return b;
     }

@@ -16,13 +16,14 @@ public class StateConfig {
 
     private static final Logger log = LoggerFactory.getLogger(StateConfig.class);
 
+
     @Bean
-    WorkerManager workerManager() throws Exception {
+    StateGroupPool stateGroupPool() throws Exception {
         DefaultLazyTime defaultLazyTime = new DefaultLazyTime(100);
         CatFactory catFactory = new CatFactory(defaultLazyTime, new StateGroupConfig() {
             @Override
             public boolean autoUpdate() {
-                return true;
+                return false;
             }
 
             @Override
@@ -48,8 +49,13 @@ public class StateConfig {
         CatPool catPool = new CatPool(catFactory);
         catPool.setRemoveDeposedStateGroupPeriod(2000);
         catPool.afterPropertiesSet();
-        return new AbstractWorkerManager(500, 20, 10,
-                2000, 2000, 20, catPool) {
+        return catPool;
+    }
+
+    @Bean
+    WorkerManager workerManager(StateGroupPool stateGroupPool) throws Exception {
+        return new AbstractWorkerManager(50, 20, 100,
+                2000, 2000, 20, stateGroupPool) {
         };
     }
 }

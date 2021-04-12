@@ -10,6 +10,8 @@ public class Eat extends AbstractState {
 
     private int status;
 
+    private int cmdCode;
+
     @Override
     public String getCode() {
         return CODE;
@@ -25,12 +27,18 @@ public class Eat extends AbstractState {
         CatTask catTask = (CatTask) task;
         if (catTask.getCmd() == 1) {
             this.status = 1;
+            return;
         }
+        this.cmdCode = catTask.getCmd();
     }
 
     @Override
     public void update(Time time, StateInfo stateInfo) {
         if (this.status == 1) {
+            stateInfo.isFinished = true;
+            return;
+        }
+        if (this.cmdCode == 4) {
             stateInfo.isFinished = true;
             return;
         }

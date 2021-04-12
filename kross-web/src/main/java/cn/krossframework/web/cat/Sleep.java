@@ -10,6 +10,8 @@ public class Sleep extends AbstractState {
 
     private int status;
 
+    private int cmdCode;
+
     @Override
     public String getCode() {
         return CODE;
@@ -26,6 +28,11 @@ public class Sleep extends AbstractState {
             stateInfo.isFinished = true;
             return;
         }
+        if (this.cmdCode == 3) {
+            stateInfo.isFinished = true;
+            return;
+        }
+
         this.sleepTime -= 20;
         System.out.println("sleeping");
         if (this.sleepTime <= 0) {
@@ -38,7 +45,9 @@ public class Sleep extends AbstractState {
         CatTask catTask = (CatTask) task;
         if (catTask.getCmd() == 1) {
             this.status = 1;
+            return;
         }
+        this.cmdCode = catTask.getCmd();
     }
 
     @Override

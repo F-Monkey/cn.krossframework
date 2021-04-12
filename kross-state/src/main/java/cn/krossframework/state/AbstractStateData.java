@@ -9,8 +9,4 @@ public abstract class AbstractStateData implements StateData {
         this.groupId = groupId;
     }
 
-    @Override
-    public long getGroupId() {
-        return this.groupId;
-    }
 }

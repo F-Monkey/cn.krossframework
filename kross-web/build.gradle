@@ -3,4 +3,5 @@ dependencies {
     compile project(":kross-commons")
     implementation rootProject.ext.dependencies["spring-boot-starter-web"]
     implementation rootProject.ext.dependencies["spring-boot-starter"]
+    testImplementation rootProject.ext.dependencies["spring-boot-starter-test"]
 }
