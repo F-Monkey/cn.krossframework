@@ -1,13 +1,11 @@
 package cn.krossframework.state;
 
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
@@ -15,8 +13,6 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     private static final Logger log = LoggerFactory.getLogger(AbstractTaskDispatcher.class);
 
     protected final long id;
-
-    protected final ExecutorService executorService;
 
     protected final StateGroupPool stateGroupPool;
 
@@ -29,11 +25,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     protected volatile boolean isStart;
 
     public AbstractTaskDispatcher(long id,
-                                  ExecutorService executorService,
                                   StateGroupPool stateGroupPool) {
-        Preconditions.checkNotNull(executorService);
         this.id = id;
-        this.executorService = executorService;
         this.thread = new Thread(AbstractTaskDispatcher.this::run);
         this.LOCK = new Object();
         this.groupIdTaskQueue = new LinkedBlockingQueue<>();
@@ -60,7 +53,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     @Override
     public void start() {
         this.isStart = true;
-        this.executorService.submit(this.thread);
+        this.thread.start();
     }
 
     @Override

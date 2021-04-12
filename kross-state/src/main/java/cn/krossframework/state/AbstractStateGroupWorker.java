@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.ExecutorService;
 
 public abstract class AbstractStateGroupWorker implements StateGroupWorker {
 
@@ -19,8 +17,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
     protected final int period;
 
     protected final Thread thread;
-
-    protected final ExecutorService executorService;
 
     protected final Object LOCK;
 
@@ -40,8 +36,7 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
                                     int period,
                                     int stateGroupCapacity,
                                     int removeDeposedStateGroupPeriod,
-                                    StateGroupPool stateGroupPool,
-                                    ExecutorService executor) {
+                                    StateGroupPool stateGroupPool) {
         Preconditions.checkArgument(period > 0);
         Preconditions.checkNotNull(stateGroupPool);
         this.period = period;
@@ -51,7 +46,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
         this.groupIdSet = new ConcurrentSkipListSet<>();
         this.LOCK = new Object();
         this.thread = new Thread(AbstractStateGroupWorker.this::run);
-        this.executorService = executor;
         this.autoTask = new AutoTask(removeDeposedStateGroupPeriod, 2) {
             @Override
             protected void run() {
@@ -91,7 +85,7 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
 
     @Override
     public void start() {
-        this.executorService.submit(this.thread);
+        this.thread.start();
         this.autoTask.start();
         this.isStart = true;
     }

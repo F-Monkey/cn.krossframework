@@ -60,7 +60,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         if (stateGroupMap.size() == 0) {
             return;
         }
-        log.debug("start remove deposed stateGroup, current size: {}", stateGroupMap.size());
+        log.info("start remove deposed stateGroup, current size: {}", stateGroupMap.size());
         final BlockingQueue<Long> groupIdRecycleQueue = new LinkedBlockingQueue<>();
         stateGroupMap.entrySet().removeIf(e -> {
             boolean b = e.getValue().canDeposed();
@@ -72,7 +72,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         });
         this.stateGroupMap = stateGroupMap;
         this.groupIdRecycleQueue = groupIdRecycleQueue;
-        log.debug("end remove deposed stateGroup, current size: {}", this.stateGroupMap.size());
+        log.info("end remove deposed stateGroup, current size: {}", this.stateGroupMap.size());
     }
 
     @Override

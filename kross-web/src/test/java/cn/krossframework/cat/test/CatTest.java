@@ -40,6 +40,8 @@ public class CatTest {
         workerManager.enter(new ExecuteTask(groupId, new CatTask(10), () -> {
             System.out.println("enter error");
         }));
+
+
         StateGroup stateGroup;
         while ((stateGroup = stateGroupPool.find(groupId)) == null || stateGroup.getCurrentWorkerId() == null) {
 
@@ -74,12 +76,22 @@ public class CatTest {
                 workerManager.addTask(eatTask);
             }
         }).start();
+
+        try {
+            Thread.sleep(10_000);
+        } catch (InterruptedException ignore) {
+        }
+        workerManager.addTask(new ExecuteTask(groupId, new CatTask(1), () -> {
+            System.out.println("stop fail");
+        }));
     }
 
     @Test
     public void test() throws InterruptedException {
         for (long i = 1; i < 2000; i++) {
-            this.multiTest(i);
+            final long groupId = i;
+            Thread.sleep(200);
+            new Thread(() -> this.multiTest(groupId)).start();
         }
         new CountDownLatch(1).await();
     }

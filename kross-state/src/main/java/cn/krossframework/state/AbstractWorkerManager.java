@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -24,10 +23,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     protected final int workerCapacity;
 
     protected final int taskDispatcherSize;
-
-    protected final ExecutorService groupWorkerExecutorService;
-
-    protected final ExecutorService taskDispatcherExecutorService;
 
     protected final StateGroupPool stateGroupPool;
 
@@ -59,8 +54,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         this.stateGroupPool = stateGroupPool;
         this.workerCapacity = workerCapacity;
         this.LOCK = new Object();
-        this.groupWorkerExecutorService = new ThreadPoolExecutor(workerThreadSize, workerThreadSize, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
-        this.taskDispatcherExecutorService = new ThreadPoolExecutor(taskDispatcherSize + 1, taskDispatcherSize + 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
         this.workerMap = this.initWorkerMap();
         this.dispatcherMap = this.initDispatcherMap();
         new AutoTask(removeEmptyWorkerPeriod, 2) {
@@ -166,7 +159,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             index = groupId % this.taskDispatcherSize;
         }
         return this.dispatcherMap.computeIfAbsent(index, (i) -> {
-            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.taskDispatcherExecutorService, this.stateGroupPool) {
+            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.stateGroupPool) {
             };
             taskDispatcher.start();
             return taskDispatcher;
@@ -254,8 +247,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
                 this.workerUpdatePeriod,
                 this.workerCapacity,
                 this.removeDeposedStateGroupPeriod,
-                this.stateGroupPool,
-                this.groupWorkerExecutorService) {
+                this.stateGroupPool) {
         };
     }
 
