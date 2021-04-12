@@ -8,6 +8,11 @@ import java.util.ArrayList;
 public class TetrisConfig implements StateGroupConfig {
 
     @Override
+    public String getStartState() {
+        return WaitingState.CODE;
+    }
+
+    @Override
     public StateData createStateData() {
         ArrayList<Seat> seatList = new ArrayList<>(2);
         seatList.add(new Seat("PLAYER_1"));

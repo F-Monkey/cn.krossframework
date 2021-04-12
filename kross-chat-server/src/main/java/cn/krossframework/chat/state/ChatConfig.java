@@ -10,12 +10,12 @@ import java.util.Collection;
 public class ChatConfig implements StateGroupConfig {
 
     @Override
-    public Collection<State> getStates() {
+    public Collection<State> createStates() {
         return Lists.newArrayList(new ChatState());
     }
 
     @Override
-    public StateData getStateData() {
+    public StateData createStateData() {
         return new RoomData();
     }
 

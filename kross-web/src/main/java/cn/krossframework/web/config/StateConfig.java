@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Configuration
 public class StateConfig {
@@ -22,16 +24,25 @@ public class StateConfig {
             public boolean autoUpdate() {
                 return true;
             }
+
+            @Override
+            public String getStartState() {
+                return Walk.CODE;
+            }
+
+            @Override
+            public Collection<State> createStates() {
+                List<State> stateList = new ArrayList<>(4);
+                stateList.add(new Sleep());
+                stateList.add(new Eat());
+                stateList.add(new Walk());
+                stateList.add(new DefaultErrorState());
+                return stateList;
+            }
         }) {
             @Override
             public StateGroup create(long id) {
-                StateGroup stateGroup = new Cat(id, super.time, super.stateGroupConfig);
-                stateGroup.addState(new Sleep());
-                stateGroup.addState(new Eat());
-                stateGroup.addState(new Walk());
-                stateGroup.addState(new DefaultErrorState());
-                stateGroup.initAndSetCurrentState(Walk.CODE);
-                return stateGroup;
+                return new Cat(id, super.time, super.stateGroupConfig);
             }
         };
         CatPool catPool = new CatPool(catFactory);

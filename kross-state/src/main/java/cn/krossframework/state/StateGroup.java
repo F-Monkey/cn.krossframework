@@ -38,13 +38,6 @@ public interface StateGroup {
     void setCurrentWorkerId(long id);
 
     /**
-     * add state
-     *
-     * @param state state
-     */
-    void addState(State state);
-
-    /**
      * set current state,and init state info
      *
      * @param code state code

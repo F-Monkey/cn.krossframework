@@ -22,6 +22,11 @@ public class PlayingState extends AbstractState {
     }
 
     @Override
+    public void handleTask(Time time, Task task) {
+        super.handleTask(time, task);
+    }
+
+    @Override
     public void update(Time time, StateInfo stateInfo) {
         if (this.hasWinner) {
             stateInfo.isFinished = true;

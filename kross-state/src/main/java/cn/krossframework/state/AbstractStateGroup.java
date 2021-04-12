@@ -70,6 +70,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         }
         this.stateData = this.stateGroupConfig.createStateData();
         this.stateData.setGroupId(this.id);
+        this.initAndSetCurrentState(this.stateGroupConfig.getStartState());
     }
 
     @Override
@@ -94,8 +95,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         this.currentWorkerId = id;
     }
 
-    @Override
-    public void addState(State state) {
+    protected void addState(State state) {
         state.setStateGroup(this);
         this.stateMap.put(state.getCode(), state);
     }

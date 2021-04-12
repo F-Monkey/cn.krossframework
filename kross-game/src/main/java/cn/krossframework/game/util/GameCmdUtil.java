@@ -8,7 +8,6 @@ import cn.krossframework.proto.Command;
 import cn.krossframework.proto.Game;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
-import cn.krossframework.state.StateData;
 import cn.krossframework.state.StateGroupConfig;
 import cn.krossframework.websocket.Character;
 import com.google.common.collect.ImmutableList;
@@ -29,7 +28,6 @@ public class GameCmdUtil {
         GameData gameData = gameRoom.getStateData();
         Game.TetrisConfig.Builder configBuilder = Game.TetrisConfig.newBuilder();
         configBuilder.setFallTime(config.updatePeriod());
-
         Game.TetrisRoomData.Builder roomDataBuilder = Game.TetrisRoomData.newBuilder();
         ImmutableList<Seat> seatList = gameData.getSeatList();
         Seat seat;
@@ -39,7 +37,7 @@ public class GameCmdUtil {
             Game.TetrisSeatData.Builder builder = Game.TetrisSeatData.newBuilder();
             builder.setPlayer(Game.Player.newBuilder().setNickname(character.getNickName())
                     .setHeadIcon(character.getHeadIcon())
-                    .setUid(character.getId()).build());
+                    .setUid(character.getId()));
             roomDataBuilder.addTetrisSeatDataList(builder);
         }
 

@@ -5,6 +5,10 @@ import java.util.Collections;
 
 public interface StateGroupConfig {
 
+    default String getStartState() {
+        return "";
+    }
+
     default boolean autoUpdate() {
         return false;
     }
