@@ -18,7 +18,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
 
     protected final StateGroupFactory stateGroupFactory;
 
-    protected final BlockingQueue<Long> groupIdRecycleQueue;
+    protected volatile BlockingQueue<Long> groupIdRecycleQueue;
 
     protected volatile ConcurrentHashMap<Long, StateGroup> stateGroupMap;
 
@@ -61,20 +61,22 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
             return;
         }
         log.info("start remove deposed stateGroup, current size: {}", stateGroupMap.size());
+        final BlockingQueue<Long> groupIdRecycleQueue = new LinkedBlockingQueue<>();
         stateGroupMap.entrySet().removeIf(e -> {
             boolean b = e.getValue().canDeposed();
             if (b) {
-                this.groupIdRecycleQueue.offer(e.getKey());
+                groupIdRecycleQueue.offer(e.getKey());
                 log.info("stateGroup can be deposed, id: {}", e.getKey());
             }
             return b;
         });
         this.stateGroupMap = stateGroupMap;
+        this.groupIdRecycleQueue = groupIdRecycleQueue;
         log.info("end remove deposed stateGroup, current size: {}", this.stateGroupMap.size());
     }
 
     @Override
-    public long getNewGroupId() {
+    public long getNextGroupId() {
         Long id;
         return (id = this.groupIdRecycleQueue.poll()) == null ? ID_COUNT.incrementAndGet() : id;
     }
@@ -82,7 +84,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
     @Override
     public FetchStateGroup findOrCreate(Long id) {
         if (id == null) {
-            id = this.getNewGroupId();
+            id = this.getNextGroupId();
         }
         boolean[] isNew = {false};
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;

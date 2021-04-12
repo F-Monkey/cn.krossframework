@@ -20,6 +20,11 @@ public class Cat extends AbstractStateGroup {
     }
 
     @Override
+    public boolean tryEnterGroup(Task task) {
+        return super.tryEnterGroup(task);
+    }
+
+    @Override
     public boolean tryAddTask(Task task) {
         if (task instanceof CatTask) {
             return super.tryAddTask(task);

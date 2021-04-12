@@ -201,15 +201,12 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }
 
         for (StateGroupWorker worker : workerMap.values()) {
-
             if (!worker.isStart()) {
                 continue;
             }
-
             if (worker.isFull()) {
                 continue;
             }
-
             if (worker.tryAddStateGroup(stateGroup)) {
                 return true;
             }
