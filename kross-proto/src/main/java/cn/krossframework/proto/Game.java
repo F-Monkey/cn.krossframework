@@ -14,6 +14,435 @@ public final class Game {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface TetrisConfigOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.TetrisConfig)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 fallTime = 1;</code>
+     */
+    int getFallTime();
+  }
+  /**
+   * Protobuf type {@code cn.krossframework.proto.TetrisConfig}
+   */
+  public  static final class TetrisConfig extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.TetrisConfig)
+      TetrisConfigOrBuilder {
+    // Use TetrisConfig.newBuilder() to construct.
+    private TetrisConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TetrisConfig() {
+      fallTime_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private TetrisConfig(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              fallTime_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cn.krossframework.proto.Game.TetrisConfig.class, cn.krossframework.proto.Game.TetrisConfig.Builder.class);
+    }
+
+    public static final int FALLTIME_FIELD_NUMBER = 1;
+    private int fallTime_;
+    /**
+     * <code>optional int32 fallTime = 1;</code>
+     */
+    public int getFallTime() {
+      return fallTime_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (fallTime_ != 0) {
+        output.writeInt32(1, fallTime_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (fallTime_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, fallTime_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof cn.krossframework.proto.Game.TetrisConfig)) {
+        return super.equals(obj);
+      }
+      cn.krossframework.proto.Game.TetrisConfig other = (cn.krossframework.proto.Game.TetrisConfig) obj;
+
+      boolean result = true;
+      result = result && (getFallTime()
+          == other.getFallTime());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + FALLTIME_FIELD_NUMBER;
+      hash = (53 * hash) + getFallTime();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(cn.krossframework.proto.Game.TetrisConfig prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code cn.krossframework.proto.TetrisConfig}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.TetrisConfig)
+        cn.krossframework.proto.Game.TetrisConfigOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cn.krossframework.proto.Game.TetrisConfig.class, cn.krossframework.proto.Game.TetrisConfig.Builder.class);
+      }
+
+      // Construct using cn.krossframework.proto.Game.TetrisConfig.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        fallTime_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
+      }
+
+      public cn.krossframework.proto.Game.TetrisConfig getDefaultInstanceForType() {
+        return cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance();
+      }
+
+      public cn.krossframework.proto.Game.TetrisConfig build() {
+        cn.krossframework.proto.Game.TetrisConfig result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cn.krossframework.proto.Game.TetrisConfig buildPartial() {
+        cn.krossframework.proto.Game.TetrisConfig result = new cn.krossframework.proto.Game.TetrisConfig(this);
+        result.fallTime_ = fallTime_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cn.krossframework.proto.Game.TetrisConfig) {
+          return mergeFrom((cn.krossframework.proto.Game.TetrisConfig)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cn.krossframework.proto.Game.TetrisConfig other) {
+        if (other == cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance()) return this;
+        if (other.getFallTime() != 0) {
+          setFallTime(other.getFallTime());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cn.krossframework.proto.Game.TetrisConfig parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cn.krossframework.proto.Game.TetrisConfig) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int fallTime_ ;
+      /**
+       * <code>optional int32 fallTime = 1;</code>
+       */
+      public int getFallTime() {
+        return fallTime_;
+      }
+      /**
+       * <code>optional int32 fallTime = 1;</code>
+       */
+      public Builder setFallTime(int value) {
+        
+        fallTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 fallTime = 1;</code>
+       */
+      public Builder clearFallTime() {
+        
+        fallTime_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.TetrisConfig)
+    }
+
+    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.TetrisConfig)
+    private static final cn.krossframework.proto.Game.TetrisConfig DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new cn.krossframework.proto.Game.TetrisConfig();
+    }
+
+    public static cn.krossframework.proto.Game.TetrisConfig getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TetrisConfig>
+        PARSER = new com.google.protobuf.AbstractParser<TetrisConfig>() {
+      public TetrisConfig parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TetrisConfig(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TetrisConfig> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TetrisConfig> getParserForType() {
+      return PARSER;
+    }
+
+    public cn.krossframework.proto.Game.TetrisConfig getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface PlayerOrBuilder extends
       // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.Player)
       com.google.protobuf.MessageOrBuilder {
@@ -2149,6 +2578,760 @@ public final class Game {
 
   }
 
+  public interface StartGameOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.StartGame)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    boolean hasTetrisConfig();
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    cn.krossframework.proto.Game.TetrisConfig getTetrisConfig();
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder();
+
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    boolean hasTetrisRoomData();
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData();
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder();
+  }
+  /**
+   * Protobuf type {@code cn.krossframework.proto.StartGame}
+   */
+  public  static final class StartGame extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.StartGame)
+      StartGameOrBuilder {
+    // Use StartGame.newBuilder() to construct.
+    private StartGame(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private StartGame() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private StartGame(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              cn.krossframework.proto.Game.TetrisConfig.Builder subBuilder = null;
+              if (tetrisConfig_ != null) {
+                subBuilder = tetrisConfig_.toBuilder();
+              }
+              tetrisConfig_ = input.readMessage(cn.krossframework.proto.Game.TetrisConfig.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tetrisConfig_);
+                tetrisConfig_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              cn.krossframework.proto.Game.TetrisRoomData.Builder subBuilder = null;
+              if (tetrisRoomData_ != null) {
+                subBuilder = tetrisRoomData_.toBuilder();
+              }
+              tetrisRoomData_ = input.readMessage(cn.krossframework.proto.Game.TetrisRoomData.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tetrisRoomData_);
+                tetrisRoomData_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              cn.krossframework.proto.Game.StartGame.class, cn.krossframework.proto.Game.StartGame.Builder.class);
+    }
+
+    public static final int TETRISCONFIG_FIELD_NUMBER = 1;
+    private cn.krossframework.proto.Game.TetrisConfig tetrisConfig_;
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    public boolean hasTetrisConfig() {
+      return tetrisConfig_ != null;
+    }
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    public cn.krossframework.proto.Game.TetrisConfig getTetrisConfig() {
+      return tetrisConfig_ == null ? cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance() : tetrisConfig_;
+    }
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     */
+    public cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder() {
+      return getTetrisConfig();
+    }
+
+    public static final int TETRISROOMDATA_FIELD_NUMBER = 2;
+    private cn.krossframework.proto.Game.TetrisRoomData tetrisRoomData_;
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    public boolean hasTetrisRoomData() {
+      return tetrisRoomData_ != null;
+    }
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    public cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData() {
+      return tetrisRoomData_ == null ? cn.krossframework.proto.Game.TetrisRoomData.getDefaultInstance() : tetrisRoomData_;
+    }
+    /**
+     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     */
+    public cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder() {
+      return getTetrisRoomData();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (tetrisConfig_ != null) {
+        output.writeMessage(1, getTetrisConfig());
+      }
+      if (tetrisRoomData_ != null) {
+        output.writeMessage(2, getTetrisRoomData());
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (tetrisConfig_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getTetrisConfig());
+      }
+      if (tetrisRoomData_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getTetrisRoomData());
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof cn.krossframework.proto.Game.StartGame)) {
+        return super.equals(obj);
+      }
+      cn.krossframework.proto.Game.StartGame other = (cn.krossframework.proto.Game.StartGame) obj;
+
+      boolean result = true;
+      result = result && (hasTetrisConfig() == other.hasTetrisConfig());
+      if (hasTetrisConfig()) {
+        result = result && getTetrisConfig()
+            .equals(other.getTetrisConfig());
+      }
+      result = result && (hasTetrisRoomData() == other.hasTetrisRoomData());
+      if (hasTetrisRoomData()) {
+        result = result && getTetrisRoomData()
+            .equals(other.getTetrisRoomData());
+      }
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasTetrisConfig()) {
+        hash = (37 * hash) + TETRISCONFIG_FIELD_NUMBER;
+        hash = (53 * hash) + getTetrisConfig().hashCode();
+      }
+      if (hasTetrisRoomData()) {
+        hash = (37 * hash) + TETRISROOMDATA_FIELD_NUMBER;
+        hash = (53 * hash) + getTetrisRoomData().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(cn.krossframework.proto.Game.StartGame prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code cn.krossframework.proto.StartGame}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.StartGame)
+        cn.krossframework.proto.Game.StartGameOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cn.krossframework.proto.Game.StartGame.class, cn.krossframework.proto.Game.StartGame.Builder.class);
+      }
+
+      // Construct using cn.krossframework.proto.Game.StartGame.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (tetrisConfigBuilder_ == null) {
+          tetrisConfig_ = null;
+        } else {
+          tetrisConfig_ = null;
+          tetrisConfigBuilder_ = null;
+        }
+        if (tetrisRoomDataBuilder_ == null) {
+          tetrisRoomData_ = null;
+        } else {
+          tetrisRoomData_ = null;
+          tetrisRoomDataBuilder_ = null;
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
+      }
+
+      public cn.krossframework.proto.Game.StartGame getDefaultInstanceForType() {
+        return cn.krossframework.proto.Game.StartGame.getDefaultInstance();
+      }
+
+      public cn.krossframework.proto.Game.StartGame build() {
+        cn.krossframework.proto.Game.StartGame result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public cn.krossframework.proto.Game.StartGame buildPartial() {
+        cn.krossframework.proto.Game.StartGame result = new cn.krossframework.proto.Game.StartGame(this);
+        if (tetrisConfigBuilder_ == null) {
+          result.tetrisConfig_ = tetrisConfig_;
+        } else {
+          result.tetrisConfig_ = tetrisConfigBuilder_.build();
+        }
+        if (tetrisRoomDataBuilder_ == null) {
+          result.tetrisRoomData_ = tetrisRoomData_;
+        } else {
+          result.tetrisRoomData_ = tetrisRoomDataBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof cn.krossframework.proto.Game.StartGame) {
+          return mergeFrom((cn.krossframework.proto.Game.StartGame)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(cn.krossframework.proto.Game.StartGame other) {
+        if (other == cn.krossframework.proto.Game.StartGame.getDefaultInstance()) return this;
+        if (other.hasTetrisConfig()) {
+          mergeTetrisConfig(other.getTetrisConfig());
+        }
+        if (other.hasTetrisRoomData()) {
+          mergeTetrisRoomData(other.getTetrisRoomData());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        cn.krossframework.proto.Game.StartGame parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (cn.krossframework.proto.Game.StartGame) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private cn.krossframework.proto.Game.TetrisConfig tetrisConfig_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.krossframework.proto.Game.TetrisConfig, cn.krossframework.proto.Game.TetrisConfig.Builder, cn.krossframework.proto.Game.TetrisConfigOrBuilder> tetrisConfigBuilder_;
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public boolean hasTetrisConfig() {
+        return tetrisConfigBuilder_ != null || tetrisConfig_ != null;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisConfig getTetrisConfig() {
+        if (tetrisConfigBuilder_ == null) {
+          return tetrisConfig_ == null ? cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance() : tetrisConfig_;
+        } else {
+          return tetrisConfigBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public Builder setTetrisConfig(cn.krossframework.proto.Game.TetrisConfig value) {
+        if (tetrisConfigBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          tetrisConfig_ = value;
+          onChanged();
+        } else {
+          tetrisConfigBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public Builder setTetrisConfig(
+          cn.krossframework.proto.Game.TetrisConfig.Builder builderForValue) {
+        if (tetrisConfigBuilder_ == null) {
+          tetrisConfig_ = builderForValue.build();
+          onChanged();
+        } else {
+          tetrisConfigBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public Builder mergeTetrisConfig(cn.krossframework.proto.Game.TetrisConfig value) {
+        if (tetrisConfigBuilder_ == null) {
+          if (tetrisConfig_ != null) {
+            tetrisConfig_ =
+              cn.krossframework.proto.Game.TetrisConfig.newBuilder(tetrisConfig_).mergeFrom(value).buildPartial();
+          } else {
+            tetrisConfig_ = value;
+          }
+          onChanged();
+        } else {
+          tetrisConfigBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public Builder clearTetrisConfig() {
+        if (tetrisConfigBuilder_ == null) {
+          tetrisConfig_ = null;
+          onChanged();
+        } else {
+          tetrisConfig_ = null;
+          tetrisConfigBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisConfig.Builder getTetrisConfigBuilder() {
+        
+        onChanged();
+        return getTetrisConfigFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder() {
+        if (tetrisConfigBuilder_ != null) {
+          return tetrisConfigBuilder_.getMessageOrBuilder();
+        } else {
+          return tetrisConfig_ == null ?
+              cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance() : tetrisConfig_;
+        }
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.krossframework.proto.Game.TetrisConfig, cn.krossframework.proto.Game.TetrisConfig.Builder, cn.krossframework.proto.Game.TetrisConfigOrBuilder> 
+          getTetrisConfigFieldBuilder() {
+        if (tetrisConfigBuilder_ == null) {
+          tetrisConfigBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              cn.krossframework.proto.Game.TetrisConfig, cn.krossframework.proto.Game.TetrisConfig.Builder, cn.krossframework.proto.Game.TetrisConfigOrBuilder>(
+                  getTetrisConfig(),
+                  getParentForChildren(),
+                  isClean());
+          tetrisConfig_ = null;
+        }
+        return tetrisConfigBuilder_;
+      }
+
+      private cn.krossframework.proto.Game.TetrisRoomData tetrisRoomData_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.krossframework.proto.Game.TetrisRoomData, cn.krossframework.proto.Game.TetrisRoomData.Builder, cn.krossframework.proto.Game.TetrisRoomDataOrBuilder> tetrisRoomDataBuilder_;
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public boolean hasTetrisRoomData() {
+        return tetrisRoomDataBuilder_ != null || tetrisRoomData_ != null;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData() {
+        if (tetrisRoomDataBuilder_ == null) {
+          return tetrisRoomData_ == null ? cn.krossframework.proto.Game.TetrisRoomData.getDefaultInstance() : tetrisRoomData_;
+        } else {
+          return tetrisRoomDataBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public Builder setTetrisRoomData(cn.krossframework.proto.Game.TetrisRoomData value) {
+        if (tetrisRoomDataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          tetrisRoomData_ = value;
+          onChanged();
+        } else {
+          tetrisRoomDataBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public Builder setTetrisRoomData(
+          cn.krossframework.proto.Game.TetrisRoomData.Builder builderForValue) {
+        if (tetrisRoomDataBuilder_ == null) {
+          tetrisRoomData_ = builderForValue.build();
+          onChanged();
+        } else {
+          tetrisRoomDataBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public Builder mergeTetrisRoomData(cn.krossframework.proto.Game.TetrisRoomData value) {
+        if (tetrisRoomDataBuilder_ == null) {
+          if (tetrisRoomData_ != null) {
+            tetrisRoomData_ =
+              cn.krossframework.proto.Game.TetrisRoomData.newBuilder(tetrisRoomData_).mergeFrom(value).buildPartial();
+          } else {
+            tetrisRoomData_ = value;
+          }
+          onChanged();
+        } else {
+          tetrisRoomDataBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public Builder clearTetrisRoomData() {
+        if (tetrisRoomDataBuilder_ == null) {
+          tetrisRoomData_ = null;
+          onChanged();
+        } else {
+          tetrisRoomData_ = null;
+          tetrisRoomDataBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisRoomData.Builder getTetrisRoomDataBuilder() {
+        
+        onChanged();
+        return getTetrisRoomDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      public cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder() {
+        if (tetrisRoomDataBuilder_ != null) {
+          return tetrisRoomDataBuilder_.getMessageOrBuilder();
+        } else {
+          return tetrisRoomData_ == null ?
+              cn.krossframework.proto.Game.TetrisRoomData.getDefaultInstance() : tetrisRoomData_;
+        }
+      }
+      /**
+       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.krossframework.proto.Game.TetrisRoomData, cn.krossframework.proto.Game.TetrisRoomData.Builder, cn.krossframework.proto.Game.TetrisRoomDataOrBuilder> 
+          getTetrisRoomDataFieldBuilder() {
+        if (tetrisRoomDataBuilder_ == null) {
+          tetrisRoomDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              cn.krossframework.proto.Game.TetrisRoomData, cn.krossframework.proto.Game.TetrisRoomData.Builder, cn.krossframework.proto.Game.TetrisRoomDataOrBuilder>(
+                  getTetrisRoomData(),
+                  getParentForChildren(),
+                  isClean());
+          tetrisRoomData_ = null;
+        }
+        return tetrisRoomDataBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.StartGame)
+    }
+
+    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.StartGame)
+    private static final cn.krossframework.proto.Game.StartGame DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new cn.krossframework.proto.Game.StartGame();
+    }
+
+    public static cn.krossframework.proto.Game.StartGame getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<StartGame>
+        PARSER = new com.google.protobuf.AbstractParser<StartGame>() {
+      public StartGame parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new StartGame(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<StartGame> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<StartGame> getParserForType() {
+      return PARSER;
+    }
+
+    public cn.krossframework.proto.Game.StartGame getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface EnterOrBuilder extends
       // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.Enter)
       com.google.protobuf.MessageOrBuilder {
@@ -2880,6 +4063,11 @@ public final class Game {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_cn_krossframework_proto_Player_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -2894,6 +4082,11 @@ public final class Game {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_cn_krossframework_proto_TetrisRoomData_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_cn_krossframework_proto_StartGame_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_cn_krossframework_proto_Enter_descriptor;
   private static final 
@@ -2913,14 +4106,19 @@ public final class Game {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nGame.proto\022\027cn.krossframework.proto\"9\n" +
-      "\006Player\022\013\n\003uid\030\001 \001(\t\022\020\n\010nickname\030\002 \001(\t\022\020" +
-      "\n\010headIcon\030\003 \001(\t\"P\n\016TetrisSeatData\022\r\n\005sc" +
-      "ore\030\001 \001(\005\022/\n\006player\030\002 \001(\0132\037.cn.krossfram" +
-      "ework.proto.Player\"U\n\016TetrisRoomData\022C\n\022" +
-      "tetrisSeatDataList\030\001 \003(\0132\'.cn.krossframe" +
-      "work.proto.TetrisSeatData\"\007\n\005Enter\"\r\n\013En" +
-      "terResultB\010B\004GameH\001b\006proto3"
+      "\n\nGame.proto\022\027cn.krossframework.proto\" \n" +
+      "\014TetrisConfig\022\020\n\010fallTime\030\001 \001(\005\"9\n\006Playe" +
+      "r\022\013\n\003uid\030\001 \001(\t\022\020\n\010nickname\030\002 \001(\t\022\020\n\010head" +
+      "Icon\030\003 \001(\t\"P\n\016TetrisSeatData\022\r\n\005score\030\001 " +
+      "\001(\005\022/\n\006player\030\002 \001(\0132\037.cn.krossframework." +
+      "proto.Player\"U\n\016TetrisRoomData\022C\n\022tetris" +
+      "SeatDataList\030\001 \003(\0132\'.cn.krossframework.p" +
+      "roto.TetrisSeatData\"\211\001\n\tStartGame\022;\n\014tet" +
+      "risConfig\030\001 \001(\0132%.cn.krossframework.prot" +
+      "o.TetrisConfig\022?\n\016tetrisRoomData\030\002 \001(\0132\'",
+      ".cn.krossframework.proto.TetrisRoomData\"" +
+      "\007\n\005Enter\"\r\n\013EnterResultB\010B\004GameH\001b\006proto" +
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2934,32 +4132,44 @@ public final class Game {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_cn_krossframework_proto_Player_descriptor =
+    internal_static_cn_krossframework_proto_TetrisConfig_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_cn_krossframework_proto_TetrisConfig_descriptor,
+        new java.lang.String[] { "FallTime", });
+    internal_static_cn_krossframework_proto_Player_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_cn_krossframework_proto_Player_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_Player_descriptor,
         new java.lang.String[] { "Uid", "Nickname", "HeadIcon", });
     internal_static_cn_krossframework_proto_TetrisSeatData_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_cn_krossframework_proto_TetrisSeatData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_TetrisSeatData_descriptor,
         new java.lang.String[] { "Score", "Player", });
     internal_static_cn_krossframework_proto_TetrisRoomData_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_cn_krossframework_proto_TetrisRoomData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_TetrisRoomData_descriptor,
         new java.lang.String[] { "TetrisSeatDataList", });
+    internal_static_cn_krossframework_proto_StartGame_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_cn_krossframework_proto_StartGame_descriptor,
+        new java.lang.String[] { "TetrisConfig", "TetrisRoomData", });
     internal_static_cn_krossframework_proto_Enter_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_cn_krossframework_proto_Enter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_Enter_descriptor,
         new java.lang.String[] { });
     internal_static_cn_krossframework_proto_EnterResult_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_cn_krossframework_proto_EnterResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_EnterResult_descriptor,

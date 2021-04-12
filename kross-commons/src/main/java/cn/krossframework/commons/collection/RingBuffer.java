@@ -127,7 +127,7 @@ public class RingBuffer<T> implements Queue<T> {
         int index = (this.head.get() + 1) % this.buffer.length();
         T t = this.buffer.get(index);
         if (t == null) {
-            return this.poll();
+            return null;
         }
         if (!buffer.compareAndSet(index, t, null)) {
             return this.poll();

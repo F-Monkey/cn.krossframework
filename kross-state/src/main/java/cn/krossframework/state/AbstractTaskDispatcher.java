@@ -85,6 +85,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     protected boolean findStateGroupAndAddTask(Task task) {
         if (task instanceof AbstractWorkerManager.EnterGroupTask) {
+            // This task must happened before add task
             ((AbstractWorkerManager.EnterGroupTask) task).run();
             return true;
         }
@@ -99,6 +100,9 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
             } else {
                 StateGroup stateGroup = this.stateGroupPool.find(groupId);
                 if (stateGroup == null) {
+                    if (failCallBack != null) {
+                        failCallBack.call();
+                    }
                     return false;
                 }
                 return stateGroup.tryAddTask(groupIdTask.getTask());

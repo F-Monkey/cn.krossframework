@@ -13,11 +13,19 @@ public interface StateGroupConfig {
         return 0;
     }
 
-    default Collection<State> getStates() {
+    /**
+     * return new States
+     *
+     * @return
+     */
+    default Collection<State> createStates() {
         return Collections.emptyList();
     }
 
-    default StateData getStateData(){
+    /**
+     * @return return new StateData
+     */
+    default StateData createStateData() {
         return new AbstractStateData() {
         };
     }

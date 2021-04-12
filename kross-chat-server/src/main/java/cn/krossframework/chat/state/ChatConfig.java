@@ -18,4 +18,5 @@ public class ChatConfig implements StateGroupConfig {
     public StateData getStateData() {
         return new RoomData();
     }
+
 }

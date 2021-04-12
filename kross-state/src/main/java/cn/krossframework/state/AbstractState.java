@@ -2,17 +2,17 @@ package cn.krossframework.state;
 
 public abstract class AbstractState implements State {
 
-    protected StateData stateData;
+    private StateGroup stateGroup;
 
     @Override
-    public void setStateData(StateData stateData) {
-        this.stateData = stateData;
+    public void setStateGroup(StateGroup stateGroup) {
+        this.stateGroup = stateGroup;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends StateData> T getStateData() {
-        return (T) stateData;
+    public <T extends StateGroup> T getStateGroup() {
+        return (T) this.stateGroup;
     }
 
     @Override

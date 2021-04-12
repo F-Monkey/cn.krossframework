@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class TetrisConfig implements StateGroupConfig {
 
     @Override
-    public StateData getStateData() {
+    public StateData createStateData() {
         ArrayList<Seat> seatList = new ArrayList<>(2);
         seatList.add(new Seat("PLAYER_1"));
         seatList.add(new Seat("PLAYER_2"));

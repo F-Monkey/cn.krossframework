@@ -1,9 +1,9 @@
 package cn.krossframework.state;
 
-import java.util.Iterator;
+import java.util.Collection;
 
 public interface StateGroupWorker extends Worker {
     boolean tryAddStateGroup(StateGroup stateGroup);
 
-    Iterator<Long> stateGroupIdIterator();
+    Collection<Long> stateGroupIdIterator();
 }

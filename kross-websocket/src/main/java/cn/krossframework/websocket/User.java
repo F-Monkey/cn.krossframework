@@ -6,5 +6,7 @@ public interface User {
 
     String getUsername();
 
+    String getHeadIcon();
+
     void setUsername(String username);
 }

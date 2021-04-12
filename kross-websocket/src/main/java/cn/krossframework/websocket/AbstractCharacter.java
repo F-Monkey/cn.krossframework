@@ -51,6 +51,11 @@ public abstract class AbstractCharacter implements Character {
     }
 
     @Override
+    public String getHeadIcon() {
+        return this.user.getHeadIcon();
+    }
+
+    @Override
     public void setSession(Session session) {
         if (this.session != null) {
             this.session.send(CmdUtil.clickOff());

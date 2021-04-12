@@ -18,21 +18,26 @@ public abstract class AutoTask {
 
     private final long period;
 
+    private final long nThreads;
+
     private final ScheduledExecutorService scheduledExecutorService;
 
     public AutoTask(long period, int nThreads) {
+        this.nThreads = nThreads;
         this.period = period <= 0 ? DEFAULT_PERIOD : period;
         this.scheduledExecutorService = new ScheduledThreadPoolExecutor(nThreads);
     }
 
     public void start() {
-        this.scheduledExecutorService.scheduleAtFixedRate(() -> {
-            try {
-                this.run();
-            } catch (Throwable e) {
-                log.error("autoTask run error:\n", e);
-            }
-        }, 0, this.period, TimeUnit.MILLISECONDS);
+        for (int i = 0; i < nThreads; i++) {
+            this.scheduledExecutorService.scheduleAtFixedRate(() -> {
+                try {
+                    this.run();
+                } catch (Throwable e) {
+                    log.error("autoTask run error:\n", e);
+                }
+            }, 0, this.period, TimeUnit.MILLISECONDS);
+        }
     }
 
     protected abstract void run();

@@ -10,11 +10,27 @@ public interface StateGroup {
     long getId();
 
     /**
+     * init stateGroup data
+     */
+    void init();
+
+    /**
      * get workerId
      *
      * @return workerId
      */
     Long getCurrentWorkerId();
+
+    /**
+     * @return stateGroupConfig
+     */
+    <T extends StateGroupConfig> T getConfig();
+
+    /**
+     * @param <T> stateData type
+     * @return stateData
+     */
+    <T extends StateData> T getStateData();
 
     /**
      * set workerId
@@ -37,7 +53,8 @@ public interface StateGroup {
     void initAndSetCurrentState(String code) throws NullPointerException;
 
     /**
-     * try enter stateGroup, if stateGroup is full, return false
+     * try enter stateGroup, if stateGroup is full or state can be deposed, return false
+     *
      * @param task enterGroup task
      * @return enterResult
      */

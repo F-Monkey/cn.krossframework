@@ -13,22 +13,24 @@ public class RingBufferTest {
     public static void testLinkedBlockingQueue() throws InterruptedException {
         LinkedBlockingQueue<Integer> linkedBlockingQueue = new LinkedBlockingQueue<>(size);
         long l = System.currentTimeMillis();
-        new Thread(() -> {
+        Thread t1 = new Thread(() -> {
             for (int i = 0; i < size; i++) {
                 linkedBlockingQueue.offer(i);
                 Thread.yield();
             }
-        }).start();
+        });
 
         CountDownLatch countDownLatch = new CountDownLatch(size);
-        new Thread(() -> {
+        Thread t2 = new Thread(() -> {
             for (; ; ) {
                 Integer poll = linkedBlockingQueue.poll();
                 if (poll != null) {
                     countDownLatch.countDown();
                 }
             }
-        }).start();
+        });
+        t2.start();
+        t1.start();
         countDownLatch.await();
         System.out.println("linkedBlockingQueue cost: " + (System.currentTimeMillis() - l));
     }
@@ -36,22 +38,25 @@ public class RingBufferTest {
     public static void testRingBuffer() throws InterruptedException {
         RingBuffer<Integer> linkedBlockingQueue = new RingBuffer<>(size);
         long l = System.currentTimeMillis();
-        new Thread(() -> {
+        Thread t1 = new Thread(() -> {
             for (int i = 0; i < size; i++) {
                 linkedBlockingQueue.offer(i);
                 Thread.yield();
             }
-        }).start();
+        });
 
         CountDownLatch countDownLatch = new CountDownLatch(size);
-        new Thread(() -> {
+        Thread t2 = new Thread(() -> {
             for (; ; ) {
                 Integer poll = linkedBlockingQueue.poll();
                 if (poll != null) {
                     countDownLatch.countDown();
                 }
             }
-        }).start();
+        });
+        t1.start();
+
+        t2.start();
         countDownLatch.await();
         System.out.println("ringBuffer cost: " + (System.currentTimeMillis() - l));
     }

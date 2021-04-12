@@ -8,19 +8,19 @@ public interface State {
     Logger log = LoggerFactory.getLogger(State.class);
 
     /**
-     * set stateData that initialized from {@link StateGroup}
+     * set stateGroup {@link StateGroup}
      *
-     * @param stateData stateData
+     * @param stateGroup stateGroup
      */
-    <T extends StateData> void setStateData(T stateData);
+    void setStateGroup(StateGroup stateGroup);
 
     /**
      * get StateData
      *
-     * @param <T> stateData type
-     * @return stateData
+     * @param <T> StateGroup type
+     * @return stateGroup
      */
-    <T extends StateData> T getStateData();
+    <T extends StateGroup> T getStateGroup();
 
     /**
      * return current state code, The code for each set of states

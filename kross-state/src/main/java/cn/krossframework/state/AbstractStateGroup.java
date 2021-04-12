@@ -13,8 +13,6 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     protected final long id;
 
-    protected final StateData stateData;
-
     protected final Time time;
 
     protected final StateGroupConfig stateGroupConfig;
@@ -22,6 +20,8 @@ public abstract class AbstractStateGroup implements StateGroup {
     protected final Map<String, State> stateMap;
 
     protected final Queue<Task> taskQueue;
+
+    protected StateData stateData;
 
     protected State currentState;
 
@@ -38,16 +38,9 @@ public abstract class AbstractStateGroup implements StateGroup {
         this.time = time;
         this.id = id;
         this.stateGroupConfig = stateGroupConfig;
-        Collection<State> states = stateGroupConfig.getStates();
-        if (states != null && states.size() > 0) {
-            for (State state : states) {
-                this.addState(state);
-            }
-        }
-        this.stateData = stateGroupConfig.getStateData();
-        this.stateData.setGroupId(this.id);
         this.stateMap = new HashMap<>();
         this.taskQueue = this.initTaskQueue();
+        this.init();
     }
 
     /**
@@ -68,8 +61,32 @@ public abstract class AbstractStateGroup implements StateGroup {
     }
 
     @Override
+    public void init() {
+        Collection<State> states = this.stateGroupConfig.createStates();
+        if (states != null && states.size() > 0) {
+            for (State state : states) {
+                this.addState(state);
+            }
+        }
+        this.stateData = this.stateGroupConfig.createStateData();
+        this.stateData.setGroupId(this.id);
+    }
+
+    @Override
     public Long getCurrentWorkerId() {
         return this.currentWorkerId;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends StateGroupConfig> T getConfig() {
+        return (T) this.stateGroupConfig;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends StateData> T getStateData() {
+        return (T) this.stateData;
     }
 
     @Override
@@ -79,7 +96,7 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     @Override
     public void addState(State state) {
-        state.setStateData(this.stateData);
+        state.setStateGroup(this);
         this.stateMap.put(state.getCode(), state);
     }
 

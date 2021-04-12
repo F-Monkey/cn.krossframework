@@ -13,6 +13,8 @@ public class ChatUser implements User, Serializable {
 
     private String username;
 
+    private String headIcon;
+
     public void setObjectId(ObjectId objectId) {
         this.objectId = objectId;
     }
@@ -29,6 +31,11 @@ public class ChatUser implements User, Serializable {
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    @Override
+    public String getHeadIcon() {
+        return this.headIcon;
     }
 
     @Override

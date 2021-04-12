@@ -29,28 +29,11 @@ public class ChatState extends AbstractState {
             case CmdType.SEND_MESSAGE:
                 this.sendMessage(character, cmd);
                 break;
-            case CmdType.ENTER:
-                this.enterRoom(character, cmd);
-                break;
             default:
                 character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL,
                         "invalid cmdType",
                         cmdType, null)));
         }
-    }
-
-    private void enterRoom(Character character, Command.Cmd cmd) {
-        RoomData stateData = super.getStateData();
-        stateData.addCharacter(character);
-        character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "enter room"));
-        Command.PackageGroup enterRoom = ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, character.getNickName() + " enter room");
-        for (Character other : stateData.getChatterList()) {
-            if (character.getId().equals(other.getId())) {
-                continue;
-            }
-            character.sendMsg(enterRoom);
-        }
-        character.setCurrentGroupId(stateData.getGroupId());
     }
 
     private void sendMessage(Character character, Command.Cmd cmd) {
@@ -67,7 +50,7 @@ public class ChatState extends AbstractState {
             return;
         }
         String id = character.getId();
-        RoomData stateData = super.getStateData();
+        RoomData stateData = super.getStateGroup().getStateData();
         for (Character other : stateData.getChatterList()) {
             if (id.equals(other.getId())) {
                 continue;

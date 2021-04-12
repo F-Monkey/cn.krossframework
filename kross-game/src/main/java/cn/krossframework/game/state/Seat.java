@@ -8,12 +8,13 @@ public class Seat {
 
     private int score;
 
+    private boolean isReady;
+
     private Character character;
 
     public Seat(String seatName) {
         this.seatName = seatName;
     }
-
 
     public String getSeatName() {
         return seatName;
@@ -29,6 +30,14 @@ public class Seat {
 
     public Character getCharacter() {
         return character;
+    }
+
+    public void setReady(boolean ready) {
+        this.isReady = ready;
+    }
+
+    public boolean isReady() {
+        return this.isReady;
     }
 
     public int getScore() {

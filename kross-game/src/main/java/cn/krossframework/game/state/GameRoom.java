@@ -22,22 +22,36 @@ public class GameRoom extends AbstractStateGroup {
         return false;
     }
 
+    public void broadCastMsg(String excludeCharacterId, Object msg) {
+        GameData gameData = (GameData) super.stateData;
+        for (Seat seat : gameData.getSeatList()) {
+            Character character = seat.getCharacter();
+            if (character == null) {
+                continue;
+            }
+            if (excludeCharacterId != null && excludeCharacterId.equals(character.getId())) {
+                continue;
+            }
+            character.sendMsg(msg);
+        }
+    }
+
     @Override
     public boolean tryEnterGroup(Task task) {
+        if (!super.tryEnterGroup(task)) {
+            return false;
+        }
         if (task instanceof GameTask) {
             Character character = ((GameTask) task).getCharacter();
-            if (!super.tryEnterGroup(task)) {
-                character.sendMsg(GameCmdUtil.enterResult(ResultCode.FAIL, "enter fail"));
+            GameData gameData = (GameData) super.stateData;
+            Seat emptySeat = gameData.findEmptySeat();
+            if (emptySeat == null) {
                 return false;
             }
-            GameData gameData = this.currentState.getStateData();
-            for (Seat seat : gameData.getSeatList()) {
-                if (seat.getCharacter() == null) {
-                    seat.setCharacter(character);
-                    character.sendMsg(GameCmdUtil.enterResult(ResultCode.SUCCESS, "enter ok"));
-                    return true;
-                }
-            }
+            emptySeat.setCharacter(character);
+            character.sendMsg(GameCmdUtil.enterResult
+                    (ResultCode.SUCCESS, "enter ok"));
+            this.broadCastMsg(character.getId(), GameCmdUtil.enterResult(ResultCode.SUCCESS, "player: " + character.getNickName() + " enter room"));
         }
         return false;
     }

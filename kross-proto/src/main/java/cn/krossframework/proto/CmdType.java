@@ -13,4 +13,6 @@ public interface CmdType {
     int CLICK_OFF = 1006;
 
     int CLOSE_ROOM = 1008;
+
+    int START_GAME = 1009;
 }

@@ -14,10 +14,16 @@ public class WaitingState extends AbstractState {
         return CODE;
     }
 
+
+    @Override
+    public void init(Time time) {
+        this.getStateGroup().init();
+    }
+
     @Override
     public void update(Time time, StateInfo stateInfo) {
-        GameData gameData = this.getStateData();
-        if (gameData.isFull()) {
+        GameData gameData = this.getStateGroup();
+        if (gameData.isFull() && gameData.isAllReady()) {
             stateInfo.isFinished = true;
         }
     }

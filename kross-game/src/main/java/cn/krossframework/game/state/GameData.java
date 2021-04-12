@@ -26,4 +26,22 @@ public class GameData extends AbstractStateData {
         }
         return true;
     }
+
+    public boolean isAllReady() {
+        for (Seat seat : this.getSeatList()) {
+            if (!seat.isReady()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Seat findEmptySeat() {
+        for (Seat seat : this.seatList) {
+            if (seat.getCharacter() == null) {
+                return seat;
+            }
+        }
+        return null;
+    }
 }

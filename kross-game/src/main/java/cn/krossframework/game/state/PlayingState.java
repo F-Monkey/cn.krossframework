@@ -1,8 +1,7 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.state.AbstractState;
-import cn.krossframework.state.StateInfo;
-import cn.krossframework.state.Time;
+import cn.krossframework.game.util.GameCmdUtil;
+import cn.krossframework.state.*;
 
 public class PlayingState extends AbstractState {
 
@@ -18,6 +17,8 @@ public class PlayingState extends AbstractState {
     @Override
     public void init(Time time) {
         this.hasWinner = false;
+        GameRoom stateGroup = this.getStateGroup();
+        stateGroup.broadCastMsg(null, GameCmdUtil.gameStart(stateGroup));
     }
 
     @Override

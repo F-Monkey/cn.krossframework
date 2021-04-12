@@ -4,6 +4,7 @@ import cn.krossframework.commons.thread.AutoTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,7 +23,9 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     protected final int taskDispatcherSize;
 
-    protected final ExecutorService executorService;
+    protected final ExecutorService groupWorkerExecutorService;
+
+    protected final ExecutorService taskDispatcherExecutorService;
 
     protected final StateGroupPool stateGroupPool;
 
@@ -54,11 +57,8 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         this.stateGroupPool = stateGroupPool;
         this.workerCapacity = workerCapacity;
         this.LOCK = new Object();
-        this.executorService = new ThreadPoolExecutor(workerThreadSize + taskDispatcherSize,
-                (workerThreadSize + taskDispatcherSize) * 2,
-                0,
-                TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(10));
+        this.groupWorkerExecutorService = new ThreadPoolExecutor(workerThreadSize, workerThreadSize, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
+        this.taskDispatcherExecutorService = new ThreadPoolExecutor(taskDispatcherSize + 1, taskDispatcherSize + 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(10));
         this.workerMap = this.initWorkerMap();
         this.dispatcherMap = this.initDispatcherMap();
         new AutoTask(removeEmptyWorkerPeriod, 2) {
@@ -149,13 +149,15 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     protected TaskDispatcher findDispatcher(Long groupId) {
         long index;
+
         if (groupId == null) {
+            // 单独的一个处理空groupId的task线程处理，避免干扰其他正常的线程
             index = this.taskDispatcherSize + 1;
         } else {
             index = groupId % this.taskDispatcherSize;
         }
         return this.dispatcherMap.computeIfAbsent(index, (i) -> {
-            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.executorService, this.stateGroupPool) {
+            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.taskDispatcherExecutorService, this.stateGroupPool) {
             };
             taskDispatcher.start();
             return taskDispatcher;
@@ -165,9 +167,8 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     private boolean findGroupInWorker2EnterWithoutGroupId(Task task) {
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         for (StateGroupWorker worker : workerMap.values()) {
-            Iterator<Long> idIterator = worker.stateGroupIdIterator();
-            while (idIterator.hasNext()) {
-                Long id = idIterator.next();
+            Collection<Long> workerIds = worker.stateGroupIdIterator();
+            for (Long id : workerIds) {
                 StateGroup stateGroup = this.stateGroupPool.find(id);
                 if (stateGroup != null && stateGroup.tryEnterGroup(task)) {
                     return true;
@@ -244,7 +245,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
                 this.workerCapacity,
                 this.removeDeposedStateGroupPeriod,
                 this.stateGroupPool,
-                this.executorService) {
+                this.groupWorkerExecutorService) {
         };
     }
 
@@ -270,7 +271,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         if (groupId == null) {
             return false;
         }
-        StateGroup stateGroup = this.stateGroupPool.find(executeTask.getGroupId());
+        StateGroup stateGroup = this.stateGroupPool.find(groupId);
         // this should be enter
         if (stateGroup == null) {
             return false;

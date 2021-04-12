@@ -18,6 +18,8 @@ public interface Character {
 
     String getNickName();
 
+    String getHeadIcon();
+
     void setSession(Session session);
 
     void sendMsg(Object msg);
