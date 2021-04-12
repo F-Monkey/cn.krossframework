@@ -2,7 +2,7 @@ package cn.krossframework.chat.state;
 
 import cn.krossframework.proto.Chat;
 import cn.krossframework.state.AbstractStateData;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 
 import java.util.ArrayList;
 import java.util.List;

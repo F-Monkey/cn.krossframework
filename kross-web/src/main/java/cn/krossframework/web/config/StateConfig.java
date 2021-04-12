@@ -55,7 +55,7 @@ public class StateConfig {
     @Bean
     WorkerManager workerManager(StateGroupPool stateGroupPool) throws Exception {
         return new AbstractWorkerManager(50, 20, 100,
-                2000, 2000, 20, stateGroupPool) {
+                200, 200, 20, stateGroupPool) {
         };
     }
 }

@@ -1,6 +1,8 @@
 package cn.krossframework.websocket;
 
 import cn.krossframework.commons.thread.AutoTask;
+import cn.krossframework.commons.web.Character;
+import cn.krossframework.commons.web.Session;
 import cn.krossframework.state.AbstractStateGroupPool;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;

@@ -45,7 +45,12 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
         this.id = id;
         this.groupIdSet = new ConcurrentSkipListSet<>();
         this.LOCK = new Object();
-        this.thread = new Thread(AbstractStateGroupWorker.this::run);
+        this.thread = new Thread(AbstractStateGroupWorker.this::run){
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
         this.autoTask = new AutoTask(removeDeposedStateGroupPeriod, 2) {
             @Override
             protected void run() {

@@ -1,8 +1,8 @@
 package cn.krossframework.chat.server;
 
 import cn.krossframework.websocket.AbstractCharacterFactory;
-import cn.krossframework.websocket.Character;
-import cn.krossframework.websocket.Session;
+import cn.krossframework.commons.web.Character;
+import cn.krossframework.commons.web.Session;
 import cn.krossframework.websocket.User;
 
 public class ChatterFactor extends AbstractCharacterFactory {

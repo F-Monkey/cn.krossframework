@@ -1,5 +1,7 @@
 package cn.krossframework.websocket;
 
+import cn.krossframework.commons.web.Character;
+import cn.krossframework.commons.web.Session;
 import cn.krossframework.proto.util.CmdUtil;
 import com.google.common.base.Preconditions;
 

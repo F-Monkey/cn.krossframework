@@ -1,5 +1,6 @@
 package cn.krossframework.websocket;
 
+import cn.krossframework.commons.web.Session;
 import com.google.common.base.Preconditions;
 import com.google.protobuf.MessageLite;
 import io.netty.buffer.Unpooled;

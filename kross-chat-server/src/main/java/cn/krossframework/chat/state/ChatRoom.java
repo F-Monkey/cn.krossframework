@@ -1,7 +1,7 @@
 package cn.krossframework.chat.state;
 
 import cn.krossframework.state.*;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 
 public class ChatRoom extends AbstractStateGroup {
 

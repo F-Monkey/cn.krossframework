@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
 
 @SpringBootTest(classes = WebApplication.class)
 @RunWith(SpringRunner.class)
@@ -46,51 +47,72 @@ public class CatTest {
         while ((stateGroup = stateGroupPool.find(groupId)) == null || stateGroup.getCurrentWorkerId() == null) {
 
         }
-
-        new Thread(() -> {
-            for (; ; ) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ignore) {
+        LinkedBlockingQueue<ExecuteTask> executeTasks = new LinkedBlockingQueue<>(3000);
+        for (int i = 0; i < 1000; i++) {
+            executeTasks.offer(walkTask);
+        }
+        for (int i = 0; i < 1000; i++) {
+            executeTasks.offer(sleepTask);
+        }
+        for (int i = 0; i < 1000; i++) {
+            executeTasks.offer(eatTask);
+        }
+        Thread t1 = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted()) {
+                    ExecuteTask poll = executeTasks.poll();
+                    if (poll != null) {
+                        workerManager.addTask(poll);
+                    }
                 }
-                workerManager.addTask(walkTask);
             }
-        }).start();
+        };
 
-        new Thread(() -> {
-            for (; ; ) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ignore) {
+        Thread t2 = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted()) {
+                    ExecuteTask poll = executeTasks.poll();
+                    if (poll != null) {
+                        workerManager.addTask(poll);
+                    }
                 }
-                workerManager.addTask(sleepTask);
             }
-        }).start();
+        };
 
-        new Thread(() -> {
-            for (; ; ) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ignore) {
+        Thread t3 = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted()) {
+                    ExecuteTask poll = executeTasks.poll();
+                    if (poll != null) {
+                        workerManager.addTask(poll);
+                    }
                 }
-                workerManager.addTask(eatTask);
             }
-        }).start();
+        };
 
+        t1.start();
+        t2.start();
+        t3.start();
         try {
-            Thread.sleep(10_000);
+            Thread.sleep(1000);
         } catch (InterruptedException ignore) {
         }
         workerManager.addTask(new ExecuteTask(groupId, new CatTask(1), () -> {
             System.out.println("stop fail");
         }));
+        t1.interrupt();
+        t2.interrupt();
+        t3.interrupt();
     }
 
     @Test
     public void test() throws InterruptedException {
-        for (long i = 1; i < 2000; i++) {
+        for (long i = 1; i < 200; i++) {
             final long groupId = i;
-            Thread.sleep(200);
+            Thread.sleep(10);
             new Thread(() -> this.multiTest(groupId)).start();
         }
         new CountDownLatch(1).await();

@@ -2,7 +2,7 @@ package cn.krossframework.chat.state;
 
 import cn.krossframework.proto.Command;
 import cn.krossframework.state.Task;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 
 public class ChatTask implements Task {
 

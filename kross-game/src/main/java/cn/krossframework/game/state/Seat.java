@@ -1,6 +1,6 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 
 public class Seat {
 

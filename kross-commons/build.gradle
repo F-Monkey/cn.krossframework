@@ -1,4 +1,5 @@
 dependencies {
     implementation rootProject.ext.dependencies["slf4j"]
     implementation rootProject.ext.dependencies["disruptor"]
+    compile rootProject.ext.dependencies["netty"]
 }

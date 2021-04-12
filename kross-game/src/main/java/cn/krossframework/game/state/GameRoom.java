@@ -6,7 +6,7 @@ import cn.krossframework.state.AbstractStateGroup;
 import cn.krossframework.state.StateGroupConfig;
 import cn.krossframework.state.Task;
 import cn.krossframework.state.Time;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 
 public class GameRoom extends AbstractStateGroup {
 
@@ -54,5 +54,19 @@ public class GameRoom extends AbstractStateGroup {
             this.broadCastMsg(character.getId(), GameCmdUtil.enterResult(ResultCode.SUCCESS, "player: " + character.getNickName() + " enter room"));
         }
         return false;
+    }
+
+    public Seat findSeat(Character character) {
+        GameData gameData = (GameData) super.stateData;
+        for (Seat seat : gameData.getSeatList()) {
+            Character existsCharacter = seat.getCharacter();
+            if (existsCharacter == null) {
+                continue;
+            }
+            if (character.getId().equals(existsCharacter.getId())) {
+                return seat;
+            }
+        }
+        return null;
     }
 }

@@ -18,6 +18,8 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     protected final int workerUpdatePeriod;
 
+    protected final int workerSize;
+
     protected final int removeDeposedStateGroupPeriod;
 
     protected final int workerCapacity;
@@ -35,7 +37,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     /**
      * @param workerUpdatePeriod            worker的刷新频率
      * @param workerCapacity                worker内的stateGroup数量
-     * @param workerThreadSize              worker的数量
+     * @param workerSize                    worker的数量
      * @param removeEmptyWorkerPeriod       移除worker的频率
      * @param removeDeposedStateGroupPeriod 移除worker内的失效的stateGroup标记
      * @param taskDispatcherSize            taskDispatcher的数量
@@ -43,7 +45,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
      */
     public AbstractWorkerManager(int workerUpdatePeriod,
                                  int workerCapacity,
-                                 int workerThreadSize,
+                                 int workerSize,
                                  int removeEmptyWorkerPeriod,
                                  int removeDeposedStateGroupPeriod,
                                  int taskDispatcherSize,
@@ -51,6 +53,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         this.workerUpdatePeriod = workerUpdatePeriod;
         this.removeDeposedStateGroupPeriod = removeDeposedStateGroupPeriod;
         this.taskDispatcherSize = taskDispatcherSize;
+        this.workerSize = workerSize;
         this.stateGroupPool = stateGroupPool;
         this.workerCapacity = workerCapacity;
         this.LOCK = new Object();
@@ -69,7 +72,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
     protected ConcurrentHashMap<Long, StateGroupWorker> initWorkerMap() {
-        return new ConcurrentHashMap<>();
+        return new ConcurrentHashMap<>(this.workerSize);
     }
 
     public boolean tryLock() {
@@ -215,7 +218,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             }
         }
 
-        if (this.workerMap.size() > this.workerCapacity) {
+        if (this.workerMap.size() > this.workerSize) {
             return false;
         }
 

@@ -1,8 +1,9 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.state.AbstractState;
-import cn.krossframework.state.StateInfo;
-import cn.krossframework.state.Time;
+import cn.krossframework.proto.CmdType;
+import cn.krossframework.proto.Command;
+import cn.krossframework.state.*;
+import cn.krossframework.commons.web.Character;
 
 public class WaitingState extends AbstractState {
 
@@ -11,6 +12,30 @@ public class WaitingState extends AbstractState {
     @Override
     public String getCode() {
         return CODE;
+    }
+
+    @Override
+    public void handleTask(Time time, Task task) {
+        GameTask gameTask = (GameTask) task;
+        Command.Cmd cmd = gameTask.getCmd();
+        int cmdType = cmd.getCmdType();
+        switch (cmdType) {
+            case CmdType.START_GAME:
+                this.seatStart(gameTask.getCharacter());
+                break;
+            default:
+
+        }
+    }
+
+    private void seatStart(Character character) {
+        GameRoom stateGroup = super.getStateGroup();
+        Seat seat = stateGroup.findSeat(character);
+        if (seat == null) {
+            character.sendMsg(null);
+            return;
+        }
+        seat.setReady(true);
     }
 
     @Override

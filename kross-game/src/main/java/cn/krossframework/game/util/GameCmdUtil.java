@@ -9,7 +9,7 @@ import cn.krossframework.proto.Game;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.StateGroupConfig;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 import com.google.common.collect.ImmutableList;
 
 public class GameCmdUtil {

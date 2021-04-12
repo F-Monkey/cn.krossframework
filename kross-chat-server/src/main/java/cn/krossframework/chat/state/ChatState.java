@@ -6,7 +6,7 @@ import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.AbstractState;
 import cn.krossframework.state.Task;
 import cn.krossframework.state.Time;
-import cn.krossframework.websocket.Character;
+import cn.krossframework.commons.web.Character;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 
