@@ -10,11 +10,6 @@ public interface StateGroup {
     long getId();
 
     /**
-     * init stateGroup data
-     */
-    void init();
-
-    /**
      * get workerId
      *
      * @return workerId

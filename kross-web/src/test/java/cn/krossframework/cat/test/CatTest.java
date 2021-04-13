@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -62,8 +64,12 @@ public class CatTest {
             public void run() {
                 while (!this.isInterrupted()) {
                     ExecuteTask poll = executeTasks.poll();
+
                     if (poll != null) {
                         workerManager.addTask(poll);
+                    } else {
+                        System.out.println("end add task");
+                        this.interrupt();
                     }
                 }
             }
@@ -74,8 +80,12 @@ public class CatTest {
             public void run() {
                 while (!this.isInterrupted()) {
                     ExecuteTask poll = executeTasks.poll();
+
                     if (poll != null) {
                         workerManager.addTask(poll);
+                    } else {
+                        System.out.println("end add task");
+                        this.interrupt();
                     }
                 }
             }
@@ -88,6 +98,9 @@ public class CatTest {
                     ExecuteTask poll = executeTasks.poll();
                     if (poll != null) {
                         workerManager.addTask(poll);
+                    } else {
+                        System.out.println("end add task");
+                        this.interrupt();
                     }
                 }
             }
@@ -97,23 +110,59 @@ public class CatTest {
         t2.start();
         t3.start();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException ignore) {
         }
         workerManager.addTask(new ExecuteTask(groupId, new CatTask(1), () -> {
             System.out.println("stop fail");
         }));
-        t1.interrupt();
-        t2.interrupt();
-        t3.interrupt();
+    }
+
+    static class TaskAddThread extends Thread {
+
+        private final Object Lock = new Object();
+
+        LinkedBlockingQueue<Runnable> task = new LinkedBlockingQueue<>();
+
+
+        void addTask(Runnable task) {
+            this.task.offer(task);
+            synchronized (this.Lock) {
+                this.Lock.notifyAll();
+            }
+        }
+
+        @Override
+        public void run() {
+            while (!this.isInterrupted()) {
+                Runnable poll = task.poll();
+                if (poll != null) {
+                    poll.run();
+                }
+                synchronized (this.Lock) {
+                    try {
+                        this.Lock.wait(20);
+                    } catch (InterruptedException ignore) {
+                    }
+                }
+            }
+        }
     }
 
     @Test
     public void test() throws InterruptedException {
-        for (long i = 1; i < 200; i++) {
+        Map<Long, TaskAddThread> threadMap = new HashMap<>();
+        for (long i = 0; i < 10L; i++) {
+            TaskAddThread taskAddThread = new TaskAddThread();
+            threadMap.put(i, taskAddThread);
+            taskAddThread.start();
+        }
+        for (long i = 1; i <= 2000; i++) {
             final long groupId = i;
-            Thread.sleep(10);
-            new Thread(() -> this.multiTest(groupId)).start();
+            TaskAddThread taskAddThread = threadMap.get(groupId % 10);
+            taskAddThread.addTask(() -> {
+                this.multiTest(groupId);
+            });
         }
         new CountDownLatch(1).await();
     }

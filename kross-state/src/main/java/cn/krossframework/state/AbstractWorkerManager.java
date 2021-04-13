@@ -67,31 +67,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }.start();
     }
 
-    protected ConcurrentHashMap<Long, TaskDispatcher> initDispatcherMap() {
-        return new ConcurrentHashMap<>(this.taskDispatcherSize);
-    }
-
-    protected ConcurrentHashMap<Long, StateGroupWorker> initWorkerMap() {
-        return new ConcurrentHashMap<>(this.workerSize);
-    }
-
-    public boolean tryLock() {
-        synchronized (this.LOCK) {
-            try {
-                this.LOCK.wait();
-                return true;
-            } catch (InterruptedException ignore) {
-                return false;
-            }
-        }
-    }
-
-    public void unlock() {
-        synchronized (this.LOCK) {
-            this.LOCK.notifyAll();
-        }
-    }
-
     public class EnterGroupTask implements Task, Runnable {
 
         private final Long groupId;
@@ -120,6 +95,33 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             return this.failCallBack;
         }
     }
+
+    protected ConcurrentHashMap<Long, TaskDispatcher> initDispatcherMap() {
+        return new ConcurrentHashMap<>(this.taskDispatcherSize);
+    }
+
+    protected ConcurrentHashMap<Long, StateGroupWorker> initWorkerMap() {
+        return new ConcurrentHashMap<>(this.workerSize);
+    }
+
+    public boolean tryLock() {
+        synchronized (this.LOCK) {
+            try {
+                this.LOCK.wait();
+                return true;
+            } catch (InterruptedException ignore) {
+                return false;
+            }
+        }
+    }
+
+    public void unlock() {
+        synchronized (this.LOCK) {
+            this.LOCK.notifyAll();
+        }
+    }
+
+
 
     protected void removeEmptyWorker() {
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
@@ -196,6 +198,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             return false;
         }
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
+
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (!fetchStateGroup.isNew() && currentWorkerId != null) {
             StateGroupWorker worker = workerMap.get(currentWorkerId);
@@ -222,7 +225,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             return false;
         }
 
-        AbstractStateGroupWorker worker = this.createWorker();
+        StateGroupWorker worker = this.createWorker();
         worker.start();
         workerMap.put(worker.getId(), worker);
         worker.tryAddStateGroup(stateGroup);
@@ -245,7 +248,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }
     }
 
-    protected AbstractStateGroupWorker createWorker() {
+    protected StateGroupWorker createWorker() {
         return new AbstractStateGroupWorker(ID_COUNT.incrementAndGet(),
                 this.workerUpdatePeriod,
                 this.workerCapacity,

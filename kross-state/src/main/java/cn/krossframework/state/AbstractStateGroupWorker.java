@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-public abstract class AbstractStateGroupWorker implements StateGroupWorker {
+public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock {
 
     protected static final Logger log = LoggerFactory.getLogger(AbstractStateGroupWorker.class);
 
@@ -45,10 +45,16 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
         this.id = id;
         this.groupIdSet = new ConcurrentSkipListSet<>();
         this.LOCK = new Object();
-        this.thread = new Thread(AbstractStateGroupWorker.this::run){
+        this.thread = new Thread() {
             @Override
             public void run() {
-                super.run();
+                while (!this.isInterrupted()) {
+                    try {
+                        AbstractStateGroupWorker.this.update();
+                    } catch (Exception ignore) {
+                    }
+                    AbstractStateGroupWorker.this.tryLock();
+                }
             }
         };
         this.autoTask = new AutoTask(removeDeposedStateGroupPeriod, 2) {
@@ -59,16 +65,21 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
         };
     }
 
-    protected void run() {
-        for (; ; ) {
-            synchronized (this.LOCK) {
-                try {
-                    this.LOCK.wait(this.period);
-                } catch (InterruptedException ignore) {
-                }
-                this.update();
+    @Override
+    public boolean tryLock() {
+        synchronized (this.LOCK) {
+            try {
+                this.LOCK.wait(this.period);
+                return true;
+            } catch (InterruptedException ignore) {
+                return false;
             }
         }
+    }
+
+    @Override
+    public void unlock() {
+        throw new UnsupportedOperationException();
     }
 
     protected void removeDeposedStateGroup() {
@@ -112,12 +123,14 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker {
 
     @Override
     public void update() {
+        long start = System.currentTimeMillis();
         for (Long id : this.groupIdSet) {
             StateGroup stateGroup = this.stateGroupPool.find(id);
             if (stateGroup != null) {
                 stateGroup.update();
             }
         }
+        log.debug("id: {} update size:{} cost: {} ms", this.id, this.groupIdSet.size(), (System.currentTimeMillis() - start));
     }
 
     @Override

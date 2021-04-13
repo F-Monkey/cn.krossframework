@@ -16,7 +16,6 @@ public class StateConfig {
 
     private static final Logger log = LoggerFactory.getLogger(StateConfig.class);
 
-
     @Bean
     StateGroupPool stateGroupPool() throws Exception {
         DefaultLazyTime defaultLazyTime = new DefaultLazyTime(100);
@@ -54,8 +53,8 @@ public class StateConfig {
 
     @Bean
     WorkerManager workerManager(StateGroupPool stateGroupPool) throws Exception {
-        return new AbstractWorkerManager(50, 20, 100,
-                200, 200, 20, stateGroupPool) {
+        return new AbstractWorkerManager(10, 20, 100,
+                0, 0, 10, stateGroupPool) {
         };
     }
 }

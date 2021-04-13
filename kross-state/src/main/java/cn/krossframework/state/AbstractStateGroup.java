@@ -60,8 +60,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         return this.id;
     }
 
-    @Override
-    public void init() {
+    protected void init() {
         Collection<State> states = this.stateGroupConfig.createStates();
         if (states != null && states.size() > 0) {
             for (State state : states) {
@@ -159,10 +158,10 @@ public abstract class AbstractStateGroup implements StateGroup {
                 nextStateCode = this.currentState.finishOnError(this.time, e);
             }
             try {
-                log.info("try to switch to state: {}", nextStateCode);
+                log.info("id: {} try to switch to state: {}", this.getId(), nextStateCode);
                 this.initAndSetCurrentState(nextStateCode);
             } catch (Exception e) {
-                log.error("{} initAndSetCurrentState error:\n", this.getId(), e);
+                log.error("id: {} initAndSetCurrentState error:\n", this.getId(), e);
                 this.currentState = null;
             }
         }

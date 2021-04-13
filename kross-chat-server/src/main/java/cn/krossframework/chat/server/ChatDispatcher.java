@@ -91,7 +91,7 @@ public class ChatDispatcher implements Dispatcher {
         ChatTask chatTask = new ChatTask(character, cmd);
         this.workerManager.enter(new ExecuteTask(null,
                 chatTask,
-                () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter fail"))));
+                () -> character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room create fail"))));
     }
 
     private void sendMessage(Session session, Command.Cmd cmd) {

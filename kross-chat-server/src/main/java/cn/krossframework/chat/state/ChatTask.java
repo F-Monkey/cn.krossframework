@@ -1,6 +1,7 @@
 package cn.krossframework.chat.state;
 
 import cn.krossframework.proto.Command;
+import cn.krossframework.state.FailCallBack;
 import cn.krossframework.state.Task;
 import cn.krossframework.commons.web.Character;
 
@@ -21,5 +22,10 @@ public class ChatTask implements Task {
 
     public Command.Cmd getCmd() {
         return cmd;
+    }
+
+    @Override
+    public FailCallBack getFailCallBack() {
+        return null;
     }
 }

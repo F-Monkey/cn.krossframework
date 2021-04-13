@@ -17,14 +17,18 @@ public class ChatRoom extends AbstractStateGroup {
         return false;
     }
 
+
+
+
     @Override
     public boolean tryEnterGroup(Task task) {
         if (!super.tryEnterGroup(task)) {
             return false;
         }
-        if(task instanceof ChatTask){
+        if (task instanceof ChatTask) {
             Character character = ((ChatTask) task).getCharacter();
             ((RoomData) super.stateData).addCharacter(character);
+            character.sendMsg("");
             return true;
         }
         return false;

@@ -27,23 +27,23 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     public AbstractTaskDispatcher(long id,
                                   StateGroupPool stateGroupPool) {
         this.id = id;
-        this.thread = new Thread(AbstractTaskDispatcher.this::run);
+        this.thread = new Thread() {
+            @Override
+            public void run() {
+                while (!this.isInterrupted()) {
+                    try {
+                        AbstractTaskDispatcher.this.update();
+                    } catch (Exception e) {
+                        log.error("update error:\n", e);
+                    }
+                    AbstractTaskDispatcher.this.tryLock();
+                }
+            }
+        };
         this.LOCK = new Object();
         this.groupIdTaskQueue = new LinkedBlockingQueue<>();
         this.stateGroupPool = stateGroupPool;
     }
-
-    protected void run() {
-        for (; ; ) {
-            try {
-                this.update();
-            } catch (Exception e) {
-                log.error("update error:\n", e);
-            }
-            this.tryLock();
-        }
-    }
-
 
     @Override
     public long getId() {

@@ -34,7 +34,6 @@ public class Cat extends AbstractStateGroup {
 
     @Override
     public void update() {
-        System.out.println(this.id + " update");
         super.update();
     }
 }
