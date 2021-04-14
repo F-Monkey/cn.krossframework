@@ -52,8 +52,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     @Override
     public void start() {
-        this.isStart = true;
         this.thread.start();
+        this.isStart = true;
     }
 
     @Override
@@ -106,8 +106,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     @Override
     public void stop() {
-        this.thread.interrupt();
         this.isStart = false;
+        this.thread.interrupt();
     }
 
     @Override

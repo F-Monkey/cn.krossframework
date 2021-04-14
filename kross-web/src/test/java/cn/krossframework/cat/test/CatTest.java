@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -49,14 +51,14 @@ public class CatTest {
         while ((stateGroup = stateGroupPool.find(groupId)) == null || stateGroup.getCurrentWorkerId() == null) {
 
         }
-        LinkedBlockingQueue<ExecuteTask> executeTasks = new LinkedBlockingQueue<>(3000);
-        for (int i = 0; i < 1000; i++) {
+        LinkedBlockingQueue<ExecuteTask> executeTasks = new LinkedBlockingQueue<>(300);
+        for (int i = 0; i < 100; i++) {
             executeTasks.offer(walkTask);
         }
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             executeTasks.offer(sleepTask);
         }
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             executeTasks.offer(eatTask);
         }
         Thread t1 = new Thread() {
@@ -110,7 +112,7 @@ public class CatTest {
         t2.start();
         t3.start();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(20000);
         } catch (InterruptedException ignore) {
         }
         workerManager.addTask(new ExecuteTask(groupId, new CatTask(1), () -> {
@@ -122,15 +124,12 @@ public class CatTest {
 
         private final Object Lock = new Object();
 
-        LinkedBlockingQueue<Runnable> task = new LinkedBlockingQueue<>();
+        private final LinkedBlockingQueue<Runnable> task;
 
-
-        void addTask(Runnable task) {
-            this.task.offer(task);
-            synchronized (this.Lock) {
-                this.Lock.notifyAll();
-            }
+        public TaskAddThread(LinkedBlockingQueue<Runnable> taskQueue) {
+            this.task = taskQueue;
         }
+
 
         @Override
         public void run() {
@@ -138,10 +137,12 @@ public class CatTest {
                 Runnable poll = task.poll();
                 if (poll != null) {
                     poll.run();
+                } else {
+                    this.interrupt();
                 }
                 synchronized (this.Lock) {
                     try {
-                        this.Lock.wait(20);
+                        this.Lock.wait(1);
                     } catch (InterruptedException ignore) {
                     }
                 }
@@ -151,19 +152,19 @@ public class CatTest {
 
     @Test
     public void test() throws InterruptedException {
-        Map<Long, TaskAddThread> threadMap = new HashMap<>();
-        for (long i = 0; i < 10L; i++) {
-            TaskAddThread taskAddThread = new TaskAddThread();
-            threadMap.put(i, taskAddThread);
-            taskAddThread.start();
+        LinkedBlockingQueue<Runnable> task = new LinkedBlockingQueue<>(2000);
+        List<TaskAddThread> threadList = new ArrayList<>();
+        for (long i = 0; i < 40L; i++) {
+            threadList.add(new TaskAddThread(task));
         }
         for (long i = 1; i <= 2000; i++) {
-            final long groupId = i;
-            TaskAddThread taskAddThread = threadMap.get(groupId % 10);
-            taskAddThread.addTask(() -> {
-                this.multiTest(groupId);
-            });
+            long groupId = i;
+            task.add(() -> this.multiTest(groupId));
         }
+        for (TaskAddThread t : threadList) {
+            t.start();
+        }
+        System.err.println("task add end");
         new CountDownLatch(1).await();
     }
 }

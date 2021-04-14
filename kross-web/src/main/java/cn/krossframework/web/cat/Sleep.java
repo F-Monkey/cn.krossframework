@@ -34,7 +34,6 @@ public class Sleep extends AbstractState {
         }
 
         this.sleepTime -= 20;
-        System.out.println("sleeping");
         if (this.sleepTime <= 0) {
             stateInfo.isFinished = true;
         }

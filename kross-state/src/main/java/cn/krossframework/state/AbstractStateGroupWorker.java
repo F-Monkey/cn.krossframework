@@ -79,7 +79,9 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
 
     @Override
     public void unlock() {
-        throw new UnsupportedOperationException();
+        synchronized (this.LOCK) {
+            this.LOCK.notifyAll();
+        }
     }
 
     protected void removeDeposedStateGroup() {

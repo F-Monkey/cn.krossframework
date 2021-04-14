@@ -43,7 +43,6 @@ public class Eat extends AbstractState {
             return;
         }
         this.foodCount -= 1;
-        System.out.println("eating");
         if (this.foodCount <= 0) {
             stateInfo.isFinished = true;
         }

@@ -33,7 +33,6 @@ public class Walk extends AbstractState {
             return;
         }
         this.walkDistance -= 10;
-        System.out.println("walking");
         if (this.walkDistance <= 0) {
             stateInfo.isFinished = true;
         }
