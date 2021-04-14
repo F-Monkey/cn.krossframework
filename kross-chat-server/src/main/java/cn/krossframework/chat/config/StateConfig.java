@@ -42,7 +42,7 @@ public class StateConfig {
         return new ChatWorkerManager(
                 this.stateProperty.getWorkerUpdatePeriod(),
                 this.stateProperty.getWorkerCapacity(),
-                this.stateProperty.getWorkerThreadSize(),
+                this.stateProperty.getWorkerSize(),
                 this.stateProperty.getRemoveEmptyWorkerPeriod(),
                 this.stateProperty.getRemoveDeposedStateGroupPeriod(),
                 this.stateProperty.getTaskDispatcherSize(),

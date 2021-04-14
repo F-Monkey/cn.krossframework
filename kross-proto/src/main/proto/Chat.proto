@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cn.krossframework.proto;
+package cn . krossframework. proto;
 
 option optimize_for = SPEED;
 
@@ -13,23 +13,27 @@ message Login {
 }
 
 message LoginResult {
-  string id = 1;
+  string id       = 1;
   string username = 2;
 }
 
+message Stream {
+  string format = 1;
+  bytes Stream  = 2;
+}
 
 message ChatMessage {
   repeated string to = 2;
-  string msg = 3;
-  int32 emoticon = 4;
-  bytes stream = 5;
+  string msg         = 3;
+  int32 emoticon     = 4;
+  Stream stream      = 5;
 }
 
 message ChatMessageResult {
-  string from = 1;
-  bool toAll = 2;
-  repeated string to = 3;
-  ChatMessage chatMessage = 4;
+  string from                  = 1;
+  bool toAll                   = 2;
+  repeated string to           = 3;
+  ChatMessage chatMessage      = 4;
   repeated ChatMessage history = 5;
 }
 

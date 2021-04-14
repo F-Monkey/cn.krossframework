@@ -1,5 +1,7 @@
 package cn.krossframework.chat.state;
 
+import cn.krossframework.chat.cmd.ChatCmdUtil;
+import cn.krossframework.proto.ResultCode;
 import cn.krossframework.state.*;
 import cn.krossframework.commons.web.Character;
 
@@ -17,9 +19,6 @@ public class ChatRoom extends AbstractStateGroup {
         return false;
     }
 
-
-
-
     @Override
     public boolean tryEnterGroup(Task task) {
         if (!super.tryEnterGroup(task)) {
@@ -28,7 +27,7 @@ public class ChatRoom extends AbstractStateGroup {
         if (task instanceof ChatTask) {
             Character character = ((ChatTask) task).getCharacter();
             ((RoomData) super.stateData).addCharacter(character);
-            character.sendMsg("");
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "enter success"));
             return true;
         }
         return false;

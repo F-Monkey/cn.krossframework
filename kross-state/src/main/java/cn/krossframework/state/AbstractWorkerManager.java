@@ -1,11 +1,9 @@
 package cn.krossframework.state;
 
 import cn.krossframework.commons.thread.AutoTask;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -67,32 +65,17 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }.start();
     }
 
-    public class EnterGroupTask implements Task, Runnable {
-
-        private final Long groupId;
-
-        private final Task task;
-
-        private final FailCallBack failCallBack;
+    public class EnterGroupTask extends ExecuteTask implements Runnable {
 
         public EnterGroupTask(Long groupId,
                               Task task,
                               FailCallBack failCallBack) {
-            Preconditions.checkNotNull(task);
-            this.groupId = groupId;
-            this.task = task;
-            this.failCallBack = failCallBack;
+            super(groupId, task, failCallBack);
         }
 
         @Override
         public void run() {
-            AbstractWorkerManager.this.findBestGroup2Enter(this.groupId, this.task, this.failCallBack);
-        }
-
-        @Nullable
-        @Override
-        public FailCallBack getFailCallBack() {
-            return this.failCallBack;
+            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), super.getTask(), super.getFailCallBack());
         }
     }
 

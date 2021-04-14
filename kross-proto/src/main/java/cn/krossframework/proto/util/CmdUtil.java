@@ -37,9 +37,9 @@ public class CmdUtil {
         return builder.build();
     }
 
-    public static Command.PackageGroup packageGroup(Command.Package... pkgs) {
+    public static Command.PackageGroup packageGroup(Command.Package... packages) {
         Command.PackageGroup.Builder builder = Command.PackageGroup.newBuilder();
-        for (Command.Package pkg : pkgs) {
+        for (Command.Package pkg : packages) {
             builder.addPackages(pkg);
         }
         return builder.build();

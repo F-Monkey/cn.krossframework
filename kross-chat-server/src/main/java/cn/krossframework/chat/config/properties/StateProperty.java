@@ -9,7 +9,7 @@ public class StateProperty {
 
     private int workerUpdatePeriod;
     private int workerCapacity;
-    private int workerThreadSize;
+    private int workerSize;
     private int removeEmptyWorkerPeriod;
     private int removeDeposedStateGroupPeriod;
     private int taskDispatcherSize;
@@ -30,16 +30,16 @@ public class StateProperty {
         this.workerCapacity = workerCapacity;
     }
 
-    public int getWorkerThreadSize() {
-        return workerThreadSize;
-    }
-
-    public void setWorkerThreadSize(int workerThreadSize) {
-        this.workerThreadSize = workerThreadSize;
-    }
-
     public int getRemoveEmptyWorkerPeriod() {
         return removeEmptyWorkerPeriod;
+    }
+
+    public void setWorkerSize(int workerSize) {
+        this.workerSize = workerSize;
+    }
+
+    public int getWorkerSize() {
+        return workerSize;
     }
 
     public void setRemoveEmptyWorkerPeriod(int removeEmptyWorkerPeriod) {
