@@ -122,7 +122,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
 
-
     protected void removeEmptyWorker() {
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
         workerMap.entrySet().removeIf(e -> {
@@ -158,17 +157,19 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         long index;
 
         if (groupId == null) {
-            // 单独的一个处理空groupId的task线程处理，避免干扰其他正常的线程
+            // 单独的一个处理空groupId的worker线程处理，避免干扰其他正常的线程
             index = this.taskDispatcherSize + 1;
         } else {
             index = groupId % this.taskDispatcherSize;
         }
-        return this.dispatcherMap.computeIfAbsent(index, (i) -> {
-            TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(i, this.stateGroupPool) {
-            };
-            taskDispatcher.start();
-            return taskDispatcher;
-        });
+        return this.dispatcherMap.computeIfAbsent(index, (i) -> this.createDispatcher(i, this.stateGroupPool));
+    }
+
+    protected TaskDispatcher createDispatcher(long id, StateGroupPool stateGroupPool) {
+        TaskDispatcher taskDispatcher = new AbstractTaskDispatcher(id, stateGroupPool) {
+        };
+        taskDispatcher.start();
+        return taskDispatcher;
     }
 
     private boolean findGroupInWorker2EnterWithoutGroupId(Task task) {
@@ -188,9 +189,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     private boolean findGroup2Enter(Long groupId, Task task) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupId);
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
-        if (stateGroup == null) {
-            return false;
-        }
         if (stateGroup.canDeposed()) {
             return false;
         }
@@ -221,7 +219,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             }
         }
 
-        if (this.workerMap.size() > this.workerSize) {
+        if (this.workerMap.size() >= this.workerSize) {
             return false;
         }
 

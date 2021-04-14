@@ -32,8 +32,6 @@ public interface StateGroupPool {
 
     void removeDeposedStateGroup();
 
-    long getNextGroupId();
-
     FetchStateGroup findOrCreate(Long id);
 
     StateGroup find(long id);

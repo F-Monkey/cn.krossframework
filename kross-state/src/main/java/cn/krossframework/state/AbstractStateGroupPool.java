@@ -75,8 +75,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         log.info("end remove deposed stateGroup, current size: {}", this.stateGroupMap.size());
     }
 
-    @Override
-    public long getNextGroupId() {
+    protected long getNextGroupId() {
         Long id;
         return (id = this.groupIdRecycleQueue.poll()) == null ? ID_COUNT.incrementAndGet() : id;
     }
