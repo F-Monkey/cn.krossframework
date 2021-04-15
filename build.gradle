@@ -8,13 +8,13 @@ apply from: "config.gradle"
 
 allprojects {
     apply plugin: 'idea'
-    apply plugin: 'java'
-
     group = 'cn.krossframework'
     version = '0.0.1'
 }
 
 subprojects {
+
+    apply plugin: 'java'
 
     sourceCompatibility = '1.8'
     [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
