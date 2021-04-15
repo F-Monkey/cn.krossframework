@@ -9,9 +9,6 @@ public class TimeTest {
     @Test
     public void test() throws InterruptedException {
         Time time = new DefaultLazyTime(100);
-        for (; ; ) {
-            Thread.sleep(1000);
-            System.out.println(time.getCurrentTimeMillis());
-        }
+
     }
 }

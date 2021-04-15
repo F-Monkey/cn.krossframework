@@ -169,6 +169,6 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     @Override
     public boolean canDeposed() {
-        return this.currentState == null || DefaultErrorState.CODE.equals(this.currentState.getCode());
+        return (this.currentState == null || DefaultErrorState.CODE.equals(this.currentState.getCode())) && this.getStateData().isEmpty();
     }
 }

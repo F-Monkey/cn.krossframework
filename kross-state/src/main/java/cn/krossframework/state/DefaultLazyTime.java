@@ -22,9 +22,7 @@ public class DefaultLazyTime implements Time {
     }
 
     private void refreshTime() {
-        this.scheduledExecutorService.scheduleAtFixedRate(() -> {
-            this.currentTime = System.currentTimeMillis();
-        }, 0, this.period, TimeUnit.MICROSECONDS);
+        this.scheduledExecutorService.scheduleAtFixedRate(() -> this.currentTime = System.currentTimeMillis(), 0, this.period, TimeUnit.MICROSECONDS);
     }
 
     @Override

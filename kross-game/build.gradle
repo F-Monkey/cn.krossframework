@@ -1,3 +1,12 @@
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'cn.krossframework.game.GameApplication'
+    }
+}
+
 dependencies {
     compile project(":kross-state")
     compile project(":kross-commons")
