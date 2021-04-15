@@ -32,4 +32,9 @@ public class ChatRoom extends AbstractStateGroup {
         }
         return false;
     }
+
+    @Override
+    public boolean canDeposed() {
+        return super.canDeposed() && this.stateData.isFull();
+    }
 }

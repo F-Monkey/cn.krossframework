@@ -70,6 +70,7 @@ public class ChatDispatcher implements Dispatcher {
                 default:
                     log.error("invalid cmdType:{}", cmdType);
                     session.send(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd", cmdType, null));
+                    break;
             }
         } finally {
             lock.unlock();
@@ -78,16 +79,6 @@ public class ChatDispatcher implements Dispatcher {
 
     private void createRoom(Session session, Command.Cmd cmd) {
         Character character = session.getAttribute(Character.KEY);
-        ByteString content = cmd.getContent();
-        int cmdType = cmd.getCmdType();
-        Chat.CreateRoom createRoom;
-        try {
-            createRoom = Chat.CreateRoom.parseFrom(content);
-        } catch (InvalidProtocolBufferException e) {
-            log.error("createRoom parse error");
-            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid content", cmdType, null)));
-            return;
-        }
         ChatTask chatTask = new ChatTask(character, cmd);
         this.workerManager.enter(new ExecuteTask(null,
                 chatTask,
