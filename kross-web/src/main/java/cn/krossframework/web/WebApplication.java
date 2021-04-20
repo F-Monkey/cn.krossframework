@@ -9,28 +9,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
-@RestController
-public class WebApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
-    }
+import java.util.HashMap;
+import java.util.Map;
 
-    private final WorkerManager workerManager;
+@SpringBootApplication @RestController public class WebApplication {
 
-    public WebApplication(WorkerManager workerManager) {
-        this.workerManager = workerManager;
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(WebApplication.class, args);
+	}
 
-    @RequestMapping({"/addCat/{id}", "/addCat"})
-    public void addCat(@PathVariable(value = "id", required = false) Long id) {
-        this.workerManager.enter(new ExecuteTask(id, new CatTask(0), null));
-    }
+	private final WorkerManager workerManager;
 
-    @RequestMapping("/killCat/{id}")
-    public void killCat(@PathVariable("id") Long id) {
-        this.workerManager.addTask(new ExecuteTask(id, new CatTask(1), () -> {
-            System.out.println("kill cat fail:" + id);
-        }));
-    }
+	public WebApplication(WorkerManager workerManager) {
+		this.workerManager = workerManager;
+	}
+
+	@RequestMapping({ "/addCat/{id}", "/addCat" })
+	public void addCat(@PathVariable(value = "id", required = false) Long id) {
+		this.workerManager.enter(new ExecuteTask(id, new CatTask(0), null));
+	}
+
+	@RequestMapping("/killCat/{id}") public void killCat(@PathVariable("id") Long id) {
+		this.workerManager.addTask(new ExecuteTask(id, new CatTask(1), () -> {
+			System.out.println("kill cat fail:" + id);
+		}));
+	}
 }

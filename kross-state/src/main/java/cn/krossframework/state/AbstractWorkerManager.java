@@ -179,7 +179,6 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
             return false;
         }
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
-
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (!fetchStateGroup.isNew() && currentWorkerId != null) {
             StateGroupWorker worker = workerMap.get(currentWorkerId);
