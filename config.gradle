@@ -4,7 +4,6 @@ ext {
             springboot    : "2.2.4.RELEASE",
             protobuf      : "3.15.2",
             protobufPlugin: "0.8.12",
-            protoc        : "3.15.5",
             guava         : "29.0-jre",
             slf4j         : "1.7.30",
             netty         : "4.1.42.Final",
@@ -12,14 +11,6 @@ ext {
             mockito       : "1.10.19",
             disruptor     : "3.4.2",
     ]
-
-    protoc = [
-            "artifact": "com.google.protobuf:protoc:${version.protoc}"
-    ] as LinkedHashMap
-
-    plugins = [
-            "protobuf": "com.google.protobuf:protobuf-gradle-plugin:${version.protobufPlugin}"
-    ] as LinkedHashMap
 
     dependencies = [
             "spring-boot-starter"           : "org.springframework.boot:spring-boot-starter:${version.springboot}",
