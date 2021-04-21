@@ -1,6 +1,7 @@
 package cn.krossframework.proto.util;
 
 import cn.krossframework.proto.CmdType;
+import cn.krossframework.proto.Command;
 import cn.krossframework.proto.ResultCode;
 import com.google.common.base.Strings;
 import com.google.protobuf.ByteString;
