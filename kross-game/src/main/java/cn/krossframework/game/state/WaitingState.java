@@ -3,7 +3,7 @@ package cn.krossframework.game.state;
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
 import cn.krossframework.state.*;
-import cn.krossframework.commons.web.Character;
+import cn.krossframework.websocket.Character;
 
 public class WaitingState extends AbstractState {
 

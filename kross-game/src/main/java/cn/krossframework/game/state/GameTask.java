@@ -3,7 +3,7 @@ package cn.krossframework.game.state;
 import cn.krossframework.proto.Command;
 import cn.krossframework.state.FailCallBack;
 import cn.krossframework.state.Task;
-import cn.krossframework.commons.web.Character;
+import cn.krossframework.websocket.Character;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nullable;

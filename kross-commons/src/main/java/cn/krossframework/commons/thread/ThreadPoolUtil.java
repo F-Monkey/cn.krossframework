@@ -9,7 +9,7 @@ public class ThreadPoolUtil {
      * Each tasks blocks 90% of the time, and works only 10% of its
      * lifetime. That is, I/O intensive pool
      *
-     * @return io intesive Thread pool size
+     * @return io intensive Thread pool size
      */
     public static int ioIntensivePoolSize() {
 

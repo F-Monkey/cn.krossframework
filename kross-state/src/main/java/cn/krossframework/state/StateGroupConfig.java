@@ -5,32 +5,31 @@ import java.util.Collections;
 
 public interface StateGroupConfig {
 
-    default String getStartState() {
-        return "";
-    }
+	String getStartState();
 
-    default boolean autoUpdate() {
-        return false;
-    }
+	default boolean autoUpdate() {
+		return false;
+	}
 
-    default int updatePeriod() {
-        return 0;
-    }
+	default int updatePeriod() {
+		return 0;
+	}
 
-    /**
-     * return new States
-     *
-     * @return
-     */
-    default Collection<State> createStates() {
-        return Collections.emptyList();
-    }
+	/**
+	 * return new States
+	 *
+	 * @return
+	 */
+	default Collection<State> createStates() {
+		return Collections.emptyList();
+	}
 
-    /**
-     * @return return new StateData
-     */
-    default StateData createStateData() {
-        return new AbstractStateData() {
-        };
-    }
+	/**
+	 * @return return new StateData
+	 */
+	default StateData createStateData() {
+		return new AbstractStateData() {
+
+		};
+	}
 }

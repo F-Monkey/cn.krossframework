@@ -6,7 +6,7 @@ import cn.krossframework.state.AbstractStateGroup;
 import cn.krossframework.state.StateGroupConfig;
 import cn.krossframework.state.Task;
 import cn.krossframework.state.Time;
-import cn.krossframework.commons.web.Character;
+import cn.krossframework.websocket.Character;
 
 public class GameRoom extends AbstractStateGroup {
 

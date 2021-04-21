@@ -1,4 +1,4 @@
-package cn.krossframework.commons.web;
+package cn.krossframework.websocket;
 
 import io.netty.util.AttributeKey;
 

@@ -1,6 +1,5 @@
 package cn.krossframework.web.cat;
 
-import cn.krossframework.commons.web.Character;
 import cn.krossframework.state.FailCallBack;
 import cn.krossframework.state.Task;
 
@@ -9,10 +8,6 @@ public class CatTask implements Task {
 
     public CatTask(int cmd) {
         this.cmd = cmd;
-    }
-
-    public Character getCharacter() {
-        return null;
     }
 
     public int getCmd() {

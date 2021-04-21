@@ -125,14 +125,12 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
 
     @Override
     public void update() {
-        long start = System.currentTimeMillis();
         for (Long id : this.groupIdSet) {
             StateGroup stateGroup = this.stateGroupPool.find(id);
             if (stateGroup != null) {
                 stateGroup.update();
             }
         }
-        log.debug("id: {} update size:{} cost: {} ms", this.id, this.groupIdSet.size(), (System.currentTimeMillis() - start));
     }
 
     @Override
@@ -148,8 +146,8 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
             return false;
         }
         this.currentAddStateGroup = stateGroup;
-        stateGroup.setCurrentWorkerId(this.id);
         this.groupIdSet.add(stateGroup.getId());
+        stateGroup.setCurrentWorkerId(this.id);
         this.currentAddStateGroup = null;
         return true;
     }
