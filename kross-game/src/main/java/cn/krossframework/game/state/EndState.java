@@ -1,9 +1,9 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.state.AbstractState;
-import cn.krossframework.state.StateInfo;
+import cn.krossframework.state.data.AbstractState;
+import cn.krossframework.state.data.StateInfo;
 import cn.krossframework.state.Task;
-import cn.krossframework.state.Time;
+import cn.krossframework.state.util.Time;
 
 public class EndState extends AbstractState {
 

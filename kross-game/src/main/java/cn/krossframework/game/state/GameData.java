@@ -1,6 +1,6 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.state.AbstractStateData;
+import cn.krossframework.state.data.AbstractStateData;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;

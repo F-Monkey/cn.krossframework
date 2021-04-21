@@ -1,5 +1,7 @@
-package cn.krossframework.state;
+package cn.krossframework.state.data;
 
+import cn.krossframework.state.Task;
+import cn.krossframework.state.util.FailCallBack;
 import com.google.common.base.Preconditions;
 
 public class ExecuteTask implements Task {

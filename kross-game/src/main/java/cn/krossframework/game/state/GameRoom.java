@@ -3,9 +3,9 @@ package cn.krossframework.game.state;
 import cn.krossframework.game.util.GameCmdUtil;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.state.AbstractStateGroup;
-import cn.krossframework.state.StateGroupConfig;
+import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.Task;
-import cn.krossframework.state.Time;
+import cn.krossframework.state.util.Time;
 import cn.krossframework.websocket.Character;
 
 public class GameRoom extends AbstractStateGroup {

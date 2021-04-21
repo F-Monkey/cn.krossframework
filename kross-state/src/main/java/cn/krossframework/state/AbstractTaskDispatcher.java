@@ -1,5 +1,8 @@
 package cn.krossframework.state;
 
+import cn.krossframework.state.data.ExecuteTask;
+import cn.krossframework.state.util.FailCallBack;
+import cn.krossframework.state.util.Lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,10 +1,13 @@
 package cn.krossframework.state;
 
 import cn.krossframework.commons.thread.AutoTask;
+import cn.krossframework.state.data.ExecuteTask;
+import cn.krossframework.state.util.FailCallBack;
+import cn.krossframework.state.config.StateGroupConfig;
+import cn.krossframework.state.util.Lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 

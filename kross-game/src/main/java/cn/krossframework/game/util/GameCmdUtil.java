@@ -8,7 +8,7 @@ import cn.krossframework.proto.Command;
 import cn.krossframework.proto.Game;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
-import cn.krossframework.state.StateGroupConfig;
+import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.websocket.Character;
 import com.google.common.collect.ImmutableList;
 

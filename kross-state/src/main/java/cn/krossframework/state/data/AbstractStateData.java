@@ -1,4 +1,6 @@
-package cn.krossframework.state;
+package cn.krossframework.state.data;
+
+import cn.krossframework.state.data.StateData;
 
 public abstract class AbstractStateData implements StateData {
 

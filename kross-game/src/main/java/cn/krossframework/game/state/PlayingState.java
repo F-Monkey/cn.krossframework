@@ -2,6 +2,9 @@ package cn.krossframework.game.state;
 
 import cn.krossframework.game.util.GameCmdUtil;
 import cn.krossframework.state.*;
+import cn.krossframework.state.data.AbstractState;
+import cn.krossframework.state.data.StateInfo;
+import cn.krossframework.state.util.Time;
 
 public class PlayingState extends AbstractState {
 

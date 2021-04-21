@@ -1,4 +1,4 @@
-package cn.krossframework.state;
+package cn.krossframework.state.util;
 
 public interface Lock {
 

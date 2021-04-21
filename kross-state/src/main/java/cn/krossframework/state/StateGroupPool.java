@@ -1,5 +1,6 @@
 package cn.krossframework.state;
 
+import cn.krossframework.state.config.StateGroupConfig;
 import com.google.common.base.Preconditions;
 
 public interface StateGroupPool {

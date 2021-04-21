@@ -1,5 +1,7 @@
 package cn.krossframework.state;
 
+import cn.krossframework.state.config.StateGroupConfig;
+import cn.krossframework.state.util.Time;
 import com.google.common.base.Preconditions;
 
 public class DefaultStateGroupFactory implements StateGroupFactory {

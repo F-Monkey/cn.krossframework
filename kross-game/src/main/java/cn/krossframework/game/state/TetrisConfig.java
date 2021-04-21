@@ -1,11 +1,16 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.state.StateData;
-import cn.krossframework.state.StateGroupConfig;
+import cn.krossframework.state.data.StateData;
+import cn.krossframework.state.config.StateGroupConfig;
 
 import java.util.ArrayList;
 
 public class TetrisConfig implements StateGroupConfig {
+
+    @Override
+    public String getId() {
+        return null;
+    }
 
     @Override
     public String getStartState() {

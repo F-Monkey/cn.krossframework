@@ -1,4 +1,4 @@
-package cn.krossframework.state;
+package cn.krossframework.state.data;
 
 public interface StateData {
     void setGroupId(long groupId);
