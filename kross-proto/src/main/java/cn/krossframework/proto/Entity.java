@@ -19,37 +19,43 @@ public final class Entity {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string id = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The id.
      */
     java.lang.String getId();
     /**
-     * <code>optional string id = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     com.google.protobuf.ByteString
         getIdBytes();
 
     /**
-     * <code>optional string nickName = 2;</code>
+     * <code>string nickName = 2;</code>
+     * @return The nickName.
      */
     java.lang.String getNickName();
     /**
-     * <code>optional string nickName = 2;</code>
+     * <code>string nickName = 2;</code>
+     * @return The bytes for nickName.
      */
     com.google.protobuf.ByteString
         getNickNameBytes();
 
     /**
-     * <code>optional bool isOnline = 3;</code>
+     * <code>bool isOnline = 3;</code>
+     * @return The isOnline.
      */
     boolean getIsOnline();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.Character}
    */
-  public  static final class Character extends
+  public static final class Character extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.Character)
       CharacterOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Character.newBuilder() to construct.
     private Character(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -57,20 +63,30 @@ public final class Entity {
     private Character() {
       id_ = "";
       nickName_ = "";
-      isOnline_ = false;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Character();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Character(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -79,12 +95,6 @@ public final class Entity {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -102,6 +112,13 @@ public final class Entity {
               isOnline_ = input.readBool();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -110,6 +127,7 @@ public final class Entity {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -118,6 +136,7 @@ public final class Entity {
       return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_Character_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_Character_fieldAccessorTable
@@ -128,8 +147,10 @@ public final class Entity {
     public static final int ID_FIELD_NUMBER = 1;
     private volatile java.lang.Object id_;
     /**
-     * <code>optional string id = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The id.
      */
+    @java.lang.Override
     public java.lang.String getId() {
       java.lang.Object ref = id_;
       if (ref instanceof java.lang.String) {
@@ -143,8 +164,10 @@ public final class Entity {
       }
     }
     /**
-     * <code>optional string id = 1;</code>
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getIdBytes() {
       java.lang.Object ref = id_;
@@ -162,8 +185,10 @@ public final class Entity {
     public static final int NICKNAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object nickName_;
     /**
-     * <code>optional string nickName = 2;</code>
+     * <code>string nickName = 2;</code>
+     * @return The nickName.
      */
+    @java.lang.Override
     public java.lang.String getNickName() {
       java.lang.Object ref = nickName_;
       if (ref instanceof java.lang.String) {
@@ -177,8 +202,10 @@ public final class Entity {
       }
     }
     /**
-     * <code>optional string nickName = 2;</code>
+     * <code>string nickName = 2;</code>
+     * @return The bytes for nickName.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getNickNameBytes() {
       java.lang.Object ref = nickName_;
@@ -196,13 +223,16 @@ public final class Entity {
     public static final int ISONLINE_FIELD_NUMBER = 3;
     private boolean isOnline_;
     /**
-     * <code>optional bool isOnline = 3;</code>
+     * <code>bool isOnline = 3;</code>
+     * @return The isOnline.
      */
+    @java.lang.Override
     public boolean getIsOnline() {
       return isOnline_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -212,6 +242,7 @@ public final class Entity {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getIdBytes().isEmpty()) {
@@ -223,8 +254,10 @@ public final class Entity {
       if (isOnline_ != false) {
         output.writeBool(3, isOnline_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -240,11 +273,11 @@ public final class Entity {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, isOnline_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -255,14 +288,14 @@ public final class Entity {
       }
       cn.krossframework.proto.Entity.Character other = (cn.krossframework.proto.Entity.Character) obj;
 
-      boolean result = true;
-      result = result && getId()
-          .equals(other.getId());
-      result = result && getNickName()
-          .equals(other.getNickName());
-      result = result && (getIsOnline()
-          == other.getIsOnline());
-      return result;
+      if (!getId()
+          .equals(other.getId())) return false;
+      if (!getNickName()
+          .equals(other.getNickName())) return false;
+      if (getIsOnline()
+          != other.getIsOnline()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -271,7 +304,7 @@ public final class Entity {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
       hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
@@ -284,6 +317,17 @@ public final class Entity {
       return hash;
     }
 
+    public static cn.krossframework.proto.Entity.Character parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Entity.Character parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Entity.Character parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -343,6 +387,7 @@ public final class Entity {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -350,6 +395,7 @@ public final class Entity {
     public static Builder newBuilder(cn.krossframework.proto.Entity.Character prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -373,6 +419,7 @@ public final class Entity {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_Character_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_Character_fieldAccessorTable
@@ -395,6 +442,7 @@ public final class Entity {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         id_ = "";
@@ -406,15 +454,18 @@ public final class Entity {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_Character_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.Character getDefaultInstanceForType() {
         return cn.krossframework.proto.Entity.Character.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.Character build() {
         cn.krossframework.proto.Entity.Character result = buildPartial();
         if (!result.isInitialized()) {
@@ -423,6 +474,7 @@ public final class Entity {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.Character buildPartial() {
         cn.krossframework.proto.Entity.Character result = new cn.krossframework.proto.Entity.Character(this);
         result.id_ = id_;
@@ -432,32 +484,39 @@ public final class Entity {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Entity.Character) {
           return mergeFrom((cn.krossframework.proto.Entity.Character)other);
@@ -480,14 +539,17 @@ public final class Entity {
         if (other.getIsOnline() != false) {
           setIsOnline(other.getIsOnline());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -508,7 +570,8 @@ public final class Entity {
 
       private java.lang.Object id_ = "";
       /**
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
+       * @return The id.
        */
       public java.lang.String getId() {
         java.lang.Object ref = id_;
@@ -523,7 +586,8 @@ public final class Entity {
         }
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
+       * @return The bytes for id.
        */
       public com.google.protobuf.ByteString
           getIdBytes() {
@@ -539,7 +603,9 @@ public final class Entity {
         }
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
        */
       public Builder setId(
           java.lang.String value) {
@@ -552,7 +618,8 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearId() {
         
@@ -561,7 +628,9 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
+       * @param value The bytes for id to set.
+       * @return This builder for chaining.
        */
       public Builder setIdBytes(
           com.google.protobuf.ByteString value) {
@@ -577,7 +646,8 @@ public final class Entity {
 
       private java.lang.Object nickName_ = "";
       /**
-       * <code>optional string nickName = 2;</code>
+       * <code>string nickName = 2;</code>
+       * @return The nickName.
        */
       public java.lang.String getNickName() {
         java.lang.Object ref = nickName_;
@@ -592,7 +662,8 @@ public final class Entity {
         }
       }
       /**
-       * <code>optional string nickName = 2;</code>
+       * <code>string nickName = 2;</code>
+       * @return The bytes for nickName.
        */
       public com.google.protobuf.ByteString
           getNickNameBytes() {
@@ -608,7 +679,9 @@ public final class Entity {
         }
       }
       /**
-       * <code>optional string nickName = 2;</code>
+       * <code>string nickName = 2;</code>
+       * @param value The nickName to set.
+       * @return This builder for chaining.
        */
       public Builder setNickName(
           java.lang.String value) {
@@ -621,7 +694,8 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional string nickName = 2;</code>
+       * <code>string nickName = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearNickName() {
         
@@ -630,7 +704,9 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional string nickName = 2;</code>
+       * <code>string nickName = 2;</code>
+       * @param value The bytes for nickName to set.
+       * @return This builder for chaining.
        */
       public Builder setNickNameBytes(
           com.google.protobuf.ByteString value) {
@@ -646,13 +722,17 @@ public final class Entity {
 
       private boolean isOnline_ ;
       /**
-       * <code>optional bool isOnline = 3;</code>
+       * <code>bool isOnline = 3;</code>
+       * @return The isOnline.
        */
+      @java.lang.Override
       public boolean getIsOnline() {
         return isOnline_;
       }
       /**
-       * <code>optional bool isOnline = 3;</code>
+       * <code>bool isOnline = 3;</code>
+       * @param value The isOnline to set.
+       * @return This builder for chaining.
        */
       public Builder setIsOnline(boolean value) {
         
@@ -661,7 +741,8 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional bool isOnline = 3;</code>
+       * <code>bool isOnline = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearIsOnline() {
         
@@ -669,14 +750,16 @@ public final class Entity {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -695,11 +778,12 @@ public final class Entity {
 
     private static final com.google.protobuf.Parser<Character>
         PARSER = new com.google.protobuf.AbstractParser<Character>() {
+      @java.lang.Override
       public Character parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Character(input, extensionRegistry);
+        return new Character(input, extensionRegistry);
       }
     };
 
@@ -712,6 +796,7 @@ public final class Entity {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Entity.Character getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -723,7 +808,8 @@ public final class Entity {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 roomId = 1;</code>
+     * <code>int64 roomId = 1;</code>
+     * @return The roomId.
      */
     long getRoomId();
 
@@ -754,30 +840,42 @@ public final class Entity {
   /**
    * Protobuf type {@code cn.krossframework.proto.RoomData}
    */
-  public  static final class RoomData extends
+  public static final class RoomData extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.RoomData)
       RoomDataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RoomData.newBuilder() to construct.
     private RoomData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private RoomData() {
-      roomId_ = 0L;
       characters_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new RoomData();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private RoomData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -786,24 +884,25 @@ public final class Entity {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               roomId_ = input.readInt64();
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 characters_ = new java.util.ArrayList<cn.krossframework.proto.Entity.Character>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               characters_.add(
                   input.readMessage(cn.krossframework.proto.Entity.Character.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -814,9 +913,10 @@ public final class Entity {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           characters_ = java.util.Collections.unmodifiableList(characters_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -825,6 +925,7 @@ public final class Entity {
       return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_RoomData_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_RoomData_fieldAccessorTable
@@ -832,12 +933,13 @@ public final class Entity {
               cn.krossframework.proto.Entity.RoomData.class, cn.krossframework.proto.Entity.RoomData.Builder.class);
     }
 
-    private int bitField0_;
     public static final int ROOMID_FIELD_NUMBER = 1;
     private long roomId_;
     /**
-     * <code>optional int64 roomId = 1;</code>
+     * <code>int64 roomId = 1;</code>
+     * @return The roomId.
      */
+    @java.lang.Override
     public long getRoomId() {
       return roomId_;
     }
@@ -847,12 +949,14 @@ public final class Entity {
     /**
      * <code>repeated .cn.krossframework.proto.Character characters = 2;</code>
      */
+    @java.lang.Override
     public java.util.List<cn.krossframework.proto.Entity.Character> getCharactersList() {
       return characters_;
     }
     /**
      * <code>repeated .cn.krossframework.proto.Character characters = 2;</code>
      */
+    @java.lang.Override
     public java.util.List<? extends cn.krossframework.proto.Entity.CharacterOrBuilder> 
         getCharactersOrBuilderList() {
       return characters_;
@@ -860,24 +964,28 @@ public final class Entity {
     /**
      * <code>repeated .cn.krossframework.proto.Character characters = 2;</code>
      */
+    @java.lang.Override
     public int getCharactersCount() {
       return characters_.size();
     }
     /**
      * <code>repeated .cn.krossframework.proto.Character characters = 2;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Entity.Character getCharacters(int index) {
       return characters_.get(index);
     }
     /**
      * <code>repeated .cn.krossframework.proto.Character characters = 2;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Entity.CharacterOrBuilder getCharactersOrBuilder(
         int index) {
       return characters_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -887,6 +995,7 @@ public final class Entity {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (roomId_ != 0L) {
@@ -895,8 +1004,10 @@ public final class Entity {
       for (int i = 0; i < characters_.size(); i++) {
         output.writeMessage(2, characters_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -910,11 +1021,11 @@ public final class Entity {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, characters_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -925,12 +1036,12 @@ public final class Entity {
       }
       cn.krossframework.proto.Entity.RoomData other = (cn.krossframework.proto.Entity.RoomData) obj;
 
-      boolean result = true;
-      result = result && (getRoomId()
-          == other.getRoomId());
-      result = result && getCharactersList()
-          .equals(other.getCharactersList());
-      return result;
+      if (getRoomId()
+          != other.getRoomId()) return false;
+      if (!getCharactersList()
+          .equals(other.getCharactersList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -939,7 +1050,7 @@ public final class Entity {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ROOMID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getRoomId());
@@ -952,6 +1063,17 @@ public final class Entity {
       return hash;
     }
 
+    public static cn.krossframework.proto.Entity.RoomData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Entity.RoomData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Entity.RoomData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1011,6 +1133,7 @@ public final class Entity {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1018,6 +1141,7 @@ public final class Entity {
     public static Builder newBuilder(cn.krossframework.proto.Entity.RoomData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1041,6 +1165,7 @@ public final class Entity {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_RoomData_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_RoomData_fieldAccessorTable
@@ -1064,28 +1189,32 @@ public final class Entity {
           getCharactersFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         roomId_ = 0L;
 
         if (charactersBuilder_ == null) {
           characters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           charactersBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Entity.internal_static_cn_krossframework_proto_RoomData_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.RoomData getDefaultInstanceForType() {
         return cn.krossframework.proto.Entity.RoomData.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.RoomData build() {
         cn.krossframework.proto.Entity.RoomData result = buildPartial();
         if (!result.isInitialized()) {
@@ -1094,51 +1223,57 @@ public final class Entity {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Entity.RoomData buildPartial() {
         cn.krossframework.proto.Entity.RoomData result = new cn.krossframework.proto.Entity.RoomData(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.roomId_ = roomId_;
         if (charactersBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             characters_ = java.util.Collections.unmodifiableList(characters_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.characters_ = characters_;
         } else {
           result.characters_ = charactersBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Entity.RoomData) {
           return mergeFrom((cn.krossframework.proto.Entity.RoomData)other);
@@ -1157,7 +1292,7 @@ public final class Entity {
           if (!other.characters_.isEmpty()) {
             if (characters_.isEmpty()) {
               characters_ = other.characters_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureCharactersIsMutable();
               characters_.addAll(other.characters_);
@@ -1170,7 +1305,7 @@ public final class Entity {
               charactersBuilder_.dispose();
               charactersBuilder_ = null;
               characters_ = other.characters_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               charactersBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getCharactersFieldBuilder() : null;
@@ -1179,14 +1314,17 @@ public final class Entity {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1208,13 +1346,17 @@ public final class Entity {
 
       private long roomId_ ;
       /**
-       * <code>optional int64 roomId = 1;</code>
+       * <code>int64 roomId = 1;</code>
+       * @return The roomId.
        */
+      @java.lang.Override
       public long getRoomId() {
         return roomId_;
       }
       /**
-       * <code>optional int64 roomId = 1;</code>
+       * <code>int64 roomId = 1;</code>
+       * @param value The roomId to set.
+       * @return This builder for chaining.
        */
       public Builder setRoomId(long value) {
         
@@ -1223,7 +1365,8 @@ public final class Entity {
         return this;
       }
       /**
-       * <code>optional int64 roomId = 1;</code>
+       * <code>int64 roomId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearRoomId() {
         
@@ -1235,9 +1378,9 @@ public final class Entity {
       private java.util.List<cn.krossframework.proto.Entity.Character> characters_ =
         java.util.Collections.emptyList();
       private void ensureCharactersIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           characters_ = new java.util.ArrayList<cn.krossframework.proto.Entity.Character>(characters_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -1387,7 +1530,7 @@ public final class Entity {
       public Builder clearCharacters() {
         if (charactersBuilder_ == null) {
           characters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           charactersBuilder_.clear();
@@ -1464,21 +1607,23 @@ public final class Entity {
           charactersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               cn.krossframework.proto.Entity.Character, cn.krossframework.proto.Entity.Character.Builder, cn.krossframework.proto.Entity.CharacterOrBuilder>(
                   characters_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           characters_ = null;
         }
         return charactersBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1497,11 +1642,12 @@ public final class Entity {
 
     private static final com.google.protobuf.Parser<RoomData>
         PARSER = new com.google.protobuf.AbstractParser<RoomData>() {
+      @java.lang.Override
       public RoomData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new RoomData(input, extensionRegistry);
+        return new RoomData(input, extensionRegistry);
       }
     };
 
@@ -1514,6 +1660,7 @@ public final class Entity {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Entity.RoomData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1546,18 +1693,10 @@ public final class Entity {
       "ramework.proto.CharacterB\nB\006EntityH\001b\006pr" +
       "oto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_cn_krossframework_proto_Character_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_cn_krossframework_proto_Character_fieldAccessorTable = new

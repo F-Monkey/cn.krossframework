@@ -19,36 +19,48 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 fallTime = 1;</code>
+     * <code>int32 fallTime = 1;</code>
+     * @return The fallTime.
      */
     int getFallTime();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.TetrisConfig}
    */
-  public  static final class TetrisConfig extends
+  public static final class TetrisConfig extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.TetrisConfig)
       TetrisConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TetrisConfig.newBuilder() to construct.
     private TetrisConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private TetrisConfig() {
-      fallTime_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TetrisConfig();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TetrisConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -57,15 +69,16 @@ public final class Game {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               fallTime_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -76,6 +89,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -84,6 +98,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable
@@ -94,13 +109,16 @@ public final class Game {
     public static final int FALLTIME_FIELD_NUMBER = 1;
     private int fallTime_;
     /**
-     * <code>optional int32 fallTime = 1;</code>
+     * <code>int32 fallTime = 1;</code>
+     * @return The fallTime.
      */
+    @java.lang.Override
     public int getFallTime() {
       return fallTime_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -110,13 +128,16 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (fallTime_ != 0) {
         output.writeInt32(1, fallTime_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -126,11 +147,11 @@ public final class Game {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, fallTime_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -141,10 +162,10 @@ public final class Game {
       }
       cn.krossframework.proto.Game.TetrisConfig other = (cn.krossframework.proto.Game.TetrisConfig) obj;
 
-      boolean result = true;
-      result = result && (getFallTime()
-          == other.getFallTime());
-      return result;
+      if (getFallTime()
+          != other.getFallTime()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -153,7 +174,7 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + FALLTIME_FIELD_NUMBER;
       hash = (53 * hash) + getFallTime();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -161,6 +182,17 @@ public final class Game {
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.TetrisConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -220,6 +252,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -227,6 +260,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.TetrisConfig prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -250,6 +284,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable
@@ -272,6 +307,7 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         fallTime_ = 0;
@@ -279,15 +315,18 @@ public final class Game {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisConfig_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisConfig getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisConfig build() {
         cn.krossframework.proto.Game.TetrisConfig result = buildPartial();
         if (!result.isInitialized()) {
@@ -296,6 +335,7 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisConfig buildPartial() {
         cn.krossframework.proto.Game.TetrisConfig result = new cn.krossframework.proto.Game.TetrisConfig(this);
         result.fallTime_ = fallTime_;
@@ -303,32 +343,39 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.TetrisConfig) {
           return mergeFrom((cn.krossframework.proto.Game.TetrisConfig)other);
@@ -343,14 +390,17 @@ public final class Game {
         if (other.getFallTime() != 0) {
           setFallTime(other.getFallTime());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -371,13 +421,17 @@ public final class Game {
 
       private int fallTime_ ;
       /**
-       * <code>optional int32 fallTime = 1;</code>
+       * <code>int32 fallTime = 1;</code>
+       * @return The fallTime.
        */
+      @java.lang.Override
       public int getFallTime() {
         return fallTime_;
       }
       /**
-       * <code>optional int32 fallTime = 1;</code>
+       * <code>int32 fallTime = 1;</code>
+       * @param value The fallTime to set.
+       * @return This builder for chaining.
        */
       public Builder setFallTime(int value) {
         
@@ -386,7 +440,8 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional int32 fallTime = 1;</code>
+       * <code>int32 fallTime = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearFallTime() {
         
@@ -394,14 +449,16 @@ public final class Game {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -420,11 +477,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<TetrisConfig>
         PARSER = new com.google.protobuf.AbstractParser<TetrisConfig>() {
+      @java.lang.Override
       public TetrisConfig parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TetrisConfig(input, extensionRegistry);
+        return new TetrisConfig(input, extensionRegistry);
       }
     };
 
@@ -437,6 +495,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisConfig getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -448,31 +507,37 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string uid = 1;</code>
+     * <code>string uid = 1;</code>
+     * @return The uid.
      */
     java.lang.String getUid();
     /**
-     * <code>optional string uid = 1;</code>
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
      */
     com.google.protobuf.ByteString
         getUidBytes();
 
     /**
-     * <code>optional string nickname = 2;</code>
+     * <code>string nickname = 2;</code>
+     * @return The nickname.
      */
     java.lang.String getNickname();
     /**
-     * <code>optional string nickname = 2;</code>
+     * <code>string nickname = 2;</code>
+     * @return The bytes for nickname.
      */
     com.google.protobuf.ByteString
         getNicknameBytes();
 
     /**
-     * <code>optional string headIcon = 3;</code>
+     * <code>string headIcon = 3;</code>
+     * @return The headIcon.
      */
     java.lang.String getHeadIcon();
     /**
-     * <code>optional string headIcon = 3;</code>
+     * <code>string headIcon = 3;</code>
+     * @return The bytes for headIcon.
      */
     com.google.protobuf.ByteString
         getHeadIconBytes();
@@ -480,10 +545,11 @@ public final class Game {
   /**
    * Protobuf type {@code cn.krossframework.proto.Player}
    */
-  public  static final class Player extends
+  public static final class Player extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.Player)
       PlayerOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Player.newBuilder() to construct.
     private Player(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -495,16 +561,27 @@ public final class Game {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Player();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Player(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -513,12 +590,6 @@ public final class Game {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -537,6 +608,13 @@ public final class Game {
               headIcon_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -545,6 +623,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -553,6 +632,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Player_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Player_fieldAccessorTable
@@ -563,8 +643,10 @@ public final class Game {
     public static final int UID_FIELD_NUMBER = 1;
     private volatile java.lang.Object uid_;
     /**
-     * <code>optional string uid = 1;</code>
+     * <code>string uid = 1;</code>
+     * @return The uid.
      */
+    @java.lang.Override
     public java.lang.String getUid() {
       java.lang.Object ref = uid_;
       if (ref instanceof java.lang.String) {
@@ -578,8 +660,10 @@ public final class Game {
       }
     }
     /**
-     * <code>optional string uid = 1;</code>
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getUidBytes() {
       java.lang.Object ref = uid_;
@@ -597,8 +681,10 @@ public final class Game {
     public static final int NICKNAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object nickname_;
     /**
-     * <code>optional string nickname = 2;</code>
+     * <code>string nickname = 2;</code>
+     * @return The nickname.
      */
+    @java.lang.Override
     public java.lang.String getNickname() {
       java.lang.Object ref = nickname_;
       if (ref instanceof java.lang.String) {
@@ -612,8 +698,10 @@ public final class Game {
       }
     }
     /**
-     * <code>optional string nickname = 2;</code>
+     * <code>string nickname = 2;</code>
+     * @return The bytes for nickname.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getNicknameBytes() {
       java.lang.Object ref = nickname_;
@@ -631,8 +719,10 @@ public final class Game {
     public static final int HEADICON_FIELD_NUMBER = 3;
     private volatile java.lang.Object headIcon_;
     /**
-     * <code>optional string headIcon = 3;</code>
+     * <code>string headIcon = 3;</code>
+     * @return The headIcon.
      */
+    @java.lang.Override
     public java.lang.String getHeadIcon() {
       java.lang.Object ref = headIcon_;
       if (ref instanceof java.lang.String) {
@@ -646,8 +736,10 @@ public final class Game {
       }
     }
     /**
-     * <code>optional string headIcon = 3;</code>
+     * <code>string headIcon = 3;</code>
+     * @return The bytes for headIcon.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getHeadIconBytes() {
       java.lang.Object ref = headIcon_;
@@ -663,6 +755,7 @@ public final class Game {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -672,6 +765,7 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getUidBytes().isEmpty()) {
@@ -683,8 +777,10 @@ public final class Game {
       if (!getHeadIconBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, headIcon_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -699,11 +795,11 @@ public final class Game {
       if (!getHeadIconBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, headIcon_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -714,14 +810,14 @@ public final class Game {
       }
       cn.krossframework.proto.Game.Player other = (cn.krossframework.proto.Game.Player) obj;
 
-      boolean result = true;
-      result = result && getUid()
-          .equals(other.getUid());
-      result = result && getNickname()
-          .equals(other.getNickname());
-      result = result && getHeadIcon()
-          .equals(other.getHeadIcon());
-      return result;
+      if (!getUid()
+          .equals(other.getUid())) return false;
+      if (!getNickname()
+          .equals(other.getNickname())) return false;
+      if (!getHeadIcon()
+          .equals(other.getHeadIcon())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -730,7 +826,7 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + UID_FIELD_NUMBER;
       hash = (53 * hash) + getUid().hashCode();
       hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
@@ -742,6 +838,17 @@ public final class Game {
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.Player parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.Player parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.Player parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -801,6 +908,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -808,6 +916,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.Player prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -831,6 +940,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Player_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Player_fieldAccessorTable
@@ -853,6 +963,7 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         uid_ = "";
@@ -864,15 +975,18 @@ public final class Game {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Player_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Player getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.Player.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Player build() {
         cn.krossframework.proto.Game.Player result = buildPartial();
         if (!result.isInitialized()) {
@@ -881,6 +995,7 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Player buildPartial() {
         cn.krossframework.proto.Game.Player result = new cn.krossframework.proto.Game.Player(this);
         result.uid_ = uid_;
@@ -890,32 +1005,39 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.Player) {
           return mergeFrom((cn.krossframework.proto.Game.Player)other);
@@ -939,14 +1061,17 @@ public final class Game {
           headIcon_ = other.headIcon_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -967,7 +1092,8 @@ public final class Game {
 
       private java.lang.Object uid_ = "";
       /**
-       * <code>optional string uid = 1;</code>
+       * <code>string uid = 1;</code>
+       * @return The uid.
        */
       public java.lang.String getUid() {
         java.lang.Object ref = uid_;
@@ -982,7 +1108,8 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string uid = 1;</code>
+       * <code>string uid = 1;</code>
+       * @return The bytes for uid.
        */
       public com.google.protobuf.ByteString
           getUidBytes() {
@@ -998,7 +1125,9 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string uid = 1;</code>
+       * <code>string uid = 1;</code>
+       * @param value The uid to set.
+       * @return This builder for chaining.
        */
       public Builder setUid(
           java.lang.String value) {
@@ -1011,7 +1140,8 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string uid = 1;</code>
+       * <code>string uid = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUid() {
         
@@ -1020,7 +1150,9 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string uid = 1;</code>
+       * <code>string uid = 1;</code>
+       * @param value The bytes for uid to set.
+       * @return This builder for chaining.
        */
       public Builder setUidBytes(
           com.google.protobuf.ByteString value) {
@@ -1036,7 +1168,8 @@ public final class Game {
 
       private java.lang.Object nickname_ = "";
       /**
-       * <code>optional string nickname = 2;</code>
+       * <code>string nickname = 2;</code>
+       * @return The nickname.
        */
       public java.lang.String getNickname() {
         java.lang.Object ref = nickname_;
@@ -1051,7 +1184,8 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string nickname = 2;</code>
+       * <code>string nickname = 2;</code>
+       * @return The bytes for nickname.
        */
       public com.google.protobuf.ByteString
           getNicknameBytes() {
@@ -1067,7 +1201,9 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string nickname = 2;</code>
+       * <code>string nickname = 2;</code>
+       * @param value The nickname to set.
+       * @return This builder for chaining.
        */
       public Builder setNickname(
           java.lang.String value) {
@@ -1080,7 +1216,8 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string nickname = 2;</code>
+       * <code>string nickname = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearNickname() {
         
@@ -1089,7 +1226,9 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string nickname = 2;</code>
+       * <code>string nickname = 2;</code>
+       * @param value The bytes for nickname to set.
+       * @return This builder for chaining.
        */
       public Builder setNicknameBytes(
           com.google.protobuf.ByteString value) {
@@ -1105,7 +1244,8 @@ public final class Game {
 
       private java.lang.Object headIcon_ = "";
       /**
-       * <code>optional string headIcon = 3;</code>
+       * <code>string headIcon = 3;</code>
+       * @return The headIcon.
        */
       public java.lang.String getHeadIcon() {
         java.lang.Object ref = headIcon_;
@@ -1120,7 +1260,8 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string headIcon = 3;</code>
+       * <code>string headIcon = 3;</code>
+       * @return The bytes for headIcon.
        */
       public com.google.protobuf.ByteString
           getHeadIconBytes() {
@@ -1136,7 +1277,9 @@ public final class Game {
         }
       }
       /**
-       * <code>optional string headIcon = 3;</code>
+       * <code>string headIcon = 3;</code>
+       * @param value The headIcon to set.
+       * @return This builder for chaining.
        */
       public Builder setHeadIcon(
           java.lang.String value) {
@@ -1149,7 +1292,8 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string headIcon = 3;</code>
+       * <code>string headIcon = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearHeadIcon() {
         
@@ -1158,7 +1302,9 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional string headIcon = 3;</code>
+       * <code>string headIcon = 3;</code>
+       * @param value The bytes for headIcon to set.
+       * @return This builder for chaining.
        */
       public Builder setHeadIconBytes(
           com.google.protobuf.ByteString value) {
@@ -1171,14 +1317,16 @@ public final class Game {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1197,11 +1345,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<Player>
         PARSER = new com.google.protobuf.AbstractParser<Player>() {
+      @java.lang.Override
       public Player parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Player(input, extensionRegistry);
+        return new Player(input, extensionRegistry);
       }
     };
 
@@ -1214,6 +1363,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.Player getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1225,49 +1375,63 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 score = 1;</code>
+     * <code>int32 score = 1;</code>
+     * @return The score.
      */
     int getScore();
 
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
+     * @return Whether the player field is set.
      */
     boolean hasPlayer();
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
+     * @return The player.
      */
     cn.krossframework.proto.Game.Player getPlayer();
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
      */
     cn.krossframework.proto.Game.PlayerOrBuilder getPlayerOrBuilder();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.TetrisSeatData}
    */
-  public  static final class TetrisSeatData extends
+  public static final class TetrisSeatData extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.TetrisSeatData)
       TetrisSeatDataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TetrisSeatData.newBuilder() to construct.
     private TetrisSeatData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private TetrisSeatData() {
-      score_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TetrisSeatData();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TetrisSeatData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1276,12 +1440,6 @@ public final class Game {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               score_ = input.readInt32();
@@ -1300,6 +1458,13 @@ public final class Game {
 
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1308,6 +1473,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1316,6 +1482,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisSeatData_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisSeatData_fieldAccessorTable
@@ -1326,8 +1493,10 @@ public final class Game {
     public static final int SCORE_FIELD_NUMBER = 1;
     private int score_;
     /**
-     * <code>optional int32 score = 1;</code>
+     * <code>int32 score = 1;</code>
+     * @return The score.
      */
+    @java.lang.Override
     public int getScore() {
       return score_;
     }
@@ -1335,25 +1504,31 @@ public final class Game {
     public static final int PLAYER_FIELD_NUMBER = 2;
     private cn.krossframework.proto.Game.Player player_;
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
+     * @return Whether the player field is set.
      */
+    @java.lang.Override
     public boolean hasPlayer() {
       return player_ != null;
     }
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
+     * @return The player.
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.Player getPlayer() {
       return player_ == null ? cn.krossframework.proto.Game.Player.getDefaultInstance() : player_;
     }
     /**
-     * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+     * <code>.cn.krossframework.proto.Player player = 2;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.PlayerOrBuilder getPlayerOrBuilder() {
       return getPlayer();
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1363,6 +1538,7 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (score_ != 0) {
@@ -1371,8 +1547,10 @@ public final class Game {
       if (player_ != null) {
         output.writeMessage(2, getPlayer());
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1386,11 +1564,11 @@ public final class Game {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getPlayer());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1401,15 +1579,15 @@ public final class Game {
       }
       cn.krossframework.proto.Game.TetrisSeatData other = (cn.krossframework.proto.Game.TetrisSeatData) obj;
 
-      boolean result = true;
-      result = result && (getScore()
-          == other.getScore());
-      result = result && (hasPlayer() == other.hasPlayer());
+      if (getScore()
+          != other.getScore()) return false;
+      if (hasPlayer() != other.hasPlayer()) return false;
       if (hasPlayer()) {
-        result = result && getPlayer()
-            .equals(other.getPlayer());
+        if (!getPlayer()
+            .equals(other.getPlayer())) return false;
       }
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -1418,7 +1596,7 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + SCORE_FIELD_NUMBER;
       hash = (53 * hash) + getScore();
       if (hasPlayer()) {
@@ -1430,6 +1608,17 @@ public final class Game {
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.TetrisSeatData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.TetrisSeatData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.TetrisSeatData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1489,6 +1678,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1496,6 +1686,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.TetrisSeatData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1519,6 +1710,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisSeatData_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisSeatData_fieldAccessorTable
@@ -1541,6 +1733,7 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         score_ = 0;
@@ -1554,15 +1747,18 @@ public final class Game {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisSeatData_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisSeatData getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.TetrisSeatData.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisSeatData build() {
         cn.krossframework.proto.Game.TetrisSeatData result = buildPartial();
         if (!result.isInitialized()) {
@@ -1571,6 +1767,7 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisSeatData buildPartial() {
         cn.krossframework.proto.Game.TetrisSeatData result = new cn.krossframework.proto.Game.TetrisSeatData(this);
         result.score_ = score_;
@@ -1583,32 +1780,39 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.TetrisSeatData) {
           return mergeFrom((cn.krossframework.proto.Game.TetrisSeatData)other);
@@ -1626,14 +1830,17 @@ public final class Game {
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1654,13 +1861,17 @@ public final class Game {
 
       private int score_ ;
       /**
-       * <code>optional int32 score = 1;</code>
+       * <code>int32 score = 1;</code>
+       * @return The score.
        */
+      @java.lang.Override
       public int getScore() {
         return score_;
       }
       /**
-       * <code>optional int32 score = 1;</code>
+       * <code>int32 score = 1;</code>
+       * @param value The score to set.
+       * @return This builder for chaining.
        */
       public Builder setScore(int value) {
         
@@ -1669,7 +1880,8 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional int32 score = 1;</code>
+       * <code>int32 score = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearScore() {
         
@@ -1678,17 +1890,19 @@ public final class Game {
         return this;
       }
 
-      private cn.krossframework.proto.Game.Player player_ = null;
+      private cn.krossframework.proto.Game.Player player_;
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.Player, cn.krossframework.proto.Game.Player.Builder, cn.krossframework.proto.Game.PlayerOrBuilder> playerBuilder_;
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
+       * @return Whether the player field is set.
        */
       public boolean hasPlayer() {
         return playerBuilder_ != null || player_ != null;
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
+       * @return The player.
        */
       public cn.krossframework.proto.Game.Player getPlayer() {
         if (playerBuilder_ == null) {
@@ -1698,7 +1912,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public Builder setPlayer(cn.krossframework.proto.Game.Player value) {
         if (playerBuilder_ == null) {
@@ -1714,7 +1928,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public Builder setPlayer(
           cn.krossframework.proto.Game.Player.Builder builderForValue) {
@@ -1728,7 +1942,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public Builder mergePlayer(cn.krossframework.proto.Game.Player value) {
         if (playerBuilder_ == null) {
@@ -1746,7 +1960,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public Builder clearPlayer() {
         if (playerBuilder_ == null) {
@@ -1760,7 +1974,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public cn.krossframework.proto.Game.Player.Builder getPlayerBuilder() {
         
@@ -1768,7 +1982,7 @@ public final class Game {
         return getPlayerFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       public cn.krossframework.proto.Game.PlayerOrBuilder getPlayerOrBuilder() {
         if (playerBuilder_ != null) {
@@ -1779,7 +1993,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.Player player = 2;</code>
+       * <code>.cn.krossframework.proto.Player player = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.Player, cn.krossframework.proto.Game.Player.Builder, cn.krossframework.proto.Game.PlayerOrBuilder> 
@@ -1794,14 +2008,16 @@ public final class Game {
         }
         return playerBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -1820,11 +2036,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<TetrisSeatData>
         PARSER = new com.google.protobuf.AbstractParser<TetrisSeatData>() {
+      @java.lang.Override
       public TetrisSeatData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TetrisSeatData(input, extensionRegistry);
+        return new TetrisSeatData(input, extensionRegistry);
       }
     };
 
@@ -1837,6 +2054,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisSeatData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1874,10 +2092,11 @@ public final class Game {
   /**
    * Protobuf type {@code cn.krossframework.proto.TetrisRoomData}
    */
-  public  static final class TetrisRoomData extends
+  public static final class TetrisRoomData extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.TetrisRoomData)
       TetrisRoomDataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use TetrisRoomData.newBuilder() to construct.
     private TetrisRoomData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1887,16 +2106,28 @@ public final class Game {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TetrisRoomData();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private TetrisRoomData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -1905,19 +2136,20 @@ public final class Game {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 tetrisSeatDataList_ = new java.util.ArrayList<cn.krossframework.proto.Game.TetrisSeatData>();
                 mutable_bitField0_ |= 0x00000001;
               }
               tetrisSeatDataList_.add(
                   input.readMessage(cn.krossframework.proto.Game.TetrisSeatData.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -1928,9 +2160,10 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           tetrisSeatDataList_ = java.util.Collections.unmodifiableList(tetrisSeatDataList_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -1939,6 +2172,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisRoomData_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisRoomData_fieldAccessorTable
@@ -1951,12 +2185,14 @@ public final class Game {
     /**
      * <code>repeated .cn.krossframework.proto.TetrisSeatData tetrisSeatDataList = 1;</code>
      */
+    @java.lang.Override
     public java.util.List<cn.krossframework.proto.Game.TetrisSeatData> getTetrisSeatDataListList() {
       return tetrisSeatDataList_;
     }
     /**
      * <code>repeated .cn.krossframework.proto.TetrisSeatData tetrisSeatDataList = 1;</code>
      */
+    @java.lang.Override
     public java.util.List<? extends cn.krossframework.proto.Game.TetrisSeatDataOrBuilder> 
         getTetrisSeatDataListOrBuilderList() {
       return tetrisSeatDataList_;
@@ -1964,24 +2200,28 @@ public final class Game {
     /**
      * <code>repeated .cn.krossframework.proto.TetrisSeatData tetrisSeatDataList = 1;</code>
      */
+    @java.lang.Override
     public int getTetrisSeatDataListCount() {
       return tetrisSeatDataList_.size();
     }
     /**
      * <code>repeated .cn.krossframework.proto.TetrisSeatData tetrisSeatDataList = 1;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisSeatData getTetrisSeatDataList(int index) {
       return tetrisSeatDataList_.get(index);
     }
     /**
      * <code>repeated .cn.krossframework.proto.TetrisSeatData tetrisSeatDataList = 1;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisSeatDataOrBuilder getTetrisSeatDataListOrBuilder(
         int index) {
       return tetrisSeatDataList_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1991,13 +2231,16 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < tetrisSeatDataList_.size(); i++) {
         output.writeMessage(1, tetrisSeatDataList_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2007,11 +2250,11 @@ public final class Game {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, tetrisSeatDataList_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2022,10 +2265,10 @@ public final class Game {
       }
       cn.krossframework.proto.Game.TetrisRoomData other = (cn.krossframework.proto.Game.TetrisRoomData) obj;
 
-      boolean result = true;
-      result = result && getTetrisSeatDataListList()
-          .equals(other.getTetrisSeatDataListList());
-      return result;
+      if (!getTetrisSeatDataListList()
+          .equals(other.getTetrisSeatDataListList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -2034,7 +2277,7 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getTetrisSeatDataListCount() > 0) {
         hash = (37 * hash) + TETRISSEATDATALIST_FIELD_NUMBER;
         hash = (53 * hash) + getTetrisSeatDataListList().hashCode();
@@ -2044,6 +2287,17 @@ public final class Game {
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.TetrisRoomData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.TetrisRoomData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.TetrisRoomData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2103,6 +2357,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2110,6 +2365,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.TetrisRoomData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2133,6 +2389,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisRoomData_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisRoomData_fieldAccessorTable
@@ -2156,6 +2413,7 @@ public final class Game {
           getTetrisSeatDataListFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (tetrisSeatDataListBuilder_ == null) {
@@ -2167,15 +2425,18 @@ public final class Game {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_TetrisRoomData_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisRoomData getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.TetrisRoomData.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisRoomData build() {
         cn.krossframework.proto.Game.TetrisRoomData result = buildPartial();
         if (!result.isInitialized()) {
@@ -2184,11 +2445,12 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.TetrisRoomData buildPartial() {
         cn.krossframework.proto.Game.TetrisRoomData result = new cn.krossframework.proto.Game.TetrisRoomData(this);
         int from_bitField0_ = bitField0_;
         if (tetrisSeatDataListBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             tetrisSeatDataList_ = java.util.Collections.unmodifiableList(tetrisSeatDataList_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -2200,32 +2462,39 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.TetrisRoomData) {
           return mergeFrom((cn.krossframework.proto.Game.TetrisRoomData)other);
@@ -2263,14 +2532,17 @@ public final class Game {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2293,7 +2565,7 @@ public final class Game {
       private java.util.List<cn.krossframework.proto.Game.TetrisSeatData> tetrisSeatDataList_ =
         java.util.Collections.emptyList();
       private void ensureTetrisSeatDataListIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           tetrisSeatDataList_ = new java.util.ArrayList<cn.krossframework.proto.Game.TetrisSeatData>(tetrisSeatDataList_);
           bitField0_ |= 0x00000001;
          }
@@ -2522,21 +2794,23 @@ public final class Game {
           tetrisSeatDataListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               cn.krossframework.proto.Game.TetrisSeatData, cn.krossframework.proto.Game.TetrisSeatData.Builder, cn.krossframework.proto.Game.TetrisSeatDataOrBuilder>(
                   tetrisSeatDataList_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           tetrisSeatDataList_ = null;
         }
         return tetrisSeatDataListBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2555,11 +2829,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<TetrisRoomData>
         PARSER = new com.google.protobuf.AbstractParser<TetrisRoomData>() {
+      @java.lang.Override
       public TetrisRoomData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TetrisRoomData(input, extensionRegistry);
+        return new TetrisRoomData(input, extensionRegistry);
       }
     };
 
@@ -2572,6 +2847,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisRoomData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2583,38 +2859,43 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * @return Whether the tetrisConfig field is set.
      */
     boolean hasTetrisConfig();
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * @return The tetrisConfig.
      */
     cn.krossframework.proto.Game.TetrisConfig getTetrisConfig();
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
      */
     cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder();
 
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * @return Whether the tetrisRoomData field is set.
      */
     boolean hasTetrisRoomData();
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * @return The tetrisRoomData.
      */
     cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData();
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
      */
     cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder();
   }
   /**
    * Protobuf type {@code cn.krossframework.proto.StartGame}
    */
-  public  static final class StartGame extends
+  public static final class StartGame extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.StartGame)
       StartGameOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use StartGame.newBuilder() to construct.
     private StartGame(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2623,16 +2904,27 @@ public final class Game {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new StartGame();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private StartGame(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2641,12 +2933,6 @@ public final class Game {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               cn.krossframework.proto.Game.TetrisConfig.Builder subBuilder = null;
               if (tetrisConfig_ != null) {
@@ -2673,6 +2959,13 @@ public final class Game {
 
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2681,6 +2974,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2689,6 +2983,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable
@@ -2699,20 +2994,25 @@ public final class Game {
     public static final int TETRISCONFIG_FIELD_NUMBER = 1;
     private cn.krossframework.proto.Game.TetrisConfig tetrisConfig_;
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * @return Whether the tetrisConfig field is set.
      */
+    @java.lang.Override
     public boolean hasTetrisConfig() {
       return tetrisConfig_ != null;
     }
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * @return The tetrisConfig.
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisConfig getTetrisConfig() {
       return tetrisConfig_ == null ? cn.krossframework.proto.Game.TetrisConfig.getDefaultInstance() : tetrisConfig_;
     }
     /**
-     * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+     * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder() {
       return getTetrisConfig();
     }
@@ -2720,25 +3020,31 @@ public final class Game {
     public static final int TETRISROOMDATA_FIELD_NUMBER = 2;
     private cn.krossframework.proto.Game.TetrisRoomData tetrisRoomData_;
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * @return Whether the tetrisRoomData field is set.
      */
+    @java.lang.Override
     public boolean hasTetrisRoomData() {
       return tetrisRoomData_ != null;
     }
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * @return The tetrisRoomData.
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData() {
       return tetrisRoomData_ == null ? cn.krossframework.proto.Game.TetrisRoomData.getDefaultInstance() : tetrisRoomData_;
     }
     /**
-     * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+     * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
      */
+    @java.lang.Override
     public cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder() {
       return getTetrisRoomData();
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2748,6 +3054,7 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (tetrisConfig_ != null) {
@@ -2756,8 +3063,10 @@ public final class Game {
       if (tetrisRoomData_ != null) {
         output.writeMessage(2, getTetrisRoomData());
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2771,11 +3080,11 @@ public final class Game {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getTetrisRoomData());
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2786,18 +3095,18 @@ public final class Game {
       }
       cn.krossframework.proto.Game.StartGame other = (cn.krossframework.proto.Game.StartGame) obj;
 
-      boolean result = true;
-      result = result && (hasTetrisConfig() == other.hasTetrisConfig());
+      if (hasTetrisConfig() != other.hasTetrisConfig()) return false;
       if (hasTetrisConfig()) {
-        result = result && getTetrisConfig()
-            .equals(other.getTetrisConfig());
+        if (!getTetrisConfig()
+            .equals(other.getTetrisConfig())) return false;
       }
-      result = result && (hasTetrisRoomData() == other.hasTetrisRoomData());
+      if (hasTetrisRoomData() != other.hasTetrisRoomData()) return false;
       if (hasTetrisRoomData()) {
-        result = result && getTetrisRoomData()
-            .equals(other.getTetrisRoomData());
+        if (!getTetrisRoomData()
+            .equals(other.getTetrisRoomData())) return false;
       }
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -2806,7 +3115,7 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasTetrisConfig()) {
         hash = (37 * hash) + TETRISCONFIG_FIELD_NUMBER;
         hash = (53 * hash) + getTetrisConfig().hashCode();
@@ -2820,6 +3129,17 @@ public final class Game {
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.StartGame parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.StartGame parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2879,6 +3199,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2886,6 +3207,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.StartGame prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2909,6 +3231,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_fieldAccessorTable
@@ -2931,6 +3254,7 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (tetrisConfigBuilder_ == null) {
@@ -2948,15 +3272,18 @@ public final class Game {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_StartGame_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.StartGame getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.StartGame.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.StartGame build() {
         cn.krossframework.proto.Game.StartGame result = buildPartial();
         if (!result.isInitialized()) {
@@ -2965,6 +3292,7 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.StartGame buildPartial() {
         cn.krossframework.proto.Game.StartGame result = new cn.krossframework.proto.Game.StartGame(this);
         if (tetrisConfigBuilder_ == null) {
@@ -2981,32 +3309,39 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.StartGame) {
           return mergeFrom((cn.krossframework.proto.Game.StartGame)other);
@@ -3024,14 +3359,17 @@ public final class Game {
         if (other.hasTetrisRoomData()) {
           mergeTetrisRoomData(other.getTetrisRoomData());
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3050,17 +3388,19 @@ public final class Game {
         return this;
       }
 
-      private cn.krossframework.proto.Game.TetrisConfig tetrisConfig_ = null;
+      private cn.krossframework.proto.Game.TetrisConfig tetrisConfig_;
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.TetrisConfig, cn.krossframework.proto.Game.TetrisConfig.Builder, cn.krossframework.proto.Game.TetrisConfigOrBuilder> tetrisConfigBuilder_;
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * @return Whether the tetrisConfig field is set.
        */
       public boolean hasTetrisConfig() {
         return tetrisConfigBuilder_ != null || tetrisConfig_ != null;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * @return The tetrisConfig.
        */
       public cn.krossframework.proto.Game.TetrisConfig getTetrisConfig() {
         if (tetrisConfigBuilder_ == null) {
@@ -3070,7 +3410,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public Builder setTetrisConfig(cn.krossframework.proto.Game.TetrisConfig value) {
         if (tetrisConfigBuilder_ == null) {
@@ -3086,7 +3426,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public Builder setTetrisConfig(
           cn.krossframework.proto.Game.TetrisConfig.Builder builderForValue) {
@@ -3100,7 +3440,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public Builder mergeTetrisConfig(cn.krossframework.proto.Game.TetrisConfig value) {
         if (tetrisConfigBuilder_ == null) {
@@ -3118,7 +3458,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public Builder clearTetrisConfig() {
         if (tetrisConfigBuilder_ == null) {
@@ -3132,7 +3472,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public cn.krossframework.proto.Game.TetrisConfig.Builder getTetrisConfigBuilder() {
         
@@ -3140,7 +3480,7 @@ public final class Game {
         return getTetrisConfigFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       public cn.krossframework.proto.Game.TetrisConfigOrBuilder getTetrisConfigOrBuilder() {
         if (tetrisConfigBuilder_ != null) {
@@ -3151,7 +3491,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
+       * <code>.cn.krossframework.proto.TetrisConfig tetrisConfig = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.TetrisConfig, cn.krossframework.proto.Game.TetrisConfig.Builder, cn.krossframework.proto.Game.TetrisConfigOrBuilder> 
@@ -3167,17 +3507,19 @@ public final class Game {
         return tetrisConfigBuilder_;
       }
 
-      private cn.krossframework.proto.Game.TetrisRoomData tetrisRoomData_ = null;
+      private cn.krossframework.proto.Game.TetrisRoomData tetrisRoomData_;
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.TetrisRoomData, cn.krossframework.proto.Game.TetrisRoomData.Builder, cn.krossframework.proto.Game.TetrisRoomDataOrBuilder> tetrisRoomDataBuilder_;
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * @return Whether the tetrisRoomData field is set.
        */
       public boolean hasTetrisRoomData() {
         return tetrisRoomDataBuilder_ != null || tetrisRoomData_ != null;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * @return The tetrisRoomData.
        */
       public cn.krossframework.proto.Game.TetrisRoomData getTetrisRoomData() {
         if (tetrisRoomDataBuilder_ == null) {
@@ -3187,7 +3529,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public Builder setTetrisRoomData(cn.krossframework.proto.Game.TetrisRoomData value) {
         if (tetrisRoomDataBuilder_ == null) {
@@ -3203,7 +3545,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public Builder setTetrisRoomData(
           cn.krossframework.proto.Game.TetrisRoomData.Builder builderForValue) {
@@ -3217,7 +3559,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public Builder mergeTetrisRoomData(cn.krossframework.proto.Game.TetrisRoomData value) {
         if (tetrisRoomDataBuilder_ == null) {
@@ -3235,7 +3577,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public Builder clearTetrisRoomData() {
         if (tetrisRoomDataBuilder_ == null) {
@@ -3249,7 +3591,7 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public cn.krossframework.proto.Game.TetrisRoomData.Builder getTetrisRoomDataBuilder() {
         
@@ -3257,7 +3599,7 @@ public final class Game {
         return getTetrisRoomDataFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       public cn.krossframework.proto.Game.TetrisRoomDataOrBuilder getTetrisRoomDataOrBuilder() {
         if (tetrisRoomDataBuilder_ != null) {
@@ -3268,7 +3610,7 @@ public final class Game {
         }
       }
       /**
-       * <code>optional .cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
+       * <code>.cn.krossframework.proto.TetrisRoomData tetrisRoomData = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.krossframework.proto.Game.TetrisRoomData, cn.krossframework.proto.Game.TetrisRoomData.Builder, cn.krossframework.proto.Game.TetrisRoomDataOrBuilder> 
@@ -3283,14 +3625,16 @@ public final class Game {
         }
         return tetrisRoomDataBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3309,11 +3653,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<StartGame>
         PARSER = new com.google.protobuf.AbstractParser<StartGame>() {
+      @java.lang.Override
       public StartGame parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StartGame(input, extensionRegistry);
+        return new StartGame(input, extensionRegistry);
       }
     };
 
@@ -3326,6 +3671,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.StartGame getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3339,10 +3685,11 @@ public final class Game {
   /**
    * Protobuf type {@code cn.krossframework.proto.Enter}
    */
-  public  static final class Enter extends
+  public static final class Enter extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.Enter)
       EnterOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Enter.newBuilder() to construct.
     private Enter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3351,15 +3698,27 @@ public final class Game {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Enter();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Enter(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3369,7 +3728,8 @@ public final class Game {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3382,6 +3742,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3390,6 +3751,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Enter_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Enter_fieldAccessorTable
@@ -3398,6 +3760,7 @@ public final class Game {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3407,20 +3770,23 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3431,8 +3797,8 @@ public final class Game {
       }
       cn.krossframework.proto.Game.Enter other = (cn.krossframework.proto.Game.Enter) obj;
 
-      boolean result = true;
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -3441,12 +3807,23 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.Enter parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.Enter parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.Enter parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3506,6 +3883,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3513,6 +3891,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.Enter prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3536,6 +3915,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Enter_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Enter_fieldAccessorTable
@@ -3558,20 +3938,24 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_Enter_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Enter getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.Enter.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Enter build() {
         cn.krossframework.proto.Game.Enter result = buildPartial();
         if (!result.isInitialized()) {
@@ -3580,38 +3964,46 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.Enter buildPartial() {
         cn.krossframework.proto.Game.Enter result = new cn.krossframework.proto.Game.Enter(this);
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.Enter) {
           return mergeFrom((cn.krossframework.proto.Game.Enter)other);
@@ -3623,14 +4015,17 @@ public final class Game {
 
       public Builder mergeFrom(cn.krossframework.proto.Game.Enter other) {
         if (other == cn.krossframework.proto.Game.Enter.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3648,14 +4043,16 @@ public final class Game {
         }
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3674,11 +4071,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<Enter>
         PARSER = new com.google.protobuf.AbstractParser<Enter>() {
+      @java.lang.Override
       public Enter parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Enter(input, extensionRegistry);
+        return new Enter(input, extensionRegistry);
       }
     };
 
@@ -3691,6 +4089,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.Enter getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3704,10 +4103,11 @@ public final class Game {
   /**
    * Protobuf type {@code cn.krossframework.proto.EnterResult}
    */
-  public  static final class EnterResult extends
+  public static final class EnterResult extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:cn.krossframework.proto.EnterResult)
       EnterResultOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use EnterResult.newBuilder() to construct.
     private EnterResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3716,15 +4116,27 @@ public final class Game {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new EnterResult();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private EnterResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3734,7 +4146,8 @@ public final class Game {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3747,6 +4160,7 @@ public final class Game {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3755,6 +4169,7 @@ public final class Game {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_EnterResult_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_EnterResult_fieldAccessorTable
@@ -3763,6 +4178,7 @@ public final class Game {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3772,20 +4188,23 @@ public final class Game {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3796,8 +4215,8 @@ public final class Game {
       }
       cn.krossframework.proto.Game.EnterResult other = (cn.krossframework.proto.Game.EnterResult) obj;
 
-      boolean result = true;
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -3806,12 +4225,23 @@ public final class Game {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
+    public static cn.krossframework.proto.Game.EnterResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static cn.krossframework.proto.Game.EnterResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static cn.krossframework.proto.Game.EnterResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3871,6 +4301,7 @@ public final class Game {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3878,6 +4309,7 @@ public final class Game {
     public static Builder newBuilder(cn.krossframework.proto.Game.EnterResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3901,6 +4333,7 @@ public final class Game {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_EnterResult_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_EnterResult_fieldAccessorTable
@@ -3923,20 +4356,24 @@ public final class Game {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return cn.krossframework.proto.Game.internal_static_cn_krossframework_proto_EnterResult_descriptor;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.EnterResult getDefaultInstanceForType() {
         return cn.krossframework.proto.Game.EnterResult.getDefaultInstance();
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.EnterResult build() {
         cn.krossframework.proto.Game.EnterResult result = buildPartial();
         if (!result.isInitialized()) {
@@ -3945,38 +4382,46 @@ public final class Game {
         return result;
       }
 
+      @java.lang.Override
       public cn.krossframework.proto.Game.EnterResult buildPartial() {
         cn.krossframework.proto.Game.EnterResult result = new cn.krossframework.proto.Game.EnterResult(this);
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
+          java.lang.Object value) {
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof cn.krossframework.proto.Game.EnterResult) {
           return mergeFrom((cn.krossframework.proto.Game.EnterResult)other);
@@ -3988,14 +4433,17 @@ public final class Game {
 
       public Builder mergeFrom(cn.krossframework.proto.Game.EnterResult other) {
         if (other == cn.krossframework.proto.Game.EnterResult.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4013,14 +4461,16 @@ public final class Game {
         }
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4039,11 +4489,12 @@ public final class Game {
 
     private static final com.google.protobuf.Parser<EnterResult>
         PARSER = new com.google.protobuf.AbstractParser<EnterResult>() {
+      @java.lang.Override
       public EnterResult parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new EnterResult(input, extensionRegistry);
+        return new EnterResult(input, extensionRegistry);
       }
     };
 
@@ -4056,6 +4507,7 @@ public final class Game {
       return PARSER;
     }
 
+    @java.lang.Override
     public cn.krossframework.proto.Game.EnterResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4115,23 +4567,15 @@ public final class Game {
       "SeatDataList\030\001 \003(\0132\'.cn.krossframework.p" +
       "roto.TetrisSeatData\"\211\001\n\tStartGame\022;\n\014tet" +
       "risConfig\030\001 \001(\0132%.cn.krossframework.prot" +
-      "o.TetrisConfig\022?\n\016tetrisRoomData\030\002 \001(\0132\'",
+      "o.TetrisConfig\022?\n\016tetrisRoomData\030\002 \001(\0132\'" +
       ".cn.krossframework.proto.TetrisRoomData\"" +
       "\007\n\005Enter\"\r\n\013EnterResultB\010B\004GameH\001b\006proto" +
       "3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_cn_krossframework_proto_TetrisConfig_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_cn_krossframework_proto_TetrisConfig_fieldAccessorTable = new

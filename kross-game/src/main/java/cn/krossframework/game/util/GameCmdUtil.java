@@ -4,8 +4,6 @@ import cn.krossframework.game.state.GameData;
 import cn.krossframework.game.state.GameRoom;
 import cn.krossframework.game.state.Seat;
 import cn.krossframework.proto.CmdType;
-import cn.krossframework.proto.Command;
-import cn.krossframework.proto.Game;
 import cn.krossframework.proto.ResultCode;
 import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.config.StateGroupConfig;

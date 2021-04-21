@@ -1,6 +1,5 @@
 package cn.krossframework.websocket;
 
-import cn.krossframework.proto.Command;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;

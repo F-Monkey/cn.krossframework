@@ -1,6 +1,5 @@
 package cn.krossframework.game.state;
 
-import cn.krossframework.proto.Command;
 import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.Task;
 import cn.krossframework.websocket.Character;
