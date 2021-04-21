@@ -81,7 +81,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
     }
 
     @Override
-    public FetchStateGroup findOrCreate(Long id) {
+    public FetchStateGroup findOrCreate(Long id, final StateGroupConfig stateGroupConfig) {
         if (id == null) {
             id = this.getNextGroupId();
         }
@@ -89,7 +89,10 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
         StateGroup stateGroup = stateGroupMap.computeIfAbsent(id, (i) -> {
             isNew[0] = true;
-            return this.getStateGroupFactory().create(i);
+            if (stateGroupConfig == null) {
+                throw new NullPointerException("stateGroupConfig can not be null when create new stateGroup");
+            }
+            return this.getStateGroupFactory().create(i, stateGroupConfig);
         });
         log.info("find or create stateGroup, stateGroup id: {}, isNew: {}", stateGroup.getId(), isNew[0]);
         this.stateGroupMap = stateGroupMap;
