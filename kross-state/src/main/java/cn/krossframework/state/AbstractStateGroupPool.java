@@ -58,7 +58,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
     @Override
     public void removeDeposedStateGroup() {
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
-        if (stateGroupMap.size() == 0) {
+        if (stateGroupMap.isEmpty()) {
             return;
         }
         log.info("start remove deposed stateGroup, current size: {}", stateGroupMap.size());

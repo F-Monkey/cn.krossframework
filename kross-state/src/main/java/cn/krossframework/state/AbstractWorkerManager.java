@@ -5,6 +5,7 @@ import cn.krossframework.state.data.ExecuteTask;
 import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.util.Lock;
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +45,12 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
      * @param taskDispatcherSize            taskDispatcher的数量
      * @param stateGroupPool                stateGroup池
      */
-    public AbstractWorkerManager(int workerUpdatePeriod, int workerCapacity, int workerSize,
-                                 int removeEmptyWorkerPeriod, int removeDeposedStateGroupPeriod, int taskDispatcherSize,
+    public AbstractWorkerManager(int workerUpdatePeriod,
+                                 int workerCapacity,
+                                 int workerSize,
+                                 int removeEmptyWorkerPeriod,
+                                 int removeDeposedStateGroupPeriod,
+                                 int taskDispatcherSize,
                                  StateGroupPool stateGroupPool) {
         this.workerUpdatePeriod = workerUpdatePeriod;
         this.removeDeposedStateGroupPeriod = removeDeposedStateGroupPeriod;
@@ -65,19 +70,23 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }.start();
     }
 
-    public class EnterGroupTask extends ExecuteTask implements Runnable {
+    public class EnterGroupTask extends AbstractTask implements Runnable {
 
-        private final StateGroupConfig stateGroupConfig;
+        protected final Task task;
+
+        protected final StateGroupConfig stateGroupConfig;
 
         public EnterGroupTask(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
-            super(groupId, task, failCallBack);
+            super(groupId, failCallBack);
+            Preconditions.checkNotNull(task);
+            this.task = task;
             this.stateGroupConfig = stateGroupConfig;
         }
 
         @Override
         public void run() {
-            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), super.getTask(),
-                    super.getFailCallBack(), this.stateGroupConfig);
+            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), this.task,
+                    super.failCallBack(), this.stateGroupConfig);
         }
     }
 
@@ -108,6 +117,9 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     protected void removeEmptyWorker() {
         final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
+        if (workerMap.isEmpty()) {
+            return;
+        }
         workerMap.entrySet().removeIf(e -> {
             Worker worker = e.getValue();
             boolean empty = worker.isEmpty();
@@ -120,13 +132,13 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         this.workerMap = workerMap;
     }
 
-    protected void addDispatcherTask(Task task) {
+    protected void addDispatcherTask(AbstractTask task) {
         Long groupId = null;
         FailCallBack callBack = null;
         if (task instanceof ExecuteTask) {
             ExecuteTask groupIdTask = (ExecuteTask) task;
             groupId = groupIdTask.getGroupId();
-            callBack = groupIdTask.getFailCallBack();
+            callBack = groupIdTask.failCallBack();
         }
 
         TaskDispatcher dispatcher = this.findDispatcher(groupId);
@@ -223,13 +235,13 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     @Override
     public void enter(ExecuteTask executeTask, StateGroupConfig stateGroupConfig) {
         this.addDispatcherTask(new EnterGroupTask(executeTask.getGroupId(), executeTask.getTask(),
-                executeTask.getFailCallBack(), stateGroupConfig));
+                executeTask.failCallBack(), stateGroupConfig));
     }
 
     @Override
     public void addTask(ExecuteTask executeTask) {
         if (!this.tryAddTask(executeTask)) {
-            FailCallBack failCallBack = executeTask.getFailCallBack();
+            FailCallBack failCallBack = executeTask.failCallBack();
             if (failCallBack != null) {
                 failCallBack.call();
             }

@@ -1,7 +1,7 @@
 package cn.krossframework.game.state;
 
 import cn.krossframework.game.util.GameCmdUtil;
-import cn.krossframework.proto.ResultCode;
+import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.state.AbstractStateGroup;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.Task;
@@ -57,7 +57,7 @@ public class GameRoom extends AbstractStateGroup {
     }
 
     public Seat findSeat(Character character) {
-        GameData gameData = (GameData) super.stateData;
+        GameData gameData = super.getStateData();
         for (Seat seat : gameData.getSeatList()) {
             Character existsCharacter = seat.getCharacter();
             if (existsCharacter == null) {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cn.krossframework.proto;
+package cn . krossframework. proto;
 
 option optimize_for = SPEED;
 option java_outer_classname = "Entity";
@@ -9,9 +9,4 @@ message Character {
   string id       = 1;
   string nickName = 2;
   bool isOnline   = 3;
-}
-
-message RoomData {
-  int64 roomId                  = 1;
-  repeated Character characters = 2;
 }

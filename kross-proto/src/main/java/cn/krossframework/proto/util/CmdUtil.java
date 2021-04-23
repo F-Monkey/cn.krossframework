@@ -2,20 +2,11 @@ package cn.krossframework.proto.util;
 
 import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
-import cn.krossframework.proto.ResultCode;
 import com.google.common.base.Strings;
 import com.google.protobuf.ByteString;
 
 public class CmdUtil {
     private CmdUtil() {
-    }
-
-
-    public static Command.PackageGroup clickOff() {
-        Command.Package.Builder builder = Command.Package.newBuilder();
-        builder.setCmdType(CmdType.CLICK_OFF);
-        builder.setResultMsg(CmdUtil.resultMessage(ResultCode.SUCCESS, "click off"));
-        return CmdUtil.packageGroup(builder.build());
     }
 
     public static Command.ResultMessage resultMessage(int resultCode, String message) {

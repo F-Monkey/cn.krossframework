@@ -1,0 +1,10 @@
+server:
+  port: 8888
+spring:
+  data:
+    redis:
+      id:
+        host: 127.0.0.1
+        port: 6379
+        timeout: 1000
+        database: 1

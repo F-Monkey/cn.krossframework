@@ -1,4 +1,4 @@
-package cn.krossframework.proto;
+package cn.krossframework.commons.model;
 
 public interface ResultCode {
     int SUCCESS = 200;

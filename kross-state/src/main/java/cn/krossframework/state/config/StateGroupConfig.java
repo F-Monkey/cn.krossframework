@@ -24,7 +24,7 @@ public interface StateGroupConfig {
     /**
      * return new States
      *
-     * @return
+     * @return collection
      */
     default Collection<State> createStates() {
         return Collections.emptyList();

@@ -1,14 +1,9 @@
 syntax = "proto3";
 
-package cn.krossframework.proto;
+package cn . krossframework. proto;
 
 option optimize_for = SPEED;
 option java_outer_classname = "Command";
-
-message Cmd {
-  int32 cmdType = 1;
-  bytes content = 2;
-}
 
 message ResultMessage {
   int32 code = 1;
@@ -17,8 +12,8 @@ message ResultMessage {
 
 message Package {
   ResultMessage resultMsg = 1;
-  int32 cmdType = 2;
-  bytes content = 3;
+  int32 cmdType           = 2;
+  bytes content           = 3;
 }
 
 message PackageGroup {

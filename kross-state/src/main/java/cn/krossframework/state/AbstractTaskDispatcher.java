@@ -23,7 +23,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     private final Object LOCK;
 
-    protected final BlockingQueue<Task> groupIdTaskQueue;
+    protected final BlockingQueue<AbstractTask> groupIdTaskQueue;
 
     protected volatile boolean isStart;
 
@@ -67,13 +67,16 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     @Override
     public void update() {
         do {
-            List<Task> taskList = new ArrayList<>(this.groupIdTaskQueue.size());
+            List<AbstractTask> taskList = new ArrayList<>(this.groupIdTaskQueue.size());
             this.groupIdTaskQueue.drainTo(taskList);
-            for (Task task : taskList) {
+            for (AbstractTask task : taskList) {
                 if (task == null) continue;
-
+                FailCallBack failCallBack = task.failCallBack();
                 if (!this.findStateGroupAndAddTask(task)) {
                     log.error("stateGroup task add fail, task type:{}, task:\n{}", task.getClass(), task);
+                    if (failCallBack != null) {
+                        failCallBack.call();
+                    }
                 }
             }
         } while (this.groupIdTaskQueue.size() > 0);
@@ -88,21 +91,11 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
         if (task instanceof ExecuteTask) {
             ExecuteTask groupIdTask = (ExecuteTask) task;
             Long groupId = groupIdTask.getGroupId();
-            FailCallBack failCallBack = groupIdTask.getFailCallBack();
-            if (groupId == null) {
-                if (failCallBack != null) {
-                    failCallBack.call();
-                }
-            } else {
-                StateGroup stateGroup = this.stateGroupPool.find(groupId);
-                if (stateGroup == null) {
-                    if (failCallBack != null) {
-                        failCallBack.call();
-                    }
-                    return false;
-                }
-                return stateGroup.tryAddTask(groupIdTask.getTask());
+            StateGroup stateGroup = this.stateGroupPool.find(groupId);
+            if (stateGroup == null) {
+                return false;
             }
+            return stateGroup.tryAddTask(groupIdTask.getTask());
         }
         return false;
     }
@@ -114,7 +107,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
     }
 
     @Override
-    public boolean tryAddTask(Task task) {
+    public boolean tryAddTask(AbstractTask task) {
         boolean b = this.isStart() && this.groupIdTaskQueue.offer(task);
         if (b) {
             this.unlock();

@@ -1,15 +1,16 @@
 ext {
 
     version = [
-            springboot    : "2.2.4.RELEASE",
-            protobuf      : "3.15.2",
-            protobufPlugin: "0.8.12",
-            guava         : "29.0-jre",
-            slf4j         : "1.7.30",
-            netty         : "4.1.42.Final",
-            junit         : "4.12",
-            mockito       : "1.10.19",
-            disruptor     : "3.4.2",
+            springboot         : "2.2.4.RELEASE",
+            protobuf           : "3.15.2",
+            guava              : "29.0-jre",
+            slf4j              : "1.7.30",
+            netty              : "4.1.45.Final",
+            junit              : "4.12",
+            mockito            : "1.10.19",
+            disruptor          : "3.4.2",
+            lombok             : "1.18.16",
+            apache_commons_pool: "2.9.0",
     ]
 
     dependencies = [
@@ -17,6 +18,8 @@ ext {
             "spring-boot-starter-test"      : "org.springframework.boot:spring-boot-starter-test:${version.springboot}",
             "spring-boot-starter-web"       : "org.springframework.boot:spring-boot-starter-web:${version.springboot}",
             "spring-boot-starter-data-mongo": "org.springframework.boot:spring-boot-starter-data-mongodb:${version.springboot}",
+            "spring-boot-starter-data-redis": ["org.springframework.boot:spring-boot-starter-data-redis:${version.springboot}",
+                                               "org.apache.commons:commons-pool2:${version.apache_commons_pool}"],
             "protobuf"                      : "com.google.protobuf:protobuf-java:${version.protobuf}",
             "guava"                         : "com.google.guava:guava:${version.guava}",
             "slf4j"                         : ["org.slf4j:slf4j-api:${version.slf4j}"],
@@ -24,5 +27,6 @@ ext {
             "junit"                         : "junit:junit:${version.junit}",
             "mockito"                       : "org.mockito:mockito-all:${version.mockito}",
             "disruptor"                     : "com.lmax:disruptor:${version.disruptor}",
+            "lombok"                        : "org.projectlombok:lombok:${version.lombok}",
     ]
 }
