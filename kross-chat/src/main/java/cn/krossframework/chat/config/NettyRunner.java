@@ -35,7 +35,7 @@ public class NettyRunner implements ApplicationRunner, ApplicationContextAware {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        start();
+        this.start();
     }
 
     private void start() throws InterruptedException {

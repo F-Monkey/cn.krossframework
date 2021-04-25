@@ -1,16 +1,5 @@
 package cn.krossframework.chat.config.properties;
 
-/**
- * kross:
- * state:
- * workerUpdatePeriod: 20
- * workerCapacity: 20
- * workerSize: 20
- * removeEmptyWorkerPeriod: 0
- * removeDeposedStateGroupPeriod: 0
- * taskDispatcherSize: 10
- */
-
 public class WorkerManagerProperties {
     private int workerUpdatePeriod;
     private int workerCapacity;

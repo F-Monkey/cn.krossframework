@@ -6,13 +6,11 @@ plugins {
 
 apply from: "config.gradle"
 
-allprojects {
-    apply plugin: 'idea'
-    group = 'cn.krossframework'
-    version = '0.0.1'
-}
+group = 'cn.krossframework'
+version = '0.0.1'
 
 subprojects {
+    apply plugin: 'idea'
 
     apply plugin: 'java'
 

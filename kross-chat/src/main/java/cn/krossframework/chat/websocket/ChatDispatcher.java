@@ -96,9 +96,17 @@ public class ChatDispatcher implements Dispatcher {
             return;
         }
         int cmdType = cmd.getCmdType();
-        AbstractTask executeTask = new ExecuteTask(currentGroupId, new ChatTask(character, cmd), () -> {
-            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd type:" + cmdType, cmdType, null)));
-        });
+        ExecuteTask executeTask;
+        try {
+            ChatTask chatTask = new ChatTask(character, cmd);
+            executeTask = new ExecuteTask(currentGroupId, chatTask, () -> {
+                character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd type:" + cmdType, cmdType, null)));
+            });
+        } catch (Exception e) {
+            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "bad data", cmdType, null)));
+            log.error("task create error:\n", e);
+            return;
+        }
         this.workerManager.addTask(executeTask);
     }
 
