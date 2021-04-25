@@ -41,8 +41,8 @@ public class NettyRunner implements ApplicationRunner, ApplicationContextAware {
     private void start() throws InterruptedException {
         Integer port = this.port;
         if (port == null) {
-            log.info("${server.port} has not configured, use default port:{}", DEFAULT_PORT);
             port = DEFAULT_PORT;
+            log.info("${server.port} has not configured, use default port:{}", DEFAULT_PORT);
         }
         Map<String, Filter> beans = this.applicationContext.getBeansOfType(Filter.class);
         List<Filter> filters = null;

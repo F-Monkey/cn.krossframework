@@ -1,6 +1,6 @@
 package cn.krossframework.state;
 
-import cn.krossframework.commons.beam.InitializeBean;
+import cn.krossframework.commons.bean.InitializeBean;
 import cn.krossframework.commons.thread.AutoTask;
 import cn.krossframework.state.config.StateGroupConfig;
 import com.google.common.base.Preconditions;

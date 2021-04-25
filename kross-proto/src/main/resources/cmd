@@ -1,2 +1,0 @@
-
-protoc --proto_path='E:\\java workspace\\cn.krossframework\\kross-proto\\src\\main\\proto' --cshap_out='E:\\java workspace\\cn.krossframework\\kross-proto\\src\\main\\proto' 'E:\\java workspace\\cn.krossframework\\kross-proto\\src\\main\\proto\\cmd.proto'

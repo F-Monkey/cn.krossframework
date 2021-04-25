@@ -1,6 +1,5 @@
 package cn.krossframework.chat.websocket;
 
-import cn.krossframework.chat.websocket.Chatter;
 import cn.krossframework.websocket.AbstractCharacterFactory;
 import cn.krossframework.websocket.Character;
 import cn.krossframework.websocket.Session;

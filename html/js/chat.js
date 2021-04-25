@@ -69,6 +69,7 @@ function onCreateRoomResult(data, msg){
     alert(msg);
     let chatRoomData = ChatRoomData.decode(data);
     document.getElementById("current_room_id").value = chatRoomData.id;
+    refreshChatRoomData(chatRoomData);
 }
 
 export function sendMsg(){
@@ -116,7 +117,28 @@ export function exists(){
 
 function onExists(data, msg){
     let existsResult = EnterResult.decode(data);
-    let chatRoomData = existsResult.chatRoomData;
     alert(msg);
+    let chatRoomData = existsResult.chatRoomData;
+    refreshChatRoomData(chatRoomData);
 }
 
+function refreshChatRoomData(chatRoomData){
+    let chatter_list = chatRoomData.chatter;
+    if(chatter_list && chatter_list.length > 0){
+        let character_list_ul = document.getElementById("character_list");
+        character_list_ul.innerHTML = "";
+        let uid = document.getElementById("user_id").value;
+        var character;
+        for(var i in chatter_list){
+            character = chatter_list[i];
+            let li = document.createElement("li");
+            let userSpan = document.createElement("span");
+            userSpan.innerHTML = character.id;
+            if(character.id == uid){
+                userSpan.style = "color:#F00";
+            }
+            li.appendChild(userSpan);
+            character_list_ul.appendChild(li);
+        }
+    }
+}

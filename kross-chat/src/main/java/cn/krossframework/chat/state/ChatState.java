@@ -2,6 +2,7 @@ package cn.krossframework.chat.state;
 
 import cn.krossframework.chat.cmd.ChatCmdType;
 import cn.krossframework.chat.cmd.ChatCmdUtil;
+import cn.krossframework.chat.state.data.ChatTask;
 import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;

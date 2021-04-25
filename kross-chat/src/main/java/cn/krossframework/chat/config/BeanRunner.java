@@ -1,6 +1,6 @@
 package cn.krossframework.chat.config;
 
-import cn.krossframework.commons.beam.InitializeBean;
+import cn.krossframework.commons.bean.InitializeBean;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.ApplicationArguments;

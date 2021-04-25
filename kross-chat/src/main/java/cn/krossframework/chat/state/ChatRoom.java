@@ -1,6 +1,8 @@
 package cn.krossframework.chat.state;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
+import cn.krossframework.chat.state.data.ChatTask;
+import cn.krossframework.chat.websocket.Chatter;
 import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
@@ -72,6 +74,16 @@ public class ChatRoom extends AbstractStateGroup {
     @Override
     public boolean canDeposed() {
         return (super.currentState == null || DefaultErrorState.CODE.equals(super.currentState.getCode()))
-                && this.chatterList.isEmpty();
+                && (this.chatterList.isEmpty() || isAllExists());
+    }
+
+    private boolean isAllExists() {
+        for (Character chatter : this.chatterList) {
+            Long currentGroupId = chatter.getCurrentGroupId();
+            if (currentGroupId != null && currentGroupId == this.id) {
+                return false;
+            }
+        }
+        return true;
     }
 }

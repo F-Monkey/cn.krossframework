@@ -8,8 +8,9 @@ import java.util.Optional;
 
 public class TimeTest {
 
-	@Test public void test() throws InterruptedException {
-		Optional<List<Object>> objects = Optional.of(Collections.emptyList());
-		Optional<List<Object>> list = objects.filter(l -> !l.isEmpty());
-	}
+    @Test
+    public void test() throws InterruptedException {
+        Optional<List<Object>> objects = Optional.of(Collections.emptyList());
+        Optional<List<Object>> list = objects.filter(l -> !l.isEmpty());
+    }
 }

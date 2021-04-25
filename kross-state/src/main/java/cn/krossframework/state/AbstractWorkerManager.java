@@ -1,9 +1,11 @@
 package cn.krossframework.state;
 
+import cn.krossframework.commons.bean.InitializeBean;
 import cn.krossframework.commons.thread.AutoTask;
 import cn.krossframework.state.data.AbstractTask;
 import cn.krossframework.state.data.ExecuteTask;
 import cn.krossframework.state.data.Task;
+import cn.krossframework.state.data.WorkerManagerProperties;
 import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.util.Lock;
@@ -13,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class AbstractWorkerManager implements WorkerManager, Lock {
+public abstract class AbstractWorkerManager implements WorkerManager, Lock, InitializeBean {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractWorkerManager.class);
 
@@ -24,6 +26,8 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     protected final int workerSize;
 
     protected final int removeDeposedStateGroupPeriod;
+
+    protected final int removeEmptyWorkerPeriod;
 
     protected final int workerCapacity;
 
@@ -38,32 +42,26 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     protected volatile ConcurrentHashMap<Long, StateGroupWorker> workerMap;
 
     /**
-     * @param workerUpdatePeriod            worker的刷新频率
-     * @param workerCapacity                worker内的stateGroup数量
-     * @param workerSize                    worker的数量
-     * @param removeEmptyWorkerPeriod       移除worker的频率
-     * @param removeDeposedStateGroupPeriod 移除worker内的失效的stateGroup标记
-     * @param taskDispatcherSize            taskDispatcher的数量
-     * @param stateGroupPool                stateGroup池
+     * @param workerManagerProperties workerManagerProperties;
+     * @param stateGroupPool          stateGroup池
      */
-    public AbstractWorkerManager(int workerUpdatePeriod,
-                                 int workerCapacity,
-                                 int workerSize,
-                                 int removeEmptyWorkerPeriod,
-                                 int removeDeposedStateGroupPeriod,
-                                 int taskDispatcherSize,
+    public AbstractWorkerManager(WorkerManagerProperties workerManagerProperties,
                                  StateGroupPool stateGroupPool) {
-        this.workerUpdatePeriod = workerUpdatePeriod;
-        this.removeDeposedStateGroupPeriod = removeDeposedStateGroupPeriod;
-        this.taskDispatcherSize = taskDispatcherSize;
-        this.workerSize = workerSize;
+        this.workerUpdatePeriod = workerManagerProperties.getWorkerUpdatePeriod();
+        this.removeDeposedStateGroupPeriod = workerManagerProperties.getRemoveDeposedStateGroupPeriod();
+        this.taskDispatcherSize = workerManagerProperties.getTaskDispatcherSize();
+        this.workerSize = workerManagerProperties.getWorkerSize();
         this.stateGroupPool = stateGroupPool;
-        this.workerCapacity = workerCapacity;
+        this.workerCapacity = workerManagerProperties.getWorkerCapacity();
+        this.removeEmptyWorkerPeriod = workerManagerProperties.getRemoveEmptyWorkerPeriod();
         this.LOCK = new Object();
         this.workerMap = this.initWorkerMap();
         this.dispatcherMap = this.initDispatcherMap();
-        new AutoTask(removeEmptyWorkerPeriod, 2) {
+    }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        new AutoTask(this.removeEmptyWorkerPeriod, 1) {
             @Override
             protected void run() {
                 AbstractWorkerManager.this.removeEmptyWorker();

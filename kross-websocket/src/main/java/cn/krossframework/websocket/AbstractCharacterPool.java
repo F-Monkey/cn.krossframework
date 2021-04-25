@@ -1,6 +1,6 @@
 package cn.krossframework.websocket;
 
-import cn.krossframework.commons.beam.InitializeBean;
+import cn.krossframework.commons.bean.InitializeBean;
 import cn.krossframework.commons.thread.AutoTask;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;

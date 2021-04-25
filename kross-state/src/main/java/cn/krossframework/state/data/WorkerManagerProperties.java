@@ -1,4 +1,4 @@
-package cn.krossframework.chat.config.properties;
+package cn.krossframework.state.data;
 
 public class WorkerManagerProperties {
     private int workerUpdatePeriod;
