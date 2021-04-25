@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+message TetrisConfig {
+  int32 fallTime = 1;
+}
+
+message Player {
+  string uid      = 1;
+  string nickname = 2;
+  string headIcon = 3;
+}
+
+message TetrisSeatData {
+  int32 score   = 1;
+  Player player = 2;
+}
+
+message TetrisRoomData {
+  repeated TetrisSeatData tetrisSeatDataList = 1;
+}
+
+message StartGame {
+  TetrisConfig tetrisConfig     = 1;
+  TetrisRoomData tetrisRoomData = 2;
+}
+
+
+message Enter {
+
+}
+
+message EnterResult {
+
+}

@@ -26,24 +26,28 @@ public class NettyServer {
 
     private final int port;
 
+    private final String socketPath;
+
     private final ChannelHandler customHandler;
 
     public NettyServer(int port,
+                       String socketPath,
                        ChannelHandler customHandler) {
         this.bossGroup = new NioEventLoopGroup(2);
         this.workerGroup = new NioEventLoopGroup(ThreadPoolUtil.ioIntensivePoolSize() / 2);
         this.bootstrap = new ServerBootstrap();
         this.port = port;
+        this.socketPath = socketPath;
         Preconditions.checkNotNull(customHandler);
         this.customHandler = customHandler;
     }
 
     public void start() throws InterruptedException {
-        WebSocketChannelInitializer webSocketChannelInitializer = new WebSocketChannelInitializer() {
+        WebSocketChannelInitializer webSocketChannelInitializer = new WebSocketChannelInitializer(this.socketPath) {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
                 super.initChannel(ch);
-                ch.pipeline().addLast("customHandler", NettyServer.this.customHandler);
+                ch.pipeline().addLast(NettyServer.this.customHandler);
             }
         };
 

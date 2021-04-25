@@ -14,10 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static io.netty.buffer.Unpooled.EMPTY_BUFFER;
-
 @ChannelHandler.Sharable
-public class ProtoWebSocketHandler extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
+public class ProtoWebSocketHandler
+        extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
 
     private static final Logger log = LoggerFactory.getLogger(ProtoWebSocketHandler.class);
 
@@ -33,7 +32,6 @@ public class ProtoWebSocketHandler extends SimpleChannelInboundHandler<BinaryWeb
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("get connection from: {}", ctx.channel().remoteAddress());
-        super.channelActive(ctx);
     }
 
     private Session initSession(ChannelHandlerContext ctx) {
@@ -49,15 +47,10 @@ public class ProtoWebSocketHandler extends SimpleChannelInboundHandler<BinaryWeb
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        super.channelRead(ctx, msg);
-    }
-
-    @Override
     protected void channelRead0(ChannelHandlerContext ctx, BinaryWebSocketFrame frame) {
+        Session session = this.initSession(ctx);
         ByteBuf content = frame.content();
         ByteBuf byteBuf = Unpooled.copiedBuffer(content);
-        Session session = this.initSession(ctx);
         Command.Package cmd;
         try {
             cmd = Command.Package.parseFrom(byteBuf.array());

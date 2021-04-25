@@ -170,7 +170,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         return taskDispatcher;
     }
 
-    private boolean findGroup2Enter(Long groupId, Task task, StateGroupConfig stateGroupConfig) {
+    protected boolean findGroup2Enter(Long groupId, Task task, StateGroupConfig stateGroupConfig) {
         StateGroupPool.FetchStateGroup fetchStateGroup = this.stateGroupPool.findOrCreate(groupId, stateGroupConfig);
         StateGroup stateGroup = fetchStateGroup.getStateGroup();
         if (stateGroup.canDeposed()) {

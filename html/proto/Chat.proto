@@ -1,58 +1,70 @@
 syntax = "proto3";
 
-package cn.krossframework.proto;
-
-option optimize_for = SPEED;
-
 import "Entity.proto";
 
-option java_outer_classname = "Chat";
-
-message Login {
-  string username = 1;
+message ChatRoomData {
+  int64 id = 1;
+  repeated Character chatter = 2;
+  repeated ChatMessageResult history = 3;
 }
 
-message LoginResult {
-  string id = 1;
+message ClickOff {
+  repeated string characterId = 1;
+}
+
+message ClickOffResult {
+  ChatRoomData chatRoomData = 1;
+}
+
+
+message Login {
+  string uid = 1;
   string username = 2;
 }
 
+message LoginResult {
+  string uid = 1;
+  string username = 2;
+}
+
+message Logout {
+
+}
+
+message LogoutResult {
+
+}
+
+message Enter {
+  int64 roomId = 1;
+}
+
+message EnterResult {
+  ChatRoomData chatRoomData = 1;
+}
+
+message Stream {
+  string format = 1;
+  bytes Stream = 2;
+}
 
 message ChatMessage {
+  bool toAll = 1;
   repeated string to = 2;
   string msg = 3;
   int32 emoticon = 4;
-  bytes stream = 5;
+  Stream stream = 5;
 }
 
 message ChatMessageResult {
-  string from = 1;
-  bool toAll = 2;
-  repeated string to = 3;
-  ChatMessage chatMessage = 4;
-  repeated ChatMessage history = 5;
+  bool toAll = 1;
+  repeated string to = 2;
+  string msg = 3;
+  int32 emoticon = 4;
+  Stream stream = 5;
+  string from = 6;
 }
 
-message CreateRoom {
-  int64 roomId = 1;
-}
 
-message CreateRoomResult {
-  int64 roomId = 1;
-}
 
-message EnterRoom {
 
-}
-
-message EnterRoomResult {
-  RoomData roomData = 1;
-}
-
-message CloseRoom {
-
-}
-
-message CloseRoomResult {
-
-}

@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  data:
+    redis:
+      id:
+        host: 192.168.111.128
+        port: 6379
+        timeout: 1000
+        database: 1
+    mongodb:
+      #主机地址
+      host: 192.168.111.128
+      #数据库
+      database: chat
+      #默认端口是27017
+      port: 27017
+      #也可以使用uri连接
+
+kross:
+  state:
+    workerUpdatePeriod: 20
+    workerCapacity: 20
+    workerSize: 20
+    removeEmptyWorkerPeriod: 0
+    removeDeposedStateGroupPeriod: 0
+    taskDispatcherSize: 10
+  util:
+    time:
+      refreshPeriod: 10

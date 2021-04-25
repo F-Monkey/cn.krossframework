@@ -1,6 +1,5 @@
 package cn.krossframework.proto.util;
 
-import cn.krossframework.proto.CmdType;
 import cn.krossframework.proto.Command;
 import com.google.common.base.Strings;
 import com.google.protobuf.ByteString;
@@ -17,6 +16,7 @@ public class CmdUtil {
         }
         return builder.build();
     }
+
 
     public static Command.Package pkg(int resultCode, String message, int cmdType, ByteString content) {
         Command.Package.Builder builder = Command.Package.newBuilder();

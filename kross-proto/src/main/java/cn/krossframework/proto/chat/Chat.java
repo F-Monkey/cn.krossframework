@@ -2514,12 +2514,24 @@ public final class Chat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string uid = 1;</code>
+     * @return The uid.
+     */
+    java.lang.String getUid();
+    /**
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
+     */
+    com.google.protobuf.ByteString
+        getUidBytes();
+
+    /**
+     * <code>string username = 2;</code>
      * @return The username.
      */
     java.lang.String getUsername();
     /**
-     * <code>string username = 1;</code>
+     * <code>string username = 2;</code>
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
@@ -2538,6 +2550,7 @@ public final class Chat {
       super(builder);
     }
     private Login() {
+      uid_ = "";
       username_ = "";
     }
 
@@ -2572,6 +2585,12 @@ public final class Chat {
               done = true;
               break;
             case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              uid_ = s;
+              break;
+            }
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               username_ = s;
@@ -2609,10 +2628,48 @@ public final class Chat {
               cn.krossframework.proto.chat.Chat.Login.class, cn.krossframework.proto.chat.Chat.Login.Builder.class);
     }
 
-    public static final int USERNAME_FIELD_NUMBER = 1;
+    public static final int UID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object uid_;
+    /**
+     * <code>string uid = 1;</code>
+     * @return The uid.
+     */
+    @java.lang.Override
+    public java.lang.String getUid() {
+      java.lang.Object ref = uid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        uid_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUidBytes() {
+      java.lang.Object ref = uid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object username_;
     /**
-     * <code>string username = 1;</code>
+     * <code>string username = 2;</code>
      * @return The username.
      */
     @java.lang.Override
@@ -2629,7 +2686,7 @@ public final class Chat {
       }
     }
     /**
-     * <code>string username = 1;</code>
+     * <code>string username = 2;</code>
      * @return The bytes for username.
      */
     @java.lang.Override
@@ -2661,8 +2718,11 @@ public final class Chat {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!getUidBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uid_);
+      }
       if (!getUsernameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, username_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, username_);
       }
       unknownFields.writeTo(output);
     }
@@ -2673,8 +2733,11 @@ public final class Chat {
       if (size != -1) return size;
 
       size = 0;
+      if (!getUidBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uid_);
+      }
       if (!getUsernameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, username_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, username_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2691,6 +2754,8 @@ public final class Chat {
       }
       cn.krossframework.proto.chat.Chat.Login other = (cn.krossframework.proto.chat.Chat.Login) obj;
 
+      if (!getUid()
+          .equals(other.getUid())) return false;
       if (!getUsername()
           .equals(other.getUsername())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -2704,6 +2769,8 @@ public final class Chat {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + UID_FIELD_NUMBER;
+      hash = (53 * hash) + getUid().hashCode();
       hash = (37 * hash) + USERNAME_FIELD_NUMBER;
       hash = (53 * hash) + getUsername().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -2839,6 +2906,8 @@ public final class Chat {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        uid_ = "";
+
         username_ = "";
 
         return this;
@@ -2867,6 +2936,7 @@ public final class Chat {
       @java.lang.Override
       public cn.krossframework.proto.chat.Chat.Login buildPartial() {
         cn.krossframework.proto.chat.Chat.Login result = new cn.krossframework.proto.chat.Chat.Login(this);
+        result.uid_ = uid_;
         result.username_ = username_;
         onBuilt();
         return result;
@@ -2916,6 +2986,10 @@ public final class Chat {
 
       public Builder mergeFrom(cn.krossframework.proto.chat.Chat.Login other) {
         if (other == cn.krossframework.proto.chat.Chat.Login.getDefaultInstance()) return this;
+        if (!other.getUid().isEmpty()) {
+          uid_ = other.uid_;
+          onChanged();
+        }
         if (!other.getUsername().isEmpty()) {
           username_ = other.username_;
           onChanged();
@@ -2949,9 +3023,85 @@ public final class Chat {
         return this;
       }
 
+      private java.lang.Object uid_ = "";
+      /**
+       * <code>string uid = 1;</code>
+       * @return The uid.
+       */
+      public java.lang.String getUid() {
+        java.lang.Object ref = uid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          uid_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string uid = 1;</code>
+       * @return The bytes for uid.
+       */
+      public com.google.protobuf.ByteString
+          getUidBytes() {
+        java.lang.Object ref = uid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          uid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string uid = 1;</code>
+       * @param value The uid to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        uid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string uid = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUid() {
+        
+        uid_ = getDefaultInstance().getUid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string uid = 1;</code>
+       * @param value The bytes for uid to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        uid_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object username_ = "";
       /**
-       * <code>string username = 1;</code>
+       * <code>string username = 2;</code>
        * @return The username.
        */
       public java.lang.String getUsername() {
@@ -2967,7 +3117,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>string username = 1;</code>
+       * <code>string username = 2;</code>
        * @return The bytes for username.
        */
       public com.google.protobuf.ByteString
@@ -2984,7 +3134,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>string username = 1;</code>
+       * <code>string username = 2;</code>
        * @param value The username to set.
        * @return This builder for chaining.
        */
@@ -2999,7 +3149,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>string username = 1;</code>
+       * <code>string username = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearUsername() {
@@ -3009,7 +3159,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>string username = 1;</code>
+       * <code>string username = 2;</code>
        * @param value The bytes for username to set.
        * @return This builder for chaining.
        */
@@ -3082,16 +3232,16 @@ public final class Chat {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>string uid = 1;</code>
+     * @return The uid.
      */
-    java.lang.String getId();
+    java.lang.String getUid();
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
      */
     com.google.protobuf.ByteString
-        getIdBytes();
+        getUidBytes();
 
     /**
      * <code>string username = 2;</code>
@@ -3118,7 +3268,7 @@ public final class Chat {
       super(builder);
     }
     private LoginResult() {
-      id_ = "";
+      uid_ = "";
       username_ = "";
     }
 
@@ -3155,7 +3305,7 @@ public final class Chat {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              id_ = s;
+              uid_ = s;
               break;
             }
             case 18: {
@@ -3196,38 +3346,38 @@ public final class Chat {
               cn.krossframework.proto.chat.Chat.LoginResult.class, cn.krossframework.proto.chat.Chat.LoginResult.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object id_;
+    public static final int UID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object uid_;
     /**
-     * <code>string id = 1;</code>
-     * @return The id.
+     * <code>string uid = 1;</code>
+     * @return The uid.
      */
     @java.lang.Override
-    public java.lang.String getId() {
-      java.lang.Object ref = id_;
+    public java.lang.String getUid() {
+      java.lang.Object ref = uid_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        id_ = s;
+        uid_ = s;
         return s;
       }
     }
     /**
-     * <code>string id = 1;</code>
-     * @return The bytes for id.
+     * <code>string uid = 1;</code>
+     * @return The bytes for uid.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getIdBytes() {
-      java.lang.Object ref = id_;
+        getUidBytes() {
+      java.lang.Object ref = uid_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        id_ = b;
+        uid_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -3286,8 +3436,8 @@ public final class Chat {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
+      if (!getUidBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, uid_);
       }
       if (!getUsernameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, username_);
@@ -3301,8 +3451,8 @@ public final class Chat {
       if (size != -1) return size;
 
       size = 0;
-      if (!getIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
+      if (!getUidBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, uid_);
       }
       if (!getUsernameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, username_);
@@ -3322,8 +3472,8 @@ public final class Chat {
       }
       cn.krossframework.proto.chat.Chat.LoginResult other = (cn.krossframework.proto.chat.Chat.LoginResult) obj;
 
-      if (!getId()
-          .equals(other.getId())) return false;
+      if (!getUid()
+          .equals(other.getUid())) return false;
       if (!getUsername()
           .equals(other.getUsername())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -3337,8 +3487,8 @@ public final class Chat {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId().hashCode();
+      hash = (37 * hash) + UID_FIELD_NUMBER;
+      hash = (53 * hash) + getUid().hashCode();
       hash = (37 * hash) + USERNAME_FIELD_NUMBER;
       hash = (53 * hash) + getUsername().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -3474,7 +3624,7 @@ public final class Chat {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = "";
+        uid_ = "";
 
         username_ = "";
 
@@ -3504,7 +3654,7 @@ public final class Chat {
       @java.lang.Override
       public cn.krossframework.proto.chat.Chat.LoginResult buildPartial() {
         cn.krossframework.proto.chat.Chat.LoginResult result = new cn.krossframework.proto.chat.Chat.LoginResult(this);
-        result.id_ = id_;
+        result.uid_ = uid_;
         result.username_ = username_;
         onBuilt();
         return result;
@@ -3554,8 +3704,8 @@ public final class Chat {
 
       public Builder mergeFrom(cn.krossframework.proto.chat.Chat.LoginResult other) {
         if (other == cn.krossframework.proto.chat.Chat.LoginResult.getDefaultInstance()) return this;
-        if (!other.getId().isEmpty()) {
-          id_ = other.id_;
+        if (!other.getUid().isEmpty()) {
+          uid_ = other.uid_;
           onChanged();
         }
         if (!other.getUsername().isEmpty()) {
@@ -3591,78 +3741,78 @@ public final class Chat {
         return this;
       }
 
-      private java.lang.Object id_ = "";
+      private java.lang.Object uid_ = "";
       /**
-       * <code>string id = 1;</code>
-       * @return The id.
+       * <code>string uid = 1;</code>
+       * @return The uid.
        */
-      public java.lang.String getId() {
-        java.lang.Object ref = id_;
+      public java.lang.String getUid() {
+        java.lang.Object ref = uid_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          id_ = s;
+          uid_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @return The bytes for id.
+       * <code>string uid = 1;</code>
+       * @return The bytes for uid.
        */
       public com.google.protobuf.ByteString
-          getIdBytes() {
-        java.lang.Object ref = id_;
+          getUidBytes() {
+        java.lang.Object ref = uid_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          id_ = b;
+          uid_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The id to set.
+       * <code>string uid = 1;</code>
+       * @param value The uid to set.
        * @return This builder for chaining.
        */
-      public Builder setId(
+      public Builder setUid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        id_ = value;
+        uid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string id = 1;</code>
+       * <code>string uid = 1;</code>
        * @return This builder for chaining.
        */
-      public Builder clearId() {
+      public Builder clearUid() {
         
-        id_ = getDefaultInstance().getId();
+        uid_ = getDefaultInstance().getUid();
         onChanged();
         return this;
       }
       /**
-       * <code>string id = 1;</code>
-       * @param value The bytes for id to set.
+       * <code>string uid = 1;</code>
+       * @param value The bytes for uid to set.
        * @return This builder for chaining.
        */
-      public Builder setIdBytes(
+      public Builder setUidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        id_ = value;
+        uid_ = value;
         onChanged();
         return this;
       }
@@ -8874,20 +9024,20 @@ public final class Chat {
       "sult\"\037\n\010ClickOff\022\023\n\013characterId\030\001 \003(\t\"R\n" +
       "\016ClickOffResult\022@\n\014chatRoomData\030\001 \001(\0132*." +
       "cn.krossframework.proto.chat.ChatRoomDat" +
-      "a\"\031\n\005Login\022\020\n\010username\030\001 \001(\t\"+\n\013LoginRes" +
-      "ult\022\n\n\002id\030\001 \001(\t\022\020\n\010username\030\002 \001(\t\"\010\n\006Log" +
-      "out\"\016\n\014LogoutResult\"\027\n\005Enter\022\016\n\006roomId\030\001" +
-      " \001(\003\"O\n\013EnterResult\022@\n\014chatRoomData\030\001 \001(" +
-      "\0132*.cn.krossframework.proto.chat.ChatRoo" +
-      "mData\"(\n\006Stream\022\016\n\006format\030\001 \001(\t\022\016\n\006Strea" +
-      "m\030\002 \001(\014\"}\n\013ChatMessage\022\r\n\005toAll\030\001 \001(\010\022\n\n" +
-      "\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005" +
-      "\0224\n\006stream\030\005 \001(\0132$.cn.krossframework.pro" +
-      "to.chat.Stream\"\221\001\n\021ChatMessageResult\022\r\n\005" +
+      "a\"&\n\005Login\022\013\n\003uid\030\001 \001(\t\022\020\n\010username\030\002 \001(" +
+      "\t\",\n\013LoginResult\022\013\n\003uid\030\001 \001(\t\022\020\n\010usernam" +
+      "e\030\002 \001(\t\"\010\n\006Logout\"\016\n\014LogoutResult\"\027\n\005Ent" +
+      "er\022\016\n\006roomId\030\001 \001(\003\"O\n\013EnterResult\022@\n\014cha" +
+      "tRoomData\030\001 \001(\0132*.cn.krossframework.prot" +
+      "o.chat.ChatRoomData\"(\n\006Stream\022\016\n\006format\030" +
+      "\001 \001(\t\022\016\n\006Stream\030\002 \001(\014\"}\n\013ChatMessage\022\r\n\005" +
       "toAll\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010" +
       "emoticon\030\004 \001(\005\0224\n\006stream\030\005 \001(\0132$.cn.kros" +
-      "sframework.proto.chat.Stream\022\014\n\004from\030\006 \001" +
-      "(\tB\010B\004ChatH\001b\006proto3"
+      "sframework.proto.chat.Stream\"\221\001\n\021ChatMes" +
+      "sageResult\022\r\n\005toAll\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n" +
+      "\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005\0224\n\006stream\030\005" +
+      " \001(\0132$.cn.krossframework.proto.chat.Stre" +
+      "am\022\014\n\004from\030\006 \001(\tB\010B\004ChatH\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -8917,13 +9067,13 @@ public final class Chat {
     internal_static_cn_krossframework_proto_chat_Login_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_chat_Login_descriptor,
-        new java.lang.String[] { "Username", });
+        new java.lang.String[] { "Uid", "Username", });
     internal_static_cn_krossframework_proto_chat_LoginResult_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_cn_krossframework_proto_chat_LoginResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_chat_LoginResult_descriptor,
-        new java.lang.String[] { "Id", "Username", });
+        new java.lang.String[] { "Uid", "Username", });
     internal_static_cn_krossframework_proto_chat_Logout_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_cn_krossframework_proto_chat_Logout_fieldAccessorTable = new

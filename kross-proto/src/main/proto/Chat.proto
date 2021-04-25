@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cn . krossframework. proto. chat;
+package cn.krossframework.proto.chat;
 
 option optimize_for = SPEED;
 
@@ -10,8 +10,8 @@ option java_outer_classname = "Chat";
 
 
 message ChatRoomData {
-  int64 id                           = 1;
-  repeated Character chatter         = 2;
+  int64 id = 1;
+  repeated Character chatter = 2;
   repeated ChatMessageResult history = 3;
 }
 
@@ -25,11 +25,12 @@ message ClickOffResult {
 
 
 message Login {
-  string username = 1;
+  string uid = 1;
+  string username = 2;
 }
 
 message LoginResult {
-  string id       = 1;
+  string uid = 1;
   string username = 2;
 }
 
@@ -51,24 +52,24 @@ message EnterResult {
 
 message Stream {
   string format = 1;
-  bytes Stream  = 2;
+  bytes Stream = 2;
 }
 
 message ChatMessage {
-  bool toAll         = 1;
+  bool toAll = 1;
   repeated string to = 2;
-  string msg         = 3;
-  int32 emoticon     = 4;
-  Stream stream      = 5;
+  string msg = 3;
+  int32 emoticon = 4;
+  Stream stream = 5;
 }
 
 message ChatMessageResult {
-  bool toAll         = 1;
+  bool toAll = 1;
   repeated string to = 2;
-  string msg         = 3;
-  int32 emoticon     = 4;
-  Stream stream      = 5;
-  string from        = 6;
+  string msg = 3;
+  int32 emoticon = 4;
+  Stream stream = 5;
+  string from = 6;
 }
 
 

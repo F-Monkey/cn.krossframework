@@ -3,15 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script type="module">
+        import * as webSocket from "./js/webSocket.js"
+        import * as chat from "./js/chat.js"
+        window.chat = chat;
+        window.webSocket = webSocket;
+    </script>
 </head>
 <body>
+    <div id = "user">
+        <ul>
+            <li>
+                <span>current roomId: </span>
+                <input type="text" readonly id = "current_room_id" />
+            </li>
+            <li>
+                <span>username:</span>
+                <input type="text" id="username"/>
+                <span>userId:</span>
+                <input type="text" id="user_id"/>
+            </li>
+            <li>
+                <span>roomId:</span>
+                <input type="text" id="room_id"/>
+            </li>
+            <li>
+                <input type="button" value="create room"/>
+                <input type="button" value="login" onclick="chat.userLogin()"/>
+                <input type="button" value="join room"/>
+            </li>
+        </ul>
+    </div>
     <div id = "chat-board">
+        <ul id="history">
 
+        </ul>
+    </div>
+    <div>
+        <textarea id="msg"></textarea>
+        <input type="button" value="send"/>
     </div>
 </body>
-<script type="module">
-    import * as webSocket from "./js/webSocket.js"
-    window.webSocket = webSocket;
-
-</script>
 </html>

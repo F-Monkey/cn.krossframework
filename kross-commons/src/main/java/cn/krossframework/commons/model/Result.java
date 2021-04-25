@@ -1,13 +1,26 @@
 package cn.krossframework.commons.model;
 
-import lombok.Getter;
-
-@Getter
 public final class Result<T> {
     private int code;
     private String msg;
     private T data;
     private Throwable e;
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public Throwable getE() {
+        return e;
+    }
 
     public static <T> Builder<T> newBuilder() {
         return new Builder<>();
@@ -17,7 +30,7 @@ public final class Result<T> {
         return Result.<T>newBuilder().code(ResultCode.SUCCESS).data(data).build();
     }
 
-    public static Result<Object> ok() {
+    public static <T> Result<T> ok() {
         return ok(null);
     }
 
