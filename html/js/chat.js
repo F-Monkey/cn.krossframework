@@ -50,10 +50,23 @@ export function userLogin(){
     }
     let loginDataContent = Login.encode(Login.create(login)).finish();
     webSocket.func_map[constants.LOGIN_RESULT] = onLoginResult;
-    webSocket.send(buildPackage(constants.LOGIN,loginDataContent));
+    webSocket.send(constants.LOGIN,loginDataContent);
 }
 
 function onLoginResult(data){
     let loginResult = LoginResult.decode(data);
-    alert(loginResult.uid);
+    document.getElementById("user_id").value = loginResult.uid;
+}
+
+export function createRoom(){
+    let enter = {};
+    let enterContent = Enter.encode(Enter.create(enter)).finish();
+    webSocket.func_map[constants.CREATE_ROOM_RESULT] = createRoomResult;
+    webSocket.send(constants.CREATE_ROOM, enterContent);
+}
+
+function createRoomResult(data, msg){
+    alert(msg);
+    let chatRoomData = ChatRoomData.decode(data);
+    document.getElementById("room_id").value = chatRoomData.id;
 }

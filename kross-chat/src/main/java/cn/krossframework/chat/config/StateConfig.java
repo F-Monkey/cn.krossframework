@@ -2,6 +2,7 @@ package cn.krossframework.chat.config;
 
 import cn.krossframework.chat.config.properties.TimeProperties;
 import cn.krossframework.chat.config.properties.WorkerManagerProperties;
+import cn.krossframework.chat.state.ChatRoomFactory;
 import cn.krossframework.chat.state.ChatRoomWorkerManager;
 import cn.krossframework.state.*;
 import cn.krossframework.state.util.DefaultLazyTime;
@@ -31,7 +32,7 @@ public class StateConfig {
 
     @Bean
     StateGroupFactory stateGroupFactory(Time time) {
-        return new DefaultStateGroupFactory(time);
+        return new ChatRoomFactory(time);
     }
 
     @Bean

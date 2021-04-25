@@ -55,7 +55,7 @@ public class ChatCmdUtil {
                 }
             }
         }
-        return CmdUtil.packageGroup(CmdUtil.pkg(resultCode, msg, ChatCmdType.LOGIN_RESULT, builder.build().toByteString()));
+        return CmdUtil.packageGroup(CmdUtil.pkg(resultCode, msg, ChatCmdType.CREATE_ROOM_RESULT, builder.build().toByteString()));
     }
 
     public static Chat.ChatMessageResult chatMessageResult(String from, Chat.ChatMessage chatMessage) {

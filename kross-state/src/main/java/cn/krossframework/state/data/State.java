@@ -1,7 +1,6 @@
 package cn.krossframework.state.data;
 
 import cn.krossframework.state.StateGroup;
-import cn.krossframework.state.Task;
 import cn.krossframework.state.util.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

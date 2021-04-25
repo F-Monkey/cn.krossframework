@@ -1,11 +1,12 @@
 package cn.krossframework.state;
 
 import cn.krossframework.commons.thread.AutoTask;
+import cn.krossframework.state.data.AbstractTask;
 import cn.krossframework.state.data.ExecuteTask;
+import cn.krossframework.state.data.Task;
 import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.util.Lock;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,20 +73,16 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
 
     public class EnterGroupTask extends AbstractTask implements Runnable {
 
-        protected final Task task;
-
         protected final StateGroupConfig stateGroupConfig;
 
         public EnterGroupTask(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
-            super(groupId, failCallBack);
-            Preconditions.checkNotNull(task);
-            this.task = task;
+            super(groupId, task, failCallBack);
             this.stateGroupConfig = stateGroupConfig;
         }
 
         @Override
         public void run() {
-            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), this.task,
+            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), super.task,
                     super.failCallBack(), this.stateGroupConfig);
         }
     }
@@ -233,13 +230,13 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
     }
 
     @Override
-    public void enter(ExecuteTask executeTask, StateGroupConfig stateGroupConfig) {
-        this.addDispatcherTask(new EnterGroupTask(executeTask.getGroupId(), executeTask.getTask(),
-                executeTask.failCallBack(), stateGroupConfig));
+    public void enter(AbstractTask task, StateGroupConfig stateGroupConfig) {
+        this.addDispatcherTask(new EnterGroupTask(task.getGroupId(), task.getTask(),
+                task.failCallBack(), stateGroupConfig));
     }
 
     @Override
-    public void addTask(ExecuteTask executeTask) {
+    public void addTask(AbstractTask executeTask) {
         if (!this.tryAddTask(executeTask)) {
             FailCallBack failCallBack = executeTask.failCallBack();
             if (failCallBack != null) {
@@ -248,7 +245,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock {
         }
     }
 
-    protected boolean tryAddTask(ExecuteTask executeTask) {
+    protected boolean tryAddTask(AbstractTask executeTask) {
         Long groupId = executeTask.getGroupId();
         if (groupId == null) {
             log.error("groupId is empty");

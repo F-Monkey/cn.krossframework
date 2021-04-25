@@ -5,11 +5,12 @@ import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
 import cn.krossframework.state.AbstractStateGroup;
-import cn.krossframework.state.Task;
 import cn.krossframework.state.config.StateGroupConfig;
+import cn.krossframework.state.data.Task;
 import cn.krossframework.state.util.Time;
 import cn.krossframework.websocket.Character;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoom extends AbstractStateGroup {
@@ -24,6 +25,9 @@ public class ChatRoom extends AbstractStateGroup {
 
     public ChatRoom(long id, Time time, StateGroupConfig stateGroupConfig) {
         super(id, time, stateGroupConfig);
+        this.assistants = new ArrayList<>();
+        this.chatterList = new ArrayList<>();
+        this.history = new ArrayList<>();
     }
 
     @Override
@@ -37,6 +41,7 @@ public class ChatRoom extends AbstractStateGroup {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
             String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
             this.broadCast(character.getId(), ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this));
+            return true;
         }
         return false;
     }

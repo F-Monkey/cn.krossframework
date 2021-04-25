@@ -28,7 +28,7 @@ function onMessage(data){
                 if(constants.SUCCESS == resultMsg.code){
                     var func = func_map[pkg.cmdType];
                     if(func){
-                        func(pkg.content);
+                        func(pkg.content, resultMsg.msg);
                     }
                     continue;
                 }
@@ -68,9 +68,15 @@ function loadWebSocket(){
     };
 }
 
-export function send(data){
+export function send(cmdType, content){
     if(ws && ws.readyState ==1){
-        ws.send(data);
+        let pkg = {};
+        pkg["cmdType"] = cmdType;
+        if(content){
+            pkg.content = content;
+        }
+        let pkgContent = webSocket.Package.encode(webSocket.Package.create(pkg)).finish();
+        ws.send(pkgContent);
     }
 }
 

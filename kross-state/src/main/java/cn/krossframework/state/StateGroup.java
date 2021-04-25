@@ -2,6 +2,7 @@ package cn.krossframework.state;
 
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.data.StateData;
+import cn.krossframework.state.data.Task;
 
 public interface StateGroup {
 

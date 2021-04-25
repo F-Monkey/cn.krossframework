@@ -1,9 +1,6 @@
 package cn.krossframework.state.data;
 
 import cn.krossframework.state.StateGroup;
-import cn.krossframework.state.Task;
-import cn.krossframework.state.data.State;
-import cn.krossframework.state.data.StateInfo;
 import cn.krossframework.state.util.Time;
 
 public abstract class AbstractState implements State {

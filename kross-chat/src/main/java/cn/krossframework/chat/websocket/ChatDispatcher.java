@@ -11,6 +11,8 @@ import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
 import cn.krossframework.proto.util.CmdUtil;
 import cn.krossframework.state.WorkerManager;
+import cn.krossframework.state.data.AbstractTask;
+import cn.krossframework.state.data.DefaultTask;
 import cn.krossframework.state.data.ExecuteTask;
 import cn.krossframework.websocket.Character;
 import cn.krossframework.websocket.CharacterFactory;
@@ -89,7 +91,7 @@ public class ChatDispatcher implements Dispatcher {
     private void trySendTask(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
         int cmdType = cmd.getCmdType();
-        ExecuteTask executeTask = new ExecuteTask(character.getCurrentGroupId(), new ChatTask(character, cmd), () -> {
+        AbstractTask executeTask = new ExecuteTask(character.getCurrentGroupId(), new ChatTask(character, cmd), () -> {
             character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd type:" + cmdType, cmdType, null)));
         });
         this.workerManager.addTask(executeTask);
@@ -98,10 +100,10 @@ public class ChatDispatcher implements Dispatcher {
     private void createRoom(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        ExecuteTask executeTask = new ExecuteTask(null, chatTask, () -> {
+        AbstractTask task = new DefaultTask(null, chatTask, () -> {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room create fail", null));
         });
-        this.workerManager.enter(executeTask, new ChatRoomConfig(""));
+        this.workerManager.enter(task, new ChatRoomConfig("1"));
     }
 
     private void login(Session session, Command.Package cmd) {
