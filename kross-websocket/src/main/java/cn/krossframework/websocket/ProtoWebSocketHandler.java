@@ -3,6 +3,7 @@ package cn.krossframework.websocket;
 import cn.krossframework.proto.Command;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,9 +14,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static io.netty.buffer.Unpooled.EMPTY_BUFFER;
+
 @ChannelHandler.Sharable
-public class ProtoWebSocketHandler
-        extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
+public class ProtoWebSocketHandler extends SimpleChannelInboundHandler<BinaryWebSocketFrame> {
 
     private static final Logger log = LoggerFactory.getLogger(ProtoWebSocketHandler.class);
 
@@ -31,6 +33,7 @@ public class ProtoWebSocketHandler
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("get connection from: {}", ctx.channel().remoteAddress());
+        super.channelActive(ctx);
     }
 
     private Session initSession(ChannelHandlerContext ctx) {
@@ -46,20 +49,18 @@ public class ProtoWebSocketHandler
     }
 
     @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        super.channelRead(ctx, msg);
+    }
+
+    @Override
     protected void channelRead0(ChannelHandlerContext ctx, BinaryWebSocketFrame frame) {
         ByteBuf content = frame.content();
-        byte[] bytes = new byte[content.readableBytes()];
-        try {
-            content.readBytes(bytes);
-        } finally {
-            content.release();
-        }
-
+        ByteBuf byteBuf = Unpooled.copiedBuffer(content);
         Session session = this.initSession(ctx);
-
         Command.Package cmd;
         try {
-            cmd = Command.Package.parseFrom(bytes);
+            cmd = Command.Package.parseFrom(byteBuf.array());
             log.info("pkg.cmdType:{}", cmd.getCmdType());
         } catch (InvalidProtocolBufferException e) {
             session.send("error");

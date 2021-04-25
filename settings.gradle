@@ -5,4 +5,5 @@ include 'kross-commons'
 include 'kross-proto'
 include 'kross-game'
 include 'chat'
+include 'websocket-test'
 

@@ -43,7 +43,7 @@ public class NettyServer {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
                 super.initChannel(ch);
-                ch.pipeline().addLast(NettyServer.this.customHandler);
+                ch.pipeline().addLast("customHandler", NettyServer.this.customHandler);
             }
         };
 

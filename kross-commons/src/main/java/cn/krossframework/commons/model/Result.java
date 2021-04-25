@@ -17,7 +17,7 @@ public final class Result<T> {
         return Result.<T>newBuilder().code(ResultCode.SUCCESS).data(data).build();
     }
 
-    public static <T> Result<T> ok() {
+    public static Result<Object> ok() {
         return ok(null);
     }
 
