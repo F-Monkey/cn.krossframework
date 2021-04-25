@@ -2,6 +2,8 @@ import "./lib/protobuf.js"
 import * as webSocket from "./webSocket.js"
 import * as constants from "./constants.js"
 
+webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
+
 let ChatRoomData;
 let Login;
 let LoginResult;
@@ -29,14 +31,6 @@ protobuf.load("/proto/Entity.proto",function(error, root){
         Character = root.lookup("Character");
 });
 
-function buildPackage(cmdType,content){
-    let pkg = {};
-    pkg["cmdType"] = cmdType;
-    if(content){
-        pkg.content = content;
-    }
-    return webSocket.Package.encode(webSocket.Package.create(pkg)).finish();
-}
 
 export function userLogin(){
     let username = document.getElementById("username").value;
@@ -61,12 +55,50 @@ function onLoginResult(data){
 export function createRoom(){
     let enter = {};
     let enterContent = Enter.encode(Enter.create(enter)).finish();
-    webSocket.func_map[constants.CREATE_ROOM_RESULT] = createRoomResult;
+    webSocket.func_map[constants.CREATE_ROOM_RESULT] = onCreateRoomResult;
     webSocket.send(constants.CREATE_ROOM, enterContent);
 }
 
-function createRoomResult(data, msg){
+function onCreateRoomResult(data, msg){
     alert(msg);
     let chatRoomData = ChatRoomData.decode(data);
-    document.getElementById("room_id").value = chatRoomData.id;
+    document.getElementById("current_room_id").value = chatRoomData.id;
 }
+
+export function sendMsg(){
+    let msg = document.getElementById("msg").value;
+    if(!msg || msg == ''){
+        alert("empty msg");
+        return;
+    }
+    let chatMsg = {};
+    chatMsg["msg"] = msg;
+    let chatMsgContent = ChatMessage.encode(ChatMessage.create(chatMsg)).finish();
+    webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
+    webSocket.send(constants.SEND_MESSAGE, chatMsgContent);
+}
+
+function onSendMsgResult(data){
+    let chatMsgResult = ChatMessageResult.decode(data);
+    let li = document.createElement("li");
+    let userSpan = document.createElement("span");
+    userSpan.innerHTML = chatMsgResult.from +": ";
+    let span = document.createElement("span");
+    span.innerHTML = chatMsgResult.msg;
+    li.appendChild(userSpan);
+    li.appendChild(span);
+    document.getElementById("history").appendChild(li);
+}
+
+
+export function joinRoom(){
+    let roomId = document.getElementById("room_id").value;
+    let enter = {};
+    if(roomId && roomId != ''){
+        enter["roomId"] = roomId;
+    }
+    let enterContent = Enter.encode(Enter.create(enter)).finish();
+    webSocket.func_map[constants.CREATE_ROOM_RESULT] = onCreateRoomResult;
+    webSocket.send(constants.CREATE_ROOM, enterContent);
+}
+

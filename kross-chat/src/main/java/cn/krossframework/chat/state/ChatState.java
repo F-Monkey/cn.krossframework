@@ -43,7 +43,7 @@ public class ChatState extends AbstractState {
         try {
             chatMessage = Chat.ChatMessage.parseFrom(content);
         } catch (InvalidProtocolBufferException e) {
-            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.ERROR, "invalid sendMsg content", ChatCmdType.LOGIN_RESULT, null)));
+            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.ERROR, "invalid sendMsg content", ChatCmdType.SEND_MESSAGE_RESULT, null)));
             return;
         }
         ChatRoom chatRoom = this.getStateGroup();

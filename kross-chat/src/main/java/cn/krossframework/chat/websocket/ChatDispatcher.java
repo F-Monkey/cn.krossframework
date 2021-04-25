@@ -90,8 +90,13 @@ public class ChatDispatcher implements Dispatcher {
 
     private void trySendTask(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
+        Long currentGroupId = character.getCurrentGroupId();
+        if (currentGroupId == null) {
+            character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "character has not join home yet", ChatCmdType.LOGIN_RESULT, null)));
+            return;
+        }
         int cmdType = cmd.getCmdType();
-        AbstractTask executeTask = new ExecuteTask(character.getCurrentGroupId(), new ChatTask(character, cmd), () -> {
+        AbstractTask executeTask = new ExecuteTask(currentGroupId, new ChatTask(character, cmd), () -> {
             character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd type:" + cmdType, cmdType, null)));
         });
         this.workerManager.addTask(executeTask);
@@ -100,7 +105,16 @@ public class ChatDispatcher implements Dispatcher {
     private void createRoom(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        AbstractTask task = new DefaultTask(null, chatTask, () -> {
+        Long groupId = null;
+        try {
+            Chat.Enter enter = Chat.Enter.parseFrom(cmd.getContent());
+            if (enter.getRoomId() != 0) {
+                groupId = enter.getRoomId();
+            }
+        } catch (InvalidProtocolBufferException e) {
+            log.error("invalid enter content");
+        }
+        AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room create fail", null));
         });
         this.workerManager.enter(task, new ChatRoomConfig("1"));

@@ -38,6 +38,7 @@ public class ChatRoom extends AbstractStateGroup {
         if (task instanceof ChatTask) {
             Character character = ((ChatTask) task).getCharacter();
             this.chatterList.add(character);
+            character.setCurrentGroupId(this.id);
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
             String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
             this.broadCast(character.getId(), ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this));

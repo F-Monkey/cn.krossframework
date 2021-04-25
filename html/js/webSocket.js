@@ -69,15 +69,21 @@ function loadWebSocket(){
 }
 
 export function send(cmdType, content){
-    if(ws && ws.readyState ==1){
-        let pkg = {};
-        pkg["cmdType"] = cmdType;
-        if(content){
-            pkg.content = content;
-        }
-        let pkgContent = webSocket.Package.encode(webSocket.Package.create(pkg)).finish();
-        ws.send(pkgContent);
+    if(!ws){
+        alert("webSocket has not initialized");
+        return;
     }
+    if(ws.readyState != 1){
+        alert("webSocket has not open yet!");
+        return;
+    }
+    let pkg = {};
+    pkg["cmdType"] = cmdType;
+    if(content){
+        pkg.content = content;
+    }
+    let pkgContent = webSocket.Package.encode(webSocket.Package.create(pkg)).finish();
+    ws.send(pkgContent);
 }
 
 loadWebSocket();

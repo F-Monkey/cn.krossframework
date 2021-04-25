@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <style>
+        .exp{ width:600px; height:300px; border:1px solid #00F}
+    </style>
     <script type="module">
         import * as webSocket from "./js/webSocket.js"
         import * as chat from "./js/chat.js"
@@ -31,18 +33,18 @@
             <li>
                 <input type="button" value="create room" onclick="chat.createRoom()"/>
                 <input type="button" value="login" onclick="chat.userLogin()"/>
-                <input type="button" value="join room"/>
+                <input type="button" value="join room" onclick="chat.joinRoom()"/>
             </li>
         </ul>
     </div>
-    <div id = "chat-board">
+    <div id = "chat-board" class="exp">
         <ul id="history">
 
         </ul>
     </div>
     <div>
         <textarea id="msg"></textarea>
-        <input type="button" value="send"/>
+        <input type="button" value="send" onclick="chat.sendMsg()"/>
     </div>
 </body>
 </html>
