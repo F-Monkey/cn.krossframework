@@ -1,4 +1,4 @@
-package cn.krossframework.chat.factory;
+package cn.krossframework.chat.websocket;
 
 import cn.krossframework.chat.websocket.Chatter;
 import cn.krossframework.websocket.AbstractCharacterFactory;

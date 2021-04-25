@@ -63,6 +63,6 @@ public class NettyWebSocketSession implements Session {
 
     @Override
     public boolean isAlive() {
-        return this.context.channel().isActive();
+        return this.context.channel().isOpen();
     }
 }

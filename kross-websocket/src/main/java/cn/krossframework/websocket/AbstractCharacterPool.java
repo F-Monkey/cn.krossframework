@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AbstractCharacterPool implements CharacterPool {
 
-    private static final Logger log = LoggerFactory.getLogger(AbstractStateGroupPool.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractCharacterPool.class);
 
     private final CharacterFactory factory;
 
@@ -20,7 +20,7 @@ public abstract class AbstractCharacterPool implements CharacterPool {
         Preconditions.checkNotNull(characterFactory);
         this.factory = characterFactory;
         this.characterMap = new ConcurrentHashMap<>();
-        new AutoTask(0, 2) {
+        new AutoTask(0, 1) {
             @Override
             protected void run() {
                 AbstractCharacterPool.this.removeInvalidCharacter();
@@ -29,6 +29,9 @@ public abstract class AbstractCharacterPool implements CharacterPool {
     }
 
     protected void removeInvalidCharacter() {
+        if (this.characterMap.size() <= 0) {
+            return;
+        }
         final ConcurrentHashMap<String, Character> characterMap = this.characterMap;
         log.info("start remove offline character, currentSize: {}", characterMap.size());
         characterMap.entrySet().removeIf(e -> e.getValue().isOffLine());

@@ -4,19 +4,20 @@ import com.google.common.base.Preconditions;
 
 public abstract class AbstractCharacter implements Character {
 
-    private volatile Session session;
+    protected volatile Session session;
 
-    private final User user;
+    protected final User user;
 
-    private Long currentGroupId;
+    protected Long currentGroupId;
 
-    private volatile boolean isOnline;
+    protected volatile boolean isOnline;
 
     public AbstractCharacter(Session session, User user) {
         Preconditions.checkNotNull(session);
         Preconditions.checkNotNull(user);
         this.session = session;
         this.user = user;
+        this.isOnline = true;
     }
 
     @Override
@@ -76,6 +77,6 @@ public abstract class AbstractCharacter implements Character {
 
     @Override
     public boolean isOffLine() {
-        return !this.isOnline;
+        return !this.session.isAlive() || !this.isOnline;
     }
 }

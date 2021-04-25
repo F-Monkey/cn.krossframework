@@ -14,11 +14,8 @@ import cn.krossframework.state.WorkerManager;
 import cn.krossframework.state.data.AbstractTask;
 import cn.krossframework.state.data.DefaultTask;
 import cn.krossframework.state.data.ExecuteTask;
+import cn.krossframework.websocket.*;
 import cn.krossframework.websocket.Character;
-import cn.krossframework.websocket.CharacterFactory;
-import cn.krossframework.websocket.Dispatcher;
-import cn.krossframework.websocket.Session;
-import cn.krossframework.websocket.User;
 import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -42,7 +39,7 @@ public class ChatDispatcher implements Dispatcher {
 
     private final WorkerManager workerManager;
 
-    private final CharacterFactory characterFactory;
+    private final CharacterPool characterPool;
 
     private final NioEventLoopGroup eventExecutors;
 
@@ -50,10 +47,10 @@ public class ChatDispatcher implements Dispatcher {
 
     public ChatDispatcher(IUserService userService,
                           WorkerManager workerManager,
-                          CharacterFactory characterFactory) {
+                          CharacterPool characterPool) {
         this.userService = userService;
         this.workerManager = workerManager;
-        this.characterFactory = characterFactory;
+        this.characterPool = characterPool;
         this.eventExecutors = new NioEventLoopGroup();
         this.lockCache = CacheBuilder.newBuilder()
                 .expireAfterAccess(Duration.ofMinutes(1))
@@ -147,7 +144,12 @@ public class ChatDispatcher implements Dispatcher {
                 session.send(ChatCmdUtil.loginResult(ResultCode.FAIL, "登录失败", null));
                 return;
             }
-            session.setAttribute(Character.KEY, this.characterFactory.create(session, userResult.getData()));
+            CharacterPool.FetchCharacter fetchCharacter = this.characterPool.findOrCreate(session, userResult.getData());
+            Character character = fetchCharacter.getCharacter();
+            if (!fetchCharacter.isNew()) {
+                character.setSession(session);
+            }
+            session.setAttribute(Character.KEY, character);
             session.send(ChatCmdUtil.loginResult(ResultCode.SUCCESS, "登录成功", userResult.getData()));
             return;
         }
@@ -157,7 +159,12 @@ public class ChatDispatcher implements Dispatcher {
                 session.send(ChatCmdUtil.loginResult(ResultCode.FAIL, "登录失败", null));
                 return;
             }
-            session.setAttribute(Character.KEY, this.characterFactory.create(session, userResult.getData()));
+            CharacterPool.FetchCharacter fetchCharacter = this.characterPool.findOrCreate(session, userResult.getData());
+            Character character = fetchCharacter.getCharacter();
+            if (!fetchCharacter.isNew()) {
+                character.setSession(session);
+            }
+            session.setAttribute(Character.KEY, character);
             session.send(ChatCmdUtil.loginResult(ResultCode.SUCCESS, "登录成功", userResult.getData()));
         }
     }

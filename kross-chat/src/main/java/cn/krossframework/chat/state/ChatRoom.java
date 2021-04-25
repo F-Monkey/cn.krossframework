@@ -67,9 +67,4 @@ public class ChatRoom extends AbstractStateGroup {
     public void addChatMessage(Chat.ChatMessageResult chatMessageResult) {
         this.history.add(chatMessageResult);
     }
-
-    @Override
-    public boolean tryAddTask(Task task) {
-        return super.tryAddTask(task);
-    }
 }
