@@ -19,4 +19,8 @@ export const SEND_MESSAGE = 1008;
 
 export const SEND_MESSAGE_RESULT = 1009;
 
+export const EXISTS_ROOM = 1011;
+
+export const EXISTS_ROOM_RESULT = 1012;
+
 

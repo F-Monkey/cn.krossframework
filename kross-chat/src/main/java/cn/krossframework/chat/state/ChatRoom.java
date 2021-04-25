@@ -6,6 +6,7 @@ import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
 import cn.krossframework.state.AbstractStateGroup;
 import cn.krossframework.state.config.StateGroupConfig;
+import cn.krossframework.state.data.DefaultErrorState;
 import cn.krossframework.state.data.Task;
 import cn.krossframework.state.util.Time;
 import cn.krossframework.websocket.Character;
@@ -66,5 +67,11 @@ public class ChatRoom extends AbstractStateGroup {
 
     public void addChatMessage(Chat.ChatMessageResult chatMessageResult) {
         this.history.add(chatMessageResult);
+    }
+
+    @Override
+    public boolean canDeposed() {
+        return (super.currentState == null || DefaultErrorState.CODE.equals(super.currentState.getCode()))
+                && this.chatterList.isEmpty();
     }
 }

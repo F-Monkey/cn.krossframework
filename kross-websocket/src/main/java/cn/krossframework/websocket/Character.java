@@ -10,7 +10,7 @@ public interface Character {
 
     String getRemoteAddress();
 
-    void setCurrentGroupId(long groupId);
+    void setCurrentGroupId(Long groupId);
 
     Long getCurrentGroupId();
 

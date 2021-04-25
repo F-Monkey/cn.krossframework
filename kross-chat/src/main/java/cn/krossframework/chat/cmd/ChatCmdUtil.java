@@ -40,20 +40,27 @@ public class ChatCmdUtil {
         return CmdUtil.packageGroup(CmdUtil.pkg(resultCode, msg, ChatCmdType.LOGIN_RESULT, builder.build().toByteString()));
     }
 
+    public static Chat.ChatRoomData chatRoomData(ChatRoom chatRoom) {
+        Chat.ChatRoomData.Builder builder = Chat.ChatRoomData.newBuilder();
+        List<Chat.ChatMessageResult> history = chatRoom.getHistory();
+        List<Character> chatterList = chatRoom.getChatterList();
+        builder.setId(chatRoom.getId());
+        if (history != null) {
+            builder.addAllHistory(history);
+        }
+        if (chatterList != null) {
+            for (Character chatter : chatterList) {
+                builder.addChatter(character(chatter));
+            }
+        }
+        return builder.build();
+    }
+
+
     public static Command.PackageGroup enterRoomResult(int resultCode, String msg, ChatRoom chatRoom) {
         Chat.ChatRoomData.Builder builder = Chat.ChatRoomData.newBuilder();
         if (chatRoom != null) {
-            List<Chat.ChatMessageResult> history = chatRoom.getHistory();
-            List<Character> chatterList = chatRoom.getChatterList();
-            builder.setId(chatRoom.getId());
-            if (history != null) {
-                builder.addAllHistory(history);
-            }
-            if (chatterList != null) {
-                for (Character chatter : chatterList) {
-                    builder.addChatter(character(chatter));
-                }
-            }
+            builder = chatRoomData(chatRoom).toBuilder();
         }
         return CmdUtil.packageGroup(CmdUtil.pkg(resultCode, msg, ChatCmdType.CREATE_ROOM_RESULT, builder.build().toByteString()));
     }
@@ -76,6 +83,14 @@ public class ChatCmdUtil {
         ProtocolStringList toList = chatMessage.getToList();
         if (!toList.isEmpty()) {
             builder.addAllTo(toList);
+        }
+        return builder.build();
+    }
+
+    public static Chat.ExistsResult existsResult(ChatRoom chatRoom) {
+        Chat.ExistsResult.Builder builder = Chat.ExistsResult.newBuilder();
+        if (chatRoom != null) {
+            builder.setChatRoomData(chatRoomData(chatRoom));
         }
         return builder.build();
     }

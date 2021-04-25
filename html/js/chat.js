@@ -3,6 +3,8 @@ import * as webSocket from "./webSocket.js"
 import * as constants from "./constants.js"
 
 webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
+webSocket.func_map[constants.EXISTS_ROOM_RESULT] = onExists;
+
 
 let ChatRoomData;
 let Login;
@@ -13,6 +15,8 @@ let Stream;
 let ChatMessage;
 let ChatMessageResult;
 let Character;
+let Exists;
+let ExistsResult;
 
 protobuf.load("/proto/Chat.proto", function(error, root){
         if(error) throw error;
@@ -24,6 +28,8 @@ protobuf.load("/proto/Chat.proto", function(error, root){
         Stream = root.lookup("Stream");
         ChatMessage = root.lookup("ChatMessage");
         ChatMessageResult = root.lookup("ChatMessageResult");
+        Exists = root.lookup("Exists");
+        ExistsResult = root.lookup("ExistsResult");
 });
 
 protobuf.load("/proto/Entity.proto",function(error, root){
@@ -100,5 +106,17 @@ export function joinRoom(){
     let enterContent = Enter.encode(Enter.create(enter)).finish();
     webSocket.func_map[constants.CREATE_ROOM_RESULT] = onCreateRoomResult;
     webSocket.send(constants.CREATE_ROOM, enterContent);
+}
+
+export function exists(){
+    let existsData = {}
+    let existsContent = Exists.encode(Exists.create(existsData)).finish();
+    webSocket.send(constants.EXISTS_ROOM, existsContent);
+}
+
+function onExists(data, msg){
+    let existsResult = EnterResult.decode(data);
+    let chatRoomData = existsResult.chatRoomData;
+    alert(msg);
 }
 

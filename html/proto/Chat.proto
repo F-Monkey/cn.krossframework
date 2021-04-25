@@ -43,6 +43,14 @@ message EnterResult {
   ChatRoomData chatRoomData = 1;
 }
 
+message Exists {
+
+}
+
+message ExistsResult {
+  ChatRoomData chatRoomData = 1;
+}
+
 message Stream {
   string format = 1;
   bytes Stream = 2;

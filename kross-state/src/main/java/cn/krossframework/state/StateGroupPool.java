@@ -27,12 +27,6 @@ public interface StateGroupPool {
 
     StateGroupFactory getStateGroupFactory();
 
-    void setRemoveDeposedStateGroupPeriod(long period);
-
-    void afterPropertiesSet() throws Exception;
-
-    void removeDeposedStateGroup();
-
     FetchStateGroup findOrCreate(Long id, StateGroupConfig stateGroupConfig);
 
     StateGroup find(long id);

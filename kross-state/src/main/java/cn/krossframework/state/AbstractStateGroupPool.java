@@ -1,5 +1,6 @@
 package cn.krossframework.state;
 
+import cn.krossframework.commons.beam.InitializeBean;
 import cn.krossframework.commons.thread.AutoTask;
 import cn.krossframework.state.config.StateGroupConfig;
 import com.google.common.base.Preconditions;
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class AbstractStateGroupPool implements StateGroupPool {
+public abstract class AbstractStateGroupPool implements StateGroupPool, InitializeBean {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractStateGroupPool.class);
 
@@ -40,7 +41,6 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         return this.stateGroupFactory;
     }
 
-    @Override
     public void setRemoveDeposedStateGroupPeriod(long period) {
         this.period = period;
     }
@@ -55,8 +55,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool {
         }.start();
     }
 
-    @Override
-    public void removeDeposedStateGroup() {
+    protected void removeDeposedStateGroup() {
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
         if (stateGroupMap.isEmpty()) {
             return;

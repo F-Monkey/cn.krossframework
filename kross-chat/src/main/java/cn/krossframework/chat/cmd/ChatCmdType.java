@@ -14,6 +14,10 @@ public interface ChatCmdType {
 
     int CREATE_ROOM_RESULT = 1007;
 
+    int EXISTS_ROOM = 1011;
+
+    int EXISTS_ROOM_RESULT = 1012;
+
     int SEND_MESSAGE = 1008;
 
     int SEND_MESSAGE_RESULT = 1009;

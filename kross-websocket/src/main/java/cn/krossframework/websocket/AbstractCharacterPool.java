@@ -1,14 +1,14 @@
 package cn.krossframework.websocket;
 
+import cn.krossframework.commons.beam.InitializeBean;
 import cn.krossframework.commons.thread.AutoTask;
-import cn.krossframework.state.AbstractStateGroupPool;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public abstract class AbstractCharacterPool implements CharacterPool {
+public abstract class AbstractCharacterPool implements CharacterPool, InitializeBean {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractCharacterPool.class);
 
@@ -20,12 +20,6 @@ public abstract class AbstractCharacterPool implements CharacterPool {
         Preconditions.checkNotNull(characterFactory);
         this.factory = characterFactory;
         this.characterMap = new ConcurrentHashMap<>();
-        new AutoTask(0, 1) {
-            @Override
-            protected void run() {
-                AbstractCharacterPool.this.removeInvalidCharacter();
-            }
-        }.start();
     }
 
     protected void removeInvalidCharacter() {
@@ -37,6 +31,16 @@ public abstract class AbstractCharacterPool implements CharacterPool {
         characterMap.entrySet().removeIf(e -> e.getValue().isOffLine());
         this.characterMap = characterMap;
         log.info("end remove offline character, currentSize: {}", this.characterMap.size());
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        new AutoTask(0, 2) {
+            @Override
+            protected void run() {
+                AbstractCharacterPool.this.removeInvalidCharacter();
+            }
+        }.start();
     }
 
     @Override

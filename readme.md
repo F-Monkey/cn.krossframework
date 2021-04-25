@@ -1,13 +1,13 @@
 ### Netty WebSocket Demo
 
-@See Code in <kross-websocket>
+@See Code in kross-websocket
 
 ### State Machine
 
-@See Code in <kross-state>
+@See Code in kross-state
 
 ### protoBuf
 
-@See Code in <kross-proto>
+@See Code in kross-proto
 
 ### gradle

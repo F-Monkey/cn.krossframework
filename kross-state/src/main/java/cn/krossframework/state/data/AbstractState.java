@@ -25,7 +25,7 @@ public abstract class AbstractState implements State {
 
     @Override
     public void handleTask(Time time, Task task) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

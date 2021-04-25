@@ -36,7 +36,7 @@ public class StateConfig {
     }
 
     @Bean
-    StateGroupPool stateGroupPool(StateGroupFactory stateGroupFactory) {
+    StateGroupPool stateGroupPool(StateGroupFactory stateGroupFactory) throws Exception {
         return new AbstractStateGroupPool(stateGroupFactory) {
         };
     }

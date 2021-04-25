@@ -31,7 +31,7 @@ public abstract class AbstractCharacter implements Character {
     }
 
     @Override
-    public void setCurrentGroupId(long groupId) {
+    public void setCurrentGroupId(Long groupId) {
         this.currentGroupId = groupId;
     }
 
