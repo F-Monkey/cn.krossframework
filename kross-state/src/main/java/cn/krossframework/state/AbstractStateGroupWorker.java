@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock {
@@ -31,7 +32,7 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
 
     protected volatile StateGroup currentAddStateGroup;
 
-    protected volatile ConcurrentSkipListSet<Long> groupIdSet;
+    protected volatile ConcurrentHashMap<Long, StateGroup> stateGroupMap;
 
     public AbstractStateGroupWorker(long id,
                                     int period,
@@ -44,7 +45,7 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
         this.stateGroupCapacity = stateGroupCapacity;
         this.stateGroupPool = stateGroupPool;
         this.id = id;
-        this.groupIdSet = new ConcurrentSkipListSet<>();
+        this.stateGroupMap = new ConcurrentHashMap<>(this.stateGroupCapacity);
         this.LOCK = new Object();
         this.thread = new Thread() {
             @Override
@@ -86,15 +87,14 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
     }
 
     protected void removeDeposedStateGroup() {
-        final ConcurrentSkipListSet<Long> groupIdSet = this.groupIdSet;
-        groupIdSet.removeIf(id -> {
-            StateGroup stateGroup = this.stateGroupPool.find(id);
-            if (stateGroup == null) {
-                return true;
-            }
-            return stateGroup.canDeposed();
-        });
-        this.groupIdSet = groupIdSet;
+        if (this.stateGroupMap.isEmpty()) {
+            return;
+        }
+        log.info("start remove worker id:{} stateGroups, currentSize:{}", this.id, this.stateGroupMap.size());
+        final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
+        stateGroupMap.entrySet().removeIf(e -> e.getValue().canDeposed());
+        log.info("end remove worker id:{} stateGroups, currentSize:{}", this.id, stateGroupMap.size());
+        this.stateGroupMap = stateGroupMap;
     }
 
     @Override
@@ -116,21 +116,18 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
 
     @Override
     public boolean isFull() {
-        return (this.currentAddStateGroup == null ? 0 : 1) + this.groupIdSet.size() >= this.stateGroupCapacity;
+        return (this.currentAddStateGroup == null ? 0 : 1) + this.stateGroupMap.size() >= this.stateGroupCapacity;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.groupIdSet.isEmpty() && this.currentAddStateGroup == null;
+        return this.stateGroupMap.isEmpty() && this.currentAddStateGroup == null;
     }
 
     @Override
     public void update() {
-        for (Long id : this.groupIdSet) {
-            StateGroup stateGroup = this.stateGroupPool.find(id);
-            if (stateGroup != null) {
-                stateGroup.update();
-            }
+        for (StateGroup stateGroup : this.stateGroupMap.values()) {
+            stateGroup.update();
         }
     }
 
@@ -147,14 +144,14 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
             return false;
         }
         this.currentAddStateGroup = stateGroup;
-        this.groupIdSet.add(stateGroup.getId());
+        this.stateGroupMap.putIfAbsent(stateGroup.getId(), stateGroup);
         stateGroup.setCurrentWorkerId(this.id);
         this.currentAddStateGroup = null;
         return true;
     }
 
     @Override
-    public Collection<Long> stateGroupIdIterator() {
-        return this.groupIdSet;
+    public Collection<StateGroup> stateGroupIterator() {
+        return this.stateGroupMap.values();
     }
 }

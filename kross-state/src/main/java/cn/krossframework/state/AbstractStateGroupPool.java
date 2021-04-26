@@ -82,16 +82,17 @@ public abstract class AbstractStateGroupPool implements StateGroupPool, Initiali
 
     @Override
     public FetchStateGroup findOrCreate(Long id, final StateGroupConfig stateGroupConfig) {
+        if (stateGroupConfig == null) {
+            throw new NullPointerException("stateGroupConfig can not be null when create new stateGroup");
+        }
         if (id == null) {
             id = this.getNextGroupId();
         }
         boolean[] isNew = {false};
         final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
+
         StateGroup stateGroup = stateGroupMap.computeIfAbsent(id, (i) -> {
             isNew[0] = true;
-            if (stateGroupConfig == null) {
-                throw new NullPointerException("stateGroupConfig can not be null when create new stateGroup");
-            }
             return this.getStateGroupFactory().create(i, stateGroupConfig);
         });
         log.info("find or create stateGroup, stateGroup id: {}, isNew: {}", stateGroup.getId(), isNew[0]);

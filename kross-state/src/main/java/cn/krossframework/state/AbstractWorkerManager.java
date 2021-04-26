@@ -265,6 +265,10 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
             log.error("group: {} worker: {} is not exists", groupId, currentWorkerId);
             return false;
         }
+        if (!worker.isStart()) {
+            log.error("group: {} worker: {} is not start", groupId, currentWorkerId);
+            return false;
+        }
         this.addDispatcherTask(executeTask);
         return true;
     }

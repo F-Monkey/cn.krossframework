@@ -6,5 +6,5 @@ public interface StateGroupWorker extends Worker {
 
     boolean tryAddStateGroup(StateGroup stateGroup);
 
-    Collection<Long> stateGroupIdIterator();
+    Collection<StateGroup> stateGroupIterator();
 }
