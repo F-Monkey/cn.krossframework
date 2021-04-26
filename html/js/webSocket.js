@@ -51,7 +51,7 @@ function loadWebSocket(){
         return;
     }
 
-    let wsUri = "ws://localhost:8888/chat";
+    let wsUri = "ws://192.168.111.1:8888/chat";
 
     ws = new WebSocket(wsUri);
     ws.onopen = function(evt) {

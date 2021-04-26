@@ -90,8 +90,10 @@ public class ChatDispatcher implements Dispatcher {
 
     private void enterRoom(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
+
         ChatTask chatTask = new ChatTask(character, cmd);
         Long groupId = null;
+
         try {
             Chat.Enter enter = Chat.Enter.parseFrom(cmd.getContent());
             if (enter.getRoomId() != 0) {
@@ -100,11 +102,18 @@ public class ChatDispatcher implements Dispatcher {
         } catch (InvalidProtocolBufferException e) {
             log.error("invalid enter content");
         }
+
         if (groupId == null) {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room closed[0]", null));
             log.error("enter room fail, cause group id is empty");
             return;
         }
+
+        if (character.getCurrentGroupId() != null && !character.getCurrentGroupId().equals(groupId)) {
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "please exit before enter new one", null));
+            return;
+        }
+
         AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room closed[1]", null));
         });

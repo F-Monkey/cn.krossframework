@@ -51,11 +51,11 @@ message EnterResult {
   ChatRoomData chatRoomData = 1;
 }
 
-message Exists {
+message Exit {
 
 }
 
-message ExistsResult {
+message ExitResult {
   ChatRoomData chatRoomData = 1;
 }
 

@@ -98,8 +98,8 @@ public class ChatCmdUtil {
         return builder.build();
     }
 
-    public static Chat.ExistsResult existsResult(ChatRoom chatRoom) {
-        Chat.ExistsResult.Builder builder = Chat.ExistsResult.newBuilder();
+    public static Chat.ExitResult existsResult(ChatRoom chatRoom) {
+        Chat.ExitResult.Builder builder = Chat.ExitResult.newBuilder();
         if (chatRoom != null) {
             builder.setChatRoomData(chatRoomData(chatRoom));
         }

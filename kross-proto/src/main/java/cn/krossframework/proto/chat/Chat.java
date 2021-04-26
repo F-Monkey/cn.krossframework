@@ -6041,30 +6041,30 @@ public final class Chat {
 
   }
 
-  public interface ExistsOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.chat.Exists)
+  public interface ExitOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.chat.Exit)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code cn.krossframework.proto.chat.Exists}
+   * Protobuf type {@code cn.krossframework.proto.chat.Exit}
    */
-  public static final class Exists extends
+  public static final class Exit extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.chat.Exists)
-      ExistsOrBuilder {
+      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.chat.Exit)
+      ExitOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Exists.newBuilder() to construct.
-    private Exists(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use Exit.newBuilder() to construct.
+    private Exit(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Exists() {
+    private Exit() {
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new Exists();
+      return new Exit();
     }
 
     @java.lang.Override
@@ -6072,7 +6072,7 @@ public final class Chat {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Exists(
+    private Exit(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6111,15 +6111,15 @@ public final class Chat {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exists_descriptor;
+      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exit_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exists_fieldAccessorTable
+      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exit_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              cn.krossframework.proto.chat.Chat.Exists.class, cn.krossframework.proto.chat.Chat.Exists.Builder.class);
+              cn.krossframework.proto.chat.Chat.Exit.class, cn.krossframework.proto.chat.Chat.Exit.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -6155,10 +6155,10 @@ public final class Chat {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof cn.krossframework.proto.chat.Chat.Exists)) {
+      if (!(obj instanceof cn.krossframework.proto.chat.Chat.Exit)) {
         return super.equals(obj);
       }
-      cn.krossframework.proto.chat.Chat.Exists other = (cn.krossframework.proto.chat.Chat.Exists) obj;
+      cn.krossframework.proto.chat.Chat.Exit other = (cn.krossframework.proto.chat.Chat.Exit) obj;
 
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -6176,69 +6176,69 @@ public final class Chat {
       return hash;
     }
 
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(byte[] data)
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(java.io.InputStream input)
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseDelimitedFrom(java.io.InputStream input)
+    public static cn.krossframework.proto.chat.Chat.Exit parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseDelimitedFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.Exists parseFrom(
+    public static cn.krossframework.proto.chat.Chat.Exit parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6251,7 +6251,7 @@ public final class Chat {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(cn.krossframework.proto.chat.Chat.Exists prototype) {
+    public static Builder newBuilder(cn.krossframework.proto.chat.Chat.Exit prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -6267,26 +6267,26 @@ public final class Chat {
       return builder;
     }
     /**
-     * Protobuf type {@code cn.krossframework.proto.chat.Exists}
+     * Protobuf type {@code cn.krossframework.proto.chat.Exit}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.chat.Exists)
-        cn.krossframework.proto.chat.Chat.ExistsOrBuilder {
+        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.chat.Exit)
+        cn.krossframework.proto.chat.Chat.ExitOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exists_descriptor;
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exit_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exists_fieldAccessorTable
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exit_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                cn.krossframework.proto.chat.Chat.Exists.class, cn.krossframework.proto.chat.Chat.Exists.Builder.class);
+                cn.krossframework.proto.chat.Chat.Exit.class, cn.krossframework.proto.chat.Chat.Exit.Builder.class);
       }
 
-      // Construct using cn.krossframework.proto.chat.Chat.Exists.newBuilder()
+      // Construct using cn.krossframework.proto.chat.Chat.Exit.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6310,17 +6310,17 @@ public final class Chat {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exists_descriptor;
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_Exit_descriptor;
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.Exists getDefaultInstanceForType() {
-        return cn.krossframework.proto.chat.Chat.Exists.getDefaultInstance();
+      public cn.krossframework.proto.chat.Chat.Exit getDefaultInstanceForType() {
+        return cn.krossframework.proto.chat.Chat.Exit.getDefaultInstance();
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.Exists build() {
-        cn.krossframework.proto.chat.Chat.Exists result = buildPartial();
+      public cn.krossframework.proto.chat.Chat.Exit build() {
+        cn.krossframework.proto.chat.Chat.Exit result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6328,8 +6328,8 @@ public final class Chat {
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.Exists buildPartial() {
-        cn.krossframework.proto.chat.Chat.Exists result = new cn.krossframework.proto.chat.Chat.Exists(this);
+      public cn.krossframework.proto.chat.Chat.Exit buildPartial() {
+        cn.krossframework.proto.chat.Chat.Exit result = new cn.krossframework.proto.chat.Chat.Exit(this);
         onBuilt();
         return result;
       }
@@ -6368,16 +6368,16 @@ public final class Chat {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof cn.krossframework.proto.chat.Chat.Exists) {
-          return mergeFrom((cn.krossframework.proto.chat.Chat.Exists)other);
+        if (other instanceof cn.krossframework.proto.chat.Chat.Exit) {
+          return mergeFrom((cn.krossframework.proto.chat.Chat.Exit)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(cn.krossframework.proto.chat.Chat.Exists other) {
-        if (other == cn.krossframework.proto.chat.Chat.Exists.getDefaultInstance()) return this;
+      public Builder mergeFrom(cn.krossframework.proto.chat.Chat.Exit other) {
+        if (other == cn.krossframework.proto.chat.Chat.Exit.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -6393,11 +6393,11 @@ public final class Chat {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        cn.krossframework.proto.chat.Chat.Exists parsedMessage = null;
+        cn.krossframework.proto.chat.Chat.Exit parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (cn.krossframework.proto.chat.Chat.Exists) e.getUnfinishedMessage();
+          parsedMessage = (cn.krossframework.proto.chat.Chat.Exit) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -6419,48 +6419,48 @@ public final class Chat {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.chat.Exists)
+      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.chat.Exit)
     }
 
-    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.chat.Exists)
-    private static final cn.krossframework.proto.chat.Chat.Exists DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.chat.Exit)
+    private static final cn.krossframework.proto.chat.Chat.Exit DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new cn.krossframework.proto.chat.Chat.Exists();
+      DEFAULT_INSTANCE = new cn.krossframework.proto.chat.Chat.Exit();
     }
 
-    public static cn.krossframework.proto.chat.Chat.Exists getDefaultInstance() {
+    public static cn.krossframework.proto.chat.Chat.Exit getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<Exists>
-        PARSER = new com.google.protobuf.AbstractParser<Exists>() {
+    private static final com.google.protobuf.Parser<Exit>
+        PARSER = new com.google.protobuf.AbstractParser<Exit>() {
       @java.lang.Override
-      public Exists parsePartialFrom(
+      public Exit parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Exists(input, extensionRegistry);
+        return new Exit(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<Exists> parser() {
+    public static com.google.protobuf.Parser<Exit> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Exists> getParserForType() {
+    public com.google.protobuf.Parser<Exit> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public cn.krossframework.proto.chat.Chat.Exists getDefaultInstanceForType() {
+    public cn.krossframework.proto.chat.Chat.Exit getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ExistsResultOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.chat.ExistsResult)
+  public interface ExitResultOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:cn.krossframework.proto.chat.ExitResult)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -6479,25 +6479,25 @@ public final class Chat {
     cn.krossframework.proto.chat.Chat.ChatRoomDataOrBuilder getChatRoomDataOrBuilder();
   }
   /**
-   * Protobuf type {@code cn.krossframework.proto.chat.ExistsResult}
+   * Protobuf type {@code cn.krossframework.proto.chat.ExitResult}
    */
-  public static final class ExistsResult extends
+  public static final class ExitResult extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.chat.ExistsResult)
-      ExistsResultOrBuilder {
+      // @@protoc_insertion_point(message_implements:cn.krossframework.proto.chat.ExitResult)
+      ExitResultOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use ExistsResult.newBuilder() to construct.
-    private ExistsResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use ExitResult.newBuilder() to construct.
+    private ExitResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ExistsResult() {
+    private ExitResult() {
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new ExistsResult();
+      return new ExitResult();
     }
 
     @java.lang.Override
@@ -6505,7 +6505,7 @@ public final class Chat {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExistsResult(
+    private ExitResult(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6557,15 +6557,15 @@ public final class Chat {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor;
+      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExitResult_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExistsResult_fieldAccessorTable
+      return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExitResult_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              cn.krossframework.proto.chat.Chat.ExistsResult.class, cn.krossframework.proto.chat.Chat.ExistsResult.Builder.class);
+              cn.krossframework.proto.chat.Chat.ExitResult.class, cn.krossframework.proto.chat.Chat.ExitResult.Builder.class);
     }
 
     public static final int CHATROOMDATA_FIELD_NUMBER = 1;
@@ -6634,10 +6634,10 @@ public final class Chat {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof cn.krossframework.proto.chat.Chat.ExistsResult)) {
+      if (!(obj instanceof cn.krossframework.proto.chat.Chat.ExitResult)) {
         return super.equals(obj);
       }
-      cn.krossframework.proto.chat.Chat.ExistsResult other = (cn.krossframework.proto.chat.Chat.ExistsResult) obj;
+      cn.krossframework.proto.chat.Chat.ExitResult other = (cn.krossframework.proto.chat.Chat.ExitResult) obj;
 
       if (hasChatRoomData() != other.hasChatRoomData()) return false;
       if (hasChatRoomData()) {
@@ -6664,69 +6664,69 @@ public final class Chat {
       return hash;
     }
 
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(byte[] data)
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(java.io.InputStream input)
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseDelimitedFrom(java.io.InputStream input)
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseDelimitedFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.krossframework.proto.chat.Chat.ExistsResult parseFrom(
+    public static cn.krossframework.proto.chat.Chat.ExitResult parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6739,7 +6739,7 @@ public final class Chat {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(cn.krossframework.proto.chat.Chat.ExistsResult prototype) {
+    public static Builder newBuilder(cn.krossframework.proto.chat.Chat.ExitResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -6755,26 +6755,26 @@ public final class Chat {
       return builder;
     }
     /**
-     * Protobuf type {@code cn.krossframework.proto.chat.ExistsResult}
+     * Protobuf type {@code cn.krossframework.proto.chat.ExitResult}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.chat.ExistsResult)
-        cn.krossframework.proto.chat.Chat.ExistsResultOrBuilder {
+        // @@protoc_insertion_point(builder_implements:cn.krossframework.proto.chat.ExitResult)
+        cn.krossframework.proto.chat.Chat.ExitResultOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor;
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExitResult_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExistsResult_fieldAccessorTable
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExitResult_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                cn.krossframework.proto.chat.Chat.ExistsResult.class, cn.krossframework.proto.chat.Chat.ExistsResult.Builder.class);
+                cn.krossframework.proto.chat.Chat.ExitResult.class, cn.krossframework.proto.chat.Chat.ExitResult.Builder.class);
       }
 
-      // Construct using cn.krossframework.proto.chat.Chat.ExistsResult.newBuilder()
+      // Construct using cn.krossframework.proto.chat.Chat.ExitResult.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6804,17 +6804,17 @@ public final class Chat {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor;
+        return cn.krossframework.proto.chat.Chat.internal_static_cn_krossframework_proto_chat_ExitResult_descriptor;
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.ExistsResult getDefaultInstanceForType() {
-        return cn.krossframework.proto.chat.Chat.ExistsResult.getDefaultInstance();
+      public cn.krossframework.proto.chat.Chat.ExitResult getDefaultInstanceForType() {
+        return cn.krossframework.proto.chat.Chat.ExitResult.getDefaultInstance();
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.ExistsResult build() {
-        cn.krossframework.proto.chat.Chat.ExistsResult result = buildPartial();
+      public cn.krossframework.proto.chat.Chat.ExitResult build() {
+        cn.krossframework.proto.chat.Chat.ExitResult result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -6822,8 +6822,8 @@ public final class Chat {
       }
 
       @java.lang.Override
-      public cn.krossframework.proto.chat.Chat.ExistsResult buildPartial() {
-        cn.krossframework.proto.chat.Chat.ExistsResult result = new cn.krossframework.proto.chat.Chat.ExistsResult(this);
+      public cn.krossframework.proto.chat.Chat.ExitResult buildPartial() {
+        cn.krossframework.proto.chat.Chat.ExitResult result = new cn.krossframework.proto.chat.Chat.ExitResult(this);
         if (chatRoomDataBuilder_ == null) {
           result.chatRoomData_ = chatRoomData_;
         } else {
@@ -6867,16 +6867,16 @@ public final class Chat {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof cn.krossframework.proto.chat.Chat.ExistsResult) {
-          return mergeFrom((cn.krossframework.proto.chat.Chat.ExistsResult)other);
+        if (other instanceof cn.krossframework.proto.chat.Chat.ExitResult) {
+          return mergeFrom((cn.krossframework.proto.chat.Chat.ExitResult)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(cn.krossframework.proto.chat.Chat.ExistsResult other) {
-        if (other == cn.krossframework.proto.chat.Chat.ExistsResult.getDefaultInstance()) return this;
+      public Builder mergeFrom(cn.krossframework.proto.chat.Chat.ExitResult other) {
+        if (other == cn.krossframework.proto.chat.Chat.ExitResult.getDefaultInstance()) return this;
         if (other.hasChatRoomData()) {
           mergeChatRoomData(other.getChatRoomData());
         }
@@ -6895,11 +6895,11 @@ public final class Chat {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        cn.krossframework.proto.chat.Chat.ExistsResult parsedMessage = null;
+        cn.krossframework.proto.chat.Chat.ExitResult parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (cn.krossframework.proto.chat.Chat.ExistsResult) e.getUnfinishedMessage();
+          parsedMessage = (cn.krossframework.proto.chat.Chat.ExitResult) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -7040,41 +7040,41 @@ public final class Chat {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.chat.ExistsResult)
+      // @@protoc_insertion_point(builder_scope:cn.krossframework.proto.chat.ExitResult)
     }
 
-    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.chat.ExistsResult)
-    private static final cn.krossframework.proto.chat.Chat.ExistsResult DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:cn.krossframework.proto.chat.ExitResult)
+    private static final cn.krossframework.proto.chat.Chat.ExitResult DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new cn.krossframework.proto.chat.Chat.ExistsResult();
+      DEFAULT_INSTANCE = new cn.krossframework.proto.chat.Chat.ExitResult();
     }
 
-    public static cn.krossframework.proto.chat.Chat.ExistsResult getDefaultInstance() {
+    public static cn.krossframework.proto.chat.Chat.ExitResult getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ExistsResult>
-        PARSER = new com.google.protobuf.AbstractParser<ExistsResult>() {
+    private static final com.google.protobuf.Parser<ExitResult>
+        PARSER = new com.google.protobuf.AbstractParser<ExitResult>() {
       @java.lang.Override
-      public ExistsResult parsePartialFrom(
+      public ExitResult parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ExistsResult(input, extensionRegistry);
+        return new ExitResult(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ExistsResult> parser() {
+    public static com.google.protobuf.Parser<ExitResult> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ExistsResult> getParserForType() {
+    public com.google.protobuf.Parser<ExitResult> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public cn.krossframework.proto.chat.Chat.ExistsResult getDefaultInstanceForType() {
+    public cn.krossframework.proto.chat.Chat.ExitResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10182,15 +10182,15 @@ public final class Chat {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_cn_krossframework_proto_chat_EnterResult_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_cn_krossframework_proto_chat_Exists_descriptor;
+    internal_static_cn_krossframework_proto_chat_Exit_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_cn_krossframework_proto_chat_Exists_fieldAccessorTable;
+      internal_static_cn_krossframework_proto_chat_Exit_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor;
+    internal_static_cn_krossframework_proto_chat_ExitResult_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_cn_krossframework_proto_chat_ExistsResult_fieldAccessorTable;
+      internal_static_cn_krossframework_proto_chat_ExitResult_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_cn_krossframework_proto_chat_Stream_descriptor;
   private static final 
@@ -10228,18 +10228,18 @@ public final class Chat {
       "\001 \001(\t\022\020\n\010username\030\002 \001(\t\"\010\n\006Logout\"\016\n\014Log" +
       "outResult\"\027\n\005Enter\022\016\n\006roomId\030\001 \001(\003\"O\n\013En" +
       "terResult\022@\n\014chatRoomData\030\001 \001(\0132*.cn.kro" +
-      "ssframework.proto.chat.ChatRoomData\"\010\n\006E" +
-      "xists\"P\n\014ExistsResult\022@\n\014chatRoomData\030\001 " +
-      "\001(\0132*.cn.krossframework.proto.chat.ChatR" +
-      "oomData\"(\n\006Stream\022\016\n\006format\030\001 \001(\t\022\016\n\006Str" +
-      "eam\030\002 \001(\014\"}\n\013ChatMessage\022\r\n\005toAll\030\001 \001(\010\022" +
-      "\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001" +
-      "(\005\0224\n\006stream\030\005 \001(\0132$.cn.krossframework.p" +
-      "roto.chat.Stream\"\221\001\n\021ChatMessageResult\022\r" +
-      "\n\005toAll\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020" +
-      "\n\010emoticon\030\004 \001(\005\0224\n\006stream\030\005 \001(\0132$.cn.kr" +
-      "ossframework.proto.chat.Stream\022\014\n\004from\030\006" +
-      " \001(\tB\010B\004ChatH\001b\006proto3"
+      "ssframework.proto.chat.ChatRoomData\"\006\n\004E" +
+      "xit\"N\n\nExitResult\022@\n\014chatRoomData\030\001 \001(\0132" +
+      "*.cn.krossframework.proto.chat.ChatRoomD" +
+      "ata\"(\n\006Stream\022\016\n\006format\030\001 \001(\t\022\016\n\006Stream\030" +
+      "\002 \001(\014\"}\n\013ChatMessage\022\r\n\005toAll\030\001 \001(\010\022\n\n\002t" +
+      "o\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005\0224" +
+      "\n\006stream\030\005 \001(\0132$.cn.krossframework.proto" +
+      ".chat.Stream\"\221\001\n\021ChatMessageResult\022\r\n\005to" +
+      "All\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010em" +
+      "oticon\030\004 \001(\005\0224\n\006stream\030\005 \001(\0132$.cn.krossf" +
+      "ramework.proto.chat.Stream\022\014\n\004from\030\006 \001(\t" +
+      "B\010B\004ChatH\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10300,17 +10300,17 @@ public final class Chat {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_chat_EnterResult_descriptor,
         new java.lang.String[] { "ChatRoomData", });
-    internal_static_cn_krossframework_proto_chat_Exists_descriptor =
+    internal_static_cn_krossframework_proto_chat_Exit_descriptor =
       getDescriptor().getMessageTypes().get(9);
-    internal_static_cn_krossframework_proto_chat_Exists_fieldAccessorTable = new
+    internal_static_cn_krossframework_proto_chat_Exit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_cn_krossframework_proto_chat_Exists_descriptor,
+        internal_static_cn_krossframework_proto_chat_Exit_descriptor,
         new java.lang.String[] { });
-    internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor =
+    internal_static_cn_krossframework_proto_chat_ExitResult_descriptor =
       getDescriptor().getMessageTypes().get(10);
-    internal_static_cn_krossframework_proto_chat_ExistsResult_fieldAccessorTable = new
+    internal_static_cn_krossframework_proto_chat_ExitResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_cn_krossframework_proto_chat_ExistsResult_descriptor,
+        internal_static_cn_krossframework_proto_chat_ExitResult_descriptor,
         new java.lang.String[] { "ChatRoomData", });
     internal_static_cn_krossframework_proto_chat_Stream_descriptor =
       getDescriptor().getMessageTypes().get(11);

@@ -4,7 +4,7 @@ import * as constants from "./constants.js"
 
 webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
 webSocket.func_map[constants.ENTER_ROOM_RESULT] = onCreateRoomResult;
-webSocket.func_map[constants.EXIST_ROOM_RESULT] = onExists;
+webSocket.func_map[constants.EXIT_ROOM_RESULT] = onExit;
 webSocket.func_map[constants.CLICK_OFF_RESULT] = onClickOff;
 
 let ChatRoomData;
@@ -16,8 +16,8 @@ let Stream;
 let ChatMessage;
 let ChatMessageResult;
 let Character;
-let Exists;
-let ExistsResult;
+let Exit;
+let ExitResult;
 let ClickOff;
 let ClickOffResult;
 
@@ -31,8 +31,8 @@ protobuf.load("/proto/Chat.proto", function(error, root){
         Stream = root.lookup("Stream");
         ChatMessage = root.lookup("ChatMessage");
         ChatMessageResult = root.lookup("ChatMessageResult");
-        Exists = root.lookup("Exists");
-        ExistsResult = root.lookup("ExistsResult");
+        Exit = root.lookup("Exit");
+        ExitResult = root.lookup("ExitResult");
         ClickOff = root.lookup("ClickOff");
         ClickOffResult = root.lookup("ClickOffResult");
 });
@@ -122,16 +122,16 @@ export function exit(){
     while((new Date()).getTime() - start < 20) {
         continue;
     }
-    let existsData = {}
-    let existsContent = Exists.encode(Exists.create(existsData)).finish();
-    webSocket.send(constants.EXIT_ROOM, existsContent);
+    let exitData = {}
+    let exitContent = Exit.encode(Exit.create(exitData)).finish();
+    webSocket.send(constants.EXIT_ROOM, exitContent);
     document.getElementById("current_room_id").value = "";
 }
 
-function onExists(data, msg){
-    let existsResult = EnterResult.decode(data);
+function onExit(data, msg){
+    let exitResult = ExitResult.decode(data);
     alert(msg);
-    let chatRoomData = existsResult.chatRoomData;
+    let chatRoomData = exitResult.chatRoomData;
     refreshChatRoomData(chatRoomData);
 }
 

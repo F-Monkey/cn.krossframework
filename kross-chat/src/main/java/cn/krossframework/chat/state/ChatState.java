@@ -116,6 +116,7 @@ public class ChatState extends AbstractState {
                 break;
             }
         }
+        character.setCurrentGroupId(null);
         broadCastMsg = broadCastMsg == null ? character.getId() + " is out" : broadCastMsg;
         chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.ENTER_ROOM_RESULT,
                 ChatCmdUtil.existsResult(chatRoom).toByteString())), character.getId());
