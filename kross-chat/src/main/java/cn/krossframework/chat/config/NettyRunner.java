@@ -4,6 +4,7 @@ import cn.krossframework.websocket.Dispatcher;
 import cn.krossframework.websocket.Filter;
 import cn.krossframework.websocket.NettyServer;
 import cn.krossframework.websocket.ProtoWebSocketHandler;
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -57,6 +58,7 @@ public class NettyRunner implements ApplicationRunner, ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        Preconditions.checkNotNull(applicationContext);
         this.applicationContext = applicationContext;
     }
 }

@@ -2,7 +2,6 @@ package cn.krossframework.chat.state;
 
 import cn.krossframework.chat.cmd.ChatCmdUtil;
 import cn.krossframework.chat.state.data.ChatTask;
-import cn.krossframework.chat.websocket.Chatter;
 import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
@@ -40,23 +39,47 @@ public class ChatRoom extends AbstractStateGroup {
         }
         if (task instanceof ChatTask) {
             Character character = ((ChatTask) task).getCharacter();
-            this.chatterList.add(character);
+            if (this.master == null) {
+                this.master = character.getId();
+            }
+            boolean containsCharacter = false;
+            for (Character c : this.chatterList) {
+                if (character.getId().equals(c.getId())) {
+                    containsCharacter = true;
+                    break;
+                }
+            }
+            if (!containsCharacter) {
+                this.chatterList.add(character);
+            }
             character.setCurrentGroupId(this.id);
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
             String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
-            this.broadCast(character.getId(), ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this));
+            this.broadCast(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this), character.getId());
             return true;
         }
         return false;
     }
 
-    public void broadCast(String excludeId, Command.PackageGroup packageGroup) {
-        for (Character character : this.chatterList) {
-            if (excludeId != null && excludeId.equals(character.getId())) {
-                continue;
+    public void broadCast(Command.PackageGroup packageGroup, String... excludeId) {
+        if (excludeId != null && excludeId.length > 0) {
+            for (String id : excludeId) {
+                for (Character character : this.chatterList) {
+                    if (character.getId().equals(id)) {
+                        continue;
+                    }
+                    character.sendMsg(packageGroup);
+                }
             }
+            return;
+        }
+        for (Character character : this.chatterList) {
             character.sendMsg(packageGroup);
         }
+    }
+
+    public String getMaster() {
+        return this.master;
     }
 
     public List<Character> getChatterList() {

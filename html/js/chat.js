@@ -4,7 +4,7 @@ import * as constants from "./constants.js"
 
 webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
 webSocket.func_map[constants.EXISTS_ROOM_RESULT] = onExists;
-
+webSocket.func_map[constants.CLICK_OFF_RESULT] = onClickOff;
 
 let ChatRoomData;
 let Login;
@@ -17,6 +17,8 @@ let ChatMessageResult;
 let Character;
 let Exists;
 let ExistsResult;
+let ClickOff;
+let ClickOffResult;
 
 protobuf.load("/proto/Chat.proto", function(error, root){
         if(error) throw error;
@@ -30,6 +32,8 @@ protobuf.load("/proto/Chat.proto", function(error, root){
         ChatMessageResult = root.lookup("ChatMessageResult");
         Exists = root.lookup("Exists");
         ExistsResult = root.lookup("ExistsResult");
+        ClickOff = root.lookup("ClickOff");
+        ClickOffResult = root.lookup("ClickOffResult");
 });
 
 protobuf.load("/proto/Entity.proto",function(error, root){
@@ -141,4 +145,27 @@ function refreshChatRoomData(chatRoomData){
             character_list_ul.appendChild(li);
         }
     }
+}
+
+export function clickOff() {
+    let userId = document.getElementById("click_user_id").value;
+    if(!userId || userId == ''){
+        alert("please enter click off user id");
+        return;
+    }
+    let clickOff = {};
+    clickOff["characterId"] = userId.split(",");
+    let clickOffContent = ClickOff.encode(ClickOff.create(clickOff)).finish();
+    webSocket.send(constants.CLICK_OFF, clickOffContent);
+}
+
+function onClickOff(data,msg) {
+    alert(msg);
+    let clickOffResult = ClickOffResult.decode(data);
+    if(!clickOffResult.chatRoomData){
+        let character_list_ul = document.getElementById("character_list");
+        character_list_ul.innerHTML = "";
+        return;
+    }
+    refreshChatRoomData(clickOffResult.chatRoomData);
 }

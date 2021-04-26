@@ -3,6 +3,7 @@ package cn.krossframework.chat.config;
 import cn.krossframework.chat.config.properties.TimeProperties;
 import cn.krossframework.chat.state.ChatRoomFactory;
 import cn.krossframework.chat.state.ChatRoomWorkerManager;
+import cn.krossframework.chat.websocket.ChatRoomPool;
 import cn.krossframework.state.*;
 import cn.krossframework.state.data.WorkerManagerProperties;
 import cn.krossframework.state.util.DefaultLazyTime;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StateConfig {
+
     @Bean
     @ConfigurationProperties(prefix = "kross.state")
     WorkerManagerProperties workerManagerProperties() {
@@ -36,9 +38,8 @@ public class StateConfig {
     }
 
     @Bean
-    StateGroupPool stateGroupPool(StateGroupFactory stateGroupFactory) throws Exception {
-        return new AbstractStateGroupPool(stateGroupFactory) {
-        };
+    StateGroupPool stateGroupPool(StateGroupFactory stateGroupFactory) {
+        return new ChatRoomPool(stateGroupFactory);
     }
 
     @Bean

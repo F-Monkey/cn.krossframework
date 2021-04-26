@@ -94,4 +94,12 @@ public class ChatCmdUtil {
         }
         return builder.build();
     }
+
+    public static Chat.ClickOffResult clickOffResult(ChatRoom chatRoom) {
+        Chat.ClickOffResult.Builder builder = Chat.ClickOffResult.newBuilder();
+        if (chatRoom != null) {
+            builder.setChatRoomData(chatRoomData(chatRoom));
+        }
+        return builder.build();
+    }
 }

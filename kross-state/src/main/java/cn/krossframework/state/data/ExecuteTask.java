@@ -10,6 +10,5 @@ public class ExecuteTask extends AbstractTask {
                        FailCallBack failCallBack) {
         super(groupId, task, failCallBack);
         Preconditions.checkNotNull(groupId);
-        Preconditions.checkNotNull(task);
     }
 }
