@@ -90,6 +90,7 @@ public class ChatState extends AbstractState {
                 Character c = iterator.next();
                 if (id.equals(c.getId())) {
                     idList.add(id);
+                    c.setCurrentGroupId(null);
                     iterator.remove();
                     c.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, String.format(clickOffMsgTemplate, "you"), ChatCmdType.CLICK_OFF_RESULT, null)));
                 }
@@ -119,7 +120,7 @@ public class ChatState extends AbstractState {
         character.setCurrentGroupId(null);
         character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, "out room: " + chatRoom.getId(),
                 ChatCmdType.EXISTS_ROOM_RESULT, null)));
-        broadCastMsg = broadCastMsg == null ? character.getId() + "is out" : broadCastMsg;
+        broadCastMsg = broadCastMsg == null ? character.getId() + " is out" : broadCastMsg;
         chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.EXISTS_ROOM_RESULT,
                 ChatCmdUtil.existsResult(chatRoom).toByteString())), character.getId());
     }

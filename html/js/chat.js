@@ -3,6 +3,7 @@ import * as webSocket from "./webSocket.js"
 import * as constants from "./constants.js"
 
 webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
+webSocket.func_map[constants.ENTER_ROOM_RESULT] = onCreateRoomResult;
 webSocket.func_map[constants.EXISTS_ROOM_RESULT] = onExists;
 webSocket.func_map[constants.CLICK_OFF_RESULT] = onClickOff;
 
@@ -72,7 +73,6 @@ export function createRoom(){
 function onCreateRoomResult(data, msg){
     alert(msg);
     let chatRoomData = ChatRoomData.decode(data);
-    document.getElementById("current_room_id").value = chatRoomData.id;
     refreshChatRoomData(chatRoomData);
 }
 
@@ -101,22 +101,31 @@ function onSendMsgResult(data){
     document.getElementById("history").appendChild(li);
 }
 
-
-export function joinRoom(){
+export function enterRoom(){
     let roomId = document.getElementById("room_id").value;
-    let enter = {};
-    if(roomId && roomId != ''){
-        enter["roomId"] = roomId;
+    if(!roomId || roomId == ''){
+        alert("please input your roomId");
+        return;
     }
+    let enter = {};
+    enter["roomId"] = roomId;
     let enterContent = Enter.encode(Enter.create(enter)).finish();
-    webSocket.func_map[constants.CREATE_ROOM_RESULT] = onCreateRoomResult;
-    webSocket.send(constants.CREATE_ROOM, enterContent);
+    webSocket.send(constants.ENTER_ROOM, enterContent);
 }
 
 export function exists(){
+    let current_room_id = document.getElementById("current_room_id").value;
+    if(!current_room_id || current_room_id == ''){
+        return;
+    }
+    var start = (new Date()).getTime();
+    while((new Date()).getTime() - start < 20) {
+        continue;
+    }
     let existsData = {}
     let existsContent = Exists.encode(Exists.create(existsData)).finish();
     webSocket.send(constants.EXISTS_ROOM, existsContent);
+    document.getElementById("current_room_id").value = "";
 }
 
 function onExists(data, msg){
@@ -130,19 +139,21 @@ function refreshChatRoomData(chatRoomData){
     let character_list_ul = document.getElementById("character_list");
     if(!chatRoomData){
         character_list_ul.innerHTML = "";
+        document.getElementById("current_room_id").value = "";
         return;
     }
     let chatter_list = chatRoomData.chatter;
+    let master = chatRoomData.master;
+    document.getElementById("current_room_id").value = chatRoomData.id;
     if(chatter_list && chatter_list.length > 0){
         character_list_ul.innerHTML = "";
-        let uid = document.getElementById("user_id").value;
         var character;
         for(var i in chatter_list){
             character = chatter_list[i];
             let li = document.createElement("li");
             let userSpan = document.createElement("span");
             userSpan.innerHTML = character.id;
-            if(character.id == uid){
+            if(character.id == master){
                 userSpan.style = "color:#F00";
             }
             li.appendChild(userSpan);

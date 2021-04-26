@@ -11,8 +11,9 @@ option java_outer_classname = "Chat";
 
 message ChatRoomData {
   int64 id = 1;
-  repeated Character chatter = 2;
-  repeated ChatMessageResult history = 3;
+  string master = 2;
+  repeated Character chatter = 3;
+  repeated ChatMessageResult history = 4;
 }
 
 message ClickOff {

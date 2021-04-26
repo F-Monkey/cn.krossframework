@@ -25,49 +25,61 @@ public final class Chat {
     long getId();
 
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>string master = 2;</code>
+     * @return The master.
+     */
+    java.lang.String getMaster();
+    /**
+     * <code>string master = 2;</code>
+     * @return The bytes for master.
+     */
+    com.google.protobuf.ByteString
+        getMasterBytes();
+
+    /**
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     java.util.List<cn.krossframework.proto.Entity.Character> 
         getChatterList();
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     cn.krossframework.proto.Entity.Character getChatter(int index);
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     int getChatterCount();
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     java.util.List<? extends cn.krossframework.proto.Entity.CharacterOrBuilder> 
         getChatterOrBuilderList();
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     cn.krossframework.proto.Entity.CharacterOrBuilder getChatterOrBuilder(
         int index);
 
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     java.util.List<cn.krossframework.proto.chat.Chat.ChatMessageResult> 
         getHistoryList();
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     cn.krossframework.proto.chat.Chat.ChatMessageResult getHistory(int index);
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     int getHistoryCount();
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     java.util.List<? extends cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder> 
         getHistoryOrBuilderList();
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder getHistoryOrBuilder(
         int index);
@@ -85,6 +97,7 @@ public final class Chat {
       super(builder);
     }
     private ChatRoomData() {
+      master_ = "";
       chatter_ = java.util.Collections.emptyList();
       history_ = java.util.Collections.emptyList();
     }
@@ -126,6 +139,12 @@ public final class Chat {
               break;
             }
             case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              master_ = s;
+              break;
+            }
+            case 26: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 chatter_ = new java.util.ArrayList<cn.krossframework.proto.Entity.Character>();
                 mutable_bitField0_ |= 0x00000001;
@@ -134,7 +153,7 @@ public final class Chat {
                   input.readMessage(cn.krossframework.proto.Entity.Character.parser(), extensionRegistry));
               break;
             }
-            case 26: {
+            case 34: {
               if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 history_ = new java.util.ArrayList<cn.krossframework.proto.chat.Chat.ChatMessageResult>();
                 mutable_bitField0_ |= 0x00000002;
@@ -192,17 +211,55 @@ public final class Chat {
       return id_;
     }
 
-    public static final int CHATTER_FIELD_NUMBER = 2;
+    public static final int MASTER_FIELD_NUMBER = 2;
+    private volatile java.lang.Object master_;
+    /**
+     * <code>string master = 2;</code>
+     * @return The master.
+     */
+    @java.lang.Override
+    public java.lang.String getMaster() {
+      java.lang.Object ref = master_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        master_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string master = 2;</code>
+     * @return The bytes for master.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMasterBytes() {
+      java.lang.Object ref = master_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        master_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CHATTER_FIELD_NUMBER = 3;
     private java.util.List<cn.krossframework.proto.Entity.Character> chatter_;
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     @java.lang.Override
     public java.util.List<cn.krossframework.proto.Entity.Character> getChatterList() {
       return chatter_;
     }
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     @java.lang.Override
     public java.util.List<? extends cn.krossframework.proto.Entity.CharacterOrBuilder> 
@@ -210,21 +267,21 @@ public final class Chat {
       return chatter_;
     }
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     @java.lang.Override
     public int getChatterCount() {
       return chatter_.size();
     }
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     @java.lang.Override
     public cn.krossframework.proto.Entity.Character getChatter(int index) {
       return chatter_.get(index);
     }
     /**
-     * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+     * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
      */
     @java.lang.Override
     public cn.krossframework.proto.Entity.CharacterOrBuilder getChatterOrBuilder(
@@ -232,17 +289,17 @@ public final class Chat {
       return chatter_.get(index);
     }
 
-    public static final int HISTORY_FIELD_NUMBER = 3;
+    public static final int HISTORY_FIELD_NUMBER = 4;
     private java.util.List<cn.krossframework.proto.chat.Chat.ChatMessageResult> history_;
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     @java.lang.Override
     public java.util.List<cn.krossframework.proto.chat.Chat.ChatMessageResult> getHistoryList() {
       return history_;
     }
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     @java.lang.Override
     public java.util.List<? extends cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder> 
@@ -250,21 +307,21 @@ public final class Chat {
       return history_;
     }
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     @java.lang.Override
     public int getHistoryCount() {
       return history_.size();
     }
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     @java.lang.Override
     public cn.krossframework.proto.chat.Chat.ChatMessageResult getHistory(int index) {
       return history_.get(index);
     }
     /**
-     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+     * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
      */
     @java.lang.Override
     public cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder getHistoryOrBuilder(
@@ -289,11 +346,14 @@ public final class Chat {
       if (id_ != 0L) {
         output.writeInt64(1, id_);
       }
+      if (!getMasterBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, master_);
+      }
       for (int i = 0; i < chatter_.size(); i++) {
-        output.writeMessage(2, chatter_.get(i));
+        output.writeMessage(3, chatter_.get(i));
       }
       for (int i = 0; i < history_.size(); i++) {
-        output.writeMessage(3, history_.get(i));
+        output.writeMessage(4, history_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -308,13 +368,16 @@ public final class Chat {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, id_);
       }
+      if (!getMasterBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, master_);
+      }
       for (int i = 0; i < chatter_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, chatter_.get(i));
+          .computeMessageSize(3, chatter_.get(i));
       }
       for (int i = 0; i < history_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, history_.get(i));
+          .computeMessageSize(4, history_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -333,6 +396,8 @@ public final class Chat {
 
       if (getId()
           != other.getId()) return false;
+      if (!getMaster()
+          .equals(other.getMaster())) return false;
       if (!getChatterList()
           .equals(other.getChatterList())) return false;
       if (!getHistoryList()
@@ -351,6 +416,8 @@ public final class Chat {
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getId());
+      hash = (37 * hash) + MASTER_FIELD_NUMBER;
+      hash = (53 * hash) + getMaster().hashCode();
       if (getChatterCount() > 0) {
         hash = (37 * hash) + CHATTER_FIELD_NUMBER;
         hash = (53 * hash) + getChatterList().hashCode();
@@ -496,6 +563,8 @@ public final class Chat {
         super.clear();
         id_ = 0L;
 
+        master_ = "";
+
         if (chatterBuilder_ == null) {
           chatter_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
@@ -536,6 +605,7 @@ public final class Chat {
         cn.krossframework.proto.chat.Chat.ChatRoomData result = new cn.krossframework.proto.chat.Chat.ChatRoomData(this);
         int from_bitField0_ = bitField0_;
         result.id_ = id_;
+        result.master_ = master_;
         if (chatterBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
             chatter_ = java.util.Collections.unmodifiableList(chatter_);
@@ -604,6 +674,10 @@ public final class Chat {
         if (other == cn.krossframework.proto.chat.Chat.ChatRoomData.getDefaultInstance()) return this;
         if (other.getId() != 0L) {
           setId(other.getId());
+        }
+        if (!other.getMaster().isEmpty()) {
+          master_ = other.master_;
+          onChanged();
         }
         if (chatterBuilder_ == null) {
           if (!other.chatter_.isEmpty()) {
@@ -718,6 +792,82 @@ public final class Chat {
         return this;
       }
 
+      private java.lang.Object master_ = "";
+      /**
+       * <code>string master = 2;</code>
+       * @return The master.
+       */
+      public java.lang.String getMaster() {
+        java.lang.Object ref = master_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          master_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string master = 2;</code>
+       * @return The bytes for master.
+       */
+      public com.google.protobuf.ByteString
+          getMasterBytes() {
+        java.lang.Object ref = master_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          master_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string master = 2;</code>
+       * @param value The master to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMaster(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        master_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string master = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMaster() {
+        
+        master_ = getDefaultInstance().getMaster();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string master = 2;</code>
+       * @param value The bytes for master to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMasterBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        master_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<cn.krossframework.proto.Entity.Character> chatter_ =
         java.util.Collections.emptyList();
       private void ensureChatterIsMutable() {
@@ -731,7 +881,7 @@ public final class Chat {
           cn.krossframework.proto.Entity.Character, cn.krossframework.proto.Entity.Character.Builder, cn.krossframework.proto.Entity.CharacterOrBuilder> chatterBuilder_;
 
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public java.util.List<cn.krossframework.proto.Entity.Character> getChatterList() {
         if (chatterBuilder_ == null) {
@@ -741,7 +891,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public int getChatterCount() {
         if (chatterBuilder_ == null) {
@@ -751,7 +901,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public cn.krossframework.proto.Entity.Character getChatter(int index) {
         if (chatterBuilder_ == null) {
@@ -761,7 +911,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder setChatter(
           int index, cn.krossframework.proto.Entity.Character value) {
@@ -778,7 +928,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder setChatter(
           int index, cn.krossframework.proto.Entity.Character.Builder builderForValue) {
@@ -792,7 +942,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder addChatter(cn.krossframework.proto.Entity.Character value) {
         if (chatterBuilder_ == null) {
@@ -808,7 +958,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder addChatter(
           int index, cn.krossframework.proto.Entity.Character value) {
@@ -825,7 +975,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder addChatter(
           cn.krossframework.proto.Entity.Character.Builder builderForValue) {
@@ -839,7 +989,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder addChatter(
           int index, cn.krossframework.proto.Entity.Character.Builder builderForValue) {
@@ -853,7 +1003,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder addAllChatter(
           java.lang.Iterable<? extends cn.krossframework.proto.Entity.Character> values) {
@@ -868,7 +1018,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder clearChatter() {
         if (chatterBuilder_ == null) {
@@ -881,7 +1031,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public Builder removeChatter(int index) {
         if (chatterBuilder_ == null) {
@@ -894,14 +1044,14 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public cn.krossframework.proto.Entity.Character.Builder getChatterBuilder(
           int index) {
         return getChatterFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public cn.krossframework.proto.Entity.CharacterOrBuilder getChatterOrBuilder(
           int index) {
@@ -911,7 +1061,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public java.util.List<? extends cn.krossframework.proto.Entity.CharacterOrBuilder> 
            getChatterOrBuilderList() {
@@ -922,14 +1072,14 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public cn.krossframework.proto.Entity.Character.Builder addChatterBuilder() {
         return getChatterFieldBuilder().addBuilder(
             cn.krossframework.proto.Entity.Character.getDefaultInstance());
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public cn.krossframework.proto.Entity.Character.Builder addChatterBuilder(
           int index) {
@@ -937,7 +1087,7 @@ public final class Chat {
             index, cn.krossframework.proto.Entity.Character.getDefaultInstance());
       }
       /**
-       * <code>repeated .cn.krossframework.proto.Character chatter = 2;</code>
+       * <code>repeated .cn.krossframework.proto.Character chatter = 3;</code>
        */
       public java.util.List<cn.krossframework.proto.Entity.Character.Builder> 
            getChatterBuilderList() {
@@ -971,7 +1121,7 @@ public final class Chat {
           cn.krossframework.proto.chat.Chat.ChatMessageResult, cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder, cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder> historyBuilder_;
 
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public java.util.List<cn.krossframework.proto.chat.Chat.ChatMessageResult> getHistoryList() {
         if (historyBuilder_ == null) {
@@ -981,7 +1131,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public int getHistoryCount() {
         if (historyBuilder_ == null) {
@@ -991,7 +1141,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public cn.krossframework.proto.chat.Chat.ChatMessageResult getHistory(int index) {
         if (historyBuilder_ == null) {
@@ -1001,7 +1151,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder setHistory(
           int index, cn.krossframework.proto.chat.Chat.ChatMessageResult value) {
@@ -1018,7 +1168,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder setHistory(
           int index, cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder builderForValue) {
@@ -1032,7 +1182,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder addHistory(cn.krossframework.proto.chat.Chat.ChatMessageResult value) {
         if (historyBuilder_ == null) {
@@ -1048,7 +1198,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder addHistory(
           int index, cn.krossframework.proto.chat.Chat.ChatMessageResult value) {
@@ -1065,7 +1215,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder addHistory(
           cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder builderForValue) {
@@ -1079,7 +1229,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder addHistory(
           int index, cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder builderForValue) {
@@ -1093,7 +1243,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder addAllHistory(
           java.lang.Iterable<? extends cn.krossframework.proto.chat.Chat.ChatMessageResult> values) {
@@ -1108,7 +1258,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder clearHistory() {
         if (historyBuilder_ == null) {
@@ -1121,7 +1271,7 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public Builder removeHistory(int index) {
         if (historyBuilder_ == null) {
@@ -1134,14 +1284,14 @@ public final class Chat {
         return this;
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder getHistoryBuilder(
           int index) {
         return getHistoryFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder getHistoryOrBuilder(
           int index) {
@@ -1151,7 +1301,7 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public java.util.List<? extends cn.krossframework.proto.chat.Chat.ChatMessageResultOrBuilder> 
            getHistoryOrBuilderList() {
@@ -1162,14 +1312,14 @@ public final class Chat {
         }
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder addHistoryBuilder() {
         return getHistoryFieldBuilder().addBuilder(
             cn.krossframework.proto.chat.Chat.ChatMessageResult.getDefaultInstance());
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder addHistoryBuilder(
           int index) {
@@ -1177,7 +1327,7 @@ public final class Chat {
             index, cn.krossframework.proto.chat.Chat.ChatMessageResult.getDefaultInstance());
       }
       /**
-       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 3;</code>
+       * <code>repeated .cn.krossframework.proto.chat.ChatMessageResult history = 4;</code>
        */
       public java.util.List<cn.krossframework.proto.chat.Chat.ChatMessageResult.Builder> 
            getHistoryBuilderList() {
@@ -10066,30 +10216,30 @@ public final class Chat {
   static {
     java.lang.String[] descriptorData = {
       "\n\nChat.proto\022\034cn.krossframework.proto.ch" +
-      "at\032\014Entity.proto\"\221\001\n\014ChatRoomData\022\n\n\002id\030" +
-      "\001 \001(\003\0223\n\007chatter\030\002 \003(\0132\".cn.krossframewo" +
-      "rk.proto.Character\022@\n\007history\030\003 \003(\0132/.cn" +
-      ".krossframework.proto.chat.ChatMessageRe" +
-      "sult\"\037\n\010ClickOff\022\023\n\013characterId\030\001 \003(\t\"R\n" +
-      "\016ClickOffResult\022@\n\014chatRoomData\030\001 \001(\0132*." +
-      "cn.krossframework.proto.chat.ChatRoomDat" +
-      "a\"&\n\005Login\022\013\n\003uid\030\001 \001(\t\022\020\n\010username\030\002 \001(" +
-      "\t\",\n\013LoginResult\022\013\n\003uid\030\001 \001(\t\022\020\n\010usernam" +
-      "e\030\002 \001(\t\"\010\n\006Logout\"\016\n\014LogoutResult\"\027\n\005Ent" +
-      "er\022\016\n\006roomId\030\001 \001(\003\"O\n\013EnterResult\022@\n\014cha" +
-      "tRoomData\030\001 \001(\0132*.cn.krossframework.prot" +
-      "o.chat.ChatRoomData\"\010\n\006Exists\"P\n\014ExistsR" +
-      "esult\022@\n\014chatRoomData\030\001 \001(\0132*.cn.krossfr" +
-      "amework.proto.chat.ChatRoomData\"(\n\006Strea" +
-      "m\022\016\n\006format\030\001 \001(\t\022\016\n\006Stream\030\002 \001(\014\"}\n\013Cha" +
-      "tMessage\022\r\n\005toAll\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n\003m" +
-      "sg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005\0224\n\006stream\030\005 \001" +
-      "(\0132$.cn.krossframework.proto.chat.Stream" +
-      "\"\221\001\n\021ChatMessageResult\022\r\n\005toAll\030\001 \001(\010\022\n\n" +
-      "\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001(\005" +
-      "\0224\n\006stream\030\005 \001(\0132$.cn.krossframework.pro" +
-      "to.chat.Stream\022\014\n\004from\030\006 \001(\tB\010B\004ChatH\001b\006" +
-      "proto3"
+      "at\032\014Entity.proto\"\241\001\n\014ChatRoomData\022\n\n\002id\030" +
+      "\001 \001(\003\022\016\n\006master\030\002 \001(\t\0223\n\007chatter\030\003 \003(\0132\"" +
+      ".cn.krossframework.proto.Character\022@\n\007hi" +
+      "story\030\004 \003(\0132/.cn.krossframework.proto.ch" +
+      "at.ChatMessageResult\"\037\n\010ClickOff\022\023\n\013char" +
+      "acterId\030\001 \003(\t\"R\n\016ClickOffResult\022@\n\014chatR" +
+      "oomData\030\001 \001(\0132*.cn.krossframework.proto." +
+      "chat.ChatRoomData\"&\n\005Login\022\013\n\003uid\030\001 \001(\t\022" +
+      "\020\n\010username\030\002 \001(\t\",\n\013LoginResult\022\013\n\003uid\030" +
+      "\001 \001(\t\022\020\n\010username\030\002 \001(\t\"\010\n\006Logout\"\016\n\014Log" +
+      "outResult\"\027\n\005Enter\022\016\n\006roomId\030\001 \001(\003\"O\n\013En" +
+      "terResult\022@\n\014chatRoomData\030\001 \001(\0132*.cn.kro" +
+      "ssframework.proto.chat.ChatRoomData\"\010\n\006E" +
+      "xists\"P\n\014ExistsResult\022@\n\014chatRoomData\030\001 " +
+      "\001(\0132*.cn.krossframework.proto.chat.ChatR" +
+      "oomData\"(\n\006Stream\022\016\n\006format\030\001 \001(\t\022\016\n\006Str" +
+      "eam\030\002 \001(\014\"}\n\013ChatMessage\022\r\n\005toAll\030\001 \001(\010\022" +
+      "\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020\n\010emoticon\030\004 \001" +
+      "(\005\0224\n\006stream\030\005 \001(\0132$.cn.krossframework.p" +
+      "roto.chat.Stream\"\221\001\n\021ChatMessageResult\022\r" +
+      "\n\005toAll\030\001 \001(\010\022\n\n\002to\030\002 \003(\t\022\013\n\003msg\030\003 \001(\t\022\020" +
+      "\n\010emoticon\030\004 \001(\005\0224\n\006stream\030\005 \001(\0132$.cn.kr" +
+      "ossframework.proto.chat.Stream\022\014\n\004from\030\006" +
+      " \001(\tB\010B\004ChatH\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10101,7 +10251,7 @@ public final class Chat {
     internal_static_cn_krossframework_proto_chat_ChatRoomData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_cn_krossframework_proto_chat_ChatRoomData_descriptor,
-        new java.lang.String[] { "Id", "Chatter", "History", });
+        new java.lang.String[] { "Id", "Master", "Chatter", "History", });
     internal_static_cn_krossframework_proto_chat_ClickOff_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_cn_krossframework_proto_chat_ClickOff_fieldAccessorTable = new

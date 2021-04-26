@@ -20,7 +20,7 @@
             <li>
                 <span>current roomId: </span>
                 <input type="text" readonly id = "current_room_id" />
-                <input type="button" value="create room" onclick="chat.createRoom()"/>
+                <input type="button" value="create room" onclick="chat.exists();chat.createRoom()"/>
             </li>
             <li>
                 <span>username:</span>
@@ -32,7 +32,7 @@
             <li>
                 <span>roomId:</span>
                 <input type="text" id="room_id"/>
-                <input type="button" value="join room" onclick="chat.joinRoom()"/>
+                <input type="button" value="join room" onclick="chat.exists();chat.enterRoom()"/>
                 <input type="button" value="exists room" onclick="chat.exists()"/>
             </li>
             <li>

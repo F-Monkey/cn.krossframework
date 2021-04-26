@@ -14,6 +14,10 @@ public interface ChatCmdType {
 
     int CREATE_ROOM_RESULT = 1007;
 
+    int ENTER_ROOM = 1013;
+
+    int ENTER_ROOM_RESULT = 1014;
+
     int EXISTS_ROOM = 1011;
 
     int EXISTS_ROOM_RESULT = 1012;

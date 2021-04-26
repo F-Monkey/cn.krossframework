@@ -53,11 +53,22 @@ public class ChatCmdUtil {
                 builder.addChatter(character(chatter));
             }
         }
+        String master = chatRoom.getMaster();
+        if (!Strings.isNullOrEmpty(master)) {
+            builder.setMaster(master);
+        }
         return builder.build();
     }
 
-
     public static Command.PackageGroup enterRoomResult(int resultCode, String msg, ChatRoom chatRoom) {
+        Chat.ChatRoomData.Builder builder = Chat.ChatRoomData.newBuilder();
+        if (chatRoom != null) {
+            builder = chatRoomData(chatRoom).toBuilder();
+        }
+        return CmdUtil.packageGroup(CmdUtil.pkg(resultCode, msg, ChatCmdType.ENTER_ROOM_RESULT, builder.build().toByteString()));
+    }
+
+    public static Command.PackageGroup createRoomResult(int resultCode, String msg, ChatRoom chatRoom) {
         Chat.ChatRoomData.Builder builder = Chat.ChatRoomData.newBuilder();
         if (chatRoom != null) {
             builder = chatRoomData(chatRoom).toBuilder();

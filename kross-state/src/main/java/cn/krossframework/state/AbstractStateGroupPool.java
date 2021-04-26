@@ -16,7 +16,7 @@ public abstract class AbstractStateGroupPool implements StateGroupPool, Initiali
 
     private static final Logger log = LoggerFactory.getLogger(AbstractStateGroupPool.class);
 
-    private static final AtomicLong ID_COUNT = new AtomicLong(0);
+    protected static final AtomicLong ID_COUNT = new AtomicLong(0);
 
     protected final StateGroupFactory stateGroupFactory;
 

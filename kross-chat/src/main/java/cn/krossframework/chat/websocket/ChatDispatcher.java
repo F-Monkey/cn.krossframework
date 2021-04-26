@@ -77,12 +77,38 @@ public class ChatDispatcher implements Dispatcher {
                 case ChatCmdType.CREATE_ROOM:
                     this.eventExecutors.submit(() -> this.createRoom(session, cmd));
                     return;
+                case ChatCmdType.ENTER_ROOM:
+                    this.eventExecutors.submit(() -> this.enterRoom(session, cmd));
+                    return;
                 default:
                     this.eventExecutors.submit(() -> this.trySendTask(session, cmd));
             }
         } finally {
             lock.unlock();
         }
+    }
+
+    private void enterRoom(Session session, Command.Package cmd) {
+        Character character = session.getAttribute(Character.KEY);
+        ChatTask chatTask = new ChatTask(character, cmd);
+        Long groupId = null;
+        try {
+            Chat.Enter enter = Chat.Enter.parseFrom(cmd.getContent());
+            if (enter.getRoomId() != 0) {
+                groupId = enter.getRoomId();
+            }
+        } catch (InvalidProtocolBufferException e) {
+            log.error("invalid enter content");
+        }
+        if (groupId == null) {
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter room fail[0]", null));
+            log.error("enter room fail, cause group id is empty");
+            return;
+        }
+        AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter room fail[1]", null));
+        });
+        this.workerManager.enter(task, new ChatRoomConfig("1"));
     }
 
     private void trySendTask(Session session, Command.Package cmd) {
@@ -110,16 +136,7 @@ public class ChatDispatcher implements Dispatcher {
     private void createRoom(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        Long groupId = null;
-        try {
-            Chat.Enter enter = Chat.Enter.parseFrom(cmd.getContent());
-            if (enter.getRoomId() != 0) {
-                groupId = enter.getRoomId();
-            }
-        } catch (InvalidProtocolBufferException e) {
-            log.error("invalid enter content");
-        }
-        AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
+        AbstractTask task = new DefaultTask(null, chatTask, () -> {
             character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room create fail", null));
         });
         this.workerManager.enter(task, new ChatRoomConfig("1"));

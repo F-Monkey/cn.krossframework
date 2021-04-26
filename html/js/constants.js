@@ -23,4 +23,7 @@ export const EXISTS_ROOM = 1011;
 
 export const EXISTS_ROOM_RESULT = 1012;
 
+export const ENTER_ROOM = 1013;
+
+export const ENTER_ROOM_RESULT = 1014;
 

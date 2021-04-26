@@ -1,5 +1,6 @@
 package cn.krossframework.chat.state;
 
+import cn.krossframework.chat.cmd.ChatCmdType;
 import cn.krossframework.chat.cmd.ChatCmdUtil;
 import cn.krossframework.chat.state.data.ChatTask;
 import cn.krossframework.commons.model.ResultCode;
@@ -38,7 +39,8 @@ public class ChatRoom extends AbstractStateGroup {
             return false;
         }
         if (task instanceof ChatTask) {
-            Character character = ((ChatTask) task).getCharacter();
+            ChatTask chatTask = (ChatTask) task;
+            Character character = chatTask.getCharacter();
             if (this.master == null) {
                 this.master = character.getId();
             }
@@ -51,11 +53,16 @@ public class ChatRoom extends AbstractStateGroup {
             }
             if (!containsCharacter) {
                 this.chatterList.add(character);
+                character.setCurrentGroupId(this.id);
             }
-            character.setCurrentGroupId(this.id);
-            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
-            String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
-            this.broadCast(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this), character.getId());
+            Command.Package cmd = chatTask.getCmd();
+            if (cmd.getCmdType() == ChatCmdType.ENTER_ROOM) {
+                character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
+                String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
+                this.broadCast(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this), character.getId());
+            } else {
+                character.sendMsg(ChatCmdUtil.createRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
+            }
             return true;
         }
         return false;
