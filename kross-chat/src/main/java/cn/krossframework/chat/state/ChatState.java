@@ -102,10 +102,25 @@ public class ChatState extends AbstractState {
     private void handleExists(Character character, Command.Package cmd) {
         ChatRoom chatRoom = this.getStateGroup();
         chatRoom.getChatterList().remove(character);
+        String master = chatRoom.getMaster();
+        String broadCastMsg = null;
+        if (master.equals(character.getId())) {
+            List<Character> chatterList = chatRoom.getChatterList();
+            if (chatterList.isEmpty()) {
+                chatRoom.setMaster(null);
+            }
+            for (Character c : chatterList) {
+                String id = c.getId();
+                chatRoom.setMaster(id);
+                broadCastMsg = "master is out, choose new master: " + id;
+                break;
+            }
+        }
         character.setCurrentGroupId(null);
-        character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, "exists room: " + chatRoom.getId(),
+        character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, "out room: " + chatRoom.getId(),
                 ChatCmdType.EXISTS_ROOM_RESULT, null)));
-        chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, character.getId() + " exists", ChatCmdType.EXISTS_ROOM_RESULT,
+        broadCastMsg = broadCastMsg == null ? character.getId() + "is out" : broadCastMsg;
+        chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.EXISTS_ROOM_RESULT,
                 ChatCmdUtil.existsResult(chatRoom).toByteString())), character.getId());
     }
 

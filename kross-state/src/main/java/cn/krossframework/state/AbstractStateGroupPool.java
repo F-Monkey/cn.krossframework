@@ -47,12 +47,15 @@ public abstract class AbstractStateGroupPool implements StateGroupPool, Initiali
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        new AutoTask(this.period == null ? 0 : this.period, 2) {
-            @Override
-            protected void run() {
-                AbstractStateGroupPool.this.removeDeposedStateGroup();
+        AutoTask autoTask = new AutoTask(this.period == null ? 0 : this.period, 1) {
+        };
+        autoTask.addTask(() -> {
+            try {
+                this.removeDeposedStateGroup();
+            } catch (Throwable e) {
+                log.error("removeDeposedStateGroup error:\n", e);
             }
-        }.start();
+        });
     }
 
     protected void removeDeposedStateGroup() {

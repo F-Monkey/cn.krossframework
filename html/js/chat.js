@@ -127,9 +127,13 @@ function onExists(data, msg){
 }
 
 function refreshChatRoomData(chatRoomData){
+    let character_list_ul = document.getElementById("character_list");
+    if(!chatRoomData){
+        character_list_ul.innerHTML = "";
+        return;
+    }
     let chatter_list = chatRoomData.chatter;
     if(chatter_list && chatter_list.length > 0){
-        let character_list_ul = document.getElementById("character_list");
         character_list_ul.innerHTML = "";
         let uid = document.getElementById("user_id").value;
         var character;
@@ -162,10 +166,5 @@ export function clickOff() {
 function onClickOff(data,msg) {
     alert(msg);
     let clickOffResult = ClickOffResult.decode(data);
-    if(!clickOffResult.chatRoomData){
-        let character_list_ul = document.getElementById("character_list");
-        character_list_ul.innerHTML = "";
-        return;
-    }
     refreshChatRoomData(clickOffResult.chatRoomData);
 }

@@ -9,6 +9,7 @@ import cn.krossframework.state.data.WorkerManagerProperties;
 import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.util.Lock;
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,8 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
     protected final int taskDispatcherSize;
 
     protected final StateGroupPool stateGroupPool;
+
+    protected AutoTask workerStateGroupRemoveTask;
 
     protected final Object LOCK;
 
@@ -61,12 +64,17 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        new AutoTask(this.removeEmptyWorkerPeriod, 1) {
-            @Override
-            protected void run() {
-                AbstractWorkerManager.this.removeEmptyWorker();
+        AutoTask removeStopWorkerTask = new AutoTask(this.removeEmptyWorkerPeriod, 1) {
+        };
+        removeStopWorkerTask.addTask(() -> {
+            try {
+                this.removeEmptyWorker();
+            } catch (Throwable e) {
+                log.error("removeEmptyWorker error:\n", e);
             }
-        }.start();
+        });
+        this.workerStateGroupRemoveTask = new AutoTask(this.removeDeposedStateGroupPeriod, 1) {
+        };
     }
 
     public class EnterGroupTask extends AbstractTask implements Runnable {
@@ -222,8 +230,9 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
     }
 
     protected StateGroupWorker createWorker() {
+        Preconditions.checkNotNull(this.workerStateGroupRemoveTask);
         return new AbstractStateGroupWorker(ID_COUNT.incrementAndGet(), this.workerUpdatePeriod,
-                this.workerCapacity, this.removeDeposedStateGroupPeriod, this.stateGroupPool) {
+                this.workerCapacity, this.workerStateGroupRemoveTask, this.stateGroupPool) {
         };
     }
 

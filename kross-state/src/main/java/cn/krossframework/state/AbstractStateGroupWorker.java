@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
 
 public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock {
 
@@ -26,8 +25,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
 
     protected final StateGroupPool stateGroupPool;
 
-    protected final AutoTask autoTask;
-
     protected volatile boolean isStart;
 
     protected volatile StateGroup currentAddStateGroup;
@@ -37,10 +34,11 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
     public AbstractStateGroupWorker(long id,
                                     int period,
                                     int stateGroupCapacity,
-                                    int removeDeposedStateGroupPeriod,
+                                    AutoTask removeDeposedStateGroupTask,
                                     StateGroupPool stateGroupPool) {
         Preconditions.checkArgument(period > 0);
         Preconditions.checkNotNull(stateGroupPool);
+        Preconditions.checkNotNull(removeDeposedStateGroupTask);
         this.period = period;
         this.stateGroupCapacity = stateGroupCapacity;
         this.stateGroupPool = stateGroupPool;
@@ -59,12 +57,13 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
                 }
             }
         };
-        this.autoTask = new AutoTask(removeDeposedStateGroupPeriod, 2) {
-            @Override
-            protected void run() {
+        removeDeposedStateGroupTask.addTask(() -> {
+            try {
                 AbstractStateGroupWorker.this.removeDeposedStateGroup();
+            } catch (Exception e) {
+                log.error("id: {} removeDeposedStateGroup error:\n", this.id, e);
             }
-        };
+        });
     }
 
     @Override
@@ -105,7 +104,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
     @Override
     public void start() {
         this.thread.start();
-        this.autoTask.start();
         this.isStart = true;
     }
 
@@ -135,7 +133,6 @@ public abstract class AbstractStateGroupWorker implements StateGroupWorker, Lock
     public void stop() {
         this.isStart = false;
         this.thread.interrupt();
-        this.autoTask.stop();
     }
 
     @Override

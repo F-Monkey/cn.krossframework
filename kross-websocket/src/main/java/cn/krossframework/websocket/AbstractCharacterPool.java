@@ -35,12 +35,15 @@ public abstract class AbstractCharacterPool implements CharacterPool, Initialize
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        new AutoTask(0, 2) {
-            @Override
-            protected void run() {
-                AbstractCharacterPool.this.removeInvalidCharacter();
+        AutoTask autoTask = new AutoTask(0, 1) {
+        };
+        autoTask.addTask(() -> {
+            try {
+                this.removeInvalidCharacter();
+            } catch (Throwable e) {
+                log.error("removeInvalidCharacter error:\n", e);
             }
-        }.start();
+        });
     }
 
     @Override

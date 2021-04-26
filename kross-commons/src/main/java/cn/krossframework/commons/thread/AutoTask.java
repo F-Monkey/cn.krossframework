@@ -28,19 +28,11 @@ public abstract class AutoTask {
         this.scheduledExecutorService = new ScheduledThreadPoolExecutor(nThreads);
     }
 
-    public void start() {
-        for (int i = 0; i < nThreads; i++) {
-            this.scheduledExecutorService.scheduleAtFixedRate(() -> {
-                try {
-                    this.run();
-                } catch (Throwable e) {
-                    log.error("autoTask run error:\n", e);
-                }
-            }, 0, this.period, TimeUnit.MILLISECONDS);
+    public void addTask(Runnable runnable) {
+        for (int i = 0; i < this.nThreads; i++) {
+            this.scheduledExecutorService.scheduleAtFixedRate(runnable, 0, this.period, TimeUnit.MILLISECONDS);
         }
     }
-
-    protected abstract void run();
 
     public void stop() {
         this.scheduledExecutorService.shutdownNow();

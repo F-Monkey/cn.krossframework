@@ -82,6 +82,10 @@ public class ChatRoom extends AbstractStateGroup {
         return this.master;
     }
 
+    public void setMaster(String master) {
+        this.master = master;
+    }
+
     public List<Character> getChatterList() {
         return chatterList;
     }
