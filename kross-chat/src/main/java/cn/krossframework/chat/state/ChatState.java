@@ -40,7 +40,7 @@ public class ChatState extends AbstractState {
             case ChatCmdType.SEND_MESSAGE:
                 this.handleSendMessage(character, cmd);
                 return;
-            case ChatCmdType.EXISTS_ROOM:
+            case ChatCmdType.EXIT_ROOM:
                 this.handleExists(character, cmd);
                 return;
             case ChatCmdType.CLICK_OFF:
@@ -117,7 +117,7 @@ public class ChatState extends AbstractState {
             }
         }
         broadCastMsg = broadCastMsg == null ? character.getId() + " is out" : broadCastMsg;
-        chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.EXISTS_ROOM_RESULT,
+        chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.ENTER_ROOM_RESULT,
                 ChatCmdUtil.existsResult(chatRoom).toByteString())), character.getId());
     }
 

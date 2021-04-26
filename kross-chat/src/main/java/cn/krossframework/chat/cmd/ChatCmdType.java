@@ -18,9 +18,9 @@ public interface ChatCmdType {
 
     int ENTER_ROOM_RESULT = 1014;
 
-    int EXISTS_ROOM = 1011;
+    int EXIT_ROOM = 1011;
 
-    int EXISTS_ROOM_RESULT = 1012;
+    int EXIT_ROOM_RESULT = 1012;
 
     int SEND_MESSAGE = 1008;
 

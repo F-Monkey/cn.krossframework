@@ -4,7 +4,7 @@ import * as constants from "./constants.js"
 
 webSocket.func_map[constants.SEND_MESSAGE_RESULT] = onSendMsgResult;
 webSocket.func_map[constants.ENTER_ROOM_RESULT] = onCreateRoomResult;
-webSocket.func_map[constants.EXISTS_ROOM_RESULT] = onExists;
+webSocket.func_map[constants.EXIST_ROOM_RESULT] = onExists;
 webSocket.func_map[constants.CLICK_OFF_RESULT] = onClickOff;
 
 let ChatRoomData;
@@ -113,7 +113,7 @@ export function enterRoom(){
     webSocket.send(constants.ENTER_ROOM, enterContent);
 }
 
-export function exists(){
+export function exit(){
     let current_room_id = document.getElementById("current_room_id").value;
     if(!current_room_id || current_room_id == ''){
         return;
@@ -124,7 +124,7 @@ export function exists(){
     }
     let existsData = {}
     let existsContent = Exists.encode(Exists.create(existsData)).finish();
-    webSocket.send(constants.EXISTS_ROOM, existsContent);
+    webSocket.send(constants.EXIT_ROOM, existsContent);
     document.getElementById("current_room_id").value = "";
 }
 

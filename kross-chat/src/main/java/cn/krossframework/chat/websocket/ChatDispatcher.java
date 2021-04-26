@@ -101,12 +101,12 @@ public class ChatDispatcher implements Dispatcher {
             log.error("invalid enter content");
         }
         if (groupId == null) {
-            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter room fail[0]", null));
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room closed[0]", null));
             log.error("enter room fail, cause group id is empty");
             return;
         }
         AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
-            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "enter room fail[1]", null));
+            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room closed[1]", null));
         });
         this.workerManager.enter(task, new ChatRoomConfig("1"));
     }
@@ -123,7 +123,7 @@ public class ChatDispatcher implements Dispatcher {
         try {
             ChatTask chatTask = new ChatTask(character, cmd);
             executeTask = new ExecuteTask(currentGroupId, chatTask, () -> {
-                character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "invalid cmd type:" + cmdType, cmdType, null)));
+                character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "room " + currentGroupId + " is not exists", cmdType, null)));
             });
         } catch (Exception e) {
             character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "bad data", cmdType, null)));

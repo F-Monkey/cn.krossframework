@@ -16,7 +16,6 @@ public class ChatRoomPool extends AbstractStateGroupPool {
 
     @Override
     public FetchStateGroup findOrCreate(Long id, StateGroupConfig stateGroupConfig) {
-
         if (id != null && id > ID_COUNT.get()) {
             log.warn("invalid id: {}", id);
             id = this.getNextGroupId();
