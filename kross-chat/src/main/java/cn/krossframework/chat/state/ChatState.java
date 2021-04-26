@@ -7,7 +7,6 @@ import cn.krossframework.commons.model.ResultCode;
 import cn.krossframework.proto.Command;
 import cn.krossframework.proto.chat.Chat;
 import cn.krossframework.proto.util.CmdUtil;
-import cn.krossframework.state.StateGroup;
 import cn.krossframework.state.data.AbstractState;
 import cn.krossframework.state.data.DefaultErrorState;
 import cn.krossframework.state.data.StateInfo;
@@ -117,9 +116,6 @@ public class ChatState extends AbstractState {
                 break;
             }
         }
-        character.setCurrentGroupId(null);
-        character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, "out room: " + chatRoom.getId(),
-                ChatCmdType.EXISTS_ROOM_RESULT, null)));
         broadCastMsg = broadCastMsg == null ? character.getId() + " is out" : broadCastMsg;
         chatRoom.broadCast(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.SUCCESS, broadCastMsg, ChatCmdType.EXISTS_ROOM_RESULT,
                 ChatCmdUtil.existsResult(chatRoom).toByteString())), character.getId());

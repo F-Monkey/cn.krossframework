@@ -41,6 +41,7 @@ public class NettyWebSocketSession implements Session {
     @Override
     public <T> void setAttribute(AttributeKey<T> key, T val) {
         this.context.channel().attr(key).set(val);
+
     }
 
     @Override

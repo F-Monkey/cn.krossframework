@@ -220,6 +220,11 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
     }
 
     protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
+        if (groupId != null) {
+            if (this.stateGroupPool.find(groupId) == null) {
+
+            }
+        }
         if (this.findGroup2Enter(groupId, task, stateGroupConfig)) {
             return;
         }

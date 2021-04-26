@@ -75,12 +75,20 @@ public class ChatRoom extends AbstractStateGroup {
                     if (character.getId().equals(id)) {
                         continue;
                     }
+                    Long currentGroupId = character.getCurrentGroupId();
+                    if (currentGroupId == null || currentGroupId != this.id) {
+                        continue;
+                    }
                     character.sendMsg(packageGroup);
                 }
             }
             return;
         }
         for (Character character : this.chatterList) {
+            Long currentGroupId = character.getCurrentGroupId();
+            if (currentGroupId == null || currentGroupId != this.id) {
+                continue;
+            }
             character.sendMsg(packageGroup);
         }
     }
@@ -119,5 +127,15 @@ public class ChatRoom extends AbstractStateGroup {
             }
         }
         return true;
+    }
+
+    @Override
+    public void update() {
+        this.tryRemoveInvalidChatter();
+        super.update();
+    }
+
+    private void tryRemoveInvalidChatter() {
+
     }
 }
