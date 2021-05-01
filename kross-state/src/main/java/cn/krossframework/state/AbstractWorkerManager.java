@@ -243,7 +243,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
     }
 
     @Override
-    public void addTask(AbstractTask executeTask) {
+    public void addTask(ExecuteTask executeTask) {
         if (!this.tryAddTask(executeTask)) {
             FailCallBack failCallBack = executeTask.failCallBack();
             if (failCallBack != null) {
@@ -252,7 +252,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
         }
     }
 
-    protected boolean tryAddTask(AbstractTask executeTask) {
+    protected boolean tryAddTask(ExecuteTask executeTask) {
         Long groupId = executeTask.getGroupId();
         if (groupId == null) {
             log.error("groupId is empty");

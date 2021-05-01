@@ -2,8 +2,8 @@ package cn.krossframework.chat.config;
 
 import cn.krossframework.chat.config.properties.TimeProperties;
 import cn.krossframework.chat.state.ChatRoomFactory;
+import cn.krossframework.chat.state.ChatRoomPool;
 import cn.krossframework.chat.state.ChatRoomWorkerManager;
-import cn.krossframework.chat.websocket.ChatRoomPool;
 import cn.krossframework.state.*;
 import cn.krossframework.state.data.WorkerManagerProperties;
 import cn.krossframework.state.util.DefaultLazyTime;

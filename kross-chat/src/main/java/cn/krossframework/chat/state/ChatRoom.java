@@ -57,11 +57,11 @@ public class ChatRoom extends AbstractStateGroup {
             }
             Command.Package cmd = chatTask.getCmd();
             if (cmd.getCmdType() == ChatCmdType.ENTER_ROOM) {
-                character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
-                String broadCastMsg = "[" + character.getNickName() + "] 进入房间";
+                character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, "enter room：" + this.id, this));
+                String broadCastMsg = "[" + character.getNickName() + "] enter room";
                 this.broadCast(ChatCmdUtil.enterRoomResult(ResultCode.SUCCESS, broadCastMsg, this), character.getId());
             } else {
-                character.sendMsg(ChatCmdUtil.createRoomResult(ResultCode.SUCCESS, "进入房间：" + this.id, this));
+                character.sendMsg(ChatCmdUtil.createRoomResult(ResultCode.SUCCESS, "enter room：" + this.id, this));
             }
             return true;
         }

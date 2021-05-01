@@ -86,7 +86,7 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
 
     protected boolean findStateGroupAndAddTask(Task task) {
         if (task instanceof AbstractWorkerManager.EnterGroupTask) {
-            // This task must happened before add task
+            // This EnterGroupTask must happened before ExecuteTask
             ((AbstractWorkerManager.EnterGroupTask) task).run();
             return true;
         }
