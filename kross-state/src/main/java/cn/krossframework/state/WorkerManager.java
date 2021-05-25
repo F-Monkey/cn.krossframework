@@ -9,5 +9,4 @@ public interface WorkerManager {
     void enter(AbstractTask task, StateGroupConfig stateGroupConfig);
 
     void addTask(ExecuteTask executeTask);
-
 }

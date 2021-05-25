@@ -8,7 +8,7 @@ public abstract class AbstractCharacter implements Character {
 
     protected final User user;
 
-    protected Long currentGroupId;
+    protected volatile Long currentGroupId;
 
     protected volatile boolean isOnline;
 

@@ -30,7 +30,7 @@ public abstract class AbstractStateGroup implements StateGroup {
 
     protected Long currentWorkerId;
 
-    private int lastUpdateTime;
+    protected StateInfo stateInfo;
 
     public AbstractStateGroup(long id, Time time, StateGroupConfig stateGroupConfig) {
         Preconditions.checkArgument(id > 0);
@@ -41,7 +41,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         this.stateGroupConfig = stateGroupConfig;
         this.stateMap = new HashMap<>();
         this.taskQueue = this.initTaskQueue();
-        this.initStates();
+        this.init();
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         return this.id;
     }
 
-    protected void initStates() {
+    protected void init() {
         Collection<State> states = this.stateGroupConfig.createStates();
         if (states != null && states.size() > 0) {
             for (State state : states) {
@@ -71,6 +71,7 @@ public abstract class AbstractStateGroup implements StateGroup {
         this.stateData = this.stateGroupConfig.createStateData();
         this.stateData.setGroupId(this.id);
         this.initAndSetCurrentState(this.stateGroupConfig.getStartState());
+        this.stateInfo = new StateInfo();
     }
 
     @Override
@@ -140,19 +141,14 @@ public abstract class AbstractStateGroup implements StateGroup {
             }
         }
 
-        if (this.time.getCurrentTimeMillis() - this.lastUpdateTime < this.stateGroupConfig
-                .updatePeriod()) {
-            return;
+        try {
+            this.currentState.update(this.time, this.stateInfo);
+        } catch (Throwable e) {
+            this.currentState.updateOnError(this.time, this.stateInfo, e);
         }
 
-        this.lastUpdateTime = 0;
-        StateInfo stateInfo = new StateInfo();
-        try {
-            this.currentState.update(this.time, stateInfo);
-        } catch (Throwable e) {
-            this.currentState.updateOnError(this.time, stateInfo, e);
-        }
-        if (stateInfo.isFinished) {
+        if (this.stateInfo.isFinished) {
+            this.stateInfo = new StateInfo();
             String nextStateCode;
             try {
                 nextStateCode = this.currentState.finish(this.time);
@@ -160,10 +156,10 @@ public abstract class AbstractStateGroup implements StateGroup {
                 nextStateCode = this.currentState.finishOnError(this.time, e);
             }
             try {
-                log.info("id: {} try to switch to state: {}", this.getId(), nextStateCode);
+                log.info("id: {} try to switch to state: {}", this.id, nextStateCode);
                 this.initAndSetCurrentState(nextStateCode);
             } catch (Exception e) {
-                log.error("id: {} initAndSetCurrentState error:\n", this.getId(), e);
+                log.error("id: {} initAndSetCurrentState error:\n", this.id, e);
                 this.currentState = null;
             }
         }

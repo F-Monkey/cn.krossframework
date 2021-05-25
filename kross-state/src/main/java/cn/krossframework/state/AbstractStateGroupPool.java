@@ -59,22 +59,20 @@ public abstract class AbstractStateGroupPool implements StateGroupPool, Initiali
     }
 
     protected void removeDeposedStateGroup() {
-        final ConcurrentHashMap<Long, StateGroup> stateGroupMap = this.stateGroupMap;
+        final ConcurrentHashMap<Long, StateGroup> stateGroupMap = new ConcurrentHashMap<>(this.stateGroupMap);
         if (stateGroupMap.isEmpty()) {
             return;
         }
         log.info("start remove deposed stateGroup, current size: {}", stateGroupMap.size());
-        final BlockingQueue<Long> groupIdRecycleQueue = new LinkedBlockingQueue<>();
         stateGroupMap.entrySet().removeIf(e -> {
             boolean b = e.getValue().canDeposed();
             if (b) {
-                groupIdRecycleQueue.offer(e.getKey());
+                this.groupIdRecycleQueue.offer(e.getKey());
                 log.info("stateGroup can be deposed, id: {}", e.getKey());
             }
             return b;
         });
         this.stateGroupMap = stateGroupMap;
-        this.groupIdRecycleQueue = groupIdRecycleQueue;
         log.info("end remove deposed stateGroup, current size: {}", this.stateGroupMap.size());
     }
 
