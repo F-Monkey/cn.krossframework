@@ -119,7 +119,7 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
     }
 
     protected void removeEmptyWorker() {
-        final ConcurrentHashMap<Long, StateGroupWorker> workerMap = this.workerMap;
+        final ConcurrentHashMap<Long, StateGroupWorker> workerMap = new ConcurrentHashMap<>(this.workerMap);
         if (workerMap.isEmpty()) {
             return;
         }
