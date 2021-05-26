@@ -6,7 +6,6 @@ import cn.krossframework.state.StateGroupPool;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.data.Task;
 import cn.krossframework.state.data.WorkerManagerProperties;
-import cn.krossframework.state.util.FailCallBack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,15 +30,12 @@ public class ChatRoomWorkerManager extends AbstractWorkerManager {
     }
 
     @Override
-    protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
+    protected void findBestGroup2Enter(Long groupId, Task task, StateGroupConfig stateGroupConfig) {
         if (groupId != null) {
-            if (!this.findExistsGroupIdToEnter(groupId, task)) {
-                if (failCallBack != null) {
-                    failCallBack.call();
-                }
+            if (this.findExistsGroupIdToEnter(groupId, task)) {
+                return;
             }
-            return;
         }
-        super.findBestGroup2Enter(groupId, task, failCallBack, stateGroupConfig);
+        super.findBestGroup2Enter(groupId, task, stateGroupConfig);
     }
 }

@@ -3,7 +3,6 @@ package cn.krossframework.state;
 import cn.krossframework.state.data.AbstractTask;
 import cn.krossframework.state.data.ExecuteTask;
 import cn.krossframework.state.data.Task;
-import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.util.Lock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,12 +72,8 @@ public abstract class AbstractTaskDispatcher implements TaskDispatcher, Lock {
             this.groupIdTaskQueue.drainTo(taskList);
             for (AbstractTask task : taskList) {
                 if (task == null) continue;
-                FailCallBack failCallBack = task.failCallBack();
                 if (!this.findStateGroupAndAddTask(task)) {
                     log.error("stateGroup task add fail, task type:{}, task:\n{}", task.getClass(), task);
-                    if (failCallBack != null) {
-                        failCallBack.call();
-                    }
                 }
             }
         } while (this.groupIdTaskQueue.size() > 0);

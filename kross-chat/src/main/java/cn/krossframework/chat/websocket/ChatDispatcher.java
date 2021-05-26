@@ -114,9 +114,7 @@ public class ChatDispatcher implements Dispatcher {
             return;
         }
 
-        AbstractTask task = new DefaultTask(groupId, chatTask, () -> {
-            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room closed[1]", null));
-        });
+        AbstractTask task = new DefaultTask(groupId, chatTask);
         this.workerManager.enter(task, new ChatRoomConfig("1"));
     }
 
@@ -131,9 +129,7 @@ public class ChatDispatcher implements Dispatcher {
         ExecuteTask executeTask;
         try {
             ChatTask chatTask = new ChatTask(character, cmd);
-            executeTask = new ExecuteTask(currentGroupId, chatTask, () -> {
-                character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "room " + currentGroupId + " is not exists", cmdType, null)));
-            });
+            executeTask = new ExecuteTask(currentGroupId, chatTask);
         } catch (Exception e) {
             character.sendMsg(CmdUtil.packageGroup(CmdUtil.pkg(ResultCode.FAIL, "bad data", cmdType, null)));
             log.error("task create error:\n", e);
@@ -145,9 +141,7 @@ public class ChatDispatcher implements Dispatcher {
     private void createRoom(Session session, Command.Package cmd) {
         Character character = session.getAttribute(Character.KEY);
         ChatTask chatTask = new ChatTask(character, cmd);
-        AbstractTask task = new DefaultTask(null, chatTask, () -> {
-            character.sendMsg(ChatCmdUtil.enterRoomResult(ResultCode.FAIL, "room create fail", null));
-        });
+        AbstractTask task = new DefaultTask(null, chatTask);
         this.workerManager.enter(task, new ChatRoomConfig("1"));
     }
 

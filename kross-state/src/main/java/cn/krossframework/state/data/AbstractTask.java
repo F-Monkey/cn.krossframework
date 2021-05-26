@@ -1,6 +1,5 @@
 package cn.krossframework.state.data;
 
-import cn.krossframework.state.util.FailCallBack;
 import com.google.common.base.Preconditions;
 
 public abstract class AbstractTask implements Task {
@@ -9,15 +8,12 @@ public abstract class AbstractTask implements Task {
 
     protected final Task task;
 
-    protected final FailCallBack failCallBack;
 
     public AbstractTask(Long groupId,
-                        Task task,
-                        FailCallBack failCallBack) {
+                        Task task) {
         Preconditions.checkNotNull(task);
         this.groupId = groupId;
         this.task = task;
-        this.failCallBack = failCallBack;
     }
 
     public Long getGroupId() {
@@ -28,7 +24,4 @@ public abstract class AbstractTask implements Task {
         return task;
     }
 
-    public FailCallBack failCallBack() {
-        return this.failCallBack;
-    }
 }

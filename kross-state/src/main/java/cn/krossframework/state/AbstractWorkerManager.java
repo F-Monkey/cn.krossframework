@@ -6,7 +6,6 @@ import cn.krossframework.state.data.AbstractTask;
 import cn.krossframework.state.data.ExecuteTask;
 import cn.krossframework.state.data.Task;
 import cn.krossframework.state.data.WorkerManagerProperties;
-import cn.krossframework.state.util.FailCallBack;
 import cn.krossframework.state.config.StateGroupConfig;
 import cn.krossframework.state.util.Lock;
 import com.google.common.base.Preconditions;
@@ -81,15 +80,14 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
 
         protected final StateGroupConfig stateGroupConfig;
 
-        public EnterGroupTask(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
-            super(groupId, task, failCallBack);
+        public EnterGroupTask(Long groupId, Task task, StateGroupConfig stateGroupConfig) {
+            super(groupId, task);
             this.stateGroupConfig = stateGroupConfig;
         }
 
         @Override
         public void run() {
-            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), super.task,
-                    super.failCallBack(), this.stateGroupConfig);
+            AbstractWorkerManager.this.findBestGroup2Enter(super.getGroupId(), super.task, this.stateGroupConfig);
         }
     }
 
@@ -137,19 +135,14 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
 
     protected void addDispatcherTask(AbstractTask task) {
         Long groupId = null;
-        FailCallBack callBack = null;
         if (task instanceof ExecuteTask) {
             ExecuteTask groupIdTask = (ExecuteTask) task;
             groupId = groupIdTask.getGroupId();
-            callBack = groupIdTask.failCallBack();
         }
 
         TaskDispatcher dispatcher = this.findDispatcher(groupId);
-        if (!dispatcher.tryAddTask(task)) {
-            if (callBack != null) {
-                callBack.call();
-            }
-        }
+        dispatcher.tryAddTask(task);
+
     }
 
     protected TaskDispatcher findDispatcher(Long groupId) {
@@ -219,14 +212,11 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
         return true;
     }
 
-    protected void findBestGroup2Enter(Long groupId, Task task, FailCallBack failCallBack, StateGroupConfig stateGroupConfig) {
+    protected void findBestGroup2Enter(Long groupId, Task task, StateGroupConfig stateGroupConfig) {
         if (this.findGroup2Enter(groupId, task, stateGroupConfig)) {
             return;
         }
         log.error("can not find stateGroup to enter");
-        if (failCallBack != null) {
-            failCallBack.call();
-        }
     }
 
     protected StateGroupWorker createWorker() {
@@ -238,47 +228,31 @@ public abstract class AbstractWorkerManager implements WorkerManager, Lock, Init
 
     @Override
     public void enter(AbstractTask task, StateGroupConfig stateGroupConfig) {
-        this.addDispatcherTask(new EnterGroupTask(task.getGroupId(), task.getTask(),
-                task.failCallBack(), stateGroupConfig));
+        this.addDispatcherTask(new EnterGroupTask(task.getGroupId(), task.getTask(), stateGroupConfig));
     }
 
     @Override
     public void addTask(ExecuteTask executeTask) {
-        if (!this.tryAddTask(executeTask)) {
-            FailCallBack failCallBack = executeTask.failCallBack();
-            if (failCallBack != null) {
-                failCallBack.call();
-            }
-        }
-    }
-
-    protected boolean tryAddTask(ExecuteTask executeTask) {
         Long groupId = executeTask.getGroupId();
-        if (groupId == null) {
-            log.error("groupId is empty");
-            return false;
-        }
         StateGroup stateGroup = this.stateGroupPool.find(groupId);
-        // this should be enter
         if (stateGroup == null) {
             log.error("can not find stateGroup by groupId:{}", groupId);
-            return false;
+            return;
         }
         Long currentWorkerId = stateGroup.getCurrentWorkerId();
         if (currentWorkerId == null) {
             log.error("group: {} worker is null", groupId);
-            return false;
+            return;
         }
         Worker worker = this.workerMap.get(currentWorkerId);
         if (worker == null) {
             log.error("group: {} worker: {} is not exists", groupId, currentWorkerId);
-            return false;
+            return;
         }
         if (!worker.isStart()) {
             log.error("group: {} worker: {} is not start", groupId, currentWorkerId);
-            return false;
+            return;
         }
         this.addDispatcherTask(executeTask);
-        return true;
     }
 }
